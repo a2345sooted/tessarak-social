@@ -217,6 +217,12 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            storeFile file('tessarak_social.keystore')
+            storePassword 'YOPUgoaVd#88'
+            keyAlias 'tessarak_social'
+            keyPassword 'YOPUgoaVd#88'
+        }
     }
     buildTypes {
         debug {
@@ -242,6 +248,11 @@ android {
             if (abi != null) {  // null for the universal-debug, universal-release variants
                 output.versionCodeOverride =
                         defaultConfig.versionCode * 1000 + versionCodes.get(abi)
+            }
+            variant.outputs.all {
+                def flavor = variant.name
+                def versionName = variant.versionName
+                outputFileName = "tessarak_social_${flavor}_${versionName}.apk"
             }
 
         }
