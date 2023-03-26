@@ -10,7 +10,7 @@ import {
   NAV_THEME,
   PAPER_THEME,
 } from './theme';
-import { NavigationContainer } from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AppStack from './AppStack';
 
@@ -26,7 +26,6 @@ const Tessarak = () => {
   const [colors, setColors] = useState<AppColors>(
     getAppColors(deviceBrightMode as string),
   );
-
 
   useEffect(() => {
     const mode = appBrightMode === 'device' ? deviceBrightMode : appBrightMode;
@@ -56,7 +55,7 @@ const Tessarak = () => {
             <RootStack.Screen
               name="App"
               component={AppStack}
-              options={{headerShown: false, animation: 'none'}}
+              options={{headerShown: false, presentation: 'fullScreenModal'}}
             />
           </RootStack.Navigator>
         </NavigationContainer>
