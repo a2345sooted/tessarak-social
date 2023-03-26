@@ -1,6 +1,7 @@
 import React, {useCallback, useContext} from 'react';
 import {SafeAreaView, StatusBar, StatusBarStyle, View} from 'react-native';
 import {
+  Button,
   Divider,
   Provider as PaperProvider,
   SegmentedButtons,
@@ -71,8 +72,19 @@ const LandingScreen = () => {
                 fontWeight: 'bold',
                 color: colors.highlight,
               }}>
-              Something here about what you can do during this early alpha testing.
+              Something here about what you can do during this early alpha
+              testing.
             </Text>
+          </View>
+          <View style={{marginTop: 30}}>
+            <Button
+              labelStyle={{color: colors.text, fontWeight: 'bold'}}
+              buttonColor={colors.tessarak}
+              uppercase
+              theme={{roundness: 1}}
+              onPress={() => {}}>
+              Enter
+            </Button>
           </View>
         </View>
         {/*<View*/}

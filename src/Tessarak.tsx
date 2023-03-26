@@ -3,7 +3,7 @@ import {useColorScheme} from 'react-native';
 import {Provider as PaperProvider} from 'react-native-paper';
 import LandingScreen from './LandingScreen';
 import {AppContext, BrightnessMode} from './AppContext';
-import {AppColors, DarkAppColors, LightAppColors} from './theme';
+import { AppColors, DarkAppColors, LightAppColors, PAPER_THEME } from './theme';
 
 function getAppColors(mode: string): AppColors {
   return mode === 'light' ? LightAppColors : DarkAppColors;
@@ -33,7 +33,7 @@ const Tessarak = () => {
         deviceBrightMode,
         colors,
       }}>
-      <PaperProvider>
+      <PaperProvider theme={PAPER_THEME}>
         <LandingScreen />
       </PaperProvider>
     </AppContext.Provider>
