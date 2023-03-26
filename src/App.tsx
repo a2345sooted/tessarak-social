@@ -1,120 +1,40 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, StatusBar, useColorScheme, View} from 'react-native';
-import {
-  Divider,
-  Provider as PaperProvider,
-  SegmentedButtons,
-  Text,
-} from 'react-native-paper';
-import {AppColors} from './theme';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {useColorScheme} from 'react-native';
+import {Provider as PaperProvider} from 'react-native-paper';
+import LandingScreen from './LandingScreen';
+import {AppContext, BrightnessMode} from './AppContext';
+import {AppColors, DarkAppColors, LightAppColors} from './theme';
 
-type SegmentedButton = {
-  value: string;
-  label: string;
-  uncheckedColor: string;
-};
+function getAppColors(mode: string): AppColors {
+  return mode === 'light' ? LightAppColors : DarkAppColors;
+}
 
 const App = () => {
-  const appBrightnessSetting = useColorScheme();
-
-  const [brightnessMode, setBrightnessMode] = useState('0');
-  const [isDarkMode, setIsDarkMode] = useState(appBrightnessSetting === 'dark');
-  const [textColor, setTextColor] = useState(
-    isDarkMode ? Colors.lighter : Colors.darker,
-  );
+  const deviceBrightMode = useColorScheme();
+  const [appBrightMode, setAppBrightMode] = useState<BrightnessMode>('device');
+  const [colors, setColors] = useState<AppColors>(DarkAppColors);
 
   useEffect(() => {
-    if (brightnessMode === '2') {
-      setIsDarkMode(true);
-    } else if (brightnessMode === '1') {
-      setIsDarkMode(false);
-    } else {
-      setIsDarkMode(appBrightnessSetting === 'dark');
-    }
-  }, [brightnessMode, appBrightnessSetting]);
+    const mode = appBrightMode === 'device' ? deviceBrightMode : appBrightMode;
+    setColors(getAppColors(mode as string));
+  }, [appBrightMode, deviceBrightMode]);
 
-  useEffect(() => {
-    setTextColor(isDarkMode ? Colors.lighter : Colors.darker);
-  }, [isDarkMode]);
-
-  function brightnessOption(value: string, label: string): SegmentedButton {
-    return {
-      value,
-      label,
-      uncheckedColor: isDarkMode ? Colors.lighter : Colors.darker,
-    };
+  function updateBrightMode(mode: BrightnessMode) {
+    setAppBrightMode(mode);
   }
 
   return (
-    <PaperProvider>
-      <SafeAreaView
-        style={{
-          backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-          flex: 1,
-        }}>
-        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <View style={{flex: 1, paddingHorizontal: 30}}>
-          <View style={{paddingTop: 100}}>
-            <Text
-              variant="displayMedium"
-              style={{fontWeight: 'bold', color: AppColors.tessarakOne}}>
-              Tessarak
-            </Text>
-          </View>
-          <Divider style={{marginVertical: 20}} />
-          <View>
-            <Text
-              variant="titleLarge"
-              style={{
-                fontWeight: 'bold',
-                color: textColor,
-              }}>
-              Opensource, Decentralized Social Media
-            </Text>
-          </View>
-          <View style={{marginTop: 20}}>
-            <Text
-              variant="titleLarge"
-              style={{
-                fontWeight: 'bold',
-                color: textColor,
-              }}>
-              Five+ dimensions, ZERO compromises.
-            </Text>
-          </View>
-        </View>
-        <View
-          style={{
-            marginBottom: 50,
-            paddingHorizontal: 30,
-          }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              marginBottom: 10,
-            }}>
-            <Text
-              style={{
-                fontWeight: 'bold',
-                color: textColor,
-              }}>
-              Brightness Mode
-            </Text>
-          </View>
-          <SegmentedButtons
-            buttons={[
-              brightnessOption('0', 'Device'),
-              brightnessOption('1', 'Light'),
-              brightnessOption('2', 'Dark'),
-            ]}
-            value={brightnessMode}
-            onValueChange={setBrightnessMode}
-          />
-        </View>
-      </SafeAreaView>
-    </PaperProvider>
+    <AppContext.Provider
+      value={{
+        updateBrightMode,
+        appBrightMode,
+        deviceBrightMode,
+        colors,
+      }}>
+      <PaperProvider>
+        <LandingScreen />
+      </PaperProvider>
+    </AppContext.Provider>
   );
 };
 
