@@ -61,10 +61,10 @@ const LandingScreen = () => {
                 fontWeight: 'bold',
                 color: colors.text,
               }}>
-              This is like TikTok + more kinda phrase here.
+              Choose your dimension.
             </Text>
           </View>
-            <Divider style={{marginVertical: 20}} />
+          <Divider style={{marginVertical: 20}} />
           <View>
             <Text
               variant="titleMedium"
@@ -72,8 +72,8 @@ const LandingScreen = () => {
                 fontWeight: 'bold',
                 color: colors.highlight,
               }}>
-              Something here about what you can do during this early beta
-              testing.
+              Click around in the app and let me know what you think so far.
+              Please don't be shy.
             </Text>
           </View>
           <View style={{marginTop: 30}}>
