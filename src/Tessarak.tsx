@@ -9,10 +9,12 @@ function getAppColors(mode: string): AppColors {
   return mode === 'light' ? LightAppColors : DarkAppColors;
 }
 
-const App = () => {
+const Tessarak = () => {
   const deviceBrightMode = useColorScheme();
   const [appBrightMode, setAppBrightMode] = useState<BrightnessMode>('device');
-  const [colors, setColors] = useState<AppColors>(DarkAppColors);
+  const [colors, setColors] = useState<AppColors>(
+    getAppColors(deviceBrightMode as string),
+  );
 
   useEffect(() => {
     const mode = appBrightMode === 'device' ? deviceBrightMode : appBrightMode;
@@ -38,4 +40,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Tessarak;

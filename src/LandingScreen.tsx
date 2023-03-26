@@ -60,49 +60,50 @@ const LandingScreen = () => {
                 fontWeight: 'bold',
                 color: colors.text,
               }}>
-              Opensource, Decentralized Social Media
+              Some kind of phrase here that let's folks know this is like tik
+              tok +
             </Text>
           </View>
-          <View style={{marginTop: 20}}>
+          <View>
             <Text
-              variant="titleLarge"
+              variant="titleMedium"
               style={{
                 fontWeight: 'bold',
-                color: colors.text,
+                color: colors.highlight,
               }}>
-              Five+ dimensions, ZERO compromises.
+              Something here about what you can do during this early alpha testing.
             </Text>
           </View>
         </View>
-        <View
-          style={{
-            marginBottom: 50,
-            paddingHorizontal: 30,
-          }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              marginBottom: 10,
-            }}>
-            <Text
-              style={{
-                fontWeight: 'bold',
-                color: colors.text,
-              }}>
-              Brightness Mode
-            </Text>
-          </View>
-          <SegmentedButtons
-            buttons={[
-              brightnessOption('device', 'Device'),
-              brightnessOption('light', 'Light'),
-              brightnessOption('dark', 'Dark'),
-            ]}
-            value={appBrightMode}
-            onValueChange={value => updateBrightMode(value as BrightnessMode)}
-          />
-        </View>
+        {/*<View*/}
+        {/*  style={{*/}
+        {/*    marginBottom: 50,*/}
+        {/*    paddingHorizontal: 30,*/}
+        {/*  }}>*/}
+        {/*  <View*/}
+        {/*    style={{*/}
+        {/*      flexDirection: 'row',*/}
+        {/*      justifyContent: 'center',*/}
+        {/*      marginBottom: 10,*/}
+        {/*    }}>*/}
+        {/*    <Text*/}
+        {/*      style={{*/}
+        {/*        fontWeight: 'bold',*/}
+        {/*        color: colors.text,*/}
+        {/*      }}>*/}
+        {/*      Brightness Mode*/}
+        {/*    </Text>*/}
+        {/*  </View>*/}
+        {/*  <SegmentedButtons*/}
+        {/*    buttons={[*/}
+        {/*      brightnessOption('device', 'Device'),*/}
+        {/*      brightnessOption('light', 'Light'),*/}
+        {/*      brightnessOption('dark', 'Dark'),*/}
+        {/*    ]}*/}
+        {/*    value={appBrightMode}*/}
+        {/*    onValueChange={value => updateBrightMode(value as BrightnessMode)}*/}
+        {/*  />*/}
+        {/*</View>*/}
       </SafeAreaView>
     </PaperProvider>
   );
