@@ -9,6 +9,7 @@ import {
 } from 'react-native-paper';
 import {AppContext, BrightnessMode} from './AppContext';
 import {isDarkMode} from './utils';
+import { useNavigation } from '@react-navigation/native';
 
 type SegmentedButton = {
   value: string;
@@ -19,6 +20,8 @@ type SegmentedButton = {
 const LandingScreen = () => {
   const {appBrightMode, colors, deviceBrightMode, updateBrightMode} =
     useContext(AppContext);
+
+  const navigation = useNavigation();
 
   function brightnessOption(
     value: BrightnessMode,
@@ -46,7 +49,12 @@ const LandingScreen = () => {
         }}>
         <StatusBar barStyle={statusBarColor()} />
         <View style={{flex: 1, paddingHorizontal: 30}}>
-          <View style={{paddingTop: 100, flexDirection: 'row', justifyContent: 'center'}}>
+          <View
+            style={{
+              paddingTop: 100,
+              flexDirection: 'row',
+              justifyContent: 'center',
+            }}>
             <Text
               variant="displayLarge"
               style={{fontWeight: 'bold', color: colors.tessarak}}>
@@ -70,7 +78,7 @@ const LandingScreen = () => {
               buttonColor={colors.tessarak}
               uppercase
               theme={{roundness: 1}}
-              onPress={() => {}}>
+              onPress={() => navigation.navigate('App')}>
               Enter
             </Button>
           </View>

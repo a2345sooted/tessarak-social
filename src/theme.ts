@@ -1,5 +1,6 @@
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {DefaultTheme} from 'react-native-paper';
+import {DefaultTheme as DefaultPaperTheme} from 'react-native-paper';
+import {DefaultTheme as DefaultNavTheme} from '@react-navigation/native';
 
 export type AppColors = {
   tessarak: string;
@@ -23,11 +24,13 @@ export const DarkAppColors: AppColors = {
 };
 
 export const PAPER_THEME = {
-  ...DefaultTheme,
+  ...DefaultPaperTheme,
   roundness: 1,
   colors: {
-    ...DefaultTheme.colors,
+    ...DefaultPaperTheme.colors,
     primary: DarkAppColors.tessarak,
     accent: DarkAppColors.highlight,
   },
 };
+
+export const NAV_THEME = DefaultNavTheme;
