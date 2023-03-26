@@ -33,8 +33,8 @@ const LandingScreen = () => {
 
   const statusBarColor = useCallback((): StatusBarStyle => {
     return isDarkMode(appBrightMode, deviceBrightMode)
-      ? 'dark-content'
-      : 'light-content';
+      ? 'light-content'
+      : 'dark-content';
   }, [appBrightMode, deviceBrightMode]);
 
   return (
@@ -46,7 +46,7 @@ const LandingScreen = () => {
         }}>
         <StatusBar barStyle={statusBarColor()} />
         <View style={{flex: 1, paddingHorizontal: 30}}>
-          <View style={{paddingTop: 100}}>
+          <View style={{paddingTop: 100, flexDirection: 'row', justifyContent: 'center'}}>
             <Text
               variant="displayLarge"
               style={{fontWeight: 'bold', color: colors.tessarak}}>
@@ -54,29 +54,17 @@ const LandingScreen = () => {
             </Text>
           </View>
           {/*<Divider style={{marginVertical: 20}} />*/}
-          <View>
+          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
             <Text
               variant="titleLarge"
               style={{
                 fontWeight: 'bold',
                 color: colors.text,
               }}>
-              Choose your dimension.
+              choose your dimension
             </Text>
           </View>
-          <Divider style={{marginVertical: 20}} />
-          <View>
-            <Text
-              variant="titleMedium"
-              style={{
-                fontWeight: 'bold',
-                color: colors.highlight,
-              }}>
-              Click around in the app and let me know what you think so far.
-              Please don't be shy.
-            </Text>
-          </View>
-          <View style={{marginTop: 30}}>
+          <View style={{marginTop: 100, paddingHorizontal: 10}}>
             <Button
               labelStyle={{color: colors.text, fontWeight: 'bold'}}
               buttonColor={colors.tessarak}
