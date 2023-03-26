@@ -48,12 +48,12 @@ const LandingScreen = () => {
         <View style={{flex: 1, paddingHorizontal: 30}}>
           <View style={{paddingTop: 100}}>
             <Text
-              variant="displayMedium"
+              variant="displayLarge"
               style={{fontWeight: 'bold', color: colors.tessarak}}>
               Tessarak
             </Text>
           </View>
-          <Divider style={{marginVertical: 20}} />
+          {/*<Divider style={{marginVertical: 20}} />*/}
           <View>
             <Text
               variant="titleLarge"
@@ -61,10 +61,10 @@ const LandingScreen = () => {
                 fontWeight: 'bold',
                 color: colors.text,
               }}>
-              Some kind of phrase here that let's folks know this is like tik
-              tok +
+              This is like TikTok + more kinda phrase here.
             </Text>
           </View>
+            <Divider style={{marginVertical: 20}} />
           <View>
             <Text
               variant="titleMedium"
@@ -72,7 +72,7 @@ const LandingScreen = () => {
                 fontWeight: 'bold',
                 color: colors.highlight,
               }}>
-              Something here about what you can do during this early alpha
+              Something here about what you can do during this early beta
               testing.
             </Text>
           </View>
