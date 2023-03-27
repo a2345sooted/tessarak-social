@@ -1,4 +1,4 @@
-import {BrightnessMode} from './AppContext';
+import {BrightnessMode} from '@app-ctx';
 import {ColorSchemeName} from 'react-native';
 
 // todo what about undefined values for colorScheme?
