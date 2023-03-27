@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {IconButton, Text} from 'react-native-paper';
+import {IconButton, Text, Avatar} from 'react-native-paper';
 import {SafeScreen} from '@common';
 import {AppContext} from '@app-ctx';
 import {Alert, View} from 'react-native';
@@ -60,8 +60,45 @@ const HomeScreen = () => {
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'center',
-        }}
-      />
+            paddingBottom: 12,
+        }}>
+
+        <IconButton
+          icon="music"
+          iconColor={colors.bizarroTessarak}
+          size={25}
+          onPress={() => {
+            Alert.alert('Sound');
+          }}
+        />
+        <IconButton
+          icon="bookmark"
+          iconColor={colors.bizarroTessarak}
+          size={25}
+          onPress={() => {
+            Alert.alert('Bookmark');
+          }}
+        />
+          <View style={{marginHorizontal: 12}}>
+              <Avatar.Text size={50} label="XD" />
+          </View>
+        <IconButton
+          icon="comment"
+          iconColor={colors.bizarroTessarak}
+          size={25}
+          onPress={() => {
+            Alert.alert('Comments');
+          }}
+        />
+        <IconButton
+          icon="heart"
+          iconColor={colors.bizarroTessarak}
+          size={25}
+          onPress={() => {
+            Alert.alert('Like');
+          }}
+        />
+      </View>
     </SafeScreen>
   );
 };
