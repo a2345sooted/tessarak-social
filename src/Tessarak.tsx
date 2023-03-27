@@ -67,7 +67,7 @@ const Tessarak = () => {
       }}>
       <PaperProvider theme={PAPER_THEME}>
         <NavigationContainer theme={NAV_THEME}>
-          <RootStack.Navigator initialRouteName="Enter">
+          <RootStack.Navigator initialRouteName="App">
             <RootStack.Screen
               name="Enter"
               component={EnterStack}
