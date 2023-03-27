@@ -54,7 +54,7 @@ const TessaScreen = () => {
           }}
         />
         <Text
-          variant="headlineSmall"
+          variant="headlineLarge"
           style={{fontWeight: 'bold', color: colors.text, flex: 1}}>
           Tessa
         </Text>
