@@ -12,7 +12,7 @@ const LandingScreen = () => {
 
   return (
     <SafeScreen>
-      <View style={{flex: 1, paddingHorizontal: 30}}>
+      <View style={{flex: 1, paddingHorizontal: 30,}}>
         <View
           style={{
             paddingTop: 100,
