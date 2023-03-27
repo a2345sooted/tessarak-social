@@ -5,9 +5,9 @@ import CreateStack from './stack-create/CreateStack';
 import TessaStack from './stack-tessa/TessaStack';
 import MessagesStack from './stack-messages/MessagesStack';
 import HomeStack from './stack-home/HomeStack';
-import ProfileStack from './stack-profile/ProfileStack';
 import {IconButton} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
+import AccountStack from './stack-account/AccountStack';
 
 const AppNavStack = createBottomTabNavigator();
 
@@ -24,7 +24,7 @@ function AppStack() {
       <IconButton
         icon={icon}
         iconColor={isFocused ? colors.tessarak : colors.text}
-        size={isFocused ? 30 : 25}
+        size={isFocused ? 35 : 25}
         onPress={() => navigation.navigate(route)}
       />
     );
@@ -35,16 +35,16 @@ function AppStack() {
         <AppNavStack.Navigator
           initialRouteName="Home"
           screenOptions={{tabBarStyle: {backgroundColor: colors.bg1}}}>
-            <AppNavStack.Screen
-                name="Profile"
-                component={ProfileStack}
-                options={({navigation}) => ({
-                    headerShown: false,
-                    tabBarLabelStyle: {color: colors.text},
-                    tabBarIcon: ({focused}) =>
-                        bottomTab(navigation, 'account-box', 'Profile', focused),
-                })}
-            />
+          <AppNavStack.Screen
+            name="Tessa"
+            component={TessaStack}
+            options={({navigation}) => ({
+              headerShown: false,
+              tabBarLabelStyle: {color: colors.text},
+              tabBarIcon: ({focused}) =>
+                bottomTab(navigation, 'robot-excited', 'Tessa', focused),
+            })}
+          />
           <AppNavStack.Screen
             name="Create"
             component={CreateStack}
@@ -66,16 +66,6 @@ function AppStack() {
                 bottomTab(navigation, 'pound', 'Home', focused),
             })}
           />
-            <AppNavStack.Screen
-                name="Tessa"
-                component={TessaStack}
-                options={({navigation}) => ({
-                    headerShown: false,
-                    tabBarLabelStyle: {color: colors.text},
-                    tabBarIcon: ({focused}) =>
-                        bottomTab(navigation, 'cube-outline', 'Tessa', focused),
-                })}
-            />
           <AppNavStack.Screen
             name="Messages"
             component={MessagesStack}
@@ -84,6 +74,16 @@ function AppStack() {
               tabBarLabelStyle: {color: colors.text},
               tabBarIcon: ({focused}) =>
                 bottomTab(navigation, 'message-text', 'Messages', focused),
+            })}
+          />
+          <AppNavStack.Screen
+            name="Account"
+            component={AccountStack}
+            options={({navigation}) => ({
+              headerShown: false,
+              tabBarLabelStyle: {color: colors.text},
+              tabBarIcon: ({focused}) =>
+                bottomTab(navigation, 'account-box', 'Account', focused),
             })}
           />
         </AppNavStack.Navigator>

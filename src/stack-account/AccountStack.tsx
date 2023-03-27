@@ -1,19 +1,19 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import ProfileScreen from './ProfileScreen';
+import AccountScreen from './AccountScreen';
 
 const ProfileNavStack = createNativeStackNavigator();
 
-function ProfileStack() {
+function AccountStack() {
   return (
     <ProfileNavStack.Navigator initialRouteName="Main">
       <ProfileNavStack.Screen
         name="Main"
-        component={ProfileScreen}
+        component={AccountScreen}
         options={{headerShown: false}}
       />
     </ProfileNavStack.Navigator>
   );
 }
 
-export default ProfileStack;
+export default AccountStack;

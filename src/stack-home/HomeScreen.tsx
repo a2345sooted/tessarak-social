@@ -14,7 +14,7 @@ const HomeScreen = () => {
     <SafeScreen>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <IconButton
-          icon="apps"
+          icon="layers"
           iconColor={colors.tessarak}
           size={25}
           onPress={() => {
@@ -28,15 +28,16 @@ const HomeScreen = () => {
           #tessarak-beta
         </Text>
         <IconButton
-          icon="broadcast"
+          icon="cube-send"
+          style={{marginRight: -10}}
           iconColor={colors.tessarak}
-          size={25}
+          size={30}
           onPress={() => Alert.alert('Live Stream')}
         />
         <IconButton
           icon="magnify"
           iconColor={colors.tessarak}
-          size={25}
+          size={30}
           onPress={() => Alert.alert('Search the Tessarak')}
         />
       </View>

@@ -4,7 +4,7 @@ import {SafeScreen} from '@common';
 import {AppContext} from '@app-ctx';
 import {View} from 'react-native';
 
-const ProfileScreen = () => {
+const AccountScreen = () => {
   const {colors} = useContext(AppContext);
 
   return (
@@ -20,4 +20,4 @@ const ProfileScreen = () => {
   );
 };
 
-export default ProfileScreen;
+export default AccountScreen;
