@@ -10,26 +10,6 @@ const ReadTermsScreen = () => {
 
   const navigation = useNavigation();
 
-  function bulletPoint(text: string, color = '#c66ef1'): JSX.Element {
-    return (
-      <View
-        style={{
-          marginTop: 5,
-          flexDirection: 'row',
-          justifyContent: 'center',
-        }}>
-        <Text
-          variant="titleLarge"
-          style={{
-            fontWeight: 'bold',
-            color,
-          }}>
-          {text}
-        </Text>
-      </View>
-    );
-  }
-
   return (
     <SafeScreen>
       <View style={{flex: 1}}>
