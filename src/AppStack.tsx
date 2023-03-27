@@ -6,7 +6,7 @@ import TessaStack from './stack-tessa/TessaStack';
 import MessagesStack from './stack-messages/MessagesStack';
 import HomeStack from './stack-home/HomeStack';
 import ProfileStack from './stack-profile/ProfileStack';
-import {IconButton, Text} from 'react-native-paper';
+import {IconButton} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
 
 const AppNavStack = createBottomTabNavigator();
@@ -24,7 +24,7 @@ function AppStack() {
       <IconButton
         icon={icon}
         iconColor={isFocused ? colors.tessarak : colors.text}
-        size={25}
+        size={isFocused ? 30 : 25}
         onPress={() => navigation.navigate(route)}
       />
     );
@@ -40,7 +40,7 @@ function AppStack() {
             component={CreateStack}
             options={({navigation}) => ({
               headerShown: false,
-                tabBarLabelStyle: {color: colors.text},
+              tabBarLabelStyle: {color: colors.text},
               tabBarIcon: ({focused}) =>
                 bottomTab(navigation, 'plus-box', 'Create', focused),
             })}
@@ -50,7 +50,7 @@ function AppStack() {
             component={ProfileStack}
             options={({navigation}) => ({
               headerShown: false,
-                tabBarLabelStyle: {color: colors.text},
+              tabBarLabelStyle: {color: colors.text},
               tabBarIcon: ({focused}) =>
                 bottomTab(navigation, 'account-box', 'Profile', focused),
             })}
@@ -60,7 +60,7 @@ function AppStack() {
             component={HomeStack}
             options={({navigation}) => ({
               headerShown: false,
-                tabBarLabelStyle: {color: colors.text},
+              tabBarLabelStyle: {color: colors.text},
               title: 'Tessarak',
               tabBarIcon: ({focused}) =>
                 bottomTab(navigation, 'pound', 'Home', focused),
@@ -71,7 +71,7 @@ function AppStack() {
             component={MessagesStack}
             options={({navigation}) => ({
               headerShown: false,
-                tabBarLabelStyle: {color: colors.text},
+              tabBarLabelStyle: {color: colors.text},
               tabBarIcon: ({focused}) =>
                 bottomTab(navigation, 'message-text', 'Messages', focused),
             })}
