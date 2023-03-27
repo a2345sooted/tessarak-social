@@ -94,7 +94,7 @@ function AppStack() {
               tabBarIcon: () => {
                 return (
                   <IconButton
-                    icon="cube"
+                    icon="cube-outline"
                     iconColor={colors.user}
                     size={25}
                     onPress={() => {}}
