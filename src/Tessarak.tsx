@@ -33,7 +33,7 @@ const Tessarak = () => {
     return (
       <StatusBar
         barStyle={darkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={colors.dark}
+        backgroundColor={colors.bg1}
       />
     );
   }
