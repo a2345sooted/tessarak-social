@@ -23,29 +23,31 @@ const VerifyCodeScreen = () => {
   }, []);
 
   async function handlePhoneInputComplete() {
-    if (!phoneNumber.trim()) {
-      await tkDelay(100);
-      phoneInputRef.current!.focus();
-      return;
-    }
-
-    setIsSending(true);
-    setErrorSending(null);
-    setIsInvalidNumber(false);
-
-    const phone = `+1${phoneNumber}`;
-
-    try {
-      await sendCodeToPhone(phone);
-      //@ts-ignore
-      navigation.navigate('VerifyCode');
-      await tkDelay(1000);
-    } catch (error: any) {
-      // todo handle invalid number
-      setErrorSending(error);
-    } finally {
-      setIsSending(false);
-    }
+    //@ts-ignore
+    navigation.navigate('EnterTessarak');
+    // if (!phoneNumber.trim()) {
+    //   await tkDelay(100);
+    //   phoneInputRef.current!.focus();
+    //   return;
+    // }
+    //
+    // setIsSending(true);
+    // setErrorSending(null);
+    // setIsInvalidNumber(false);
+    //
+    // const phone = `+1${phoneNumber}`;
+    //
+    // try {
+    //   await sendCodeToPhone(phone);
+    //   //@ts-ignore
+    //   navigation.navigate('EnterTessarak');
+    //   await tkDelay(1000);
+    // } catch (error: any) {
+    //   // todo handle invalid number
+    //   setErrorSending(error);
+    // } finally {
+    //   setIsSending(false);
+    // }
   }
 
   function formatText(text: string) {
@@ -75,7 +77,7 @@ const VerifyCodeScreen = () => {
             Enter the code...
           </Text>
         </View>
-        <View style={{marginTop: 10, paddingHorizontal: 10}}>
+        <View style={{marginTop: 10, paddingHorizontal: 10, flex: 1}}>
           <TextInput
             // autoFocus
             disabled={isSending}
@@ -97,6 +99,17 @@ const VerifyCodeScreen = () => {
             value={maskedPhoneNumber}
             onChangeText={text => formatText(text)}
           />
+        </View>
+        <View style={{paddingBottom: 20}}>
+          <Text
+              variant="titleSmall"
+              style={{
+                fontWeight: 'bold',
+                color: colors.text,
+                textAlign: 'center',
+              }}>
+            The Tessarak Project 2023
+          </Text>
         </View>
       </View>
     </SafeScreen>

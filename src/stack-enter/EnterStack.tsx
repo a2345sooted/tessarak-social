@@ -4,6 +4,7 @@ import GetPhoneNumberScreen from './GetPhoneNumberScreen';
 import LandingScreen from './LandingScreen';
 import VerifyCodeScreen from './VerifyCodeScreen';
 import ReadTermsScreen from './ReadTermsScreen';
+import EnterScreen from './EnterScreen';
 
 const EnterNavStack = createNativeStackNavigator();
 
@@ -31,8 +32,8 @@ function EnterStack() {
         options={{headerShown: false}}
       />
       <EnterNavStack.Screen
-        name="Outro"
-        component={GetPhoneNumberScreen}
+        name="EnterTessarak"
+        component={EnterScreen}
         options={{headerShown: false}}
       />
     </EnterNavStack.Navigator>

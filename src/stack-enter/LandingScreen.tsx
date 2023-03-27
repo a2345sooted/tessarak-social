@@ -67,11 +67,12 @@ const LandingScreen = () => {
         <View style={{marginTop: 50, paddingHorizontal: 10}}>
           <Button
             icon="arrow-right"
-            labelStyle={{color: colors.text, fontWeight: 'bold'}}
+            labelStyle={{color: colors.text, fontWeight: '800'}}
             buttonColor={colors.tessarak}
             theme={{roundness: 1}}
             onPress={() => {
               //@ts-ignore
+              // navigation.navigate('GetPhoneNumber');
               navigation.navigate('ReadTerms');
             }}>
             Start
