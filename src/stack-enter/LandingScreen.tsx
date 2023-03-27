@@ -10,6 +10,26 @@ const LandingScreen = () => {
 
   const navigation = useNavigation();
 
+  function bulletPoint(text: string, color = '#c66ef1'): JSX.Element {
+    return (
+      <View
+        style={{
+          marginTop: 5,
+          flexDirection: 'row',
+          justifyContent: 'center',
+        }}>
+        <Text
+          variant="titleLarge"
+          style={{
+            fontWeight: 'bold',
+            color,
+          }}>
+          {text}
+        </Text>
+      </View>
+    );
+  }
+
   return (
     <SafeScreen>
       <View style={{flex: 1, paddingHorizontal: 30}}>
@@ -25,7 +45,12 @@ const LandingScreen = () => {
             Tessarak
           </Text>
         </View>
-        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+            marginBottom: 20,
+          }}>
           <Text
             variant="titleLarge"
             style={{
@@ -35,12 +60,15 @@ const LandingScreen = () => {
             choose your dimensions
           </Text>
         </View>
-        <View style={{marginTop: 100, paddingHorizontal: 10}}>
+        {bulletPoint('opensource,')}
+        {bulletPoint('decentralized,')}
+        {bulletPoint('indestructible,')}
+        {bulletPoint('social media', '#e851be')}
+        <View style={{marginTop: 50, paddingHorizontal: 10}}>
           <Button
             icon="arrow-right"
             labelStyle={{color: colors.text, fontWeight: 'bold'}}
             buttonColor={colors.tessarak}
-            uppercase
             theme={{roundness: 1}}
             onPress={() => {
               //@ts-ignore
@@ -48,6 +76,11 @@ const LandingScreen = () => {
             }}>
             Start
           </Button>
+        </View>
+        <View style={{flex: 1}} />
+
+        <View style={{paddingBottom: 20}}>
+          {bulletPoint('The Tessarak Project 2023', colors.text)}
         </View>
       </View>
     </SafeScreen>

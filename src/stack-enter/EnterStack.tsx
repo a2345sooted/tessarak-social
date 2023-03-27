@@ -7,7 +7,7 @@ const EnterNavStack = createNativeStackNavigator();
 
 function EnterStack() {
   return (
-    <EnterNavStack.Navigator initialRouteName="GetPhoneNumber">
+    <EnterNavStack.Navigator initialRouteName="Main">
       <EnterNavStack.Screen
         name="Main"
         component={LandingScreen}
