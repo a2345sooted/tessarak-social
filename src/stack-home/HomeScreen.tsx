@@ -1,14 +1,17 @@
-import React, {useContext} from 'react';
+import React, {useContext, useRef} from 'react';
 import {IconButton, Text, Avatar} from 'react-native-paper';
 import {SafeScreen} from '@common';
 import {AppContext} from '@app-ctx';
-import { Alert, TouchableOpacity, View } from 'react-native';
+import {Alert, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import ActionSheet, {ActionSheetRef} from 'react-native-actions-sheet';
 
 const HomeScreen = () => {
   const {colors} = useContext(AppContext);
 
   const navigation = useNavigation();
+  const soundActionSheet = useRef<ActionSheetRef>(null);
+  const commentsActionSheet = useRef<ActionSheetRef>(null);
 
   return (
     <SafeScreen>
@@ -66,9 +69,7 @@ const HomeScreen = () => {
           icon="music"
           iconColor={colors.bizarroTessarak}
           size={25}
-          onPress={() => {
-            Alert.alert('Sound');
-          }}
+          onPress={() => soundActionSheet.current?.show()}
         />
         <IconButton
           icon="bookmark"
@@ -79,10 +80,11 @@ const HomeScreen = () => {
           }}
         />
         <View style={{marginHorizontal: 12}}>
-          <TouchableOpacity onPress={() => {
+          <TouchableOpacity
+            onPress={() => {
               //@ts-ignore
               navigation.navigate('User');
-          }}>
+            }}>
             <Avatar.Text size={50} label="XD" />
           </TouchableOpacity>
         </View>
@@ -90,9 +92,7 @@ const HomeScreen = () => {
           icon="comment"
           iconColor={colors.bizarroTessarak}
           size={25}
-          onPress={() => {
-            Alert.alert('Comments');
-          }}
+          onPress={() => commentsActionSheet.current?.show()}
         />
         <IconButton
           icon="heart"
@@ -103,6 +103,38 @@ const HomeScreen = () => {
           }}
         />
       </View>
+      <ActionSheet
+        ref={soundActionSheet}
+        containerStyle={{backgroundColor: colors.bg1}}
+        elevation={12}>
+        <Text
+          variant="headlineSmall"
+          style={{
+            fontWeight: 'bold',
+            color: colors.text,
+            textAlign: 'center',
+            marginTop: 30,
+          }}>
+          TikTok like sound section.
+        </Text>
+        <View style={{height: '60%'}} />
+      </ActionSheet>
+      <ActionSheet
+        ref={commentsActionSheet}
+        containerStyle={{backgroundColor: colors.bg1}}
+        elevation={12}>
+        <Text
+          variant="headlineSmall"
+          style={{
+            fontWeight: 'bold',
+            color: colors.text,
+            textAlign: 'center',
+            marginTop: 30,
+          }}>
+          Comments section.
+        </Text>
+        <View style={{height: '60%'}} />
+      </ActionSheet>
     </SafeScreen>
   );
 };
