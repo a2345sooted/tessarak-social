@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
-import SafeScreen from './common/SafeScreen';
+import {SafeScreen} from './common/SafeScreen';
 
 const AppScreen = () => {
   const {colors} = useContext(AppContext);

@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import { Alert, StatusBar, useColorScheme } from 'react-native';
+import {StatusBar, useColorScheme} from 'react-native';
 import {Provider as PaperProvider} from 'react-native-paper';
-import LandingScreen from './LandingScreen';
 import {AppContext, BrightnessMode} from '@app-ctx';
 import {
   AppColors,
@@ -16,6 +15,7 @@ import {isDarkMode} from './utils';
 import AppStack from './AppStack';
 
 import SystemNavigationBar from 'react-native-system-navigation-bar';
+import EnterStack from './stack-enter/EnterStack';
 
 function getAppColors(mode: string): AppColors {
   return mode === 'light' ? LightAppColors : DarkAppColors;
@@ -67,10 +67,10 @@ const Tessarak = () => {
       }}>
       <PaperProvider theme={PAPER_THEME}>
         <NavigationContainer theme={NAV_THEME}>
-          <RootStack.Navigator initialRouteName="Landing">
+          <RootStack.Navigator initialRouteName="Enter">
             <RootStack.Screen
-              name="Landing"
-              component={LandingScreen}
+              name="Enter"
+              component={EnterStack}
               options={{headerShown: false, animation: 'none'}}
             />
             <RootStack.Screen

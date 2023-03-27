@@ -1,9 +1,9 @@
 import React, {useContext} from 'react';
 import {IconButton, Text} from 'react-native-paper';
-import SafeScreen from '../common/SafeScreen';
+import {SafeScreen} from '@common';
 import {AppContext} from '@app-ctx';
-import { Alert, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {Alert, View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 const HomeScreen = () => {
   const {colors} = useContext(AppContext);

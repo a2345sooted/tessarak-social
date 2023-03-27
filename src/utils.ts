@@ -8,3 +8,7 @@ export function isDarkMode(
 ): boolean {
   return mode === 'dark' || (mode === 'device' && colorScheme === 'dark');
 }
+
+export async function tkDelay(millis: number): Promise<void> {
+  return new Promise(resolve => setTimeout(() => resolve(), millis));
+}

@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import {Button, Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
 import {useNavigation} from '@react-navigation/native';
-import SafeScreen from './common/SafeScreen';
+import {SafeScreen} from '@common';
 
 const LandingScreen = () => {
   const {colors} = useContext(AppContext);
@@ -12,7 +12,7 @@ const LandingScreen = () => {
 
   return (
     <SafeScreen>
-      <View style={{flex: 1, paddingHorizontal: 30,}}>
+      <View style={{flex: 1, paddingHorizontal: 30}}>
         <View
           style={{
             paddingTop: 100,
@@ -37,15 +37,16 @@ const LandingScreen = () => {
         </View>
         <View style={{marginTop: 100, paddingHorizontal: 10}}>
           <Button
+            icon="arrow-right"
             labelStyle={{color: colors.text, fontWeight: 'bold'}}
             buttonColor={colors.tessarak}
             uppercase
             theme={{roundness: 1}}
             onPress={() => {
               //@ts-ignore
-              navigation.navigate('App');
+              navigation.navigate('GetPhoneNumber');
             }}>
-            Enter
+            Start
           </Button>
         </View>
       </View>

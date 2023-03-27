@@ -1,7 +1,7 @@
 import React, {PropsWithChildren} from 'react';
 import BottomSafeArea from './BottomSafeArea';
 
-function SafeScreen(props: PropsWithChildren): JSX.Element {
+export function SafeScreen(props: PropsWithChildren): JSX.Element {
   return (
     <>
       {/*<TopSafeArea />*/}
@@ -9,5 +9,3 @@ function SafeScreen(props: PropsWithChildren): JSX.Element {
     </>
   );
 }
-
-export default SafeScreen;
