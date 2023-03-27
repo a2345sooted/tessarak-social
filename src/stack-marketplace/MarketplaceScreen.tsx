@@ -4,7 +4,7 @@ import {SafeScreen} from '@common';
 import {AppContext} from '@app-ctx';
 import {View} from 'react-native';
 
-const CreateScreen = () => {
+const MarketplaceScreen = () => {
   const {colors} = useContext(AppContext);
 
   return (
@@ -13,11 +13,11 @@ const CreateScreen = () => {
         <Text
           variant="headlineSmall"
           style={{fontWeight: 'bold', color: colors.text, textAlign: 'center'}}>
-          TikTok like create section.
+          P2P Marketplace
         </Text>
       </View>
     </SafeScreen>
   );
 };
 
-export default CreateScreen;
+export default MarketplaceScreen;

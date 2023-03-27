@@ -12,7 +12,7 @@ const MessagesScreen = () => {
       <View style={{flex: 1, justifyContent: 'center', paddingHorizontal: 30}}>
         <Text
           variant="headlineSmall"
-          style={{fontWeight: 'bold', color: colors.text}}>
+          style={{fontWeight: 'bold', color: colors.text, textAlign: 'center'}}>
           End to end encrypted p2p messaging.
         </Text>
       </View>

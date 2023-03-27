@@ -8,6 +8,7 @@ import HomeStack from './stack-home/HomeStack';
 import {IconButton} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
 import AccountStack from './stack-account/AccountStack';
+import MarketplaceStack from './stack-marketplace/MarketplaceStack';
 
 const AppNavStack = createBottomTabNavigator();
 
@@ -37,16 +38,17 @@ function AppStack() {
           screenOptions={{
             tabBarStyle: {backgroundColor: colors.bg1, borderTopWidth: 0},
           }}>
-          <AppNavStack.Screen
-            name="Tessa"
-            component={TessaStack}
-            options={({navigation}) => ({
-              headerShown: false,
-              tabBarLabelStyle: {color: colors.text},
-              tabBarIcon: ({focused}) =>
-                bottomTab(navigation, 'robot-excited', 'Tessa', focused),
-            })}
-          />
+            <AppNavStack.Screen
+                name="Home"
+                component={HomeStack}
+                options={({navigation}) => ({
+                    headerShown: false,
+                    tabBarLabelStyle: {color: colors.text},
+                    title: 'Tessarak',
+                    tabBarIcon: ({focused}) =>
+                        bottomTab(navigation, 'pound', 'Home', focused),
+                })}
+            />
           <AppNavStack.Screen
             name="Create"
             component={CreateStack}
@@ -55,17 +57,6 @@ function AppStack() {
               tabBarLabelStyle: {color: colors.text},
               tabBarIcon: ({focused}) =>
                 bottomTab(navigation, 'plus-box', 'Create', focused),
-            })}
-          />
-          <AppNavStack.Screen
-            name="Home"
-            component={HomeStack}
-            options={({navigation}) => ({
-              headerShown: false,
-              tabBarLabelStyle: {color: colors.text},
-              title: 'Tessarak',
-              tabBarIcon: ({focused}) =>
-                bottomTab(navigation, 'pound', 'Home', focused),
             })}
           />
           <AppNavStack.Screen
@@ -78,6 +69,16 @@ function AppStack() {
                 bottomTab(navigation, 'message-text', 'Messages', focused),
             })}
           />
+            <AppNavStack.Screen
+                name="Market"
+                component={MarketplaceStack}
+                options={({navigation}) => ({
+                    headerShown: false,
+                    tabBarLabelStyle: {color: colors.text},
+                    tabBarIcon: ({focused}) =>
+                        bottomTab(navigation, 'storefront', 'Market', focused),
+                })}
+            />
           <AppNavStack.Screen
             name="Account"
             component={AccountStack}
@@ -88,6 +89,16 @@ function AppStack() {
                 bottomTab(navigation, 'account-box', 'Account', focused),
             })}
           />
+            <AppNavStack.Screen
+                name="Tessa"
+                component={TessaStack}
+                options={({navigation}) => ({
+                    headerShown: false,
+                    tabBarLabelStyle: {color: colors.text},
+                    tabBarIcon: ({focused}) =>
+                        bottomTab(navigation, 'robot-excited', 'Tessa', focused),
+                })}
+            />
         </AppNavStack.Navigator>
       </View>
     </>

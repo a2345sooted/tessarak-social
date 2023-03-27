@@ -32,19 +32,25 @@ const HomeScreen = () => {
           style={{marginRight: -10}}
           iconColor={colors.tessarak}
           size={30}
-          onPress={() => Alert.alert('Activity Feed')}
+          onPress={() => {
+            //@ts-ignore
+            navigation.navigate('Activity');
+          }}
         />
         <IconButton
           icon="magnify"
           iconColor={colors.tessarak}
           size={30}
-          onPress={() => Alert.alert('Search the Tessarak')}
+          onPress={() => {
+            //@ts-ignore
+            navigation.navigate('Search');
+          }}
         />
       </View>
       <View style={{flex: 1, justifyContent: 'center', paddingHorizontal: 30}}>
         <Text
           variant="headlineSmall"
-          style={{fontWeight: 'bold', color: colors.text}}>
+          style={{fontWeight: 'bold', color: colors.text, textAlign: 'center'}}>
           TikTok like feed section based on which dimension you're in. Click up
           top to change dimensions.
         </Text>
