@@ -207,35 +207,51 @@ const ReadTermsScreen = () => {
                 fontWeight: 'bold',
                 color: colors.text,
               }}>
-              Yes, for every release, if a change was made that affects these terms, they will be updated and you will be prompted to re-read and accept.
+              Yes, for every release, if a change was made that affects these
+              terms, they will be updated and you will be prompted to re-read
+              and accept.
             </Text>
           </View>
 
-            <View style={{marginTop: 20, paddingHorizontal: 20, paddingBottom: 20}}>
-                <Button
-                    labelStyle={{color: colors.text, fontWeight: 'bold'}}
-                    buttonColor={colors.tessarak}
-                    theme={{roundness: 1}}
-                    onPress={() => {
-                        //@ts-ignore
-                        navigation.navigate('GetPhoneNumber');
-                    }}>
-                    I agree, continue...
-                </Button>
-            </View>
+          <View>
+            <Text
+              variant="titleMedium"
+              style={{
+                fontWeight: 'bold',
+                color: '#c66ef1',
+              }}>
+              Do I have to agree to these terms to use the app?
+            </Text>
+          </View>
+          <View style={{marginBottom: 20}}>
+            <Text
+              variant="titleMedium"
+              style={{
+                fontWeight: 'bold',
+                color: colors.text,
+              }}>
+              Yes. If you don't agree to them, we encourage you to check back
+              and re-read them periodically and see if newer versions are more
+              agreeable. The plan is to continue to make the data more and more
+              secure and untouchable. However, for now, to work out designs and
+              kinks, we are bootstrapping using more traditional client/server
+              models.
+            </Text>
+          </View>
 
-            <View style={{marginTop: 10, paddingHorizontal: 20, paddingBottom: 40}}>
-                <Button
-                    labelStyle={{color: colors.text, fontWeight: 'bold'}}
-                    buttonColor="#e851be"
-                    theme={{roundness: 1}}
-                    onPress={() => {
-                        //@ts-ignore
-                        navigation.navigate('GetPhoneNumber');
-                    }}>
-                    I don't agree.
-                </Button>
-            </View>
+          <View
+            style={{marginTop: 20, paddingHorizontal: 20, paddingBottom: 40}}>
+            <Button
+              labelStyle={{color: colors.text, fontWeight: 'bold'}}
+              buttonColor={colors.tessarak}
+              theme={{roundness: 1}}
+              onPress={() => {
+                //@ts-ignore
+                navigation.navigate('GetPhoneNumber');
+              }}>
+              I agree, continue...
+            </Button>
+          </View>
         </ScrollView>
         <View style={{paddingHorizontal: 20, marginBottom: 20}}>
           <Divider />
