@@ -13,7 +13,7 @@ const MessagesScreen = () => {
         <Text
           variant="headlineSmall"
           style={{fontWeight: 'bold', color: colors.text, textAlign: 'center'}}>
-          End to end encrypted p2p messaging.
+          End to end encrypted messaging.
         </Text>
       </View>
     </SafeScreen>

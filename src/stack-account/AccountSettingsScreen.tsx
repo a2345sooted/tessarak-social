@@ -48,8 +48,7 @@ const AccountSettingsScreen = () => {
         </Text>
       </View>
       <Divider />
-      <View style={{flex: 1}} />
-      <View style={{paddingBottom: 20, paddingHorizontal: 30}}>
+      <View style={{paddingBottom: 10, paddingHorizontal: 30, marginTop: 150}}>
         <Button
           uppercase
           mode="outlined"
@@ -58,7 +57,7 @@ const AccountSettingsScreen = () => {
           Sign Out
         </Button>
       </View>
-      <View style={{paddingBottom: insets.bottom + 20, paddingHorizontal: 30}}>
+      <View style={{paddingHorizontal: 30}}>
         <Button
           mode="text"
           labelStyle={{color: colors.text}}
