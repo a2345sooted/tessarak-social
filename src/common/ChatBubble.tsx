@@ -15,10 +15,7 @@ function ChatBubble(props: BubbleProps<IMessage>): JSX.Element {
           backgroundColor: colors.user,
         },
         left: {
-          backgroundColor: true
-            ? theme.colors.inverseSurface
-            : theme.colors.surfaceDisabled,
-        },
+          backgroundColor: '#424242'},
       }}
     />
   );

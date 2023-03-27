@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {IconButton, Text} from 'react-native-paper';
 import {SafeScreen} from '@common';
 import {AppContext} from '@app-ctx';
@@ -17,8 +17,21 @@ const TessaScreen = () => {
 
   const tabBarHeight = useBottomTabBarHeight();
 
-  function onSend(messages: any[]) {
-  }
+  useEffect(() => {
+    setMessages([
+      {
+        _id: 1,
+        text: 'Tessa is an ai chatbot that specializes in helping you navigate the Tessarak and make send of the rapidly changing ai and media landscape.',
+        createdAt: new Date(),
+        user: {
+          _id: 2,
+          name: 'Tessa',
+        },
+      },
+    ]);
+  }, []);
+
+  function onSend(messages: any[]) {}
 
   return (
     <SafeScreen>
@@ -59,7 +72,7 @@ const TessaScreen = () => {
           flexDirection: 'column',
         }}
         renderAvatarOnTop
-        placeholder="Type a message to Tessa..."
+        placeholder="Type a message..."
         renderSend={props => <SendButton {...props} />}
         renderBubble={props => <ChatBubble {...props} />}
         renderMessageText={props => <ChatMessageText {...props} />}
