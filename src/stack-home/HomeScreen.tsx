@@ -3,9 +3,12 @@ import {IconButton, Text} from 'react-native-paper';
 import SafeScreen from '../common/SafeScreen';
 import {AppContext} from '@app-ctx';
 import { Alert, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const HomeScreen = () => {
   const {colors} = useContext(AppContext);
+
+  const navigation = useNavigation();
 
   return (
     <SafeScreen>
@@ -14,7 +17,10 @@ const HomeScreen = () => {
           icon="apps"
           iconColor={colors.tessarak}
           size={25}
-          onPress={() => {}}
+          onPress={() => {
+            //@ts-ignore
+            navigation.navigate('Dimensions');
+          }}
         />
         <Text
           variant="headlineSmall"
@@ -22,13 +28,13 @@ const HomeScreen = () => {
           #tessarak-beta
         </Text>
         <IconButton
-          icon="video-wireless-outline"
+          icon="broadcast"
           iconColor={colors.tessarak}
           size={25}
           onPress={() => Alert.alert('Live Stream')}
         />
         <IconButton
-          icon="layers-search-outline"
+          icon="magnify"
           iconColor={colors.tessarak}
           size={25}
           onPress={() => Alert.alert('Search the Tessarak')}
