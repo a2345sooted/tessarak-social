@@ -8,7 +8,7 @@ import {tkDelay} from '../utils';
 import {sendCodeToPhone} from '../services/auth';
 import {formatWithMask, Masks} from 'react-native-mask-input';
 
-const GetPhoneNumberScreen = () => {
+const VerifyCodeScreen = () => {
   const {colors} = useContext(AppContext);
   const navigation = useNavigation();
   const phoneInputRef = useRef<any>();
@@ -39,6 +39,7 @@ const GetPhoneNumberScreen = () => {
       await sendCodeToPhone(phone);
       //@ts-ignore
       navigation.navigate('VerifyCode');
+      await tkDelay(1000);
     } catch (error: any) {
       // todo handle invalid number
       setErrorSending(error);
@@ -59,19 +60,24 @@ const GetPhoneNumberScreen = () => {
   return (
     <SafeScreen>
       <View style={{flex: 1, paddingHorizontal: 30}}>
-        <View style={{flexDirection: 'row', justifyContent: 'center', marginTop: 100}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+            marginTop: 100,
+          }}>
           <Text
             variant="titleLarge"
             style={{
               fontWeight: 'bold',
               color: colors.text,
             }}>
-            What is your phone number?
+            Enter the code...
           </Text>
         </View>
         <View style={{marginTop: 10, paddingHorizontal: 10}}>
           <TextInput
-              // autoFocus
+            // autoFocus
             disabled={isSending}
             keyboardType="number-pad"
             returnKeyType="done"
@@ -97,4 +103,4 @@ const GetPhoneNumberScreen = () => {
   );
 };
 
-export default GetPhoneNumberScreen;
+export default VerifyCodeScreen;

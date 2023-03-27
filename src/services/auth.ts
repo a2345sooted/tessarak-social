@@ -5,5 +5,5 @@ export async function sendCodeToPhone(phoneNumber: string): Promise<void> {
 }
 
 export async function verifyCodeForPhone(phoneNumber: string, code: string): Promise<void> {
-  await tkDelay(2000);
+  await tkDelay(1000);
 }

@@ -72,7 +72,7 @@ const LandingScreen = () => {
             theme={{roundness: 1}}
             onPress={() => {
               //@ts-ignore
-              navigation.navigate('GetPhoneNumber');
+              navigation.navigate('ReadTerms');
             }}>
             Start
           </Button>
