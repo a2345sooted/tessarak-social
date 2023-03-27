@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {IconButton, Text, Avatar} from 'react-native-paper';
 import {SafeScreen} from '@common';
 import {AppContext} from '@app-ctx';
-import {Alert, View} from 'react-native';
+import { Alert, TouchableOpacity, View } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 const HomeScreen = () => {
@@ -60,9 +60,8 @@ const HomeScreen = () => {
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'center',
-            paddingBottom: 12,
+          paddingBottom: 12,
         }}>
-
         <IconButton
           icon="music"
           iconColor={colors.bizarroTessarak}
@@ -79,9 +78,14 @@ const HomeScreen = () => {
             Alert.alert('Bookmark');
           }}
         />
-          <View style={{marginHorizontal: 12}}>
-              <Avatar.Text size={50} label="XD" />
-          </View>
+        <View style={{marginHorizontal: 12}}>
+          <TouchableOpacity onPress={() => {
+              //@ts-ignore
+              navigation.navigate('User');
+          }}>
+            <Avatar.Text size={50} label="XD" />
+          </TouchableOpacity>
+        </View>
         <IconButton
           icon="comment"
           iconColor={colors.bizarroTessarak}

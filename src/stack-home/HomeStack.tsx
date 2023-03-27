@@ -4,6 +4,7 @@ import HomeScreen from './HomeScreen';
 import DimensionsStack from '../stack-dimensions/DimensionsStack';
 import ActivityScreen from './ActivityScreen';
 import SearchScreen from './SearchScreen';
+import UserScreen from './UserScreen';
 
 const HomeNavStack = createNativeStackNavigator();
 
@@ -28,6 +29,11 @@ function HomeStack() {
       <HomeNavStack.Screen
         name="Search"
         component={SearchScreen}
+        options={{headerShown: false, presentation: 'modal'}}
+      />
+      <HomeNavStack.Screen
+        name="User"
+        component={UserScreen}
         options={{headerShown: false, presentation: 'modal'}}
       />
     </HomeNavStack.Navigator>
