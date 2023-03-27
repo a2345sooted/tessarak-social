@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StatusBar, useColorScheme} from 'react-native';
+import { Alert, StatusBar, useColorScheme } from 'react-native';
 import {Provider as PaperProvider} from 'react-native-paper';
 import LandingScreen from './LandingScreen';
 import {AppContext, BrightnessMode} from '@app-ctx';
@@ -15,6 +15,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {isDarkMode} from './utils';
 import AppStack from './AppStack';
 
+import SystemNavigationBar from 'react-native-system-navigation-bar';
+
 function getAppColors(mode: string): AppColors {
   return mode === 'light' ? LightAppColors : DarkAppColors;
 }
@@ -23,7 +25,7 @@ const RootStack = createNativeStackNavigator();
 
 const Tessarak = () => {
   const deviceBrightMode = useColorScheme();
-  const [appBrightMode, setAppBrightMode] = useState<BrightnessMode>('device');
+  const [appBrightMode, setAppBrightMode] = useState<BrightnessMode>('dark');
   const [colors, setColors] = useState<AppColors>(
     getAppColors(appBrightMode as string),
   );
@@ -40,6 +42,7 @@ const Tessarak = () => {
   const [statusBar, setStatusBar] = useState<JSX.Element>(getStatusBar());
 
   useEffect(() => {
+    SystemNavigationBar.setNavigationColor(colors.bg1).catch(error => {});
     updateColors();
   }, [appBrightMode, deviceBrightMode]);
 
