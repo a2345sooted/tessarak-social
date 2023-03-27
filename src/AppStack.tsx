@@ -1,37 +1,45 @@
-import React, {useContext} from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import AppScreen from './AppScreen';
+import React from 'react';
 import {View} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {Text} from 'react-native-paper';
-import {AppContext} from './AppContext';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import CreateStack from './stack-create/CreateStack';
+import TessaStack from './stack-tessa/TessaStack';
+import MessagesStack from './stack-messages/MessagesStack';
+import HomeStack from './stack-home/HomeStack';
+import ProfileStack from './stack-profile/ProfileStack';
 
-const AppNavStack = createNativeStackNavigator();
+const AppNavStack = createBottomTabNavigator();
 
 function AppStack() {
-  const insets = useSafeAreaInsets();
-  const {colors} = useContext(AppContext);
   return (
     <>
       <View style={{flex: 1}}>
         <AppNavStack.Navigator initialRouteName="Home">
           <AppNavStack.Screen
+            name="Create"
+            component={CreateStack}
+            options={{headerShown: false}}
+          />
+          <AppNavStack.Screen
+            name="Profile"
+            component={ProfileStack}
+            options={{headerShown: false}}
+          />
+          <AppNavStack.Screen
             name="Home"
-            component={AppScreen}
-            options={{headerShown: false, animation: 'none'}}
+            component={HomeStack}
+            options={{headerShown: false}}
+          />
+          <AppNavStack.Screen
+            name="Messages"
+            component={MessagesStack}
+            options={{headerShown: false}}
+          />
+          <AppNavStack.Screen
+            name="Tessa"
+            component={TessaStack}
+            options={{headerShown: false}}
           />
         </AppNavStack.Navigator>
-      </View>
-      <View
-        style={{
-          backgroundColor: '#af0c0c',
-          paddingBottom: insets.bottom,
-        }}>
-        <Text
-          variant="displayLarge"
-          style={{fontWeight: 'bold', color: colors.tessarak}}>
-          Tessarak
-        </Text>
       </View>
     </>
   );

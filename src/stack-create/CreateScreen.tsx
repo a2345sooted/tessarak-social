@@ -1,9 +1,9 @@
 import React, {useContext} from 'react';
 import {Text} from 'react-native-paper';
+import SafeScreen from '../common/SafeScreen';
 import {AppContext} from '@app-ctx';
-import SafeScreen from './common/SafeScreen';
 
-const AppScreen = () => {
+const CreateScreen = () => {
   const {colors} = useContext(AppContext);
 
   return (
@@ -11,10 +11,10 @@ const AppScreen = () => {
       <Text
         variant="displayLarge"
         style={{fontWeight: 'bold', color: colors.tessarak}}>
-        Apppppp
+        Create Screen
       </Text>
     </SafeScreen>
   );
 };
 
-export default AppScreen;
+export default CreateScreen;

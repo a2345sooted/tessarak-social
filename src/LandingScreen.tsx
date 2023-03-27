@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {View} from 'react-native';
 import {Button, Text} from 'react-native-paper';
-import {AppContext} from './AppContext';
+import {AppContext} from '@app-ctx';
 import {useNavigation} from '@react-navigation/native';
 import SafeScreen from './common/SafeScreen';
 

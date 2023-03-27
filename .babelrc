@@ -1,0 +1,28 @@
+{
+  "plugins": [
+    [
+      "module:react-native-dotenv",
+      {
+        "envName": "tessarak_local_env",
+        "moduleName": "@env",
+        "path": ".env.local",
+        "allowUndefined": false,
+        "safe": true,
+        "allowlist": [
+          "HTTP_PROTOCOL",
+          "WS_PROTOCOL",
+          "API_ORIGIN"
+        ]
+      }
+    ],
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "@common": "./src/common/index",
+          "@app-ctx": "./src/AppContext"
+        }
+      }
+    ]
+  ]
+}

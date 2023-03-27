@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {StatusBar, useColorScheme} from 'react-native';
 import {Provider as PaperProvider} from 'react-native-paper';
 import LandingScreen from './LandingScreen';
-import {AppContext, BrightnessMode} from './AppContext';
+import {AppContext, BrightnessMode} from '@app-ctx';
 import {
   AppColors,
   DarkAppColors,
@@ -12,8 +12,8 @@ import {
 } from './theme';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import AppStack from './AppStack';
 import {isDarkMode} from './utils';
+import AppStack from './AppStack';
 
 function getAppColors(mode: string): AppColors {
   return mode === 'light' ? LightAppColors : DarkAppColors;
