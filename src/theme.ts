@@ -4,6 +4,7 @@ import {DefaultTheme as DefaultNavTheme} from '@react-navigation/native';
 
 export type AppColors = {
   tessarak: string;
+  bizarroTessarak: string;
   highlight: string;
   text: string;
   bg1: string;
@@ -13,6 +14,7 @@ export type AppColors = {
 
 export const LightAppColors: AppColors = {
   tessarak: '#029aa8',
+  bizarroTessarak: '#e851be',
   highlight: '#fc8b0b',
   text: '#333333',
   bg1: '#FFFFFF',
@@ -22,6 +24,7 @@ export const LightAppColors: AppColors = {
 
 export const DarkAppColors: AppColors = {
   tessarak: '#029aa8',
+  bizarroTessarak: '#e851be',
   highlight: '#fc8b0b',
   text: '#FFFFFF',
   bg1: '#333333',
