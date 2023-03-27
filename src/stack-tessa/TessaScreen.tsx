@@ -37,7 +37,6 @@ const TessaScreen = () => {
     <SafeScreen>
       <View
         style={{
-          paddingTop: 20,
           paddingBottom: 20,
           flexDirection: 'row',
           alignItems: 'center',
