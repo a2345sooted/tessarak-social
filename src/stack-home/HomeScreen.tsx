@@ -55,6 +55,13 @@ const HomeScreen = () => {
           top to change dimensions.
         </Text>
       </View>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      />
     </SafeScreen>
   );
 };

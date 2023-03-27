@@ -85,7 +85,7 @@ const CreateScreen = () => {
       <View
         style={{
           flexDirection: 'row',
-          alignItems: 'baseline',
+          alignItems: 'center',
           justifyContent: 'center',
         }}>
         <IconButton
