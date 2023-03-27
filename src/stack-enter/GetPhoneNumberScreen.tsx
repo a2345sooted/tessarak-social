@@ -7,6 +7,7 @@ import {useNavigation} from '@react-navigation/native';
 import {tkDelay} from '../utils';
 import {sendCodeToPhone} from '../services/auth';
 import {formatWithMask, Masks} from 'react-native-mask-input';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const GetPhoneNumberScreen = () => {
   const {colors} = useContext(AppContext);
@@ -17,6 +18,8 @@ const GetPhoneNumberScreen = () => {
   const [isSending, setIsSending] = useState(false);
   const [isInvalidNumber, setIsInvalidNumber] = useState(false);
   const [errorSending, setErrorSending] = useState<any>(null);
+
+    const insets = useSafeAreaInsets();
 
   useEffect(() => {
     tkDelay(600).then(() => phoneInputRef.current?.focus());
@@ -94,7 +97,7 @@ const GetPhoneNumberScreen = () => {
             onChangeText={text => formatText(text)}
           />
         </View>
-        <View style={{paddingBottom: 20}}>
+          <View style={{paddingBottom: 20 + insets.bottom}}>
           <Text
               variant="titleSmall"
               style={{

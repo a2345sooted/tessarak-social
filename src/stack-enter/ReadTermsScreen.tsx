@@ -4,9 +4,12 @@ import {Button, Divider, Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
 import {useNavigation} from '@react-navigation/native';
 import {SafeScreen} from '@common';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const ReadTermsScreen = () => {
   const {colors} = useContext(AppContext);
+
+    const insets = useSafeAreaInsets();
 
   const navigation = useNavigation();
 
@@ -237,7 +240,7 @@ const ReadTermsScreen = () => {
           <Divider />
         </View>
         <View style={{flex: 1}} />
-        <View style={{paddingBottom: 20}}>
+          <View style={{paddingBottom: 20 + insets.bottom}}>
           <Text
             variant="titleSmall"
             style={{

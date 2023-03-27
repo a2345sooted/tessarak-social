@@ -4,11 +4,14 @@ import {Button, Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
 import {useNavigation} from '@react-navigation/native';
 import {SafeScreen} from '@common';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const LandingScreen = () => {
   const {colors} = useContext(AppContext);
 
   const navigation = useNavigation();
+
+    const insets = useSafeAreaInsets();
 
   function bulletPoint(text: string, color = '#c66ef1'): JSX.Element {
     return (
@@ -80,7 +83,7 @@ const LandingScreen = () => {
         </View>
         <View style={{flex: 1}} />
 
-        <View style={{paddingBottom: 20}}>
+          <View style={{paddingBottom: 20 + insets.bottom}}>
           {bulletPoint('The Tessarak Project 2023', colors.text)}
         </View>
       </View>
