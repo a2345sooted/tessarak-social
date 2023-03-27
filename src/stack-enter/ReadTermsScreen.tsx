@@ -210,24 +210,36 @@ const ReadTermsScreen = () => {
               Yes, for every release, if a change was made that affects these terms, they will be updated and you will be prompted to re-read and accept.
             </Text>
           </View>
+
+            <View style={{marginTop: 20, paddingHorizontal: 20, paddingBottom: 20}}>
+                <Button
+                    labelStyle={{color: colors.text, fontWeight: 'bold'}}
+                    buttonColor={colors.tessarak}
+                    theme={{roundness: 1}}
+                    onPress={() => {
+                        //@ts-ignore
+                        navigation.navigate('GetPhoneNumber');
+                    }}>
+                    I agree, continue...
+                </Button>
+            </View>
+
+            <View style={{marginTop: 10, paddingHorizontal: 20, paddingBottom: 40}}>
+                <Button
+                    labelStyle={{color: colors.text, fontWeight: 'bold'}}
+                    buttonColor="#e851be"
+                    theme={{roundness: 1}}
+                    onPress={() => {
+                        //@ts-ignore
+                        navigation.navigate('GetPhoneNumber');
+                    }}>
+                    I don't agree.
+                </Button>
+            </View>
         </ScrollView>
         <View style={{paddingHorizontal: 20, marginBottom: 20}}>
           <Divider />
         </View>
-
-        {/*<View style={{marginTop: 50, paddingHorizontal: 20}}>*/}
-        {/*  <Button*/}
-        {/*    icon="arrow-right"*/}
-        {/*    labelStyle={{color: colors.text, fontWeight: 'bold'}}*/}
-        {/*    buttonColor={colors.tessarak}*/}
-        {/*    theme={{roundness: 1}}*/}
-        {/*    onPress={() => {*/}
-        {/*      //@ts-ignore*/}
-        {/*      navigation.navigate('GetPhoneNumber');*/}
-        {/*    }}>*/}
-        {/*    Start*/}
-        {/*  </Button>*/}
-        {/*</View>*/}
         <View style={{flex: 1}} />
         <View style={{paddingBottom: 20}}>
           <Text
