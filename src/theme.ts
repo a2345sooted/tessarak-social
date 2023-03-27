@@ -7,20 +7,26 @@ export type AppColors = {
   highlight: string;
   text: string;
   bg1: string;
+  light: string;
+  dark: string;
 };
 
 export const LightAppColors: AppColors = {
   tessarak: '#029aa8',
   highlight: '#fc8b0b',
-  text: Colors.darker,
-  bg1: Colors.lighter,
+  text: '#333333',
+  bg1: '#FFFFFF',
+  light: '#FFFFFF',
+  dark: '#333333',
 };
 
 export const DarkAppColors: AppColors = {
   tessarak: '#029aa8',
   highlight: '#fc8b0b',
-  text: Colors.lighter,
-  bg1: Colors.darker,
+  text: '#FFFFFF',
+  bg1: '#333333',
+  light: '#FFFFFF',
+  dark: '#333333',
 };
 
 export const PAPER_THEME = {

@@ -8,6 +8,7 @@ export type AppContextContainer = {
   deviceBrightMode: ColorSchemeName;
   updateBrightMode: (mode: BrightnessMode) => void;
   colors: any;
+  statusBar: JSX.Element;
 };
 
 export const AppContext = createContext<AppContextContainer>({
@@ -15,4 +16,5 @@ export const AppContext = createContext<AppContextContainer>({
   deviceBrightMode: undefined as any,
   updateBrightMode: undefined as any,
   colors: undefined as any,
+  statusBar: undefined as any,
 });

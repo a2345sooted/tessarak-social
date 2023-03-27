@@ -1,14 +1,10 @@
-import React, {useContext} from 'react';
-import {AppContext} from './AppContext';
+import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import LandingScreen from './LandingScreen';
 import AppScreen from './AppScreen';
 
 const AppNavStack = createNativeStackNavigator();
 
 function AppStack() {
-  const appCtx = useContext(AppContext);
-
   return (
     <AppNavStack.Navigator initialRouteName="Home">
       <AppNavStack.Screen
