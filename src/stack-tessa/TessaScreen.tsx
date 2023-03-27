@@ -10,10 +10,13 @@ import ChatMessageText from '../common/ChatMessageText';
 import ChatInputToolbar from '../common/ChatInputToolbar';
 import CustomNoAvatarMessage from '../common/CustomNoAvatarMessage';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
+import {useNavigation} from '@react-navigation/native';
 
 const TessaScreen = () => {
   const {colors} = useContext(AppContext);
   const [messages, setMessages] = useState<any[]>([]);
+
+  const navigation = useNavigation();
 
   const tabBarHeight = useBottomTabBarHeight();
 
@@ -45,7 +48,10 @@ const TessaScreen = () => {
           icon="tune-vertical"
           iconColor={colors.tessarak}
           size={25}
-          onPress={() => Alert.alert('Tune Tessa')}
+          onPress={() => {
+            //@ts-ignore
+            navigation.navigate('Tune');
+          }}
         />
         <Text
           variant="headlineSmall"
@@ -56,7 +62,10 @@ const TessaScreen = () => {
           icon="forum"
           iconColor={colors.tessarak}
           size={25}
-          onPress={() => Alert.alert('Conversations')}
+          onPress={() => {
+            //@ts-ignore
+            navigation.navigate('TessaContext');
+          }}
         />
       </View>
       <GiftedChat

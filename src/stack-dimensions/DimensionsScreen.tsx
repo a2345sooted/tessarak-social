@@ -26,7 +26,7 @@ const DimensionsScreen = () => {
             flex: 2,
             textAlign: 'center',
           }}>
-          DIMENSIONS
+          Dimensions
         </Text>
         <IconButton
           icon="layers-search-outline"
