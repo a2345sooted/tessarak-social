@@ -77,7 +77,7 @@ function AppStack() {
               tabBarIcon: () => {
                 return (
                   <IconButton
-                    icon="message"
+                    icon="message-text"
                     iconColor={colors.user}
                     size={25}
                     onPress={() => {}}
