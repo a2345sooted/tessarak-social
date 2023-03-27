@@ -15,7 +15,8 @@ function ChatInputToolbar(props: ChatInputToolbarProps): JSX.Element {
     <InputToolbar
       {...props}
       containerStyle={{
-        borderTopWidth: 0,
+        // borderTopWidth: 2,
+        borderTopColor: '#7c7b7b',
         backgroundColor: colors.bg1,
       }}
     />
