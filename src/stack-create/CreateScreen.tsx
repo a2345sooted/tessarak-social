@@ -39,7 +39,7 @@ const CreateScreen = () => {
           iconColor={colors.bizarroTessarak}
           size={25}
           onPress={() => {
-            Alert.alert('Timer');
+            Alert.alert('Start Timer');
           }}
         />
         <IconButton
@@ -101,7 +101,7 @@ const CreateScreen = () => {
           iconColor={colors.bizarroTessarak}
           size={25}
           onPress={() => {
-            Alert.alert('Duration');
+            Alert.alert('Video Duration');
           }}
         />
         <IconButton
