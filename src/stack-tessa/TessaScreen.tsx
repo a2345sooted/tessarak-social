@@ -1,24 +1,75 @@
-import React, {useContext} from 'react';
-import {Text} from 'react-native-paper';
+import React, {useContext, useState} from 'react';
+import {IconButton, Text} from 'react-native-paper';
 import {SafeScreen} from '@common';
 import {AppContext} from '@app-ctx';
-import {View} from 'react-native';
+import {Alert, View} from 'react-native';
+import {GiftedChat} from 'react-native-gifted-chat';
+import SendButton from '../common/SendButton';
+import ChatBubble from '../common/ChatBubble';
+import ChatMessageText from '../common/ChatMessageText';
+import ChatInputToolbar from '../common/ChatInputToolbar';
+import CustomNoAvatarMessage from '../common/CustomNoAvatarMessage';
+import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
 const TessaScreen = () => {
   const {colors} = useContext(AppContext);
+  const [messages, setMessages] = useState<any[]>([]);
+
+  const tabBarHeight = useBottomTabBarHeight();
+
+  function onSend(messages: any[]) {
+  }
 
   return (
     <SafeScreen>
-      <View style={{flex: 1, justifyContent: 'center', paddingHorizontal: 30}}>
+      <View
+        style={{
+          paddingTop: 20,
+          paddingBottom: 20,
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}>
+        <IconButton
+          icon="tune-vertical"
+          iconColor={colors.tessarak}
+          size={25}
+          onPress={() => Alert.alert('Tune Tessa')}
+        />
         <Text
           variant="headlineSmall"
-          style={{fontWeight: 'bold', color: colors.text}}>
-          Built-in ai chatbot named Tessa. She is meant to help you find what
-          you want in the Tessarak and help you make sense of the rapidly
-          changing ai and media landscape. Also, whatever other cool stuff ai
-          chatbots can do.
+          style={{fontWeight: 'bold', color: colors.text, flex: 1}}>
+          Tessa
         </Text>
+        <IconButton
+          icon="forum"
+          iconColor={colors.tessarak}
+          size={25}
+          onPress={() => Alert.alert('Conversations')}
+        />
       </View>
+      <GiftedChat
+        textInputProps={{
+          fontWeight: 'bold',
+          color: colors.text,
+          fontSize: 16,
+        }}
+        bottomOffset={tabBarHeight}
+        messagesContainerStyle={{
+          backgroundColor: colors.bg1,
+          flexDirection: 'column',
+        }}
+        renderAvatarOnTop
+        placeholder="Type a message to Tessa..."
+        renderSend={props => <SendButton {...props} />}
+        renderBubble={props => <ChatBubble {...props} />}
+        renderMessageText={props => <ChatMessageText {...props} />}
+        renderInputToolbar={props => <ChatInputToolbar {...props} />}
+        renderMessage={CustomNoAvatarMessage}
+        messages={messages}
+        onSend={msgs => onSend(msgs as any)}
+        user={{_id: 1}}
+        listViewProps={{keyboardDismissMode: 'on-drag'}}
+      />
     </SafeScreen>
   );
 };

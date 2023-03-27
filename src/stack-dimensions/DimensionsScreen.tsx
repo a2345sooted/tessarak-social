@@ -19,14 +19,14 @@ const DimensionsScreen = () => {
           style={{flex: 1}}
         />
         <Text
-          variant="headlineLarge"
+          variant="headlineSmall"
           style={{
             fontWeight: 'bold',
             color: colors.text,
             flex: 2,
             textAlign: 'center',
           }}>
-          dimensions
+          DIMENSIONS
         </Text>
         <IconButton
           icon="layers-search-outline"

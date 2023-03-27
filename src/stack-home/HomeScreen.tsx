@@ -32,7 +32,7 @@ const HomeScreen = () => {
           style={{marginRight: -10}}
           iconColor={colors.tessarak}
           size={30}
-          onPress={() => Alert.alert('Live Stream')}
+          onPress={() => Alert.alert('Activity Feed')}
         />
         <IconButton
           icon="magnify"

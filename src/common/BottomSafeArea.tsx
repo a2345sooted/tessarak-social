@@ -1,7 +1,7 @@
 import React, {PropsWithChildren, useContext} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import TopSafeArea from './TopSafeArea';
-import {AppContext} from '../AppContext';
+import {AppContext} from '@app-ctx';
 
 function BottomSafeArea(props: PropsWithChildren): JSX.Element {
   const {colors, statusBar} = useContext(AppContext);
@@ -9,7 +9,8 @@ function BottomSafeArea(props: PropsWithChildren): JSX.Element {
     <>
       <TopSafeArea />
       <SafeAreaView
-        edges={['left', 'right', 'bottom']}
+        // edges={['left', 'right', 'bottom']}
+        edges={['left', 'right']}
         style={{
           flex: 1,
           backgroundColor: colors.bg1,
