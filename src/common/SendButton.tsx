@@ -12,7 +12,7 @@ function SendButton(props: SendButtonProps): JSX.Element {
   return (
     <Send {...props} alwaysShowSend>
       <View style={{justifyContent: 'center', height: '100%', marginRight: 10}}>
-        <Icon name="send-circle" size={35} color={colors.tessarak} />
+        <Icon name="send-circle" size={35} color={colors.bizarroTessarak} />
       </View>
     </Send>
   );
