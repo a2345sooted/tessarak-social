@@ -1,9 +1,9 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {IconButton, Text} from 'react-native-paper';
 import {SafeScreen} from '@common';
 import {AppContext} from '@app-ctx';
-import {Alert, View} from 'react-native';
-import {GiftedChat} from 'react-native-gifted-chat';
+import {View} from 'react-native';
+import {GiftedChat, IMessage} from 'react-native-gifted-chat';
 import SendButton from '../common/SendButton';
 import ChatBubble from '../common/ChatBubble';
 import ChatMessageText from '../common/ChatMessageText';
@@ -11,30 +11,97 @@ import ChatInputToolbar from '../common/ChatInputToolbar';
 import CustomNoAvatarMessage from '../common/CustomNoAvatarMessage';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import {useNavigation} from '@react-navigation/native';
+import {createSocket} from '../services/api';
+import {tkDelay} from '../utils';
+
+export interface TkMessage extends IMessage {
+  type: 'tessa_typing' | 'tessa_message' | 'user_message';
+}
 
 const TessaScreen = () => {
   const {colors} = useContext(AppContext);
-  const [messages, setMessages] = useState<any[]>([]);
 
   const navigation = useNavigation();
 
   const tabBarHeight = useBottomTabBarHeight();
 
+  const [socket, setSocket] = useState<WebSocket | null>(null);
+  const [isSocketConnected, setIsSocketConnected] = useState(false);
+
+  const [messages, setMessages] = useState<TkMessage[]>([]);
+  const [tessaTyping, setTessaTyping] = useState(false);
+
   useEffect(() => {
-    setMessages([
-      {
-        _id: 1,
-        text: 'Tessa is an ai chatbot that specializes in helping you navigate the Tessarak and make send of the rapidly changing ai and media landscape.',
+    if (!isSocketConnected) {
+      setupSocket();
+    }
+  }, [isSocketConnected]);
+
+  async function setupSocket(): Promise<void> {
+    try {
+      const chatSocket = await createSocket({
+        onopen: handleSocketOpen,
+        onclose: handleSocketClose,
+        onerror: handleSocketError,
+        onmessage: handleSocketMessage,
+      });
+      setSocket(chatSocket);
+      setIsSocketConnected(true);
+    } catch (error: any) {
+      // todo what to do with this error?
+      await tkDelay(1000);
+      return setupSocket();
+    }
+  }
+
+  const handleSocketMessage = useCallback((event: WebSocketMessageEvent) => {
+    const message = JSON.parse(event.data);
+    if (message.type === 'tessa_typing') {
+      setTessaTyping(true);
+    } else if (message.type === 'tessa_message') {
+      setTessaTyping(false);
+      const tkMessage: TkMessage = {
+        type: 'tessa_message',
+        _id: message.id,
+        text: message.text,
         createdAt: new Date(),
         user: {
           _id: 2,
           name: 'Tessa',
         },
-      },
-    ]);
+      };
+      setMessages(previousMessages =>
+        GiftedChat.append<TkMessage>(previousMessages, [tkMessage]),
+      );
+    } else {
+      setTessaTyping(false);
+    }
   }, []);
 
-  function onSend(messages: any[]) {}
+  const handleSocketError = useCallback((error: WebSocketErrorEvent) => {
+    // Alert.alert('error = ' + error.message);
+  }, []);
+
+  const handleSocketOpen = useCallback(() => {
+    // Alert.alert('socket is open');
+    setIsSocketConnected(true);
+  }, []);
+
+  const handleSocketClose = useCallback((event: WebSocketCloseEvent) => {
+    setIsSocketConnected(false);
+  }, []);
+
+  const onSend = useCallback(
+    (msgs: TkMessage[] = []) => {
+      const message = msgs[0];
+      message.type = 'user_message';
+      setMessages(previousMessages =>
+        GiftedChat.append<TkMessage>(previousMessages, [message]),
+      );
+      socket!.send(JSON.stringify(msgs[0]));
+    },
+    [socket],
+  );
 
   return (
     <SafeScreen>
@@ -69,6 +136,7 @@ const TessaScreen = () => {
         />
       </View>
       <GiftedChat
+          isTyping={tessaTyping}
         textInputProps={{
           fontWeight: 'bold',
           color: colors.text,

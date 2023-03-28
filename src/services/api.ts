@@ -1,5 +1,5 @@
 import {tkDelay} from '../utils';
-import {API_ORIGIN, HTTP_PROTOCOL} from '@env';
+import {API_ORIGIN, HTTP_PROTOCOL, WS_PROTOCOL} from '@env';
 import axios from 'axios';
 import {AuthSuccessResponse, getAccessToken, handleAuthSuccess} from './auth';
 
@@ -74,4 +74,25 @@ export async function refreshCreds(): Promise<void> {
   // } catch (error: any) {
   //   return false;
   // }
+}
+
+export type ChatSocketHandlers = {
+  onopen: () => void;
+  onclose: (event: WebSocketCloseEvent) => void;
+  onerror: (error: WebSocketErrorEvent) => void;
+  onmessage: (event: WebSocketMessageEvent) => void;
+};
+
+export async function createSocket(
+  handlers: ChatSocketHandlers,
+): Promise<WebSocket> {
+  const token = await getAccessToken();
+  const websocket = new WebSocket(
+    `${WS_PROTOCOL}://${API_ORIGIN}/chatv1?token=${token}`,
+  );
+  websocket.onopen = handlers.onopen;
+  websocket.onclose = handlers.onclose;
+  websocket.onerror = handlers.onerror;
+  websocket.onmessage = handlers.onmessage;
+  return websocket;
 }

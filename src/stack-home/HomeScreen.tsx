@@ -1,5 +1,5 @@
 import React, {useContext, useRef} from 'react';
-import {IconButton, Text, Avatar} from 'react-native-paper';
+import {Avatar, IconButton, Text} from 'react-native-paper';
 import {SafeScreen} from '@common';
 import {AppContext} from '@app-ctx';
 import {Alert, TouchableOpacity, View} from 'react-native';
