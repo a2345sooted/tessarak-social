@@ -123,23 +123,24 @@ const GetPhoneNumberScreen = () => {
               Something went wrong. Try again.
             </Text>
           )}
-          <View
-            style={{
-              marginTop: 20,
-              paddingBottom: 40,
-              flexDirection: 'row',
-              justifyContent: 'center',
-            }}>
-            <IconButton
-              disabled={isSending}
-              icon="keyboard-backspace"
-              iconColor={colors.tessarak}
-              size={35}
-              onPress={() => {
-                navigation.goBack();
-              }}
-            />
-          </View>
+          {!isSending && (
+            <View
+              style={{
+                marginTop: 20,
+                paddingBottom: 40,
+                flexDirection: 'row',
+                justifyContent: 'center',
+              }}>
+              <IconButton
+                icon="keyboard-backspace"
+                iconColor={colors.tessarak}
+                size={35}
+                onPress={() => {
+                  navigation.goBack();
+                }}
+              />
+            </View>
+          )}
         </View>
         <View style={{paddingBottom: 20 + insets.bottom}}>
           <Text

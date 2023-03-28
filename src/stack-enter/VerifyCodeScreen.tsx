@@ -43,6 +43,7 @@ const VerifyCodeScreen = () => {
     setIsSending(true);
     setErrorSending(null);
     setErrorVerifying(null);
+    setCodeSent(false);
     setCode('');
 
     try {
@@ -137,7 +138,7 @@ const VerifyCodeScreen = () => {
               setCode(text);
             }}
           />
-          {isVerifying && (
+          {(isVerifying || isSending) && (
             <>
               <ProgressBar indeterminate color={colors.bizarroTessarak} />
               <Text
@@ -148,7 +149,7 @@ const VerifyCodeScreen = () => {
                   textAlign: 'center',
                   marginTop: 12,
                 }}>
-                verifying code...
+                {isVerifying ? 'verifying code...' : 'resending code...'}
               </Text>
             </>
           )}
@@ -176,35 +177,41 @@ const VerifyCodeScreen = () => {
               Code resent :)
             </Text>
           )}
-          <View
-            style={{
-              marginTop: 20,
-              flexDirection: 'row',
-              justifyContent: 'center',
-            }}>
-            <Button
-              mode="text"
-              labelStyle={{color: colors.tessarak, fontWeight: 'bold'}}
-              theme={{roundness: 1}}
-              onPress={resendCode}>
-              Resend Code
-            </Button>
-          </View>
-          <View
-            style={{
-              paddingBottom: 40,
-              flexDirection: 'row',
-              justifyContent: 'center',
-            }}>
-            <IconButton
-              icon="keyboard-backspace"
-              iconColor={colors.tessarak}
-              size={35}
-              onPress={() => {
-                navigation.goBack();
-              }}
-            />
-          </View>
+          {!isVerifying && !isSending && (
+            <>
+              <View
+                style={{
+                  marginTop: 20,
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                }}>
+                <Button
+                  disabled={isVerifying || isSending}
+                  mode="text"
+                  labelStyle={{color: colors.tessarak, fontWeight: 'bold'}}
+                  theme={{roundness: 1}}
+                  onPress={resendCode}>
+                  Resend Code
+                </Button>
+              </View>
+              <View
+                style={{
+                  paddingBottom: 40,
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                }}>
+                <IconButton
+                  disabled={isVerifying || isSending}
+                  icon="keyboard-backspace"
+                  iconColor={colors.tessarak}
+                  size={35}
+                  onPress={() => {
+                    navigation.goBack();
+                  }}
+                />
+              </View>
+            </>
+          )}
         </View>
         <View style={{paddingBottom: 20 + insets.bottom}}>
           <Text
