@@ -20,7 +20,7 @@ const HomeScreen = () => {
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <IconButton
           icon="layers"
-          iconColor={colors.tessarak}
+          iconColor="#c66ef1"
           size={25}
           onPress={() => {
             //@ts-ignore

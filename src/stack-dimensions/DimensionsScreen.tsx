@@ -13,7 +13,7 @@ const DimensionsScreen = () => {
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <IconButton
           icon="close"
-          iconColor={colors.tessarak}
+          iconColor="#c66ef1"
           size={30}
           onPress={() => navigation.goBack()}
           style={{flex: 1}}
@@ -30,7 +30,7 @@ const DimensionsScreen = () => {
         </Text>
         <IconButton
           icon="layers-search-outline"
-          iconColor={colors.tessarak}
+          iconColor="#c66ef1"
           size={25}
           onPress={() => Alert.alert('Search the dimensions specifically')}
           style={{flex: 1}}
