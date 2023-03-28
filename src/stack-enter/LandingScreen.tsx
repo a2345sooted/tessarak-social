@@ -86,6 +86,15 @@ const LandingScreen = () => {
         <View style={{flex: 1}} />
         <View style={{paddingBottom: 20 + insets.bottom}}>
           {bulletPoint('The Tessarak Project 2023', colors.text)}
+          <Text
+            variant="bodyLarge"
+            style={{
+              color: colors.tessarak,
+              fontWeight: 'bold',
+              textAlign: 'center',
+            }}>
+            Version 1.1
+          </Text>
         </View>
       </Animated.View>
     </SafeScreen>
