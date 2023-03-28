@@ -4,9 +4,10 @@ import {SafeScreen} from '@common';
 import {AppContext} from '@app-ctx';
 import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {maskPhoneNumber} from '../utils';
 
 const AccountScreen = () => {
-  const {colors} = useContext(AppContext);
+  const {colors, user} = useContext(AppContext);
 
   const navigation = useNavigation();
 
@@ -26,7 +27,7 @@ const AccountScreen = () => {
             flex: 1,
             marginLeft: 20,
           }}>
-          (555) 555-5555
+          {maskPhoneNumber(user!.phone.substring(2))}
         </Text>
         <IconButton
           icon="cog"

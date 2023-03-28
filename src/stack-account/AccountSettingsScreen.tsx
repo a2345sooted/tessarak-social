@@ -8,10 +8,10 @@ import {
 } from 'react-native-paper';
 import {AppContext} from '@app-ctx';
 import {Alert, View} from 'react-native';
-import {StackActions, useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import {clearAuth, removeStake} from '../services/auth';
 import {deleteUser} from '../services/api';
-import { tkDelay } from '../utils';
+import {tkDelay} from '../utils';
 
 const AccountSettingsScreen = () => {
   const {colors, checkAuth} = useContext(AppContext);

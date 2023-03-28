@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, StatusBar, useColorScheme, View} from 'react-native';
+import { Alert, SafeAreaView, StatusBar, useColorScheme, View } from 'react-native';
 import {Provider as PaperProvider, Text} from 'react-native-paper';
 import {AppContext, BrightnessMode} from '@app-ctx';
 import {
@@ -49,6 +49,7 @@ const Tessarak = () => {
     const auth = await getActiveAuth();
     if (auth) {
       const u = await getTessarakUser();
+      // Alert.alert(JSON.stringify(u, null, 2));
       setUser(u);
       setSignedIn(true);
     } else {
