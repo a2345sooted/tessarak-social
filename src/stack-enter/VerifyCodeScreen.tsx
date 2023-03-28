@@ -5,7 +5,7 @@ import {AppContext} from '@app-ctx';
 import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {tkDelay} from '../utils';
-import {sendCodeToPhone} from '../services/auth';
+import {sendCodeToPhone, stakeApp} from '../services/auth';
 import {formatWithMask, Masks} from 'react-native-mask-input';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
@@ -26,6 +26,7 @@ const VerifyCodeScreen = () => {
   }, []);
 
   async function handlePhoneInputComplete() {
+    stakeApp();
     if (staked) {
       //@ts-ignore
       navigation.getParent()?.navigate('App');
