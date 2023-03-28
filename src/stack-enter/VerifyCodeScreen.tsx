@@ -11,7 +11,7 @@ import {AppContext} from '@app-ctx';
 import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {tkDelay} from '../utils';
-import {sendCodeToPhone, stakeApp, verifyCodeForPhone} from '../services/auth';
+import {sendCodeToPhone, stakeApp, verifyCodeForPhone} from '../services/api';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const VerifyCodeScreen = () => {

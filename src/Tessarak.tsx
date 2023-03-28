@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {StatusBar, useColorScheme, View} from 'react-native';
-import {ActivityIndicator, Provider as PaperProvider} from 'react-native-paper';
+import {Provider as PaperProvider} from 'react-native-paper';
 import {AppContext, BrightnessMode} from '@app-ctx';
 import {
   AppColors,
@@ -16,7 +16,8 @@ import AppStack from './AppStack';
 
 import SystemNavigationBar from 'react-native-system-navigation-bar';
 import EnterStack from './stack-enter/EnterStack';
-import { appIsStaked, isSignedIn, removeStake } from './services/auth';
+import {appIsStaked, getActiveAuth, removeStake} from './services/auth';
+import {getTessarakUser, TessarakUser} from './services/api';
 
 function getAppColors(mode: string): AppColors {
   return mode === 'light' ? LightAppColors : DarkAppColors;
@@ -33,6 +34,7 @@ const Tessarak = () => {
 
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
   const [staked, setStaked] = useState(false);
+  const [user, setUser] = useState<TessarakUser | null>(null);
   const [signedIn, setSignedIn] = useState(false);
 
   useEffect(() => {
@@ -41,8 +43,10 @@ const Tessarak = () => {
 
   async function checkAuth() {
     await removeStake();
-    const auth = await isSignedIn();
+    const auth = await getActiveAuth();
     if (auth) {
+      const u = await getTessarakUser();
+      setUser(u);
       setSignedIn(true);
     } else {
       const stake = await appIsStaked();
@@ -65,7 +69,7 @@ const Tessarak = () => {
   const [statusBar, setStatusBar] = useState<JSX.Element>(getStatusBar());
 
   useEffect(() => {
-    SystemNavigationBar.setNavigationColor(colors.bg1).catch(error => {});
+    SystemNavigationBar.setNavigationColor(colors.bg1);
     updateColors();
   }, [appBrightMode, deviceBrightMode]);
 
@@ -88,6 +92,7 @@ const Tessarak = () => {
         colors,
         statusBar,
         staked,
+        user,
       }}>
       <PaperProvider theme={PAPER_THEME}>
         <NavigationContainer theme={NAV_THEME}>

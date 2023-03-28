@@ -1,5 +1,6 @@
 import {createContext} from 'react';
 import {ColorSchemeName} from 'react-native';
+import { TessarakUser } from './services/api';
 
 export type BrightnessMode = 'device' | 'light' | 'dark';
 
@@ -10,6 +11,7 @@ export type AppContextContainer = {
   colors: any;
   statusBar: JSX.Element;
   staked: boolean;
+  user: TessarakUser | null;
 };
 
 export const AppContext = createContext<AppContextContainer>({
@@ -19,4 +21,5 @@ export const AppContext = createContext<AppContextContainer>({
   colors: undefined as any,
   statusBar: undefined as any,
   staked: undefined as any,
+  user: undefined as any,
 });
