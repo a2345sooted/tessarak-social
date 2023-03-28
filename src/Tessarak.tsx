@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {StatusBar, useColorScheme} from 'react-native';
-import {Provider as PaperProvider} from 'react-native-paper';
+import {StatusBar, useColorScheme, View} from 'react-native';
+import {ActivityIndicator, Provider as PaperProvider} from 'react-native-paper';
 import {AppContext, BrightnessMode} from '@app-ctx';
 import {
   AppColors,
@@ -16,6 +16,8 @@ import AppStack from './AppStack';
 
 import SystemNavigationBar from 'react-native-system-navigation-bar';
 import EnterStack from './stack-enter/EnterStack';
+import {appIsStaked, isSignedIn} from './services/auth';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 function getAppColors(mode: string): AppColors {
   return mode === 'light' ? LightAppColors : DarkAppColors;
@@ -29,6 +31,25 @@ const Tessarak = () => {
   const [colors, setColors] = useState<AppColors>(
     getAppColors(appBrightMode as string),
   );
+
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+  const [isStaked, setIsStaked] = useState(false);
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+  async function checkAuth() {
+    const signedIn = await isSignedIn();
+    if (signedIn) {
+    } else {
+      const stake = await appIsStaked();
+      if (stake) {
+        setIsStaked(true);
+      }
+    }
+    setIsCheckingAuth(false);
+  }
 
   function getStatusBar() {
     const darkMode = isDarkMode(appBrightMode, deviceBrightMode);
@@ -67,18 +88,31 @@ const Tessarak = () => {
       }}>
       <PaperProvider theme={PAPER_THEME}>
         <NavigationContainer theme={NAV_THEME}>
-          <RootStack.Navigator initialRouteName="App">
-            <RootStack.Screen
-              name="Enter"
-              component={EnterStack}
-              options={{headerShown: false, animation: 'none'}}
+          {isCheckingAuth && (
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: colors.bg1,
+              }}
             />
-            <RootStack.Screen
-              name="App"
-              component={AppStack}
-              options={{headerShown: false, presentation: 'fullScreenModal'}}
-            />
-          </RootStack.Navigator>
+          )}
+          {!isCheckingAuth && (
+            <RootStack.Navigator initialRouteName="Enter">
+              <RootStack.Screen
+                name="Enter"
+                component={EnterStack}
+                options={{headerShown: false, animation: 'none'}}
+              />
+              <RootStack.Screen
+                name="App"
+                component={AppStack}
+                options={{
+                  headerShown: false,
+                  presentation: 'fullScreenModal',
+                }}
+              />
+            </RootStack.Navigator>
+          )}
         </NavigationContainer>
       </PaperProvider>
     </AppContext.Provider>

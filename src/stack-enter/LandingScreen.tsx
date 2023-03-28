@@ -5,6 +5,7 @@ import {AppContext} from '@app-ctx';
 import {useNavigation} from '@react-navigation/native';
 import {SafeScreen} from '@common';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Animated, {FadeIn} from 'react-native-reanimated';
 
 const LandingScreen = () => {
   const {colors} = useContext(AppContext);
@@ -35,7 +36,7 @@ const LandingScreen = () => {
 
   return (
     <SafeScreen>
-      <View style={{flex: 1, paddingHorizontal: 30}}>
+      <Animated.View style={{flex: 1, paddingHorizontal: 30}} entering={FadeIn.duration(600)}>
         <View
           style={{
             paddingTop: 100,
@@ -86,7 +87,7 @@ const LandingScreen = () => {
           <View style={{paddingBottom: 20 + insets.bottom}}>
           {bulletPoint('The Tessarak Project 2023', colors.text)}
         </View>
-      </View>
+      </Animated.View>
     </SafeScreen>
   );
 };
