@@ -35,6 +35,7 @@ const TessaScreen = () => {
     if (!isSocketConnected) {
       setupSocket();
     }
+    return () => socket?.close();
   }, [isSocketConnected]);
 
   async function setupSocket(): Promise<void> {

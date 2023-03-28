@@ -64,8 +64,12 @@ const ReadTermsScreen = () => {
                 fontWeight: 'bold',
                 color: colors.text,
               }}>
-              At this moment, the only personal information collected is your
-              phone number.
+              The only personal information this app, Tessarak, uses directly is
+              your phone number. However, the builtin chatbot Tessa uses ChatGPT
+              behind the scenes. Therefore, anything you send in the Tessa
+              messaging section of Tessarak will be sent to OpenAI through the
+              ChatGPT api. We recommend you read their privacy policy if you
+              have concerns about this.
             </Text>
           </View>
 
