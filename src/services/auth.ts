@@ -73,7 +73,15 @@ export async function handleAuthSuccess(data: AuthSuccessResponse) {
 
 export async function getActiveAuth(): Promise<AuthDetails | null> {
   const auth = await getAuthDetails();
-  return auth && auth.expiration >= Date.now() / 1000 ? auth : null;
+  if (!auth) {
+    return null;
+  }
+  const isExpired = !(auth.expiration >= Date.now() / 1000);
+  if (isExpired) {
+    await clearAuth();
+    return null;
+  }
+  return auth;
 }
 
 export async function getAccessToken(): Promise<string | null | undefined> {
