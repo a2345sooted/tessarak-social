@@ -8,6 +8,7 @@ const API = `${HTTP_PROTOCOL}://${API_ORIGIN}`;
 export type TessarakUser = {
   sub: string;
   phone: string;
+  isOG?: boolean;
 };
 
 export async function checkConnection(): Promise<any> {
