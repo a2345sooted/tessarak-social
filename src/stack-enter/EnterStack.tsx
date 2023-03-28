@@ -10,7 +10,7 @@ const EnterNavStack = createNativeStackNavigator();
 
 function EnterStack() {
   return (
-    <EnterNavStack.Navigator initialRouteName="Main">
+    <EnterNavStack.Navigator initialRouteName="VerifyCode">
       <EnterNavStack.Screen
         name="Main"
         component={LandingScreen}

@@ -10,7 +10,8 @@ export async function sendCodeToPhone(phoneNumber: string): Promise<void> {
 }
 
 export async function verifyCodeForPhone(phoneNumber: string, code: string): Promise<void> {
-  await tkDelay(1000);
+  await tkDelay(2000);
+  throw new Error('test error');
 }
 
 export async function isSignedIn(): Promise<boolean> {

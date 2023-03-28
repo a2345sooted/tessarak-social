@@ -1,71 +1,98 @@
 import React, {useContext, useEffect, useRef, useState} from 'react';
-import {IconButton, Text, TextInput} from 'react-native-paper';
+import {
+  Button,
+  IconButton,
+  ProgressBar,
+  Text,
+  TextInput,
+} from 'react-native-paper';
 import {SafeScreen} from '@common';
 import {AppContext} from '@app-ctx';
 import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {tkDelay} from '../utils';
-import {sendCodeToPhone, stakeApp} from '../services/auth';
-import {formatWithMask, Masks} from 'react-native-mask-input';
+import {sendCodeToPhone, stakeApp, verifyCodeForPhone} from '../services/auth';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const VerifyCodeScreen = () => {
   const {colors, staked} = useContext(AppContext);
   const navigation = useNavigation();
-  const phoneInputRef = useRef<any>();
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [maskedPhoneNumber, setMaskedPhoneNumber] = useState('');
+
+  const codeInputRef = useRef<any>();
+  const [code, setCode] = useState('');
+
+  const [isVerifying, setIsVerifying] = useState(false);
+  const [errorVerifying, setErrorVerifying] = useState<any>(null);
+
   const [isSending, setIsSending] = useState(false);
-  const [isInvalidNumber, setIsInvalidNumber] = useState(false);
   const [errorSending, setErrorSending] = useState<any>(null);
+  const [codeSent, setCodeSent] = useState(false);
 
   const insets = useSafeAreaInsets();
 
   useEffect(() => {
-    tkDelay(600).then(() => phoneInputRef.current?.focus());
+    tkDelay(600).then(() => codeInputRef.current?.focus());
   }, []);
 
-  async function handlePhoneInputComplete() {
-    stakeApp();
-    if (staked) {
-      //@ts-ignore
-      navigation.getParent()?.navigate('App');
-    } else {
-      //@ts-ignore
-      navigation.navigate('EnterTessarak');
+  async function focusInput() {
+    await tkDelay(100);
+    codeInputRef.current!.focus();
+  }
+
+  async function resendCode() {
+    setIsSending(true);
+    setErrorSending(null);
+    setErrorVerifying(null);
+    setCode('');
+
+    try {
+      // const phone = await getStorageItem(STORAGE_KEY_USER_PHONE);
+      // if (!phone) {
+      //   navigation.goBack();
+      //   return;
+      // }
+      await sendCodeToPhone('');
+      await tkDelay(1500);
+      setCodeSent(true);
+      await focusInput();
+    } catch (error: any) {
+      setErrorSending(error);
+    } finally {
+      setIsSending(false);
     }
-    // if (!phoneNumber.trim()) {
-    //   await tkDelay(100);
-    //   phoneInputRef.current!.focus();
+  }
+
+  async function handleCodeInputComplete() {
+    // if (!code.trim()) {
+    //   await focusInput();
     //   return;
     // }
     //
-    // setIsSending(true);
-    // setErrorSending(null);
-    // setIsInvalidNumber(false);
-    //
-    // const phone = `+1${phoneNumber}`;
-    //
-    // try {
-    //   await sendCodeToPhone(phone);
-    //   //@ts-ignore
-    //   navigation.navigate('EnterTessarak');
-    //   await tkDelay(1000);
-    // } catch (error: any) {
-    //   // todo handle invalid number
-    //   setErrorSending(error);
-    // } finally {
-    //   setIsSending(false);
-    // }
-  }
+    setIsVerifying(true);
+    setErrorVerifying(null);
+    setCodeSent(false);
+    setErrorSending(null);
 
-  function formatText(text: string) {
-    const {unmasked, masked} = formatWithMask({
-      text,
-      mask: Masks.USA_PHONE,
-    });
-    setPhoneNumber(unmasked);
-    setMaskedPhoneNumber(masked);
+    try {
+      await verifyCodeForPhone('', '');
+      // const phone = await getStorageItem(STORAGE_KEY_USER_PHONE);
+      // if (!phone) {
+      //   setErrorVerifying(new Error('phone is missing in local storage'));
+      //   return;
+      // }
+      await stakeApp();
+      if (staked) {
+        //@ts-ignore
+        navigation.getParent()?.navigate('App');
+      } else {
+        //@ts-ignore
+        navigation.navigate('EnterTessarak');
+      }
+    } catch (error: any) {
+      setErrorVerifying(error);
+    } finally {
+      setIsVerifying(false);
+    }
   }
 
   return (
@@ -88,16 +115,16 @@ const VerifyCodeScreen = () => {
         </View>
         <View style={{marginTop: 10, paddingHorizontal: 10, flex: 1}}>
           <TextInput
-            // autoFocus
             disabled={isSending}
+            maxLength={6}
             keyboardType="number-pad"
             returnKeyType="done"
-            onSubmitEditing={handlePhoneInputComplete}
-            ref={(input: any) => (phoneInputRef.current = input)}
+            onSubmitEditing={handleCodeInputComplete}
+            ref={(input: any) => (codeInputRef.current = input)}
             style={{fontSize: 26, textAlign: 'center', paddingHorizontal: 8}}
             textColor={colors.text}
-            underlineColor={colors.user}
-            activeUnderlineColor={colors.user}
+            underlineColor={colors.tessarak}
+            activeUnderlineColor={colors.tessarak}
             contentStyle={{
               paddingTop: 10,
               paddingBottom: 10,
@@ -105,12 +132,66 @@ const VerifyCodeScreen = () => {
             }}
             mode="flat"
             label=""
-            value={maskedPhoneNumber}
-            onChangeText={text => formatText(text)}
+            value={code}
+            onChangeText={text => {
+              setCode(text);
+            }}
           />
+          {isVerifying && (
+            <>
+              <ProgressBar indeterminate color={colors.bizarroTessarak} />
+              <Text
+                variant="titleSmall"
+                style={{
+                  fontWeight: 'bold',
+                  color: colors.bizarroTessarak,
+                  textAlign: 'center',
+                  marginTop: 12,
+                }}>
+                verifying code...
+              </Text>
+            </>
+          )}
+          {(errorVerifying || errorSending) && (
+            <Text
+              variant="titleSmall"
+              style={{
+                fontWeight: 'bold',
+                color: colors.bizarroTessarak,
+                marginTop: 8,
+                textAlign: 'center',
+              }}>
+              Something went wrong. Try again.
+            </Text>
+          )}
+          {codeSent && (
+            <Text
+              variant="titleSmall"
+              style={{
+                fontWeight: 'bold',
+                color: colors.bizarroTessarak,
+                marginTop: 8,
+                textAlign: 'center',
+              }}>
+              Code resent :)
+            </Text>
+          )}
           <View
             style={{
               marginTop: 20,
+              flexDirection: 'row',
+              justifyContent: 'center',
+            }}>
+            <Button
+              mode="text"
+              labelStyle={{color: colors.tessarak, fontWeight: 'bold'}}
+              theme={{roundness: 1}}
+              onPress={resendCode}>
+              Resend Code
+            </Button>
+          </View>
+          <View
+            style={{
               paddingBottom: 40,
               flexDirection: 'row',
               justifyContent: 'center',

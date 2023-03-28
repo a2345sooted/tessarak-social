@@ -77,7 +77,6 @@ const GetPhoneNumberScreen = () => {
         </View>
         <View style={{marginTop: 10, paddingHorizontal: 10, flex: 1}}>
           <TextInput
-            // autoFocus
             disabled={isSending}
             keyboardType="number-pad"
             returnKeyType="done"
@@ -98,7 +97,19 @@ const GetPhoneNumberScreen = () => {
             onChangeText={text => formatText(text)}
           />
           {isSending && (
-            <ProgressBar indeterminate color={colors.bizarroTessarak} />
+            <>
+              <ProgressBar indeterminate color={colors.bizarroTessarak} />
+              <Text
+                variant="titleSmall"
+                style={{
+                  fontWeight: 'bold',
+                  color: colors.bizarroTessarak,
+                  textAlign: 'center',
+                  marginTop: 12,
+                }}>
+                texting you a 6 digit code...
+              </Text>
+            </>
           )}
           {errorSending && (
             <Text
