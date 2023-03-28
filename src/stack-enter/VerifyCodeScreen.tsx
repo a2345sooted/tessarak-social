@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useRef, useState} from 'react';
-import {Text, TextInput} from 'react-native-paper';
+import {IconButton, Text, TextInput} from 'react-native-paper';
 import {SafeScreen} from '@common';
 import {AppContext} from '@app-ctx';
 import {View} from 'react-native';
@@ -107,6 +107,22 @@ const VerifyCodeScreen = () => {
             label=""
             value={maskedPhoneNumber}
             onChangeText={text => formatText(text)}
+          />
+        </View>
+        <View
+          style={{
+            marginTop: 20,
+            paddingBottom: 40,
+            flexDirection: 'row',
+            justifyContent: 'center',
+          }}>
+          <IconButton
+            icon="keyboard-backspace"
+            iconColor={colors.tessarak}
+            size={35}
+            onPress={() => {
+              navigation.goBack();
+            }}
           />
         </View>
         <View style={{paddingBottom: 20 + insets.bottom}}>

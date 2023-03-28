@@ -16,7 +16,7 @@ import AppStack from './AppStack';
 
 import SystemNavigationBar from 'react-native-system-navigation-bar';
 import EnterStack from './stack-enter/EnterStack';
-import {appIsStaked, isSignedIn} from './services/auth';
+import { appIsStaked, isSignedIn, removeStake } from './services/auth';
 
 function getAppColors(mode: string): AppColors {
   return mode === 'light' ? LightAppColors : DarkAppColors;
@@ -40,6 +40,7 @@ const Tessarak = () => {
   }, []);
 
   async function checkAuth() {
+    await removeStake();
     const auth = await isSignedIn();
     if (auth) {
       setSignedIn(true);

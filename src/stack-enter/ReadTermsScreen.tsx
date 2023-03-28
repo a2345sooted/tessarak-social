@@ -1,15 +1,15 @@
 import React, {useContext} from 'react';
 import {View, ScrollView} from 'react-native';
-import {Button, Divider, Text} from 'react-native-paper';
+import {Button, Divider, IconButton, Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
 import {useNavigation} from '@react-navigation/native';
 import {SafeScreen} from '@common';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const ReadTermsScreen = () => {
   const {colors} = useContext(AppContext);
 
-    const insets = useSafeAreaInsets();
+  const insets = useSafeAreaInsets();
 
   const navigation = useNavigation();
 
@@ -18,7 +18,6 @@ const ReadTermsScreen = () => {
       <View style={{flex: 1}}>
         <View
           style={{
-            paddingTop: 60,
             flexDirection: 'row',
             justifyContent: 'center',
           }}>
@@ -222,8 +221,7 @@ const ReadTermsScreen = () => {
             </Text>
           </View>
 
-          <View
-            style={{marginTop: 20, paddingHorizontal: 20, paddingBottom: 40}}>
+          <View style={{marginTop: 20, paddingHorizontal: 20}}>
             <Button
               labelStyle={{color: colors.text, fontWeight: 'bold'}}
               buttonColor={colors.tessarak}
@@ -235,12 +233,29 @@ const ReadTermsScreen = () => {
               I agree, continue...
             </Button>
           </View>
+
+          <View
+            style={{
+              marginTop: 20,
+              paddingBottom: 40,
+              flexDirection: 'row',
+              justifyContent: 'center',
+            }}>
+            <IconButton
+              icon="keyboard-backspace"
+              iconColor={colors.tessarak}
+              size={35}
+              onPress={() => {
+                navigation.goBack();
+              }}
+            />
+          </View>
         </ScrollView>
         <View style={{paddingHorizontal: 20, marginBottom: 20}}>
           <Divider />
         </View>
         <View style={{flex: 1}} />
-          <View style={{paddingBottom: 20 + insets.bottom}}>
+        <View style={{paddingBottom: 20 + insets.bottom}}>
           <Text
             variant="titleSmall"
             style={{
