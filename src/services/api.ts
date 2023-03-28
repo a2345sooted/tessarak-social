@@ -51,12 +51,11 @@ export async function getTessarakUser(): Promise<TessarakUser> {
 }
 
 export async function deleteUser(): Promise<void> {
+  const token = await getAccessToken();
+  await axios.delete(`${API}/v1/`, {
+    headers: {Authorization: `Bearer ${token}`},
+  });
   await tkDelay(3000);
-  throw new Error('test');
-  // const token = await getAccessToken();
-  // await axios.delete(`${API}/v1/`, {
-  //   headers: {Authorization: `Bearer ${token}`},
-  // });
 }
 
 export async function refreshCreds(): Promise<void> {
