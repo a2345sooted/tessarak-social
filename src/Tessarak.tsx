@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {StatusBar, useColorScheme, View} from 'react-native';
-import {Provider as PaperProvider} from 'react-native-paper';
+import { SafeAreaView, StatusBar, useColorScheme, View } from 'react-native';
+import {Provider as PaperProvider, Text} from 'react-native-paper';
 import {AppContext, BrightnessMode} from '@app-ctx';
 import {
   AppColors,
@@ -17,7 +17,7 @@ import AppStack from './AppStack';
 import SystemNavigationBar from 'react-native-system-navigation-bar';
 import EnterStack from './stack-enter/EnterStack';
 import {appIsStaked, getActiveAuth, removeStake} from './services/auth';
-import {getTessarakUser, TessarakUser} from './services/api';
+import {checkConnection, getTessarakUser, TessarakUser} from './services/api';
 
 function getAppColors(mode: string): AppColors {
   return mode === 'light' ? LightAppColors : DarkAppColors;
@@ -33,12 +33,15 @@ const Tessarak = () => {
   );
 
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+  const [errorConnecting, setErrorConnecting] = useState<any>(null);
   const [staked, setStaked] = useState(false);
   const [user, setUser] = useState<TessarakUser | null>(null);
   const [signedIn, setSignedIn] = useState(false);
 
   useEffect(() => {
-    checkAuth();
+    checkConnection()
+      .then(() => checkAuth())
+      .catch(e => setErrorConnecting(e));
   }, []);
 
   async function checkAuth() {
@@ -96,6 +99,25 @@ const Tessarak = () => {
       }}>
       <PaperProvider theme={PAPER_THEME}>
         <NavigationContainer theme={NAV_THEME}>
+          {errorConnecting && (
+            <SafeAreaView
+              style={{
+                flex: 1,
+                backgroundColor: colors.bg1,
+              }}>
+              <Text
+                variant="titleLarge"
+                style={{
+                  fontWeight: 'bold',
+                  color: colors.text,
+                  marginTop: 150,
+                  paddingHorizontal: 20,
+                }}>
+                Unable to connect to the Tessarak beta servers. Try closing the
+                app completely and reopening.
+              </Text>
+            </SafeAreaView>
+          )}
           {isCheckingAuth && (
             <View
               style={{
@@ -104,7 +126,7 @@ const Tessarak = () => {
               }}
             />
           )}
-          {!isCheckingAuth && (
+          {!isCheckingAuth && !errorConnecting && (
             <RootStack.Navigator initialRouteName={signedIn ? 'App' : 'Enter'}>
               <RootStack.Screen
                 name="Enter"

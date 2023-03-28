@@ -10,14 +10,9 @@ export type TessarakUser = {
   phone: string;
 };
 
-export async function checkConnection(): Promise<boolean> {
-  try {
-    await axios.get(API);
-    return true;
-  } catch (error: any) {
-    // todo what to do with error?
-    return false;
-  }
+export async function checkConnection(): Promise<any> {
+  const response = await axios.get(API);
+  return response.data;
 }
 
 export async function sendCodeToPhone(phone: string): Promise<void> {
