@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { SafeAreaView, StatusBar, useColorScheme, View } from 'react-native';
+import {SafeAreaView, StatusBar, useColorScheme, View} from 'react-native';
 import {Provider as PaperProvider, Text} from 'react-native-paper';
 import {AppContext, BrightnessMode} from '@app-ctx';
 import {
@@ -41,11 +41,11 @@ const Tessarak = () => {
   useEffect(() => {
     checkConnection()
       .then(() => checkAuth())
+      .then(() => setIsCheckingAuth(false))
       .catch(e => setErrorConnecting(e));
   }, []);
 
   async function checkAuth() {
-    await removeStake();
     const auth = await getActiveAuth();
     if (auth) {
       const u = await getTessarakUser();
@@ -57,7 +57,6 @@ const Tessarak = () => {
         setStaked(true);
       }
     }
-    setIsCheckingAuth(false);
   }
 
   function getStatusBar() {
@@ -96,6 +95,7 @@ const Tessarak = () => {
         statusBar,
         staked,
         user,
+        checkAuth,
       }}>
       <PaperProvider theme={PAPER_THEME}>
         <NavigationContainer theme={NAV_THEME}>

@@ -12,6 +12,7 @@ export type AppContextContainer = {
   statusBar: JSX.Element;
   staked: boolean;
   user: TessarakUser | null;
+  checkAuth: () => void;
 };
 
 export const AppContext = createContext<AppContextContainer>({
@@ -22,4 +23,5 @@ export const AppContext = createContext<AppContextContainer>({
   statusBar: undefined as any,
   staked: undefined as any,
   user: undefined as any,
+  checkAuth: undefined as any,
 });

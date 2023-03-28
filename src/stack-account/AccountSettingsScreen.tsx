@@ -3,12 +3,11 @@ import {Button, Divider, IconButton, Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
 import {Alert, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {clearAuth} from '../services/auth';
 
 const AccountSettingsScreen = () => {
-  const {colors} = useContext(AppContext);
+  const {colors, checkAuth} = useContext(AppContext);
   const navigation = useNavigation();
-  const insets = useSafeAreaInsets();
 
   async function handleDelete() {}
 
@@ -26,7 +25,12 @@ const AccountSettingsScreen = () => {
     );
   }
 
-  async function handleSignout() {}
+  async function handleSignout() {
+    await clearAuth();
+    await checkAuth();
+    navigation.goBack();
+    navigation.getParent()?.getParent()?.navigate('Enter');
+  }
 
   return (
     <View style={{backgroundColor: colors.bg1, flex: 1}}>

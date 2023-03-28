@@ -80,3 +80,7 @@ export async function getAccessToken(): Promise<string | null | undefined> {
   const auth = await getAuthDetails();
   return auth?.access_token;
 }
+
+export async function clearAuth(): Promise<void> {
+  await removeStorageItem(AUTH_DETAILS_STORAGE_KEY);
+}
