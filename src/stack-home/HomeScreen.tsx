@@ -30,7 +30,7 @@ const HomeScreen = () => {
         <Text
           variant="headlineSmall"
           style={{fontWeight: 'bold', color: colors.text, flex: 1}}>
-          #tessarak-beta
+          #all-chrono
         </Text>
         <IconButton
           icon="cube-send"
