@@ -7,10 +7,10 @@ import {useNavigation} from '@react-navigation/native';
 import {tkDelay} from '../utils';
 import {sendCodeToPhone} from '../services/auth';
 import {formatWithMask, Masks} from 'react-native-mask-input';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const VerifyCodeScreen = () => {
-  const {colors} = useContext(AppContext);
+  const {colors, staked} = useContext(AppContext);
   const navigation = useNavigation();
   const phoneInputRef = useRef<any>();
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -19,15 +19,20 @@ const VerifyCodeScreen = () => {
   const [isInvalidNumber, setIsInvalidNumber] = useState(false);
   const [errorSending, setErrorSending] = useState<any>(null);
 
-    const insets = useSafeAreaInsets();
+  const insets = useSafeAreaInsets();
 
   useEffect(() => {
     tkDelay(600).then(() => phoneInputRef.current?.focus());
   }, []);
 
   async function handlePhoneInputComplete() {
-    //@ts-ignore
-    navigation.navigate('EnterTessarak');
+    if (staked) {
+      //@ts-ignore
+      navigation.getParent()?.navigate('App');
+    } else {
+      //@ts-ignore
+      navigation.navigate('EnterTessarak');
+    }
     // if (!phoneNumber.trim()) {
     //   await tkDelay(100);
     //   phoneInputRef.current!.focus();
@@ -77,7 +82,7 @@ const VerifyCodeScreen = () => {
               fontWeight: 'bold',
               color: colors.text,
             }}>
-            Enter the code...
+            {staked ? 'Code...' : 'Enter the code...'}
           </Text>
         </View>
         <View style={{marginTop: 10, paddingHorizontal: 10, flex: 1}}>
@@ -103,14 +108,14 @@ const VerifyCodeScreen = () => {
             onChangeText={text => formatText(text)}
           />
         </View>
-          <View style={{paddingBottom: 20 + insets.bottom}}>
+        <View style={{paddingBottom: 20 + insets.bottom}}>
           <Text
-              variant="titleSmall"
-              style={{
-                fontWeight: 'bold',
-                color: colors.text,
-                textAlign: 'center',
-              }}>
+            variant="titleSmall"
+            style={{
+              fontWeight: 'bold',
+              color: colors.text,
+              textAlign: 'center',
+            }}>
             The Tessarak Project 2023
           </Text>
         </View>

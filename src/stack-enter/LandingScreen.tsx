@@ -4,15 +4,15 @@ import {Button, Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
 import {useNavigation} from '@react-navigation/native';
 import {SafeScreen} from '@common';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Animated, {FadeIn} from 'react-native-reanimated';
 
 const LandingScreen = () => {
-  const {colors} = useContext(AppContext);
+  const {colors, staked} = useContext(AppContext);
 
   const navigation = useNavigation();
 
-    const insets = useSafeAreaInsets();
+  const insets = useSafeAreaInsets();
 
   function bulletPoint(text: string, color = '#c66ef1'): JSX.Element {
     return (
@@ -36,7 +36,9 @@ const LandingScreen = () => {
 
   return (
     <SafeScreen>
-      <Animated.View style={{flex: 1, paddingHorizontal: 30}} entering={FadeIn.duration(600)}>
+      <Animated.View
+        style={{flex: 1, paddingHorizontal: 30}}
+        entering={FadeIn.duration(600)}>
         <View
           style={{
             paddingTop: 100,
@@ -76,15 +78,13 @@ const LandingScreen = () => {
             theme={{roundness: 1}}
             onPress={() => {
               //@ts-ignore
-              // navigation.navigate('GetPhoneNumber');
-              navigation.navigate('ReadTerms');
+              navigation.navigate(staked ? 'GetPhoneNumber' : 'ReadTerms');
             }}>
-            Start
+            {staked ? 'Sign In' : 'Start'}
           </Button>
         </View>
         <View style={{flex: 1}} />
-
-          <View style={{paddingBottom: 20 + insets.bottom}}>
+        <View style={{paddingBottom: 20 + insets.bottom}}>
           {bulletPoint('The Tessarak Project 2023', colors.text)}
         </View>
       </Animated.View>

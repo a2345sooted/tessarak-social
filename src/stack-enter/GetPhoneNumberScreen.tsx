@@ -10,7 +10,7 @@ import {formatWithMask, Masks} from 'react-native-mask-input';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const GetPhoneNumberScreen = () => {
-  const {colors} = useContext(AppContext);
+  const {colors, staked} = useContext(AppContext);
   const navigation = useNavigation();
   const phoneInputRef = useRef<any>();
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -71,7 +71,7 @@ const GetPhoneNumberScreen = () => {
               fontWeight: 'bold',
               color: colors.text,
             }}>
-            What is your phone number?
+              {staked ? 'Phone number...' : 'What is your phone number?'}
           </Text>
         </View>
         <View style={{marginTop: 10, paddingHorizontal: 10, flex: 1}}>

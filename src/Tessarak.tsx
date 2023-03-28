@@ -17,7 +17,6 @@ import AppStack from './AppStack';
 import SystemNavigationBar from 'react-native-system-navigation-bar';
 import EnterStack from './stack-enter/EnterStack';
 import {appIsStaked, isSignedIn} from './services/auth';
-import {SafeAreaView} from 'react-native-safe-area-context';
 
 function getAppColors(mode: string): AppColors {
   return mode === 'light' ? LightAppColors : DarkAppColors;
@@ -33,19 +32,21 @@ const Tessarak = () => {
   );
 
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
-  const [isStaked, setIsStaked] = useState(false);
+  const [staked, setStaked] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
 
   useEffect(() => {
     checkAuth();
   }, []);
 
   async function checkAuth() {
-    const signedIn = await isSignedIn();
-    if (signedIn) {
+    const auth = await isSignedIn();
+    if (auth) {
+      setSignedIn(true);
     } else {
       const stake = await appIsStaked();
       if (stake) {
-        setIsStaked(true);
+        setStaked(true);
       }
     }
     setIsCheckingAuth(false);
@@ -85,6 +86,7 @@ const Tessarak = () => {
         deviceBrightMode,
         colors,
         statusBar,
+        staked,
       }}>
       <PaperProvider theme={PAPER_THEME}>
         <NavigationContainer theme={NAV_THEME}>
@@ -97,7 +99,7 @@ const Tessarak = () => {
             />
           )}
           {!isCheckingAuth && (
-            <RootStack.Navigator initialRouteName="Enter">
+            <RootStack.Navigator initialRouteName={signedIn ? 'App' : 'Enter'}>
               <RootStack.Screen
                 name="Enter"
                 component={EnterStack}
