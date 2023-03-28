@@ -136,7 +136,8 @@ const TessaScreen = () => {
         />
       </View>
       <GiftedChat
-          isTyping={tessaTyping}
+        disableComposer={!isSocketConnected || tessaTyping}
+        isTyping={tessaTyping}
         textInputProps={{
           fontWeight: 'bold',
           color: colors.text,
@@ -148,7 +149,7 @@ const TessaScreen = () => {
           flexDirection: 'column',
         }}
         renderAvatarOnTop
-        placeholder="Type a message..."
+        placeholder={!isSocketConnected ? 'Not connected :|' : tessaTyping ? 'Disabled while Tessa is typing...' : 'Type a message...'}
         renderSend={props => <SendButton {...props} />}
         renderBubble={props => <ChatBubble {...props} />}
         renderMessageText={props => <ChatMessageText {...props} />}

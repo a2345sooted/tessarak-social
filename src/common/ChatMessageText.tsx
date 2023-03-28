@@ -1,6 +1,11 @@
 import React, {useContext} from 'react';
-import { IMessage, MessageText, MessageTextProps } from 'react-native-gifted-chat';
-import { AppContext } from '@app-ctx';
+import {
+  IMessage,
+  MessageText,
+  MessageTextProps,
+} from 'react-native-gifted-chat';
+import {AppContext} from '@app-ctx';
+import {Alert} from 'react-native';
 
 function ChatMessageText(props: MessageTextProps<IMessage>): JSX.Element {
   const {colors} = useContext(AppContext);
@@ -15,6 +20,14 @@ function ChatMessageText(props: MessageTextProps<IMessage>): JSX.Element {
         },
         right: {fontWeight: 'bold'},
       }}
+      parsePatterns={(item: any) => [
+        {
+          type: 'url',
+          style: {color: '#c66ef1'},
+          onPress: () =>
+            Alert.alert("The app doesn't handle opening links from Tessa yet."),
+        },
+      ]}
     />
   );
 }

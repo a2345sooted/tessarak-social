@@ -1,21 +1,21 @@
 import React, {useContext} from 'react';
-import { Bubble, BubbleProps, IMessage } from 'react-native-gifted-chat';
+import {Bubble, BubbleProps, IMessage} from 'react-native-gifted-chat';
 import {useTheme} from 'react-native-paper';
-import { AppContext } from '@app-ctx';
+import {AppContext} from '@app-ctx';
 
 function ChatBubble(props: BubbleProps<IMessage>): JSX.Element {
   const {colors} = useContext(AppContext);
-  const theme = useTheme();
 
   return (
     <Bubble
       {...props}
       wrapperStyle={{
         right: {
-          backgroundColor: colors.user,
+          backgroundColor: colors.tessarak,
         },
         left: {
-          backgroundColor: '#424242'},
+          backgroundColor: '#424242',
+        },
       }}
     />
   );
