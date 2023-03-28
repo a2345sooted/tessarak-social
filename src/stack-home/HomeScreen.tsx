@@ -12,6 +12,8 @@ const HomeScreen = () => {
   const navigation = useNavigation();
   const soundActionSheet = useRef<ActionSheetRef>(null);
   const commentsActionSheet = useRef<ActionSheetRef>(null);
+  const longPressActionSheet = useRef<ActionSheetRef>(null);
+  const shareActionSheet = useRef<ActionSheetRef>(null);
 
   return (
     <SafeScreen>
@@ -50,14 +52,14 @@ const HomeScreen = () => {
           }}
         />
       </View>
-      <View style={{flex: 1, justifyContent: 'center', paddingHorizontal: 30}}>
+        <TouchableOpacity onLongPress={() => longPressActionSheet.current?.show()} style={{flex: 1, justifyContent: 'center', paddingHorizontal: 30}}>
         <Text
           variant="headlineSmall"
           style={{fontWeight: 'bold', color: colors.text, textAlign: 'center'}}>
           TikTok like feed section based on which dimension you're in. Click up
           top to change dimensions.
         </Text>
-      </View>
+        </TouchableOpacity>
       <View
         style={{
           flexDirection: 'row',
@@ -72,11 +74,11 @@ const HomeScreen = () => {
           onPress={() => soundActionSheet.current?.show()}
         />
         <IconButton
-          icon="bookmark"
+          icon="heart"
           iconColor={colors.bizarroTessarak}
           size={25}
           onPress={() => {
-            Alert.alert('Bookmark');
+            Alert.alert('Like');
           }}
         />
         <View style={{marginHorizontal: 12}}>
@@ -95,12 +97,10 @@ const HomeScreen = () => {
           onPress={() => commentsActionSheet.current?.show()}
         />
         <IconButton
-          icon="heart"
+          icon="share"
           iconColor={colors.bizarroTessarak}
           size={25}
-          onPress={() => {
-            Alert.alert('Like');
-          }}
+          onPress={() => shareActionSheet.current?.show()}
         />
       </View>
       <ActionSheet
@@ -134,6 +134,38 @@ const HomeScreen = () => {
           Comments section.
         </Text>
         <View style={{height: '60%'}} />
+      </ActionSheet>
+      <ActionSheet
+        ref={longPressActionSheet}
+        containerStyle={{backgroundColor: colors.bg1}}
+        elevation={12}>
+        <Text
+          variant="headlineSmall"
+          style={{
+            fontWeight: 'bold',
+            color: colors.text,
+            textAlign: 'center',
+            marginTop: 30,
+          }}>
+          Video context section and other actions for the video, sorta like TikTok.
+        </Text>
+        <View style={{height: '40%'}} />
+      </ActionSheet>
+      <ActionSheet
+        ref={shareActionSheet}
+        containerStyle={{backgroundColor: colors.bg1}}
+        elevation={12}>
+        <Text
+          variant="headlineSmall"
+          style={{
+            fontWeight: 'bold',
+            color: colors.text,
+            textAlign: 'center',
+            marginTop: 30,
+          }}>
+          TikTok-like share section.
+        </Text>
+        <View style={{height: '45%'}} />
       </ActionSheet>
     </SafeScreen>
   );
