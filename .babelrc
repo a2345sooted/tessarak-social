@@ -3,9 +3,9 @@
     [
       "module:react-native-dotenv",
       {
-        "envName": "tessarak_local_env",
+        "envName": "prod",
         "moduleName": "@env",
-        "path": ".env.local",
+        "path": ".env.prod",
         "allowUndefined": false,
         "safe": true,
         "allowlist": [

@@ -6,6 +6,7 @@ import {useNavigation} from '@react-navigation/native';
 import {SafeScreen} from '@common';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Animated, {FadeIn} from 'react-native-reanimated';
+import{triggerImpactMedium} from '../services/haptic';
 
 const LandingScreen = () => {
   const {colors, staked} = useContext(AppContext);
@@ -79,6 +80,7 @@ const LandingScreen = () => {
             onPress={() => {
               //@ts-ignore
               navigation.navigate(staked ? 'GetPhoneNumber' : 'ReadTerms');
+              triggerImpactMedium();
             }}>
             {staked ? 'Sign In' : 'Start'}
           </Button>

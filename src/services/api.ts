@@ -2,6 +2,7 @@ import {tkDelay} from '../utils';
 import {API_ORIGIN, HTTP_PROTOCOL, WS_PROTOCOL} from '@env';
 import axios from 'axios';
 import {AuthSuccessResponse, getAccessToken, handleAuthSuccess} from './auth';
+import { Alert } from 'react-native';
 
 const API = `${HTTP_PROTOCOL}://${API_ORIGIN}`;
 

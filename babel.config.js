@@ -6,9 +6,9 @@ module.exports = {
     [
       'module:react-native-dotenv',
       {
-        envName: 'tessarak_local_dev',
+        envName: 'prod',
         moduleName: '@env',
-        path: '.env.local',
+        path: '.env.prod',
         allowUndefined: false,
         safe: true,
         allowlist: ['HTTP_PROTOCOL', 'WS_PROTOCOL', 'API_ORIGIN'],
