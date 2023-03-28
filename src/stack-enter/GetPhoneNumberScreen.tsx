@@ -8,6 +8,7 @@ import {tkDelay} from '../utils';
 import {sendCodeToPhone} from '../services/api';
 import {formatWithMask, Masks} from 'react-native-mask-input';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import { setStorageItem, USER_PHONE_KEY } from '../services/storage';
 
 const GetPhoneNumberScreen = () => {
   const {colors, staked} = useContext(AppContext);
@@ -25,7 +26,7 @@ const GetPhoneNumberScreen = () => {
   }, []);
 
   async function handlePhoneInputComplete() {
-    if (!phoneNumber.trim()) {
+    if (!phoneNumber.trim() || phoneNumber.length !== 10) {
       await tkDelay(100);
       phoneInputRef.current!.focus();
       return;
@@ -38,6 +39,7 @@ const GetPhoneNumberScreen = () => {
 
     try {
       await sendCodeToPhone(phone);
+      await setStorageItem(USER_PHONE_KEY, phone);
       //@ts-ignore
       navigation.navigate('VerifyCode');
     } catch (error: any) {

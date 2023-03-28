@@ -52,14 +52,17 @@ const HomeScreen = () => {
           }}
         />
       </View>
-        <TouchableOpacity onLongPress={() => longPressActionSheet.current?.show()} style={{flex: 1, justifyContent: 'center', paddingHorizontal: 30}}>
+      <TouchableOpacity
+        onPress={() => Alert.alert('Pause')}
+        onLongPress={() => longPressActionSheet.current?.show()}
+        style={{flex: 1, justifyContent: 'center', paddingHorizontal: 30}}>
         <Text
           variant="headlineSmall"
           style={{fontWeight: 'bold', color: colors.text, textAlign: 'center'}}>
           TikTok like feed section based on which dimension you're in. Click up
           top to change dimensions.
         </Text>
-        </TouchableOpacity>
+      </TouchableOpacity>
       <View
         style={{
           flexDirection: 'row',
@@ -147,7 +150,8 @@ const HomeScreen = () => {
             textAlign: 'center',
             marginTop: 30,
           }}>
-          Video context section and other actions for the video, sorta like TikTok.
+          Video context section and other actions for the video, sorta like
+          TikTok.
         </Text>
         <View style={{height: '40%'}} />
       </ActionSheet>

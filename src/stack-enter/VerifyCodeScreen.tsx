@@ -11,8 +11,10 @@ import {AppContext} from '@app-ctx';
 import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {tkDelay} from '../utils';
-import {sendCodeToPhone, stakeApp, verifyCodeForPhone} from '../services/api';
+import {sendCodeToPhone, verifyCodeForPhone} from '../services/api';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {stakeApp} from '../services/auth';
+import {getStorageItem, USER_PHONE_KEY} from '../services/storage';
 
 const VerifyCodeScreen = () => {
   const {colors, staked} = useContext(AppContext);
@@ -47,11 +49,11 @@ const VerifyCodeScreen = () => {
     setCode('');
 
     try {
-      // const phone = await getStorageItem(STORAGE_KEY_USER_PHONE);
-      // if (!phone) {
-      //   navigation.goBack();
-      //   return;
-      // }
+      const phone = await getStorageItem(USER_PHONE_KEY);
+      if (!phone) {
+        navigation.goBack();
+        return;
+      }
       await sendCodeToPhone('');
       await tkDelay(1500);
       setCodeSent(true);
@@ -64,28 +66,28 @@ const VerifyCodeScreen = () => {
   }
 
   async function handleCodeInputComplete() {
-    // if (!code.trim()) {
-    //   await focusInput();
-    //   return;
-    // }
-    //
+    if (!code.trim()) {
+      await focusInput();
+      return;
+    }
+
     setIsVerifying(true);
     setErrorVerifying(null);
     setCodeSent(false);
     setErrorSending(null);
 
     try {
-      await verifyCodeForPhone('', '');
-      // const phone = await getStorageItem(STORAGE_KEY_USER_PHONE);
-      // if (!phone) {
-      //   setErrorVerifying(new Error('phone is missing in local storage'));
-      //   return;
-      // }
-      await stakeApp();
+      const phone = await getStorageItem(USER_PHONE_KEY);
+      if (!phone) {
+        setErrorVerifying(new Error('phone is missing in local storage'));
+        return;
+      }
+      await verifyCodeForPhone(phone, code);
       if (staked) {
         //@ts-ignore
         navigation.getParent()?.navigate('App');
       } else {
+        await stakeApp();
         //@ts-ignore
         navigation.navigate('EnterTessarak');
       }
@@ -117,7 +119,7 @@ const VerifyCodeScreen = () => {
         <View style={{marginTop: 10, paddingHorizontal: 10, flex: 1}}>
           <TextInput
             disabled={isSending}
-            maxLength={6}
+            maxLength={10}
             keyboardType="number-pad"
             returnKeyType="done"
             onSubmitEditing={handleCodeInputComplete}

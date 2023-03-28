@@ -1,7 +1,7 @@
 import {tkDelay} from '../utils';
 import {API_ORIGIN, HTTP_PROTOCOL} from '@env';
 import axios from 'axios';
-import { AuthSuccessResponse, getAccessToken, handleAuthSuccess } from './auth';
+import {AuthSuccessResponse, getAccessToken, handleAuthSuccess} from './auth';
 
 const API = `${HTTP_PROTOCOL}://${API_ORIGIN}`;
 

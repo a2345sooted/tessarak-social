@@ -1,5 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+export const USER_PHONE_KEY = '@user::phone';
+
 export async function setStorageItem(key: string, value: string) {
   return AsyncStorage.setItem(key, value);
 }
