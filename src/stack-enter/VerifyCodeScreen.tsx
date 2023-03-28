@@ -108,22 +108,22 @@ const VerifyCodeScreen = () => {
             value={maskedPhoneNumber}
             onChangeText={text => formatText(text)}
           />
-        </View>
-        <View
-          style={{
-            marginTop: 20,
-            paddingBottom: 40,
-            flexDirection: 'row',
-            justifyContent: 'center',
-          }}>
-          <IconButton
-            icon="keyboard-backspace"
-            iconColor={colors.tessarak}
-            size={35}
-            onPress={() => {
-              navigation.goBack();
-            }}
-          />
+          <View
+            style={{
+              marginTop: 20,
+              paddingBottom: 40,
+              flexDirection: 'row',
+              justifyContent: 'center',
+            }}>
+            <IconButton
+              icon="keyboard-backspace"
+              iconColor={colors.tessarak}
+              size={35}
+              onPress={() => {
+                navigation.goBack();
+              }}
+            />
+          </View>
         </View>
         <View style={{paddingBottom: 20 + insets.bottom}}>
           <Text

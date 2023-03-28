@@ -44,7 +44,7 @@ const GetPhoneNumberScreen = () => {
       // todo handle invalid number
       setErrorSending(error);
     } finally {
-      setIsSending(false);
+      setTimeout(() => setIsSending(false), 1000);
     }
   }
 
@@ -120,6 +120,7 @@ const GetPhoneNumberScreen = () => {
               justifyContent: 'center',
             }}>
             <IconButton
+              disabled={isSending}
               icon="keyboard-backspace"
               iconColor={colors.tessarak}
               size={35}
