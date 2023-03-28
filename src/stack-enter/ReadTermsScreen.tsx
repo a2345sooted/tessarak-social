@@ -171,7 +171,7 @@ const ReadTermsScreen = () => {
                 fontWeight: 'bold',
                 color: colors.text,
               }}>
-              Currently the plan is to use Auth0 and various AWS services to
+              Currently we are using Auth0, various AWS services, and OpenAI to
               drive Tessarak until a suitable decentralized network is ready.
             </Text>
           </View>
@@ -194,7 +194,7 @@ const ReadTermsScreen = () => {
                 color: colors.text,
               }}>
               Yes, for every release, if a change was made that affects these
-              terms, they will be updated and you will be prompted to re-read
+              terms, they will be updated and you will be prompted to reread
               and accept.
             </Text>
           </View>
@@ -217,7 +217,7 @@ const ReadTermsScreen = () => {
                 color: colors.text,
               }}>
               Yes. If you don't agree to them, we encourage you to check back
-              and re-read them periodically and see if newer versions are more
+              and reread them periodically and see if newer versions are more
               agreeable. The plan is to continue to make the data more and more
               secure and untouchable. However, for now, to work out designs and
               kinks, we are bootstrapping using more traditional client/server
