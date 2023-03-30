@@ -21,7 +21,7 @@ import AppStack from './AppStack';
 
 import SystemNavigationBar from 'react-native-system-navigation-bar';
 import EnterStack from './stack-enter/EnterStack';
-import {appIsStaked, getActiveAuth} from './services/auth';
+import { appIsStaked, clearAuth, getActiveAuth, removeStake } from './services/auth';
 import {checkConnection, getTessarakUser, TessarakUser} from './services/api';
 
 function getAppColors(mode: string): AppColors {
@@ -61,7 +61,6 @@ const Tessarak = () => {
     const auth = await getActiveAuth();
     if (auth) {
       const u = await getTessarakUser();
-      // Alert.alert(JSON.stringify(u, null, 2));
       setUser(u);
       setSignedIn(true);
     } else {

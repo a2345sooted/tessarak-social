@@ -95,7 +95,7 @@ const LandingScreen = () => {
               fontWeight: 'bold',
               textAlign: 'center',
             }}>
-            Version 1.1
+            Version 1.0.3
           </Text>
         </View>
       </Animated.View>
