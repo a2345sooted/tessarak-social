@@ -4,7 +4,8 @@ import {Button, Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
 import {useNavigation} from '@react-navigation/native';
 import {SafeScreen} from '@common';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {triggerImpactMedium} from '../services/haptic';
 
 const EnterScreen = () => {
   const {colors} = useContext(AppContext);
@@ -17,7 +18,7 @@ const EnterScreen = () => {
       <View style={{flex: 1, paddingHorizontal: 30}}>
         <View
           style={{
-              paddingTop: 100,
+            paddingTop: 100,
             flexDirection: 'row',
             justifyContent: 'center',
             marginBottom: 20,
@@ -38,6 +39,7 @@ const EnterScreen = () => {
             buttonColor="#e851be"
             theme={{roundness: 1}}
             onPress={() => {
+              triggerImpactMedium();
               //@ts-ignore
               navigation.getParent()?.navigate('App');
             }}>
@@ -46,7 +48,7 @@ const EnterScreen = () => {
         </View>
         <View style={{flex: 1}} />
 
-          <View style={{paddingBottom: 20 + insets.bottom}}>
+        <View style={{paddingBottom: 20 + insets.bottom}}>
           <Text
             variant="titleSmall"
             style={{

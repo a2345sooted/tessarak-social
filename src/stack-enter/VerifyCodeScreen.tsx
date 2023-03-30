@@ -17,7 +17,7 @@ import {stakeApp} from '../services/auth';
 import {getStorageItem, USER_PHONE_KEY} from '../services/storage';
 
 const VerifyCodeScreen = () => {
-  const {colors, staked} = useContext(AppContext);
+  const {colors, staked, checkAuth} = useContext(AppContext);
   const navigation = useNavigation();
 
   const codeInputRef = useRef<any>();
@@ -33,7 +33,7 @@ const VerifyCodeScreen = () => {
   const insets = useSafeAreaInsets();
 
   useEffect(() => {
-    tkDelay(600).then(() => codeInputRef.current?.focus());
+    codeInputRef.current?.focus();
   }, []);
 
   async function focusInput() {
@@ -83,6 +83,7 @@ const VerifyCodeScreen = () => {
         return;
       }
       await verifyCodeForPhone(phone, code);
+      await checkAuth();
       if (staked) {
         //@ts-ignore
         navigation.getParent()?.navigate('App');

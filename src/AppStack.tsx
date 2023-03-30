@@ -34,7 +34,7 @@ function AppStack() {
     <>
       <View style={{flex: 1}}>
         <AppNavStack.Navigator
-          initialRouteName="Tessa"
+          initialRouteName="Home"
           screenOptions={{
             tabBarStyle: {backgroundColor: colors.bg1, borderTopWidth: 0},
           }}>

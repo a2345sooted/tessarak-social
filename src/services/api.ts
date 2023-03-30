@@ -2,9 +2,9 @@ import {tkDelay} from '../utils';
 import {API_ORIGIN, HTTP_PROTOCOL, WS_PROTOCOL} from '@env';
 import axios from 'axios';
 import {AuthSuccessResponse, getAccessToken, handleAuthSuccess} from './auth';
-import { Alert } from 'react-native';
 
 const API = `${HTTP_PROTOCOL}://${API_ORIGIN}`;
+// const API = 'http://localhost:3000';
 
 export type TessarakUser = {
   sub: string;
@@ -13,6 +13,7 @@ export type TessarakUser = {
 };
 
 export async function checkConnection(): Promise<any> {
+  console.log('API ============== ' + API);
   const response = await axios.get(API);
   return response.data;
 }
@@ -92,6 +93,9 @@ export async function createSocket(
   const websocket = new WebSocket(
     `${WS_PROTOCOL}://${API_ORIGIN}/chatv1?token=${token}`,
   );
+  // const websocket = new WebSocket(
+  //   `ws://localhost:3000/chatv1?token=${token}`,
+  // );
   websocket.onopen = handlers.onopen;
   websocket.onclose = handlers.onclose;
   websocket.onerror = handlers.onerror;

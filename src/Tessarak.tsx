@@ -1,5 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import { Alert, SafeAreaView, StatusBar, useColorScheme, View } from 'react-native';
+import {
+  SafeAreaView,
+  StatusBar,
+  useColorScheme,
+  View,
+} from 'react-native';
 import {Provider as PaperProvider, Text} from 'react-native-paper';
 import {AppContext, BrightnessMode} from '@app-ctx';
 import {
@@ -16,7 +21,7 @@ import AppStack from './AppStack';
 
 import SystemNavigationBar from 'react-native-system-navigation-bar';
 import EnterStack from './stack-enter/EnterStack';
-import {appIsStaked, getActiveAuth, removeStake} from './services/auth';
+import {appIsStaked, getActiveAuth} from './services/auth';
 import {checkConnection, getTessarakUser, TessarakUser} from './services/api';
 
 function getAppColors(mode: string): AppColors {
@@ -39,11 +44,18 @@ const Tessarak = () => {
   const [signedIn, setSignedIn] = useState(false);
 
   useEffect(() => {
-    checkConnection()
-      .then(() => checkAuth())
-      .then(() => setIsCheckingAuth(false))
-      .catch(e => setErrorConnecting(e));
+    startApp();
   }, []);
+
+  async function startApp() {
+    try {
+      await checkConnection();
+      await checkAuth();
+      setIsCheckingAuth(false);
+    } catch (error: any) {
+      setErrorConnecting(error);
+    }
+  }
 
   async function checkAuth() {
     const auth = await getActiveAuth();

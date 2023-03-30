@@ -22,7 +22,7 @@ const GetPhoneNumberScreen = () => {
   const insets = useSafeAreaInsets();
 
   useEffect(() => {
-    tkDelay(600).then(() => phoneInputRef.current?.focus());
+    phoneInputRef.current?.focus();
   }, []);
 
   async function handlePhoneInputComplete() {
