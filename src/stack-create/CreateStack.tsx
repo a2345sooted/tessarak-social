@@ -1,11 +1,28 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import CreateScreen from './CreateScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TemplatesScreen from './TemplatesScreen';
+import {
+  hasAccess,
+  requestCameraAccess,
+  requestMicAccess,
+} from '../services/permissions';
 
 const CreateNavStack = createNativeStackNavigator();
 
 function CreateStack() {
+  useEffect(() => {
+    acquirePermissions();
+  }, []);
+
+  async function acquirePermissions() {
+    const hasCameraAccess = hasAccess(await requestCameraAccess());
+    const hasMicAccess = hasAccess(await requestMicAccess());
+    if (!hasCameraAccess || !hasMicAccess) {
+      // todo ... they can't really continue here
+    }
+  }
+
   return (
     <CreateNavStack.Navigator initialRouteName="Main">
       <CreateNavStack.Screen

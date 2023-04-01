@@ -4,7 +4,6 @@ import axios from 'axios';
 import {AuthSuccessResponse, getAccessToken, handleAuthSuccess} from './auth';
 
 const API = `${HTTP_PROTOCOL}://${API_ORIGIN}`;
-// const API = 'http://localhost:3000';
 
 export type TessarakUser = {
   sub: string;
@@ -47,7 +46,7 @@ export async function verifyCodeForPhone(
 
 export async function getTessarakUser(): Promise<TessarakUser> {
   const token = await getAccessToken();
-  const response = await axios.get(`${API}/v1/`, {
+  const response = await axios.get(`${API}/v1/user`, {
     headers: {Authorization: `Bearer ${token}`},
   });
   return response.data as TessarakUser;
@@ -55,7 +54,7 @@ export async function getTessarakUser(): Promise<TessarakUser> {
 
 export async function deleteUser(): Promise<void> {
   const token = await getAccessToken();
-  await axios.delete(`${API}/v1/`, {
+  await axios.delete(`${API}/v1/user`, {
     headers: {Authorization: `Bearer ${token}`},
   });
   await tkDelay(3000);

@@ -50,11 +50,20 @@ const Tessarak = () => {
   async function startApp() {
     try {
       await checkConnection();
-      await checkAuth();
-      setIsCheckingAuth(false);
     } catch (error: any) {
+      // console.error(`error checking connection: ${error}`);
       setErrorConnecting(error);
     }
+    try {
+      await checkAuth();
+    } catch (error: any) {
+      // console.error(`error checking auth: ${error}`);
+    }
+    const stake = await appIsStaked();
+    if (stake) {
+      setStaked(true);
+    }
+    setIsCheckingAuth(false);
   }
 
   async function checkAuth() {
@@ -63,11 +72,6 @@ const Tessarak = () => {
       const u = await getTessarakUser();
       setUser(u);
       setSignedIn(true);
-    } else {
-      const stake = await appIsStaked();
-      if (stake) {
-        setStaked(true);
-      }
     }
   }
 
