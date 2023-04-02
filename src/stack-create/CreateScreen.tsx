@@ -6,11 +6,14 @@ import {Alert, StyleSheet, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Camera, useCameraDevices} from 'react-native-vision-camera';
 import BottomSafeArea from '../common/BottomSafeArea';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const CreateScreen = () => {
   const {colors} = useContext(AppContext);
 
   const navigation = useNavigation();
+
+  const insets = useSafeAreaInsets();
 
   const devices = useCameraDevices();
   const device = devices.back;
@@ -18,67 +21,71 @@ const CreateScreen = () => {
   function TopBar(): JSX.Element {
     return (
       <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-        <IconButton
-          icon="camera-flip"
-          iconColor={colors.bizarroTessarak}
-          size={25}
-          onPress={() => {
-            Alert.alert('Flip Camera');
-          }}
-        />
-        <IconButton
-          icon="cube-scan"
-          iconColor={colors.bizarroTessarak}
-          size={25}
-          onPress={() => {
-            Alert.alert('Filters');
-          }}
-        />
-        <IconButton
-          icon="timer"
-          iconColor={colors.bizarroTessarak}
-          size={25}
-          onPress={() => {
-            Alert.alert('Start Timer');
-          }}
-        />
-        <IconButton
-          icon="music"
-          iconColor={colors.bizarroTessarak}
-          size={25}
-          onPress={() => {
-            Alert.alert('Add Sound');
-          }}
-        />
-        <IconButton
-          icon="auto-fix"
-          iconColor={colors.bizarroTessarak}
-          size={25}
-          onPress={() => {
-            Alert.alert('Retouch');
-          }}
-        />
-        <IconButton
-          icon="speedometer"
-          iconColor={colors.bizarroTessarak}
-          size={25}
-          onPress={() => {
-            Alert.alert('Speed');
-          }}
-        />
-        <IconButton
-          icon="comment-question"
-          iconColor={colors.bizarroTessarak}
-          size={25}
-          onPress={() => {
-            Alert.alert('Q & A');
-          }}
-        />
+        style={{position: 'absolute', top: insets.top, left: 0, width: '100%'}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+          }}>
+          <IconButton
+            icon="camera-flip"
+            iconColor={colors.bizarroTessarak}
+            size={25}
+            onPress={() => {
+              Alert.alert('Flip Camera');
+            }}
+          />
+          <IconButton
+            icon="cube-scan"
+            iconColor={colors.bizarroTessarak}
+            size={25}
+            onPress={() => {
+              Alert.alert('Filters');
+            }}
+          />
+          <IconButton
+            icon="timer"
+            iconColor={colors.bizarroTessarak}
+            size={25}
+            onPress={() => {
+              Alert.alert('Start Timer');
+            }}
+          />
+          <IconButton
+            icon="music"
+            iconColor={colors.bizarroTessarak}
+            size={25}
+            onPress={() => {
+              Alert.alert('Add Sound');
+            }}
+          />
+          <IconButton
+            icon="auto-fix"
+            iconColor={colors.bizarroTessarak}
+            size={25}
+            onPress={() => {
+              Alert.alert('Retouch');
+            }}
+          />
+          <IconButton
+            icon="speedometer"
+            iconColor={colors.bizarroTessarak}
+            size={25}
+            onPress={() => {
+              Alert.alert('Speed');
+            }}
+          />
+          <IconButton
+            icon="comment-question"
+            iconColor={colors.bizarroTessarak}
+            size={25}
+            onPress={() => {
+              Alert.alert('Q & A');
+            }}
+          />
+        </View>
       </View>
     );
   }
@@ -169,6 +176,7 @@ const CreateScreen = () => {
         />
         // </View>
       )}
+      <TopBar />
       <BottomBar />
     </>
   );
