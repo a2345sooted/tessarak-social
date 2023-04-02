@@ -1,11 +1,13 @@
 import React, {useContext, useRef} from 'react';
 import {Avatar, IconButton, Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
-import {Alert, TouchableOpacity, View} from 'react-native';
+import {Alert, TouchableOpacity, View, Animated} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import ActionSheet, {ActionSheetRef} from 'react-native-actions-sheet';
 import PagerView from 'react-native-pager-view';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+
+const AnimatedPagerView = Animated.createAnimatedComponent(PagerView);
 
 export interface TessarakContent {
   id: string;
@@ -22,18 +24,8 @@ type ContentSlideProps = {
 };
 function ContentSlide({content}: ContentSlideProps): JSX.Element {
   const {colors} = useContext(AppContext);
-  let touchX: number = 0;
   return (
-    <View
-      onTouchStart={e => (touchX = e.nativeEvent.pageX)}
-      onTouchEnd={e => {
-        if (touchX - e.nativeEvent.pageX > 20) {
-          console.log('Swiped right');
-        } else if (e.nativeEvent.pageX - touchX > 20) {
-          console.log('Swiped left');
-        }
-      }}
-      style={{paddingHorizontal: 30, flex: 1, justifyContent: 'center'}}>
+    <View style={{paddingHorizontal: 30, flex: 1, justifyContent: 'center'}}>
       <Text
         variant="headlineSmall"
         style={{
@@ -166,13 +158,14 @@ const HomeScreen = () => {
 
   return (
     <>
-      <PagerView
+      <AnimatedPagerView
+        initialPage={0}
         style={{flex: 1, backgroundColor: colors.bg1}}
         orientation="vertical">
         {fakeContent.map(content => (
           <ContentSlide key={content.id} content={content} />
         ))}
-      </PagerView>
+      </AnimatedPagerView>
       <TopBar />
       <BottomBar />
       <ActionSheet
