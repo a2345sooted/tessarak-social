@@ -1,14 +1,7 @@
 import React, {useContext, useEffect, useRef, useState} from 'react';
-import {
-  Card,
-  IconButton,
-  MD3DarkTheme,
-  Searchbar,
-  Text,
-} from 'react-native-paper';
-import {SafeScreen} from '@common';
+import {Card, MD3DarkTheme, Searchbar, Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
-import { Alert, Dimensions, View } from 'react-native';
+import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import MasonryList from 'reanimated-masonry-list';
 import {getAspectRatio} from '@utils';
@@ -17,20 +10,6 @@ import MarketListing from './MarketListing';
 import {getMockMarketListings, MarketListingData} from '@mock-data';
 import {formatCurrency} from 'react-native-format-currency';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-
-function randomNumber(min: number, max: number): number {
-  return Math.floor(Math.random() * (max - min) + min);
-}
-
-function getImages() {
-  const images = [];
-  for (let i = 0; i < 50; i++) {
-    const height = randomNumber(200, 600);
-    const width = randomNumber(200, 600);
-    images.push({url: `https://fakeimg.pl/${height}x${width}/`, height, width});
-  }
-  return images;
-}
 
 const MarketplaceScreen = () => {
   const {colors} = useContext(AppContext);
@@ -70,21 +49,17 @@ const MarketplaceScreen = () => {
     navigation.navigate('MarketSettings');
   }
 
-  function gotoCreateListing() {
+  function gotoMoreTools() {
     //@ts-ignore
-    navigation.navigate('CreateListingScreen');
+    navigation.navigate('MarketMoreToolsScreen');
   }
 
   function cancelSearch() {
     searchInputRef.current?.blur();
   }
 
-  function focusSearch() {
-    searchInputRef.current?.focus();
-  }
-
-  return (
-    <SafeScreen>
+  function header() {
+    return (
       <View
         style={{
           flexDirection: 'row',
@@ -94,52 +69,39 @@ const MarketplaceScreen = () => {
           alignItems: 'center',
         }}>
         <Searchbar
+          traileringIcon={searchFocused ? 'close' : 'dots-horizontal-circle'}
+          traileringIconColor={colors.bizarroTessarak}
+          onTraileringIconPress={searchFocused ? cancelSearch : gotoMoreTools}
           onFocus={() => setSearchFocused(true)}
           onBlur={() => setSearchFocused(false)}
           ref={(input: any) => (searchInputRef.current = input)}
           showDivider={false}
-          onIconPress={focusSearch}
+          icon="tune"
+          onIconPress={gotoSettings}
           theme={MD3DarkTheme}
           inputStyle={{fontSize: 20}}
           style={{flex: 1, backgroundColor: colors.bg1}}
-          iconColor={colors.tessarak}
+          iconColor={colors.bizarroTessarak}
           mode="bar"
           placeholder="Search the market..."
           onChangeText={onChangeSearch}
           value={searchQuery}
         />
-        {!searchFocused && (
-          <>
-            <IconButton
-              style={{marginRight: -16}}
-              icon={gridView ? 'grid' : 'grid-off'}
-              iconColor={colors.bizarroTessarak}
-              size={25}
-              onPress={() => setGridView(!gridView)}
-            />
-            <IconButton
-              style={{marginRight: -16}}
-              icon="plus-box"
-              iconColor={colors.bizarroTessarak}
-              size={30}
-              onPress={gotoCreateListing}
-            />
-            <IconButton
-              icon={'store-cog'}
-              iconColor={colors.bizarroTessarak}
-              size={30}
-              onPress={gotoSettings}
-            />
-          </>
-        )}
-        {searchFocused && (
-          <IconButton
-            icon="cancel"
-            iconColor={colors.bizarroTessarak}
-            size={25}
-            onPress={cancelSearch}
-          />
-        )}
+      </View>
+    );
+  }
+
+  return (
+    <View style={{backgroundColor: colors.bg1, flex: 1}}>
+      <View
+        style={{
+          position: 'absolute',
+          top: insets.top,
+          left: 0,
+          zIndex: 1000,
+          width: '100%',
+        }}>
+        {header()}
       </View>
       {gridView && (
         <>
@@ -155,38 +117,41 @@ const MarketplaceScreen = () => {
                 renderItem={({item, i}) => {
                   const ad = item as MarketListingData;
                   return (
-                    <View key={i} style={{padding: 2}}>
-                      <Card>
-                        <Card.Cover
-                          theme={{roundness: 0}}
-                          source={{uri: ad.imageUrl}}
-                          style={{
-                            height: undefined,
-                            aspectRatio: getAspectRatio(
-                              ad.imageWidth,
-                              ad.imageHeight,
-                            ),
-                          }}
-                        />
-                        <View
-                          style={{
-                            backgroundColor: colors.dark,
-                            paddingHorizontal: 8,
-                            paddingVertical: 8,
-                          }}>
-                          <Text
-                            variant="titleSmall"
-                            style={{color: colors.text}}>
-                            {`${
-                              formatCurrency({
-                                amount: ad.price,
-                                code: 'USD',
-                              })[0]
-                            } - ${ad.title}`}
-                          </Text>
-                        </View>
-                      </Card>
-                    </View>
+                    <>
+                      {i < 3 && <View style={{height: insets.top + 65}} />}
+                      <View key={i} style={{padding: 2}}>
+                        <Card>
+                          <Card.Cover
+                            theme={{roundness: 0}}
+                            source={{uri: ad.imageUrl}}
+                            style={{
+                              height: undefined,
+                              aspectRatio: getAspectRatio(
+                                ad.imageWidth,
+                                ad.imageHeight,
+                              ),
+                            }}
+                          />
+                          <View
+                            style={{
+                              backgroundColor: colors.dark,
+                              paddingHorizontal: 8,
+                              paddingVertical: 8,
+                            }}>
+                            <Text
+                              variant="titleSmall"
+                              style={{color: colors.text}}>
+                              {`${
+                                formatCurrency({
+                                  amount: ad.price,
+                                  code: 'USD',
+                                })[0]
+                              } - ${ad.title}`}
+                            </Text>
+                          </View>
+                        </Card>
+                      </View>
+                    </>
                   );
                 }}
               />
@@ -209,26 +174,26 @@ const MarketplaceScreen = () => {
           )}
         </>
       )}
-      <View
-        style={{
-          position: 'absolute',
-          top: insets.top * 3,
-          left: 0,
-          zIndex: 10000,
-          width: Dimensions.get('window').width,
-        }}>
-        <Text
-          variant="displayMedium"
-          style={{
-            color: colors.text,
-            fontWeight: '900',
-            textAlign: 'center',
-            paddingHorizontal: 20,
-          }}>
-          Fake Listings for Testing
-        </Text>
-      </View>
-    </SafeScreen>
+      {/*<View*/}
+      {/*  style={{*/}
+      {/*    position: 'absolute',*/}
+      {/*    top: insets.top * 3,*/}
+      {/*    left: 0,*/}
+      {/*    zIndex: 10000,*/}
+      {/*    width: Dimensions.get('window').width,*/}
+      {/*  }}>*/}
+      {/*  <Text*/}
+      {/*    variant="displayMedium"*/}
+      {/*    style={{*/}
+      {/*      color: colors.text,*/}
+      {/*      fontWeight: '900',*/}
+      {/*      textAlign: 'center',*/}
+      {/*      paddingHorizontal: 20,*/}
+      {/*    }}>*/}
+      {/*    Fake Listings for Testing*/}
+      {/*  </Text>*/}
+      {/*</View>*/}
+    </View>
   );
 };
 

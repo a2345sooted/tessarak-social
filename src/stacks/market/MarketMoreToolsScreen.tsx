@@ -4,7 +4,7 @@ import {AppContext} from '@app-ctx';
 import {Alert, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
-const MarketSettingsScreen = () => {
+const MarketMoreToolsScreen = () => {
   const {colors} = useContext(AppContext);
   const navigation = useNavigation();
 
@@ -24,7 +24,7 @@ const MarketSettingsScreen = () => {
             color: colors.text,
             flex: 1,
           }}>
-          Market Settings
+          Market More Tools
         </Text>
       </View>
       <Divider />
@@ -32,18 +32,25 @@ const MarketSettingsScreen = () => {
         <Text
           variant="bodyLarge"
           style={{fontWeight: 'bold', color: colors.text}}>
-          Set Range / Origin
+          Help from Tessa
         </Text>
       </View>
       <View style={{marginTop: 20, paddingHorizontal: 20}}>
         <Text
           variant="bodyLarge"
           style={{fontWeight: 'bold', color: colors.text}}>
-          What kind of other filters?
+          Bookmarked Listings
+        </Text>
+      </View>
+      <View style={{marginTop: 20, paddingHorizontal: 20}}>
+        <Text
+          variant="bodyLarge"
+          style={{fontWeight: 'bold', color: colors.text}}>
+          What else?
         </Text>
       </View>
     </View>
   );
 };
 
-export default MarketSettingsScreen;
+export default MarketMoreToolsScreen;
