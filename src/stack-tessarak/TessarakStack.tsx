@@ -1,43 +1,43 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import HomeScreen from './HomeScreen';
 import DimensionsStack from '../stack-dimensions/DimensionsStack';
 import ActivityScreen from './ActivityScreen';
 import SearchScreen from './SearchScreen';
 import UserScreen from './UserScreen';
+import ContentFeedStack from '../stack-content-feed/ContentFeedStack';
 
-const HomeNavStack = createNativeStackNavigator();
+const TessarakNavStack = createNativeStackNavigator();
 
-function HomeStack() {
+function TessarakStack() {
   return (
-    <HomeNavStack.Navigator initialRouteName="Main">
-      <HomeNavStack.Screen
-        name="Main"
-        component={HomeScreen}
+    <TessarakNavStack.Navigator initialRouteName="ContentFeed">
+      <TessarakNavStack.Screen
+        name="ContentFeed"
+        component={ContentFeedStack}
         options={{headerShown: false}}
       />
-      <HomeNavStack.Screen
+      <TessarakNavStack.Screen
         name="Dimensions"
         component={DimensionsStack}
         options={{headerShown: false, presentation: 'modal'}}
       />
-      <HomeNavStack.Screen
+      <TessarakNavStack.Screen
         name="Activity"
         component={ActivityScreen}
         options={{headerShown: false, presentation: 'modal'}}
       />
-      <HomeNavStack.Screen
+      <TessarakNavStack.Screen
         name="Search"
         component={SearchScreen}
         options={{headerShown: false, presentation: 'modal'}}
       />
-      <HomeNavStack.Screen
+      <TessarakNavStack.Screen
         name="User"
         component={UserScreen}
         options={{headerShown: false, presentation: 'modal'}}
       />
-    </HomeNavStack.Navigator>
+    </TessarakNavStack.Navigator>
   );
 }
 
-export default HomeStack;
+export default TessarakStack;

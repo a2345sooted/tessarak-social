@@ -4,11 +4,12 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import CreateStack from './stack-create/CreateStack';
 import TessaStack from './stack-tessa/TessaStack';
 import MessagesStack from './stack-messages/MessagesStack';
-import HomeStack from './stack-home/HomeStack';
+import TessarakStack from './stack-tessarak/TessarakStack';
 import {IconButton} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
 import AccountStack from './stack-account/AccountStack';
 import MarketplaceStack from './stack-marketplace/MarketplaceStack';
+import ContentFeedStack from './stack-content-feed/ContentFeedStack';
 
 const AppNavStack = createBottomTabNavigator();
 
@@ -34,19 +35,19 @@ function AppStack() {
     <>
       <View style={{flex: 1}}>
         <AppNavStack.Navigator
-          initialRouteName="Home"
+          initialRouteName="Tessarak"
           screenOptions={{
             tabBarStyle: {backgroundColor: colors.bg1, borderTopWidth: 0},
           }}>
           <AppNavStack.Screen
-            name="Home"
-            component={HomeStack}
+            name="Tessarak"
+            component={ContentFeedStack}
             options={({navigation}) => ({
               headerShown: false,
               tabBarLabelStyle: {color: colors.text},
               title: 'Tessarak',
               tabBarIcon: ({focused}) =>
-                bottomTab(navigation, 'pound', 'Home', focused),
+                bottomTab(navigation, 'pound', 'Tessarak', focused),
             })}
           />
           <AppNavStack.Screen

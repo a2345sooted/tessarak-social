@@ -3,3 +3,5 @@ declare module '@env' {
   export const HTTP_PROTOCOL: string;
   export const WS_PROTOCOL: string;
 }
+
+declare module 'react-native-dynamic-tab-view';

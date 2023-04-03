@@ -1,10 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  SafeAreaView,
-  StatusBar,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {SafeAreaView, StatusBar, useColorScheme, View} from 'react-native';
 import {Provider as PaperProvider, Text} from 'react-native-paper';
 import {AppContext, BrightnessMode} from '@app-ctx';
 import {
@@ -21,7 +16,7 @@ import AppStack from './AppStack';
 
 import SystemNavigationBar from 'react-native-system-navigation-bar';
 import EnterStack from './stack-enter/EnterStack';
-import { appIsStaked, clearAuth, getActiveAuth, removeStake } from './services/auth';
+import {appIsStaked, getActiveAuth} from './services/auth';
 import {checkConnection, getTessarakUser, TessarakUser} from './services/api';
 
 function getAppColors(mode: string): AppColors {
