@@ -78,8 +78,8 @@ const MarketplaceScreen = () => {
           showDivider={false}
           icon="tune"
           onIconPress={gotoSettings}
-          theme={MD3DarkTheme}
-          inputStyle={{fontSize: 20}}
+          theme={{...MD3DarkTheme, roundness: 0}}
+          inputStyle={{fontSize: 18, fontWeight: 'bold'}}
           style={{flex: 1, backgroundColor: colors.bg1}}
           iconColor={colors.bizarroTessarak}
           mode="bar"
@@ -194,8 +194,14 @@ const MarketplaceScreen = () => {
       {/*  </Text>*/}
       {/*</View>*/}
       <FAB
-          color={colors.dark}
-        style={{position: 'absolute', bottom: 10, right: 15, zIndex: 1000, backgroundColor: colors.bizarroTessarak}}
+        color={colors.dark}
+        style={{
+          position: 'absolute',
+          bottom: 10,
+          right: 15,
+          zIndex: 1000,
+          backgroundColor: colors.bizarroTessarak,
+        }}
         theme={{roundness: 100}}
         size="small"
         icon={gridView ? 'grid' : 'grid-off'}
