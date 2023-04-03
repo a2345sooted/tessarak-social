@@ -115,9 +115,9 @@ export async function getMockMarketListings(
 ): Promise<MarketListingData[]> {
   const listings: MarketListingData[] = [];
   for (let i = 0; i < size; i++) {
-    const height = randomNumber(200, 600);
-    const width = randomNumber(200, 600);
-    const title = adTitles[randomNumber(0, 100)];
+    const height = randomNumber(200, 400);
+    const width = randomNumber(200, 400);
+    const title = adTitles[randomNumber(0, adTitles.length - 1)];
     const price = randomNumber(1, 2500);
     listings.push({
       id: i,
