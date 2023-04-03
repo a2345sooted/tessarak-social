@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useRef, useState} from 'react';
-import {Card, MD3DarkTheme, Searchbar, Text} from 'react-native-paper';
+import {Card, FAB, MD3DarkTheme, Searchbar, Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
 import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
@@ -193,6 +193,14 @@ const MarketplaceScreen = () => {
       {/*    Fake Listings for Testing*/}
       {/*  </Text>*/}
       {/*</View>*/}
+      <FAB
+          color={colors.dark}
+        style={{position: 'absolute', bottom: 10, right: 15, zIndex: 1000, backgroundColor: colors.bizarroTessarak}}
+        theme={{roundness: 100}}
+        size="small"
+        icon={gridView ? 'grid' : 'grid-off'}
+        onPress={() => setGridView(!gridView)}
+      />
     </View>
   );
 };
