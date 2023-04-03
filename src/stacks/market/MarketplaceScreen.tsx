@@ -10,13 +10,14 @@ import MarketListing from './MarketListing';
 import {getMockMarketListings, MarketListingData} from '@mock-data';
 import {formatCurrency} from 'react-native-format-currency';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const MarketplaceScreen = () => {
   const {colors} = useContext(AppContext);
   const navigation = useNavigation();
   const [searchQuery, setSearchQuery] = useState('');
   const [gridView, setGridView] = useState(true);
+  const [showSearch, setShowSearch] = useState(gridView);
 
   const insets = useSafeAreaInsets();
 
@@ -74,25 +75,27 @@ const MarketplaceScreen = () => {
           elevation: 12,
           alignItems: 'center',
         }}>
-        <Searchbar
-          traileringIcon={searchFocused ? 'close' : 'dots-horizontal-circle'}
-          traileringIconColor={colors.bizarroTessarak}
-          onTraileringIconPress={searchFocused ? cancelSearch : gotoMoreTools}
-          onFocus={() => setSearchFocused(true)}
-          onBlur={() => setSearchFocused(false)}
-          ref={(input: any) => (searchInputRef.current = input)}
-          showDivider={false}
-          icon="tune"
-          onIconPress={gotoSettings}
-          theme={{...MD3DarkTheme, roundness: 1}}
-          inputStyle={{fontSize: 18, fontWeight: 'bold'}}
-          style={{flex: 1, backgroundColor: colors.bg1}}
-          iconColor={colors.bizarroTessarak}
-          mode="bar"
-          placeholder="Search the market..."
-          onChangeText={onChangeSearch}
-          value={searchQuery}
-        />
+        {showSearch && (
+          <Searchbar
+            traileringIcon={searchFocused ? 'close' : 'dots-horizontal-circle'}
+            traileringIconColor={colors.bizarroTessarak}
+            onTraileringIconPress={searchFocused ? cancelSearch : gotoMoreTools}
+            onFocus={() => setSearchFocused(true)}
+            onBlur={() => setSearchFocused(false)}
+            ref={(input: any) => (searchInputRef.current = input)}
+            showDivider={false}
+            icon="tune"
+            onIconPress={gotoSettings}
+            theme={{...MD3DarkTheme, roundness: 1}}
+            inputStyle={{fontSize: 18, fontWeight: 'bold'}}
+            style={{flex: 1, backgroundColor: colors.bg1}}
+            iconColor={colors.bizarroTessarak}
+            mode="bar"
+            placeholder="Search the market..."
+            onChangeText={onChangeSearch}
+            value={searchQuery}
+          />
+        )}
       </View>
     );
   }

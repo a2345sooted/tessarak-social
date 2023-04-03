@@ -1,11 +1,12 @@
 import React, {useContext} from 'react';
-import {Button, Text} from 'react-native-paper';
+import {Button, IconButton, Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
 import {Image, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {MarketListingData} from '@mock-data';
 import {formatCurrency} from 'react-native-format-currency';
-import { tkDelay } from '@utils';
+import {tkDelay} from '@utils';
+import {triggerImpactMedium} from '@haptic';
 
 export interface MarketListingProps {
   data: MarketListingData;
@@ -17,10 +18,10 @@ function MarketListing({data, index}: MarketListingProps) {
   const navigation = useNavigation();
 
   async function createPortal() {
-      // navigation.goBack();
-      await tkDelay(0);
-      //@ts-ignore
-      navigation.navigate('CreatePortalWithSellerScreen');
+    // navigation.goBack();
+    await tkDelay(0);
+    //@ts-ignore
+    navigation.navigate('CreatePortalWithSellerScreen');
   }
 
   return (
@@ -40,9 +41,9 @@ function MarketListing({data, index}: MarketListingProps) {
         <Text
           variant="headlineSmall"
           style={{
+            flex: 1,
             fontWeight: 'bold',
             color: colors.text,
-            textAlign: 'center',
             marginRight: 20,
             minWidth: 100,
           }}>
@@ -53,12 +54,39 @@ function MarketListing({data, index}: MarketListingProps) {
             })[0]
           }
         </Text>
-        <Button style={{flex: 1}} mode="contained" onPress={createPortal}>
-          Create Portal w/ Seller
-        </Button>
+        <IconButton
+          style={{marginRight: -10}}
+          icon="alert"
+          iconColor={colors.bizarroTessarak}
+          size={30}
+          onPress={() => {}}
+        />
+        <IconButton
+          style={{marginRight: -10}}
+          icon="bookmark"
+          iconColor={colors.bizarroTessarak}
+          size={30}
+          onPress={() => {}}
+        />
+        <IconButton
+          style={{marginRight: -10}}
+          icon="share"
+          iconColor={colors.bizarroTessarak}
+          size={30}
+          onPress={() => {}}
+        />
+        <IconButton
+          icon="message-text"
+          iconColor={colors.bizarroTessarak}
+          size={30}
+          onPress={() => {}}
+        />
+        {/*<Button style={{flex: 1}} mode="contained" onPress={createPortal}>*/}
+        {/*  Create Portal w/ Seller*/}
+        {/*</Button>*/}
       </View>
       <View />
-      <View style={{paddingHorizontal: 12, marginTop: 12}}>
+      <View style={{paddingHorizontal: 12, marginTop: 8}}>
         <Text
           variant="headlineSmall"
           style={{
@@ -73,7 +101,7 @@ function MarketListing({data, index}: MarketListingProps) {
           variant="titleMedium"
           style={{
             fontWeight: 'bold',
-            color: colors.text,
+            color: '#d5d4d4',
           }}>
           {data.description}
         </Text>
