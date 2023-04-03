@@ -8,6 +8,7 @@ import MessagesStack from './stacks/portals/MessagesStack';
 import MarketplaceStack from './stacks/market/MarketplaceStack';
 import AccountStack from './stacks/account/AccountStack';
 import TessaStack from './stacks/tessa/TessaStack';
+import {triggerImpactMedium} from '@haptic';
 
 const AppNavStack = createBottomTabNavigator();
 
@@ -24,14 +25,17 @@ function AppStackItem(
       component={component}
       options={({navigation}) => ({
         headerShown: false,
-        tabBarLabelStyle: {color: colors.text},
+        tabBarLabelStyle: {color: colors.text, paddingBottom: 10},
         title: title,
         tabBarIcon: ({focused}) => (
           <IconButton
             icon={icon}
             iconColor={focused ? colors.tessarak : colors.text}
             size={focused ? 35 : 25}
-            onPress={() => navigation.navigate(route)}
+            onPress={() => {
+              triggerImpactMedium();
+              navigation.navigate(route);
+            }}
           />
         ),
       })}

@@ -32,7 +32,7 @@ const SearchScreen = () => {
         <Text
           variant="bodyLarge"
           style={{fontWeight: 'bold', color: colors.text}}>
-          A powerful search tool for searching the entire Tessarak.
+          A Tessarak global search tool.
         </Text>
       </View>
     </View>

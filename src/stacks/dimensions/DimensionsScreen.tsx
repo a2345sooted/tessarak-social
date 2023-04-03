@@ -30,7 +30,7 @@ const DimensionsScreen = () => {
           icon="magnify"
           iconColor={colors.bizarroTessarak}
           size={30}
-          onPress={() => Alert.alert('Search dimensions only.')}
+          onPress={() => Alert.alert('Search dimension meta only, not content')}
         />
       </View>
       <Divider />
@@ -38,7 +38,7 @@ const DimensionsScreen = () => {
         <Text
           variant="bodyLarge"
           style={{fontWeight: 'bold', color: colors.text}}>
-          A powerful search tool for searching the entire Tessarak.
+          Configure your dimensions and discover new ones.
         </Text>
       </View>
     </View>
