@@ -27,7 +27,8 @@ export const DarkAppColors: AppColors = {
   bizarroTessarak: '#e851be',
   highlight: '#fc8b0b',
   text: '#FFFFFF',
-  bg1: '#333333',
+  // bg1: '#333333',
+  bg1: '#1a1a1a',
   light: '#FFFFFF',
   dark: '#333333',
 };

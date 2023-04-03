@@ -46,7 +46,7 @@ function ContentFeedHeader() {
           alignItems: 'center',
         }}>
         <IconButton
-          icon="apps"
+          icon="layers"
           iconColor={colors.bizarroTessarak}
           size={30}
           onPress={gotoDimensionsPanel}

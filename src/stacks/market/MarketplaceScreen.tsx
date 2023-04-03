@@ -1,17 +1,11 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
-import {
-  Card,
-  IconButton,
-  MD3DarkTheme,
-  Searchbar,
-  Text,
-} from 'react-native-paper';
-import {SafeScreen} from '@common';
-import {AppContext} from '@app-ctx';
-import {Alert, View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import React, { useContext, useRef, useState } from 'react';
+import { Card, IconButton, MD3DarkTheme, Searchbar, Text } from 'react-native-paper';
+import { SafeScreen } from '@common';
+import { AppContext } from '@app-ctx';
+import { View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import MasonryList from 'reanimated-masonry-list';
-import {getAspectRatio} from '@utils';
+import { getAspectRatio } from '@utils';
 import PagerView from 'react-native-pager-view';
 
 function randomNumber(min: number, max: number): number {
@@ -28,18 +22,6 @@ function getImages() {
   return images;
 }
 
-// function ListingCard(): JSX.Element {
-//   return (
-//     <Card>
-//       <Card.Content>
-//         <Text>item</Text>
-//         <Text>item</Text>
-//         <Text>item</Text>
-//       </Card.Content>
-//     </Card>
-//   );
-// }
-
 const MarketplaceScreen = () => {
   const {colors} = useContext(AppContext);
   const navigation = useNavigation();
@@ -55,6 +37,11 @@ const MarketplaceScreen = () => {
   function gotoSettings() {
     //@ts-ignore
     navigation.navigate('MarketSettings');
+  }
+
+  function gotoCreateListing() {
+    //@ts-ignore
+    navigation.navigate('CreateListingScreen');
   }
 
   function cancelSearch() {
@@ -93,11 +80,18 @@ const MarketplaceScreen = () => {
         {!searchFocused && (
           <>
             <IconButton
-              style={{marginRight: -10}}
+              style={{marginRight: -16}}
               icon={gridView ? 'grid' : 'grid-off'}
               iconColor={colors.bizarroTessarak}
-              size={20}
+              size={25}
               onPress={() => setGridView(!gridView)}
+            />
+            <IconButton
+              style={{marginRight: -16}}
+              icon="plus-box"
+              iconColor={colors.bizarroTessarak}
+              size={30}
+              onPress={gotoCreateListing}
             />
             <IconButton
               icon={'store-cog'}
