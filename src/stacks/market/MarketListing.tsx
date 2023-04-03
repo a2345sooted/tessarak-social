@@ -91,17 +91,17 @@ function MarketListing({data, index}: MarketListingProps) {
             iconComponent={
               <Icon
                 name="bookmark"
-                size={30}
-                color={bookmarked ? '#f2fa04' : colors.bizarroTessarak}
+                size={35}
+                color={bookmarked ? '#f2fa04' : '#d5d4d4'}
               />
             }
           />
         </View>
         <IconButton
           style={{marginRight: -10}}
-          icon="alert"
-          iconColor={colors.bizarroTessarak}
-          size={30}
+          icon="shield-star"
+          iconColor={'#f65803'}
+          size={25}
           onPress={reportListing}
         />
         {/*<IconButton*/}
@@ -114,14 +114,14 @@ function MarketListing({data, index}: MarketListingProps) {
         <IconButton
           style={{marginRight: -10}}
           icon="share"
-          iconColor={colors.bizarroTessarak}
-          size={30}
+          iconColor={'#01c093'}
+          size={35}
           onPress={showShareActionSheet}
         />
         <IconButton
           icon="message-text"
           iconColor={colors.bizarroTessarak}
-          size={30}
+          size={35}
           onPress={createPortal}
         />
         {/*<Button style={{flex: 1}} mode="contained" onPress={createPortal}>*/}

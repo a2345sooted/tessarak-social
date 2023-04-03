@@ -45,7 +45,7 @@ const CreatePortalWithSellerScreen = () => {
       </View>
       <Divider />
       <View style={{marginTop: 20, paddingHorizontal: 20}}>
-        <Card mode="outlined" style={{backgroundColor: colors.dark}}>
+        <Card style={{backgroundColor: colors.dark}}>
           <View style={{paddingHorizontal: 8, paddingVertical: 8}}>
             <TextInput
               autoFocus

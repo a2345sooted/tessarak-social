@@ -38,14 +38,25 @@ const ReportListingScreen = () => {
         </Text>
         <IconButton
           icon="send"
-          iconColor={colors.bizarroTessarak}
+          iconColor={'#e35904'}
           size={30}
           onPress={() => navigation.goBack()}
         />
       </View>
       <Divider />
       <View style={{marginTop: 20, paddingHorizontal: 20}}>
-        <Card mode="outlined" style={{backgroundColor: colors.dark}}>
+        <View>
+          <Text
+            variant="bodyLarge"
+            style={{
+              fontWeight: 'bold',
+              color: colors.text,
+            }}>
+            Some info about reporting best practices and what to expect from
+            here.
+          </Text>
+        </View>
+        <Card style={{backgroundColor: colors.dark, marginTop: 12}}>
           <View style={{paddingHorizontal: 8, paddingVertical: 8}}>
             <TextInput
               autoFocus
