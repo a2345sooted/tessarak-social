@@ -4,13 +4,14 @@ import {AppContext} from '@app-ctx';
 import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import MasonryList from 'reanimated-masonry-list';
-import {getAspectRatio} from '@utils';
+import {getAspectRatio, tkDelay} from '@utils';
 import PagerView from 'react-native-pager-view';
 import MarketListing from './MarketListing';
 import {getMockMarketListings, MarketListingData} from '@mock-data';
 import {formatCurrency} from 'react-native-format-currency';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import Animated, {FadeIn} from 'react-native-reanimated';
 
 const MarketplaceScreen = () => {
   const {colors} = useContext(AppContext);
@@ -32,6 +33,10 @@ const MarketplaceScreen = () => {
     loadListings();
   }, []);
 
+  useEffect(() => {
+    setShowSearch(gridView);
+  }, [gridView]);
+
   async function loadListings() {
     setIsLoadingListings(true);
     try {
@@ -42,6 +47,10 @@ const MarketplaceScreen = () => {
     } finally {
       setIsLoadingListings(false);
     }
+  }
+
+  function focusSearch() {
+    searchInputRef.current?.focus();
   }
 
   const onChangeSearch = query => setSearchQuery(query);
@@ -63,6 +72,9 @@ const MarketplaceScreen = () => {
 
   function cancelSearch() {
     searchInputRef.current?.blur();
+    if (!gridView) {
+        setShowSearch(false);
+    }
   }
 
   function header() {
@@ -88,7 +100,11 @@ const MarketplaceScreen = () => {
             onIconPress={gotoSettings}
             theme={{...MD3DarkTheme, roundness: 1}}
             inputStyle={{fontSize: 18, fontWeight: 'bold'}}
-            style={{flex: 1, backgroundColor: colors.bg1}}
+            style={{
+              flex: 1,
+              backgroundColor: colors.bg1,
+              opacity: showSearch ? 100 : 0,
+            }}
             iconColor={colors.bizarroTessarak}
             mode="bar"
             placeholder="Search the market..."
@@ -183,39 +199,51 @@ const MarketplaceScreen = () => {
           )}
         </>
       )}
-      {/*<View*/}
-      {/*  style={{*/}
-      {/*    position: 'absolute',*/}
-      {/*    top: insets.top * 3,*/}
-      {/*    left: 0,*/}
-      {/*    zIndex: 10000,*/}
-      {/*    width: Dimensions.get('window').width,*/}
-      {/*  }}>*/}
-      {/*  <Text*/}
-      {/*    variant="displayMedium"*/}
-      {/*    style={{*/}
-      {/*      color: colors.text,*/}
-      {/*      fontWeight: '900',*/}
-      {/*      textAlign: 'center',*/}
-      {/*      paddingHorizontal: 20,*/}
-      {/*    }}>*/}
-      {/*    Fake Listings for Testing*/}
-      {/*  </Text>*/}
-      {/*</View>*/}
-      <FAB
-        color={colors.dark}
+      <View
         style={{
           position: 'absolute',
-          bottom: 10,
-          right: 15,
+          bottom: 0,
+          right: 0,
           zIndex: 1000,
-          backgroundColor: colors.bizarroTessarak,
-        }}
-        theme={{roundness: 100}}
-        size="small"
-        icon={gridView ? 'grid' : 'grid-off'}
-        onPress={() => setGridView(!gridView)}
-      />
+        }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+            paddingHorizontal: 12,
+            paddingVertical: 12,
+          }}>
+          {!gridView && (
+            <Animated.View entering={FadeIn.duration(500)}>
+              <FAB
+                color={colors.dark}
+                style={{
+                  backgroundColor: colors.bizarroTessarak,
+                }}
+                theme={{roundness: 100}}
+                size="small"
+                icon="magnify"
+                onPress={async () => {
+                  setShowSearch(true);
+                  await tkDelay(100);
+                  focusSearch();
+                }}
+              />
+            </Animated.View>
+          )}
+          <FAB
+            color={colors.dark}
+            style={{
+              marginLeft: 10,
+              backgroundColor: colors.bizarroTessarak,
+            }}
+            theme={{roundness: 100}}
+            size="small"
+            icon={gridView ? 'grid' : 'page-layout-body'}
+            onPress={() => setGridView(!gridView)}
+          />
+        </View>
+      </View>
     </View>
   );
 };
