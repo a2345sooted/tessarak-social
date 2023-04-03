@@ -6,6 +6,7 @@ import CreateListingScreen from './CreateListingScreen';
 import MarketMoreToolsScreen from './MarketMoreToolsScreen';
 import CreatePortalWithSellerScreen from './CreatePortalWithSellerScreen';
 import MarketListingScreen from './MarketListingScreen';
+import ReportListingScreen from './ReportListingScreen';
 
 const MessagesNavStack = createNativeStackNavigator();
 
@@ -40,6 +41,11 @@ function MarketplaceStack() {
       <MessagesNavStack.Screen
         name="MarketListingScreen"
         component={MarketListingScreen}
+        options={{headerShown: false, presentation: 'modal'}}
+      />
+      <MessagesNavStack.Screen
+        name="ReportListingScreen"
+        component={ReportListingScreen}
         options={{headerShown: false, presentation: 'modal'}}
       />
     </MessagesNavStack.Navigator>
