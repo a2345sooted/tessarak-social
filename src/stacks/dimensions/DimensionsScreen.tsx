@@ -13,27 +13,24 @@ const DimensionsScreen = () => {
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <IconButton
           icon="close"
-          iconColor="#c66ef1"
+          iconColor={colors.bizarroTessarak}
           size={30}
           onPress={() => navigation.goBack()}
-          style={{flex: 1}}
         />
         <Text
           variant="headlineSmall"
           style={{
             fontWeight: 'bold',
             color: colors.text,
-            flex: 2,
-            textAlign: 'center',
+            flex: 1,
           }}>
           Dimensions
         </Text>
         <IconButton
-          icon="layers-search-outline"
-          iconColor="#c66ef1"
-          size={25}
-          onPress={() => Alert.alert('Search the dimensions specifically')}
-          style={{flex: 1}}
+          icon="magnify"
+          iconColor={colors.bizarroTessarak}
+          size={30}
+          onPress={() => Alert.alert('Search dimensions only.')}
         />
       </View>
       <Divider />
@@ -41,32 +38,7 @@ const DimensionsScreen = () => {
         <Text
           variant="bodyLarge"
           style={{fontWeight: 'bold', color: colors.text}}>
-          Here is where you would choose what dimension you want your feed from
-          at this moment. A comparison would be: the TikTok FYP and Following
-          would each be dimensions.
-        </Text>
-      </View>
-      <View style={{marginTop: 20, paddingHorizontal: 20}}>
-        <Text
-          variant="bodyLarge"
-          style={{fontWeight: 'bold', color: colors.text}}>
-          In this section you would be able to bookmark dimensions, discover new
-          ones, etc.
-        </Text>
-      </View>
-      <View style={{marginTop: 20, paddingHorizontal: 20}}>
-        <Text
-          variant="bodyLarge"
-          style={{fontWeight: 'bold', color: colors.text}}>
-          A dimension would be a feed of the common global data from some source
-          using some algorithm. A dimension can also aggregate other dimensions.
-        </Text>
-      </View>
-      <View style={{marginTop: 20, paddingHorizontal: 20}}>
-        <Text
-          variant="bodyLarge"
-          style={{fontWeight: 'bold', color: colors.text}}>
-          Some ideas of dimensions might be: #safe-for-kids, #astronomy, #politicsA, #politicsB, #Asia, etc.
+          A powerful search tool for searching the entire Tessarak.
         </Text>
       </View>
     </View>

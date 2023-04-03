@@ -6,9 +6,9 @@ const DimensionsNavStack = createNativeStackNavigator();
 
 function DimensionsStack() {
   return (
-    <DimensionsNavStack.Navigator initialRouteName="Main">
+    <DimensionsNavStack.Navigator initialRouteName="DimensionsScreen">
       <DimensionsNavStack.Screen
-        name="Main"
+        name="DimensionsScreen"
         component={DimensionsScreen}
         options={{headerShown: false}}
       />

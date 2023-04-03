@@ -7,7 +7,7 @@ const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 export const NestedPagingView = () => {
   const {colors} = useContext(AppContext);
   return (
-    <View style={styles.container}>
+    <View style={{flex: 1, backgroundColor: colors.bg1}}>
       <ScrollView
         horizontal
         pagingEnabled

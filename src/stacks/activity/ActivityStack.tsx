@@ -1,18 +1,18 @@
 import React from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import ContentFeedStack from '../content-feed/ContentFeedStack';
+import ActivityScreen from './ActivityScreen';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const ActivityDrawer = createDrawerNavigator();
+const ActivityNavStack = createNativeStackNavigator();
 
 function ActivityStack() {
   return (
-    <ActivityDrawer.Navigator initialRouteName="ContentFeedStack" screenOptions={{drawerPosition: 'right', drawerType: 'front', swipeEdgeWidth: 40}}>
-      <ActivityDrawer.Screen
+    <ActivityNavStack.Navigator initialRouteName="ContentFeedStack">
+      <ActivityNavStack.Screen
         name="ContentFeedStack"
-        component={ContentFeedStack}
+        component={ActivityScreen}
         options={{headerShown: false}}
       />
-    </ActivityDrawer.Navigator>
+    </ActivityNavStack.Navigator>
   );
 }
 
