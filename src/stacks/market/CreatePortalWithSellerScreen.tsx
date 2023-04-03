@@ -57,7 +57,7 @@ const CreatePortalWithSellerScreen = () => {
               onSubmitEditing={handleMessageInputComplete}
               ref={(input: any) => (messageInputRef.current = input)}
               style={{
-                fontSize: 26,
+                fontSize: 20,
                 paddingHorizontal: 8,
                 backgroundColor: colors.dark,
               }}
