@@ -24,6 +24,7 @@ module.exports = {
           '@haptic': './src/services/haptic',
           '@permissions': './src/services/permissions',
           '@storage': './src/services/storage',
+          '@mock-data': './src/services/mock-data',
           '@app-ctx': './src/AppContext',
           '@utils': './src/utils',
           '@theme': './src/theme',
