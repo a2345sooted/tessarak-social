@@ -25,7 +25,7 @@ function AppStackItem(
       component={component}
       options={({navigation}) => ({
         headerShown: false,
-        tabBarLabelStyle: {color: colors.text, paddingBottom: 10},
+        tabBarLabelStyle: {color: colors.text, paddingBottom: 8},
         title: title,
         tabBarIcon: ({focused}) => (
           <IconButton
@@ -53,7 +53,7 @@ function AppStack() {
       }}>
       {AppStackItem('Tessarak', 'pound', 'tessarak', ContentFeedStack)}
       {AppStackItem('Create', 'plus-box', 'create', CreateStack)}
-      {AppStackItem('Portals', 'message-text', 'portals', MessagesStack)}
+      {AppStackItem('Portals', 'text-box-multiple', 'portals', MessagesStack)}
       {AppStackItem('Market', 'storefront', 'market', MarketplaceStack)}
       {AppStackItem('Account', 'account-box', 'account', AccountStack)}
       {AppStackItem('Tessa', 'robot-excited', 'tessa', TessaStack)}
