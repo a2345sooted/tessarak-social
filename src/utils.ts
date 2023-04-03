@@ -1,6 +1,6 @@
 import {BrightnessMode} from '@app-ctx';
 import {ColorSchemeName} from 'react-native';
-import { formatWithMask, Masks } from 'react-native-mask-input';
+import {formatWithMask, Masks} from 'react-native-mask-input';
 
 // todo what about undefined values for colorScheme?
 export function isDarkMode(
@@ -20,4 +20,14 @@ export function maskPhoneNumber(text: string): string {
     mask: Masks.USA_PHONE,
   });
   return masked;
+}
+
+export function getAspectRatio(
+  width: number | undefined,
+  height: number | undefined,
+): number {
+  if (!width || !height) {
+    return 1;
+  }
+  return width / height;
 }

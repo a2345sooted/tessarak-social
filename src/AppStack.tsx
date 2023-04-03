@@ -47,7 +47,7 @@ function AppStack() {
   const {colors} = useContext(AppContext);
   return (
     <AppNavStack.Navigator
-      initialRouteName="Tessarak"
+      initialRouteName="market"
       screenOptions={{
         tabBarStyle: {backgroundColor: colors.bg1, borderTopWidth: 0},
       }}>

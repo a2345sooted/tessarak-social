@@ -2831,6 +2831,11 @@ domexception@^2.0.1:
   dependencies:
     webidl-conversions "^5.0.0"
 
+dooboolab-welcome@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/dooboolab-welcome/-/dooboolab-welcome-1.3.2.tgz#4928595312f0429b4ea1b485ba8767bae6acdab7"
+  integrity sha512-2NbMaIIURElxEf/UAoVUFlXrO+7n/FRhLCiQlk4fkbGRh9cJ3/f8VEMPveR9m4Ug2l2Zey+UCXjd6EcBqHJ5bw==
+
 dotenv@^16.0.3:
   version "16.0.3"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.0.3.tgz#115aec42bac5053db3c456db30cc243a5a836a07"
@@ -6354,6 +6359,13 @@ readline@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/readline/-/readline-1.3.0.tgz#c580d77ef2cfc8752b132498060dc9793a7ac01c"
   integrity sha512-k2d6ACCkiNYz222Fs/iNze30rRJ1iIicW7JuX/7/cozvih6YCkFZH+J6mAFDVgv0dRBaAyr4jDqC95R2y4IADg==
+
+reanimated-masonry-list@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/reanimated-masonry-list/-/reanimated-masonry-list-1.0.1.tgz#0dcb60f1d2fc52c962e27a2ed58d0204b4c9dae6"
+  integrity sha512-uSdw1VEUYhNxEvQufSdekMhEiUbpYsQEWXuMlpDgyfqb2P27sY1jGXvWfhyCm6t/X00lXKbyfaUJeWw4JHYS/w==
+  dependencies:
+    dooboolab-welcome "^1.3.2"
 
 recast@^0.20.4:
   version "0.20.5"
