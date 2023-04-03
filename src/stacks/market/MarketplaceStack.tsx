@@ -35,7 +35,7 @@ function MarketplaceStack() {
       <MessagesNavStack.Screen
         name="CreatePortalWithSellerScreen"
         component={CreatePortalWithSellerScreen}
-        options={{headerShown: false}}
+        options={{headerShown: false, presentation: 'modal'}}
       />
       <MessagesNavStack.Screen
         name="MarketListingScreen"

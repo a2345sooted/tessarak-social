@@ -79,7 +79,7 @@ function MarketListing({data, index}: MarketListingProps) {
           icon="message-text"
           iconColor={colors.bizarroTessarak}
           size={30}
-          onPress={() => {}}
+          onPress={createPortal}
         />
         {/*<Button style={{flex: 1}} mode="contained" onPress={createPortal}>*/}
         {/*  Create Portal w/ Seller*/}
