@@ -5,6 +5,7 @@ import {Image, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {MarketListingData} from '@mock-data';
 import {formatCurrency} from 'react-native-format-currency';
+import { tkDelay } from '@utils';
 
 export interface MarketListingProps {
   data: MarketListingData;
@@ -15,7 +16,9 @@ function MarketListing({data, index}: MarketListingProps) {
   const {colors} = useContext(AppContext);
   const navigation = useNavigation();
 
-  function createPortal() {
+  async function createPortal() {
+      // navigation.goBack();
+      await tkDelay(0);
       //@ts-ignore
       navigation.navigate('CreatePortalWithSellerScreen');
   }

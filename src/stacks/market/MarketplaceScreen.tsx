@@ -10,6 +10,7 @@ import MarketListing from './MarketListing';
 import {getMockMarketListings, MarketListingData} from '@mock-data';
 import {formatCurrency} from 'react-native-format-currency';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const MarketplaceScreen = () => {
   const {colors} = useContext(AppContext);
@@ -33,7 +34,7 @@ const MarketplaceScreen = () => {
   async function loadListings() {
     setIsLoadingListings(true);
     try {
-      const list = await getMockMarketListings(30);
+      const list = getMockMarketListings(30);
       setListings(list);
     } catch (error: any) {
       // todo
@@ -52,6 +53,11 @@ const MarketplaceScreen = () => {
   function gotoMoreTools() {
     //@ts-ignore
     navigation.navigate('MarketMoreToolsScreen');
+  }
+
+  function gotoListingScreen() {
+    //@ts-ignore
+    navigation.navigate('MarketListingScreen');
   }
 
   function cancelSearch() {
@@ -117,9 +123,9 @@ const MarketplaceScreen = () => {
                 renderItem={({item, i}) => {
                   const ad = item as MarketListingData;
                   return (
-                    <>
+                    <TouchableOpacity key={i} onPress={gotoListingScreen}>
                       {i < 3 && <View style={{height: insets.top + 65}} />}
-                      <View key={i} style={{padding: 2}}>
+                      <View style={{padding: 2}}>
                         <Card>
                           <Card.Cover
                             theme={{roundness: 0}}
@@ -151,7 +157,7 @@ const MarketplaceScreen = () => {
                           </View>
                         </Card>
                       </View>
-                    </>
+                    </TouchableOpacity>
                   );
                 }}
               />

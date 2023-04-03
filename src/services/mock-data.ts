@@ -110,9 +110,7 @@ export interface MarketListingData {
   price: number;
 }
 
-export async function getMockMarketListings(
-  size: number,
-): Promise<MarketListingData[]> {
+export function getMockMarketListings(size: number): MarketListingData[] {
   const listings: MarketListingData[] = [];
   for (let i = 0; i < size; i++) {
     const height = randomNumber(400, 600);
@@ -130,4 +128,8 @@ export async function getMockMarketListings(
     });
   }
   return listings;
+}
+
+export function getSingleMarketListing(): MarketListingData {
+  return getMockMarketListings(1)[0];
 }
