@@ -8,7 +8,7 @@ import {
 } from 'react-native-paper';
 import {SafeScreen} from '@common';
 import {AppContext} from '@app-ctx';
-import {Alert, View} from 'react-native';
+import { Alert, Dimensions, View } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import MasonryList from 'reanimated-masonry-list';
 import {getAspectRatio} from '@utils';
@@ -16,6 +16,7 @@ import PagerView from 'react-native-pager-view';
 import MarketListing from './MarketListing';
 import {getMockMarketListings, MarketListingData} from '@mock-data';
 import {formatCurrency} from 'react-native-format-currency';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 function randomNumber(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min) + min);
@@ -36,6 +37,8 @@ const MarketplaceScreen = () => {
   const navigation = useNavigation();
   const [searchQuery, setSearchQuery] = useState('');
   const [gridView, setGridView] = useState(true);
+
+  const insets = useSafeAreaInsets();
 
   const [listings, setListings] = useState<MarketListingData[] | null>(null);
   const [isLoadingListings, setIsLoadingListings] = useState(false);
@@ -206,6 +209,25 @@ const MarketplaceScreen = () => {
           )}
         </>
       )}
+      <View
+        style={{
+          position: 'absolute',
+          top: insets.top * 3,
+          left: 0,
+          zIndex: 10000,
+          width: Dimensions.get('window').width,
+        }}>
+        <Text
+          variant="displayMedium"
+          style={{
+            color: colors.text,
+            fontWeight: '900',
+            textAlign: 'center',
+            paddingHorizontal: 20,
+          }}>
+          Fake Listings for Testing
+        </Text>
+      </View>
     </SafeScreen>
   );
 };
