@@ -73,7 +73,7 @@ const MarketplaceScreen = () => {
   function cancelSearch() {
     searchInputRef.current?.blur();
     if (!gridView) {
-        setShowSearch(false);
+      setShowSearch(false);
     }
   }
 
@@ -218,7 +218,7 @@ const MarketplaceScreen = () => {
               <FAB
                 color={colors.dark}
                 style={{
-                  backgroundColor: colors.bizarroTessarak,
+                  backgroundColor: '#c66ef1',
                 }}
                 theme={{roundness: 100}}
                 size="small"
@@ -235,7 +235,7 @@ const MarketplaceScreen = () => {
             color={colors.dark}
             style={{
               marginLeft: 10,
-              backgroundColor: colors.bizarroTessarak,
+              backgroundColor: '#c66ef1',
             }}
             theme={{roundness: 100}}
             size="small"
