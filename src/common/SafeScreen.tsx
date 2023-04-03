@@ -1,5 +1,5 @@
 import React, {PropsWithChildren} from 'react';
-import BottomSafeArea from './BottomSafeArea';
+import { BottomSafeArea } from './BottomSafeArea';
 
 export function SafeScreen(props: PropsWithChildren): JSX.Element {
   return (

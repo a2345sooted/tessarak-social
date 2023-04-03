@@ -7,7 +7,7 @@ import {AppContext} from '@app-ctx';
 
 type SendButtonProps = SendProps<IMessage>;
 
-function SendButton(props: SendButtonProps): JSX.Element {
+export function SendButton(props: SendButtonProps): JSX.Element {
   const {colors} = useContext(AppContext);
   return (
     <Send {...props} alwaysShowSend>
@@ -17,5 +17,3 @@ function SendButton(props: SendButtonProps): JSX.Element {
     </Send>
   );
 }
-
-export default SendButton;

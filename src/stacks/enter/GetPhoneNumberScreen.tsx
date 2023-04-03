@@ -4,11 +4,11 @@ import {SafeScreen} from '@common';
 import {AppContext} from '@app-ctx';
 import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {tkDelay} from '../utils';
-import {sendCodeToPhone} from '../services/api';
+import {tkDelay} from '@utils';
+import {sendCodeToPhone} from '@api';
 import {formatWithMask, Masks} from 'react-native-mask-input';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import { setStorageItem, USER_PHONE_KEY } from '../services/storage';
+import { setStorageItem, USER_PHONE_KEY } from '@storage';
 
 const GetPhoneNumberScreen = () => {
   const {colors, staked} = useContext(AppContext);

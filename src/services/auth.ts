@@ -1,4 +1,4 @@
-import {getStorageItem, removeStorageItem, setStorageItem} from './storage';
+import {getStorageItem, removeStorageItem, setStorageItem} from '@storage';
 
 const AUTH_DETAILS_STORAGE_KEY = '@auth::details';
 const AUTH_STAKE_STORAGE_KEY = '@auth::stake';

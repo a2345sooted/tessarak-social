@@ -19,7 +19,14 @@ module.exports = {
       {
         alias: {
           '@common': './src/common/index',
+          '@api': './src/services/api',
+          '@auth': './src/services/auth',
+          '@haptic': './src/services/haptic',
+          '@permissions': './src/services/permissions',
+          '@storage': './src/services/storage',
           '@app-ctx': './src/AppContext',
+          '@utils': './src/utils',
+          '@theme': './src/theme',
         },
       },
     ],

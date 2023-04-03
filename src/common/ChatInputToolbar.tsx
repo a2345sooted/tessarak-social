@@ -8,7 +8,7 @@ import {AppContext} from '@app-ctx';
 
 export type ChatInputToolbarProps = InputToolbarProps<IMessage>;
 
-function ChatInputToolbar(props: ChatInputToolbarProps): JSX.Element {
+export function ChatInputToolbar(props: ChatInputToolbarProps): JSX.Element {
   const {colors} = useContext(AppContext);
 
   return (
@@ -22,5 +22,3 @@ function ChatInputToolbar(props: ChatInputToolbarProps): JSX.Element {
     />
   );
 }
-
-export default ChatInputToolbar;

@@ -9,9 +9,9 @@ import {
 import {AppContext} from '@app-ctx';
 import {Alert, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {clearAuth, removeStake} from '../services/auth';
-import {deleteUser} from '../services/api';
-import {tkDelay} from '../utils';
+import {tkDelay} from '@utils';
+import { deleteUser } from '@api';
+import { clearAuth, removeStake } from '@auth';
 
 const AccountSettingsScreen = () => {
   const {colors, checkAuth} = useContext(AppContext);

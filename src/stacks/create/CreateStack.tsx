@@ -2,11 +2,7 @@ import React, {useEffect} from 'react';
 import CreateScreen from './CreateScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TemplatesScreen from './TemplatesScreen';
-import {
-  hasAccess,
-  requestCameraAccess,
-  requestMicAccess,
-} from '../services/permissions';
+import { hasAccess, requestCameraAccess, requestMicAccess } from '@permissions';
 
 const CreateNavStack = createNativeStackNavigator();
 

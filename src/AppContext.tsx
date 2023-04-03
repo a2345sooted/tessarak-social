@@ -1,6 +1,6 @@
 import {createContext} from 'react';
 import {ColorSchemeName} from 'react-native';
-import { TessarakUser } from './services/api';
+import { TessarakUser } from '@api';
 
 export type BrightnessMode = 'device' | 'light' | 'dark';
 

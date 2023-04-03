@@ -1,9 +1,9 @@
 import React, {PropsWithChildren, useContext} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import TopSafeArea from './TopSafeArea';
 import {AppContext} from '@app-ctx';
+import { TopSafeArea } from './TopSafeArea';
 
-function BottomSafeArea(props: PropsWithChildren): JSX.Element {
+export function BottomSafeArea(props: PropsWithChildren): JSX.Element {
   const {colors, statusBar} = useContext(AppContext);
   return (
     <>
@@ -22,5 +22,3 @@ function BottomSafeArea(props: PropsWithChildren): JSX.Element {
     </>
   );
 }
-
-export default BottomSafeArea;

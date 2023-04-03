@@ -7,8 +7,6 @@ class NoAvatarMessage extends Message {
   }
 }
 
-function CustomNoAvatarMessage(props: MessageProps<IMessage>): JSX.Element {
+export function CustomNoAvatarMessage(props: MessageProps<IMessage>): JSX.Element {
   return <NoAvatarMessage {...props} />;
 }
-
-export default CustomNoAvatarMessage;

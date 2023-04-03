@@ -1,18 +1,13 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {IconButton, Text} from 'react-native-paper';
-import {SafeScreen} from '@common';
+import { ChatBubble, ChatInputToolbar, ChatMessageText, SafeScreen, SendButton, CustomNoAvatarMessage } from '@common';
 import {AppContext} from '@app-ctx';
 import {View} from 'react-native';
 import {GiftedChat, IMessage} from 'react-native-gifted-chat';
-import SendButton from '../common/SendButton';
-import ChatBubble from '../common/ChatBubble';
-import ChatMessageText from '../common/ChatMessageText';
-import ChatInputToolbar from '../common/ChatInputToolbar';
-import CustomNoAvatarMessage from '../common/CustomNoAvatarMessage';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import {useNavigation} from '@react-navigation/native';
-import {createSocket} from '../services/api';
-import {tkDelay} from '../utils';
+import {createSocket} from '@api';
+import {tkDelay} from '@utils';
 
 export interface TkMessage extends IMessage {
   type: 'tessa_typing' | 'tessa_message' | 'user_message';

@@ -1,8 +1,8 @@
 import React, {useContext} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {AppContext} from '../AppContext';
+import {AppContext} from '@app-ctx';
 
-function TopSafeArea(): JSX.Element {
+export function TopSafeArea(): JSX.Element {
   const {colors} = useContext(AppContext);
   return (
     <SafeAreaView
@@ -15,5 +15,3 @@ function TopSafeArea(): JSX.Element {
     />
   );
 }
-
-export default TopSafeArea;

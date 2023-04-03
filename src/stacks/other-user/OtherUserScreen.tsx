@@ -4,7 +4,7 @@ import {AppContext} from '@app-ctx';
 import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
-const UserScreen = () => {
+const OtherUserScreen = () => {
   const {colors} = useContext(AppContext);
   const navigation = useNavigation();
 
@@ -40,4 +40,4 @@ const UserScreen = () => {
   );
 };
 
-export default UserScreen;
+export default OtherUserScreen;

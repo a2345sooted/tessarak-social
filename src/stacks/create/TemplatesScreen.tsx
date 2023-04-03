@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {Divider, IconButton, Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
-import {Alert, View} from 'react-native';
+import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 const TemplatesScreen = () => {

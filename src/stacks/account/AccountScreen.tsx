@@ -4,7 +4,7 @@ import {SafeScreen} from '@common';
 import {AppContext} from '@app-ctx';
 import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {maskPhoneNumber} from '../utils';
+import {maskPhoneNumber} from '@utils';
 
 const AccountScreen = () => {
   const {colors, user} = useContext(AppContext);

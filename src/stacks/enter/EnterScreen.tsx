@@ -5,7 +5,7 @@ import {AppContext} from '@app-ctx';
 import {useNavigation} from '@react-navigation/native';
 import {SafeScreen} from '@common';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {triggerImpactMedium} from '../services/haptic';
+import {triggerImpactMedium} from '@haptic';
 
 const EnterScreen = () => {
   const {colors} = useContext(AppContext);

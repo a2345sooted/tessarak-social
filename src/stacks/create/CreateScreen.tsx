@@ -1,11 +1,9 @@
 import React, {useContext} from 'react';
 import {IconButton, Text} from 'react-native-paper';
-import {SafeScreen} from '@common';
 import {AppContext} from '@app-ctx';
 import {Alert, StyleSheet, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Camera, useCameraDevices} from 'react-native-vision-camera';
-import BottomSafeArea from '../common/BottomSafeArea';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const CreateScreen = () => {

@@ -7,7 +7,7 @@ import {
 import {AppContext} from '@app-ctx';
 import {Alert} from 'react-native';
 
-function ChatMessageText(props: MessageTextProps<IMessage>): JSX.Element {
+export function ChatMessageText(props: MessageTextProps<IMessage>): JSX.Element {
   const {colors} = useContext(AppContext);
   return (
     <MessageText
@@ -31,5 +31,3 @@ function ChatMessageText(props: MessageTextProps<IMessage>): JSX.Element {
     />
   );
 }
-
-export default ChatMessageText;

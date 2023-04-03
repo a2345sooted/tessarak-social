@@ -1,9 +1,8 @@
 import React, {useContext} from 'react';
 import {Bubble, BubbleProps, IMessage} from 'react-native-gifted-chat';
-import {useTheme} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
 
-function ChatBubble(props: BubbleProps<IMessage>): JSX.Element {
+export function ChatBubble(props: BubbleProps<IMessage>): JSX.Element {
   const {colors} = useContext(AppContext);
 
   return (
@@ -20,5 +19,3 @@ function ChatBubble(props: BubbleProps<IMessage>): JSX.Element {
     />
   );
 }
-
-export default ChatBubble;

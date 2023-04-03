@@ -10,11 +10,11 @@ import {SafeScreen} from '@common';
 import {AppContext} from '@app-ctx';
 import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {tkDelay} from '../utils';
-import {sendCodeToPhone, verifyCodeForPhone} from '../services/api';
+import {tkDelay} from '@utils';
+import {sendCodeToPhone, verifyCodeForPhone} from '@api';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {stakeApp} from '../services/auth';
-import {getStorageItem, USER_PHONE_KEY} from '../services/storage';
+import {stakeApp} from '@auth';
+import {getStorageItem, USER_PHONE_KEY} from '@storage';
 
 const VerifyCodeScreen = () => {
   const {colors, staked, checkAuth} = useContext(AppContext);

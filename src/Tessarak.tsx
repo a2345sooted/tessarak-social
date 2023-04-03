@@ -8,16 +8,16 @@ import {
   LightAppColors,
   NAV_THEME,
   PAPER_THEME,
-} from './theme';
+} from '@theme';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {isDarkMode} from './utils';
+import {isDarkMode} from '@utils';
 import AppStack from './AppStack';
 
 import SystemNavigationBar from 'react-native-system-navigation-bar';
-import EnterStack from './stack-enter/EnterStack';
-import {appIsStaked, getActiveAuth} from './services/auth';
-import {checkConnection, getTessarakUser, TessarakUser} from './services/api';
+import {appIsStaked, getActiveAuth} from '@auth';
+import {checkConnection, getTessarakUser, TessarakUser} from '@api';
+import EnterStack from './stacks/enter/EnterStack';
 
 function getAppColors(mode: string): AppColors {
   return mode === 'light' ? LightAppColors : DarkAppColors;
