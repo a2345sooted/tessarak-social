@@ -239,7 +239,7 @@ const MarketplaceScreen = () => {
             }}
             theme={{roundness: 100}}
             size="small"
-            icon={gridView ? 'grid' : 'page-layout-body'}
+            icon={gridView ? 'page-layout-body' : 'grid'}
             onPress={() => setGridView(!gridView)}
           />
         </View>
