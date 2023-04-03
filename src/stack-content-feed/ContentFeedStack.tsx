@@ -6,9 +6,9 @@ const ContentFeedNavStack = createNativeStackNavigator();
 
 function ContentFeedStack() {
   return (
-    <ContentFeedNavStack.Navigator initialRouteName="Main">
+    <ContentFeedNavStack.Navigator initialRouteName="HomeScreen">
       <ContentFeedNavStack.Screen
-        name="Main"
+        name="HomeScreen"
         component={HomeScreen}
         options={{headerShown: false}}
       />

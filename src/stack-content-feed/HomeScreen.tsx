@@ -1,9 +1,8 @@
 import {Avatar, IconButton, Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
-import {Alert, PanResponderGestureState, View} from 'react-native';
+import {Alert, View} from 'react-native';
 import React, {useContext, useRef} from 'react';
 import PagerView from 'react-native-pager-view';
-import GestureRecognizer from 'react-native-swipe-gestures';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
@@ -19,20 +18,6 @@ const HomeScreen = () => {
   const commentsActionSheet = useRef<ActionSheetRef>(null);
   const longPressActionSheet = useRef<ActionSheetRef>(null);
   const shareActionSheet = useRef<ActionSheetRef>(null);
-
-  const gestureConfig = {
-    velocityThreshold: 0.3,
-    directionalOffsetThreshold: 80,
-    gestureIsClickThreshold: 5,
-  };
-
-  async function handleSwipeLeft(
-    state: PanResponderGestureState,
-  ): Promise<void> {}
-
-  async function handleSwipeRight(
-    state: PanResponderGestureState,
-  ): Promise<void> {}
 
   function TopBar(): JSX.Element {
     return (
@@ -142,48 +127,45 @@ const HomeScreen = () => {
 
   return (
     <>
-      <GestureRecognizer
-        config={gestureConfig}
-        onSwipeLeft={handleSwipeLeft}
-        onSwipeRight={handleSwipeRight}
-        style={{flex: 1, backgroundColor: colors.bg1}}>
-        <PagerView initialPage={0} style={{flex: 1}} orientation="vertical">
-          <View
-            key="1"
+      <PagerView
+        initialPage={0}
+        style={{flex: 1, backgroundColor: colors.bg1}}
+        orientation="vertical">
+        <View
+          key="1"
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            // backgroundColor: colors.bg1,
+          }}>
+          <Text
+            variant="bodyLarge"
             style={{
-              flex: 1,
-              justifyContent: 'center',
-              // backgroundColor: colors.bg1,
+              fontWeight: 'bold',
+              color: colors.text,
+              textAlign: 'center',
             }}>
-            <Text
-              variant="bodyLarge"
-              style={{
-                fontWeight: 'bold',
-                color: colors.text,
-                textAlign: 'center',
-              }}>
-              Content 1
-            </Text>
-          </View>
-          <View
-            key="2"
+            Content 1
+          </Text>
+        </View>
+        <View
+          key="2"
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            // backgroundColor: colors.bg1,
+          }}>
+          <Text
+            variant="bodyLarge"
             style={{
-              flex: 1,
-              justifyContent: 'center',
-              // backgroundColor: colors.bg1,
+              fontWeight: 'bold',
+              color: colors.text,
+              textAlign: 'center',
             }}>
-            <Text
-              variant="bodyLarge"
-              style={{
-                fontWeight: 'bold',
-                color: colors.text,
-                textAlign: 'center',
-              }}>
-              Content 2
-            </Text>
-          </View>
-        </PagerView>
-      </GestureRecognizer>
+            Content 2
+          </Text>
+        </View>
+      </PagerView>
       <TopBar />
       <BottomBar />
       <ActionSheet
