@@ -78,7 +78,7 @@ const MarketplaceScreen = () => {
           showDivider={false}
           icon="tune"
           onIconPress={gotoSettings}
-          theme={{...MD3DarkTheme, roundness: 0}}
+          theme={{...MD3DarkTheme, roundness: 1}}
           inputStyle={{fontSize: 18, fontWeight: 'bold'}}
           style={{flex: 1, backgroundColor: colors.bg1}}
           iconColor={colors.bizarroTessarak}

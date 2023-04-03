@@ -1,9 +1,10 @@
 import React, {useContext} from 'react';
-import {Text} from 'react-native-paper';
+import {Button, Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
-import {View} from 'react-native';
+import {Image, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {MarketListingData} from '@mock-data';
+import {formatCurrency} from 'react-native-format-currency';
 
 export interface MarketListingProps {
   data: MarketListingData;
@@ -14,23 +15,66 @@ function MarketListing({data, index}: MarketListingProps) {
   const {colors} = useContext(AppContext);
   const navigation = useNavigation();
 
+  function createPortal() {
+      //@ts-ignore
+      navigation.navigate('CreatePortalWithSellerScreen');
+  }
+
   return (
     <View
       key={index}
       style={{
         flex: 1,
-        justifyContent: 'center',
-        paddingHorizontal: 30,
       }}>
-      <Text
-        variant="headlineSmall"
+      <Image style={{height: '50%'}} source={{uri: data.imageUrl}} />
+      <View
         style={{
-          fontWeight: 'bold',
-          color: colors.text,
-          textAlign: 'center',
+          flexDirection: 'row',
+          alignItems: 'center',
+          paddingHorizontal: 12,
+          paddingTop: 16,
         }}>
-        {`${data.price} - ${data.title}`}
-      </Text>
+        <Text
+          variant="headlineSmall"
+          style={{
+            fontWeight: 'bold',
+            color: colors.text,
+            textAlign: 'center',
+            marginRight: 20,
+            minWidth: 100,
+          }}>
+          {
+            formatCurrency({
+              amount: data.price,
+              code: 'USD',
+            })[0]
+          }
+        </Text>
+        <Button style={{flex: 1}} mode="contained" onPress={createPortal}>
+          Create Portal w/ Seller
+        </Button>
+      </View>
+      <View />
+      <View style={{paddingHorizontal: 12, marginTop: 12}}>
+        <Text
+          variant="headlineSmall"
+          style={{
+            fontWeight: 'bold',
+            color: colors.text,
+          }}>
+          {data.title}
+        </Text>
+      </View>
+      <View style={{paddingHorizontal: 12, marginTop: 12}}>
+        <Text
+          variant="titleMedium"
+          style={{
+            fontWeight: 'bold',
+            color: colors.text,
+          }}>
+          {data.description}
+        </Text>
+      </View>
     </View>
   );
 }
