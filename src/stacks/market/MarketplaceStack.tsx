@@ -2,7 +2,6 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import MarketplaceScreen from './MarketplaceScreen';
 import MarketSettingsScreen from './MarketSettingsScreen';
-import CreateListingScreen from './CreateListingScreen';
 import MarketMoreToolsScreen from './MarketMoreToolsScreen';
 import CreatePortalWithSellerScreen from './CreatePortalWithSellerScreen';
 import MarketListingScreen from './MarketListingScreen';
@@ -26,11 +25,6 @@ function MarketplaceStack() {
       <MessagesNavStack.Screen
         name="MarketMoreToolsScreen"
         component={MarketMoreToolsScreen}
-        options={{headerShown: false, presentation: 'modal'}}
-      />
-      <MessagesNavStack.Screen
-        name="CreateListingScreen"
-        component={CreateListingScreen}
         options={{headerShown: false, presentation: 'modal'}}
       />
       <MessagesNavStack.Screen

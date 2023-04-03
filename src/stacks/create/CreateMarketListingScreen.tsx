@@ -4,7 +4,7 @@ import {AppContext} from '@app-ctx';
 import {Alert, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
-const CreateListingScreen = () => {
+const CreateMarketListingScreen = () => {
   const {colors} = useContext(AppContext);
   const navigation = useNavigation();
 
@@ -39,4 +39,4 @@ const CreateListingScreen = () => {
   );
 };
 
-export default CreateListingScreen;
+export default CreateMarketListingScreen;

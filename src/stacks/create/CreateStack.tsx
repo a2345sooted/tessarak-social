@@ -12,6 +12,7 @@ import {View} from 'react-native';
 import {IconButton, Text} from 'react-native-paper';
 import CreateMediaMenuScreen from './CreateMediaMenuScreen';
 import MoreVideoToolsScreen from './MoreVideoToolsScreen';
+import CreateMarketListingScreen from './CreateMarketListingScreen';
 
 function CreateHeader() {
   const insets = useSafeAreaInsets();
@@ -107,6 +108,11 @@ function CreateStack() {
         <CreateNavStack.Screen
           name="CreateMediaMenuScreen"
           component={CreateMediaMenuScreen}
+          options={{headerShown: false, presentation: 'modal'}}
+        />
+        <CreateNavStack.Screen
+          name="CreateMarketListingScreen"
+          component={CreateMarketListingScreen}
           options={{headerShown: false, presentation: 'modal'}}
         />
         <CreateNavStack.Screen

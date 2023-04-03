@@ -32,13 +32,6 @@ const CreateMediaMenuScreen = () => {
         <Text
           variant="bodyLarge"
           style={{fontWeight: 'bold', color: colors.text}}>
-          Choose media type
-        </Text>
-      </View>
-      <View style={{marginTop: 20, paddingHorizontal: 20}}>
-        <Text
-          variant="bodyLarge"
-          style={{fontWeight: 'bold', color: colors.text}}>
           Video
         </Text>
       </View>
@@ -68,6 +61,13 @@ const CreateMediaMenuScreen = () => {
           variant="bodyLarge"
           style={{fontWeight: 'bold', color: colors.text}}>
           Group Chat
+        </Text>
+      </View>
+      <View style={{marginTop: 20, paddingHorizontal: 20}}>
+        <Text
+          variant="bodyLarge"
+          style={{fontWeight: 'bold', color: colors.text}}>
+          Market Listing
         </Text>
       </View>
 

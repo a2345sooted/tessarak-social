@@ -153,7 +153,7 @@ const CreateScreen = () => {
     <>
       {!device && (
         <View
-          style={{flex: 1, justifyContent: 'center', paddingHorizontal: 30}}>
+          style={{flex: 1, justifyContent: 'center', paddingHorizontal: 30, backgroundColor: colors.bg1}}>
           <Text
             variant="headlineSmall"
             style={{
@@ -161,7 +161,7 @@ const CreateScreen = () => {
               color: colors.text,
               textAlign: 'center',
             }}>
-            TikTok like create section.
+            Unable to get camera.
           </Text>
         </View>
       )}
