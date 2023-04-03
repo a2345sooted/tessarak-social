@@ -14,7 +14,6 @@ import MasonryList from 'reanimated-masonry-list';
 import {getAspectRatio} from '@utils';
 import PagerView from 'react-native-pager-view';
 
-
 function randomNumber(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min) + min);
 }
@@ -68,7 +67,14 @@ const MarketplaceScreen = () => {
 
   return (
     <SafeScreen>
-      <View style={{flexDirection: 'row', paddingHorizontal: 8, paddingTop: 8}}>
+      <View
+        style={{
+          flexDirection: 'row',
+          paddingHorizontal: 8,
+          paddingTop: 8,
+          elevation: 12,
+          alignItems: 'center',
+        }}>
         <Searchbar
           onFocus={() => setSearchFocused(true)}
           onBlur={() => setSearchFocused(false)}
@@ -90,13 +96,13 @@ const MarketplaceScreen = () => {
               style={{marginRight: -10}}
               icon={gridView ? 'grid' : 'grid-off'}
               iconColor={colors.bizarroTessarak}
-              size={25}
+              size={20}
               onPress={() => setGridView(!gridView)}
             />
             <IconButton
-              icon={'cog'}
+              icon={'store-cog'}
               iconColor={colors.bizarroTessarak}
-              size={25}
+              size={30}
               onPress={gotoSettings}
             />
           </>
@@ -113,7 +119,7 @@ const MarketplaceScreen = () => {
       {gridView && (
         <View style={{flex: 1}}>
           <MasonryList
-            style={{paddingHorizontal: 4, color: colors.text}}
+            style={{paddingHorizontal: 4}}
             data={images}
             keyExtractor={(item): string => item.key}
             numColumns={3}

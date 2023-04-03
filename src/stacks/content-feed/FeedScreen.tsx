@@ -19,55 +19,6 @@ const FeedScreen = () => {
   const longPressActionSheet = useRef<ActionSheetRef>(null);
   const shareActionSheet = useRef<ActionSheetRef>(null);
 
-  function TopBar(): JSX.Element {
-    return (
-      <View
-        style={{position: 'absolute', top: insets.top, left: 0, width: '100%'}}>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: '100%',
-          }}>
-          <IconButton
-            icon="layers"
-            iconColor="#c66ef1"
-            size={25}
-            onPress={() => {
-              //@ts-ignore
-              navigation.navigate('Dimensions');
-            }}
-          />
-          <Text
-            variant="headlineSmall"
-            style={{fontWeight: 'bold', color: colors.text, flex: 1}}>
-            #all-chrono
-          </Text>
-          <IconButton
-            icon="cube-send"
-            style={{marginRight: -10}}
-            iconColor={colors.tessarak}
-            size={30}
-            onPress={() => {
-              //@ts-ignore
-              navigation.navigate('Activity');
-            }}
-          />
-          <IconButton
-            icon="magnify"
-            iconColor={colors.tessarak}
-            size={30}
-            onPress={() => {
-              //@ts-ignore
-              navigation.navigate('Search');
-            }}
-          />
-        </View>
-      </View>
-    );
-  }
-
   function BottomBar(): JSX.Element {
     return (
       <View

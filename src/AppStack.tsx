@@ -25,13 +25,14 @@ function AppStackItem(
       component={component}
       options={({navigation}) => ({
         headerShown: false,
-        tabBarLabelStyle: {color: colors.text, paddingBottom: 8},
+        tabBarIconStyle: {marginTop: 4},
+        tabBarLabelStyle: {color: colors.text, paddingBottom: 16},
         title: title,
         tabBarIcon: ({focused}) => (
           <IconButton
             icon={icon}
             iconColor={focused ? colors.tessarak : colors.text}
-            size={focused ? 35 : 25}
+            size={focused ? 40 : 30}
             onPress={() => {
               triggerImpactMedium();
               navigation.navigate(route);
@@ -49,7 +50,11 @@ function AppStack() {
     <AppNavStack.Navigator
       initialRouteName="market"
       screenOptions={{
-        tabBarStyle: {backgroundColor: colors.bg1, borderTopWidth: 0},
+        tabBarStyle: {
+          backgroundColor: colors.bg1,
+          borderTopWidth: 0,
+          height: 95,
+        },
       }}>
       {AppStackItem('Tessarak', 'pound', 'tessarak', ContentFeedStack)}
       {AppStackItem('Create', 'plus-box', 'create', CreateStack)}
