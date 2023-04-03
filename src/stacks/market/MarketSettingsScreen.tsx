@@ -46,7 +46,7 @@ const MarketSettingsScreen = () => {
         <Text
           variant="bodyLarge"
           style={{fontWeight: 'bold', color: colors.text}}>
-          See Tessa insights
+          Get help from Tessa
         </Text>
       </View>
     </View>

@@ -14,10 +14,17 @@ import MasonryList from 'reanimated-masonry-list';
 import {getAspectRatio} from '@utils';
 import PagerView from 'react-native-pager-view';
 
+
+function randomNumber(min: number, max: number): number {
+  return Math.floor(Math.random() * (max - min) + min);
+}
+
 function getImages() {
   const images = [];
-  for (let i = 0; i < 100; i++) {
-    images.push({url: 'https://fakeimg.pl/300x300/', height: 300, width: 300});
+  for (let i = 0; i < 50; i++) {
+    const height = randomNumber(200, 600);
+    const width = randomNumber(200, 600);
+    images.push({url: `https://fakeimg.pl/${height}x${width}/`, height, width});
   }
   return images;
 }
@@ -55,6 +62,10 @@ const MarketplaceScreen = () => {
     searchInputRef.current?.blur();
   }
 
+  function focusSearch() {
+    searchInputRef.current?.focus();
+  }
+
   return (
     <SafeScreen>
       <View style={{flexDirection: 'row', paddingHorizontal: 8, paddingTop: 8}}>
@@ -63,9 +74,7 @@ const MarketplaceScreen = () => {
           onBlur={() => setSearchFocused(false)}
           ref={(input: any) => (searchInputRef.current = input)}
           showDivider={false}
-          onIconPress={() =>
-            Alert.alert('this needs to focus the search input.')
-          }
+          onIconPress={focusSearch}
           theme={MD3DarkTheme}
           inputStyle={{fontSize: 20}}
           style={{flex: 1, backgroundColor: colors.bg1}}
