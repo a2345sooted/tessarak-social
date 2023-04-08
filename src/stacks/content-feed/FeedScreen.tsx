@@ -1,14 +1,15 @@
-import {Avatar, IconButton, ProgressBar, Text} from 'react-native-paper';
-import {AppContext} from '@app-ctx';
-import {Alert, Dimensions, ScrollView, StyleSheet, View} from 'react-native';
-import React, {useContext, useEffect, useRef, useState} from 'react';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {useNavigation} from '@react-navigation/native';
-import {ActionSheetRef} from 'react-native-actions-sheet';
-import {NestedPagingView} from '@common';
-import {FeedContent, getContent, TkPic} from '../../services/content';
-import {TkPicView} from './TkPicView';
+import { Avatar, IconButton, ProgressBar, Text } from 'react-native-paper';
+import { AppContext } from '@app-ctx';
+import { Alert, Dimensions, ScrollView, StyleSheet, View } from 'react-native';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+import { ActionSheetRef } from 'react-native-actions-sheet';
+import { FeedContent, getContent, TkBeam, TkPic, TkVideo } from '../../services/content';
+import { TkPicView } from './TkPicView';
+import { TkBeamView } from './TkBeamView';
+import { TkVideoView } from './TkVideoView';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
@@ -145,6 +146,10 @@ const FeedScreen = () => {
                   switch (c.type) {
                     case 'pic':
                       return <TkPicView key={c.id} content={c as TkPic} />;
+                    case 'video':
+                      return <TkVideoView key={c.id} content={c as TkVideo} />;
+                    case 'beam':
+                      return <TkBeamView key={c.id} content={c as TkBeam} />;
                   }
                 })}
               </ScrollView>

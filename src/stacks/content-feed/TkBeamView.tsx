@@ -1,16 +1,16 @@
 import React, {useContext} from 'react';
 import {Dimensions, StyleSheet, View} from 'react-native';
 import {AppContext} from '@app-ctx';
-import {TkPic} from '../../services/content';
+import {TkBeam} from '../../services/content';
 import {Text} from 'react-native-paper';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
-export interface TkPicViewProps {
-  content: TkPic;
+export interface TkBeamViewProps {
+  content: TkBeam;
 }
 
-export function TkPicView({content}: TkPicViewProps): JSX.Element {
+export function TkBeamView({content}: TkBeamViewProps): JSX.Element {
   const {colors} = useContext(AppContext);
   return (
     <View
@@ -25,7 +25,7 @@ export function TkPicView({content}: TkPicViewProps): JSX.Element {
           color: colors.text,
           textAlign: 'center',
         }}>
-        Pic
+        Beam
       </Text>
       <Text
         variant="headlineSmall"
