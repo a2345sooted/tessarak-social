@@ -28,20 +28,6 @@ export const NestedPagingView = () => {
             </View>
           </ScrollView>
         </View>
-        <View style={[styles.horizontalPage, {backgroundColor: colors.bg1}]}>
-          <ScrollView
-            pagingEnabled
-            showsVerticalScrollIndicator={false}
-            style={styles.verticalScrollView}>
-            {/* Add vertical pages here */}
-            <View style={[styles.verticalPage, {backgroundColor: colors.bg1}]}>
-              <Text style={styles.pageText}>Horizontal 2, Vertical 1</Text>
-            </View>
-            <View style={[styles.verticalPage, {backgroundColor: colors.bg1}]}>
-              <Text style={styles.pageText}>Horizontal 2, Vertical 2</Text>
-            </View>
-          </ScrollView>
-        </View>
       </ScrollView>
     </View>
   );

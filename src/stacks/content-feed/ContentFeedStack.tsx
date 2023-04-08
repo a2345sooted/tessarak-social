@@ -54,7 +54,7 @@ function ContentFeedHeader() {
         <Text
           variant="headlineSmall"
           style={{color: colors.text, fontWeight: 'bold', flex: 1}}>
-          #all-chrono
+          ~all-chrono
         </Text>
         <IconButton
           icon="magnify"
