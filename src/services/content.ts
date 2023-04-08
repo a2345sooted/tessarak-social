@@ -33,3 +33,21 @@ export async function getContent(): Promise<FeedContentResult> {
     ],
   };
 }
+
+export interface DimensionMeta {
+  id: string;
+  name: string;
+  description: string;
+}
+
+export async function getDimensions(): Promise<DimensionMeta[]> {
+  return [
+    {id: '1', name: 'Sports', description: 'a feed of sports stuff'},
+    {id: '2', name: 'Cats in Space', description: 'a feed of cats in space.'},
+    {
+      id: '3',
+      name: 'Manatees in Space',
+      description: 'a feed of manatees in space',
+    },
+  ];
+}

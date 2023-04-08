@@ -1,19 +1,28 @@
-import { Avatar, IconButton, ProgressBar, Text } from 'react-native-paper';
-import { AppContext } from '@app-ctx';
-import { Alert, Dimensions, ScrollView, StyleSheet, View } from 'react-native';
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
-import { ActionSheetRef } from 'react-native-actions-sheet';
-import { FeedContent, getContent, TkBeam, TkPic, TkVideo } from '../../services/content';
-import { TkPicView } from './TkPicView';
-import { TkBeamView } from './TkBeamView';
-import { TkVideoView } from './TkVideoView';
+import {Avatar, IconButton, ProgressBar, Text} from 'react-native-paper';
+import {AppContext} from '@app-ctx';
+import {
+  Alert,
+  Dimensions,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  ScrollView,
+  StyleSheet,
+  View,
+} from 'react-native';
+import React, {useContext, useEffect, useRef, useState} from 'react';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {useNavigation} from '@react-navigation/native';
+import {ActionSheetRef} from 'react-native-actions-sheet';
+import {DimensionMeta, getDimensions} from '../../services/content';
+import {DimensionView} from './DimensionView';
+import {ContentFeedContext} from './ContentFeedStack';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
 const FeedScreen = () => {
+  const {selectedDimension, setSelectedDimension} =
+    useContext(ContentFeedContext);
   const {colors} = useContext(AppContext);
 
   const insets = useSafeAreaInsets();
@@ -24,24 +33,26 @@ const FeedScreen = () => {
   const longPressActionSheet = useRef<ActionSheetRef>(null);
   const shareActionSheet = useRef<ActionSheetRef>(null);
 
-  const [content, setContent] = useState<FeedContent[] | null>(null);
-  const [isLoadingContent, setIsLoadingContent] = useState(true);
-  const [errorLoadingContent, setErrorLoadingContent] = useState<any>(null);
+  const [dimensions, setDimensions] = useState<DimensionMeta[] | null>(null);
+  const [isLoadingDimensions, setIsLoadingDimensions] = useState(true);
+  const [errorLoadingDimensions, setErrorLoadingDimensions] =
+    useState<any>(null);
 
   useEffect(() => {
-    loadContent();
+    loadDimensions();
   }, []);
 
-  async function loadContent() {
-    setIsLoadingContent(true);
-    setErrorLoadingContent(null);
+  async function loadDimensions() {
+    setIsLoadingDimensions(true);
+    setErrorLoadingDimensions(null);
     try {
-      const result = await getContent();
-      setContent(result.items);
+      const result = await getDimensions();
+      setDimensions(result);
+      setSelectedDimension(result[0]);
     } catch (error: any) {
-      setErrorLoadingContent(error);
+      setErrorLoadingDimensions(error);
     } finally {
-      setIsLoadingContent(false);
+      setIsLoadingDimensions(false);
     }
   }
 
@@ -125,35 +136,46 @@ const FeedScreen = () => {
     );
   }
 
+  function handleScrollEnd(
+    event: NativeSyntheticEvent<NativeScrollEvent>,
+  ): void {
+    const offset = event.nativeEvent.contentOffset;
+    const pageIndex = Math.floor(offset.x / screenWidth);
+    setSelectedDimension(dimensions![pageIndex]);
+  }
+
   return (
     <>
-      {isLoadingContent && loadingScreen()}
-      {!isLoadingContent && !errorLoadingContent && (
+      {isLoadingDimensions && loadingScreen()}
+      {!isLoadingDimensions && !errorLoadingDimensions && (
         <View style={{flex: 1, backgroundColor: colors.bg1}}>
           <ScrollView
+            onMomentumScrollEnd={handleScrollEnd}
             horizontal
             pagingEnabled
             showsHorizontalScrollIndicator={false}
             style={styles.horizontalScrollView}>
-            {/* Add horizontal pages here */}
-            <View
-              style={[styles.horizontalPage, {backgroundColor: colors.bg1}]}>
-              <ScrollView
-                pagingEnabled
-                showsVerticalScrollIndicator={false}
-                style={styles.verticalScrollView}>
-                {content!.map(c => {
-                  switch (c.type) {
-                    case 'pic':
-                      return <TkPicView key={c.id} content={c as TkPic} />;
-                    case 'video':
-                      return <TkVideoView key={c.id} content={c as TkVideo} />;
-                    case 'beam':
-                      return <TkBeamView key={c.id} content={c as TkBeam} />;
-                  }
-                })}
-              </ScrollView>
-            </View>
+            {dimensions!.map(dimension => (
+              <DimensionView key={dimension.id} meta={dimension} />
+            ))}
+            {/*<View*/}
+            {/*  style={[styles.horizontalPage, {backgroundColor: colors.bg1}]}>*/}
+            {/*  <ScrollView*/}
+            {/*    pagingEnabled*/}
+            {/*    showsVerticalScrollIndicator={false}*/}
+            {/*    style={styles.verticalScrollView}>*/}
+            {/*    {dimensions!.map(c => {*/}
+            {/*      switch (c.type) {*/}
+            {/*        case 'pic':*/}
+            {/*          return <TkPicView key={c.id} content={c as TkPic} />;*/}
+            {/*        case 'video':*/}
+            {/*          return <TkVideoView key={c.id} content={c as TkVideo} />;*/}
+            {/*        case 'beam':*/}
+            {/*          return <TkBeamView key={c.id} content={c as TkBeam} />;*/}
+            {/*      }*/}
+            {/*    })}*/}
+            {/*  </ScrollView>*/}
+            {/*</View>*/}
           </ScrollView>
         </View>
       )}
@@ -174,17 +196,6 @@ const styles = StyleSheet.create({
   },
   verticalScrollView: {
     flex: 1,
-  },
-  verticalPage: {
-    width: screenWidth,
-    height: screenHeight,
-    justifyContent: 'center',
-  },
-  pageText: {
-    color: '#FFFFFF',
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
   },
 });
 
