@@ -17,6 +17,9 @@ export interface FeedContentResult {
 
 export async function getContent(): Promise<FeedContentResult> {
   return {
-    items: [{type: 'pic', id: 'abc', url: 'https://fakeimg.pl/400x400/'}],
+    items: [
+      {type: 'pic', id: 'abc', url: 'https://fakeimg.pl/400x400/'},
+      {type: 'pic', id: 'def', url: 'https://fakeimg.pl/500x500/'},
+    ],
   };
 }
