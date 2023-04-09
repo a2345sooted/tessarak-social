@@ -40,7 +40,6 @@
     "react-native-system-navigation-bar": "^2.5.0",
     "react-native-vector-icons": "^9.2.0",
     "react-native-video": "^5.2.1",
-    "react-native-video-player": "^0.14.0",
     "react-native-vision-camera": "^2.15.4",
     "reanimated-masonry-list": "^1.0.1"
   },
@@ -53,7 +52,7 @@
     "@types/node": "^18.15.7",
     "@types/react": "^18.0.21",
     "@types/react-native": "^0.70.6",
-    "@types/react-native-video-player": "^0.10.3",
+    "@types/react-native-video": "^5.0.14",
     "@types/react-test-renderer": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",

@@ -16,7 +16,7 @@ const BottomActionBar = () => {
     <View
       style={{
         position: 'absolute',
-        bottom: 95,
+        bottom: 95 + 20,
         left: 0,
         width: '100%',
         zIndex: 1000,

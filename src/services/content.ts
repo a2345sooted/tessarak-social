@@ -1,4 +1,4 @@
-import {MOCK_VIDEOS} from './mock-videos';
+import {MOCK_PORTRAIT_VIDEOS} from './mock-videos';
 
 export interface TkVideo {
   id: string;
@@ -45,7 +45,7 @@ export async function getContent(): Promise<FeedContentResult> {
   //   ],
   // };
   return {
-    items: MOCK_VIDEOS,
+    items: MOCK_PORTRAIT_VIDEOS,
   };
 }
 
