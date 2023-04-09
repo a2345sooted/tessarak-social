@@ -10,15 +10,15 @@ export interface TkPic {
   type: 'pic';
   url: string;
 }
-export type FeedContentType = 'pic' | 'video' | 'beam';
+export type TkContentType = 'pic' | 'video' | 'beam';
 
-export type FeedContent = (TkVideo | TkBeam | TkPic) & {
+export type TkContent = (TkVideo | TkBeam | TkPic) & {
   id: string;
-  type: FeedContentType;
+  type: TkContentType;
 };
 
 export interface FeedContentResult {
-  items: FeedContent[];
+  items: TkContent[];
 }
 
 export async function getContent(): Promise<FeedContentResult> {

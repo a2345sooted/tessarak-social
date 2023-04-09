@@ -3,7 +3,7 @@ import {Dimensions, ScrollView, StyleSheet, View} from 'react-native';
 import {AppContext} from '@app-ctx';
 import {
   DimensionMeta,
-  FeedContent,
+  TkContent,
   getContent,
   TkBeam,
   TkPic,
@@ -13,6 +13,7 @@ import {Text} from 'react-native-paper';
 import {TkPicView} from './TkPicView';
 import {TkVideoView} from './TkVideoView';
 import {TkBeamView} from './TkBeamView';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
@@ -21,8 +22,9 @@ export interface DimensionViewProps {
 }
 
 export function DimensionView({meta}: DimensionViewProps): JSX.Element {
+  const insets = useSafeAreaInsets();
   const {colors} = useContext(AppContext);
-  const [content, setContent] = useState<FeedContent[] | null>(null);
+  const [content, setContent] = useState<TkContent[] | null>(null);
   const [isLoadingContent, setIsLoadingContent] = useState(true);
   const [errorLoadingContent, setErrorLoadingContent] = useState<any>(null);
 
@@ -46,40 +48,29 @@ export function DimensionView({meta}: DimensionViewProps): JSX.Element {
   return (
     <>
       {!isLoadingContent && !errorLoadingContent && (
-        <View style={[styles.horizontalPage, {backgroundColor: colors.bg1}]}>
-          <ScrollView
-            pagingEnabled
-            showsVerticalScrollIndicator={false}
-            style={styles.verticalScrollView}>
-            {content!.map(c => {
-              switch (c.type) {
-                case 'pic':
-                  return <TkPicView key={c.id} content={c as TkPic} />;
-                case 'video':
-                  return <TkVideoView key={c.id} content={c as TkVideo} />;
-                case 'beam':
-                  return <TkBeamView key={c.id} content={c as TkBeam} />;
-              }
-            })}
-          </ScrollView>
-        </View>
+        <ScrollView
+          pagingEnabled
+          showsVerticalScrollIndicator={false}
+          style={styles.verticalScrollView}>
+          {content!.map(c => {
+            switch (c.type) {
+              case 'pic':
+                return <TkPicView key={c.id} content={c as TkPic} />;
+              case 'video':
+                return <TkVideoView key={c.id} content={c as TkVideo} />;
+              case 'beam':
+                return <TkBeamView key={c.id} content={c as TkBeam} />;
+            }
+          })}
+        </ScrollView>
       )}
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  horizontalScrollView: {
-    flex: 1,
-  },
-  horizontalPage: {
-    width: screenWidth,
-    height: screenHeight,
-  },
   verticalScrollView: {
     flex: 1,
+    backgroundColor: '#145ce3',
   },
 });
