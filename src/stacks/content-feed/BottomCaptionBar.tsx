@@ -36,26 +36,30 @@ const BottomCaptionBar = () => {
         <View>
           <Text variant="titleSmall" style={{color: colors.text}}>
             Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-            quae ab illo inventore veritatis et quasi architecto beatae vitae
-            dicta sunt explicabo.
+            accusantium doloremque.
           </Text>
+          {/*<Text variant="titleSmall" style={{color: colors.text}}>*/}
+          {/*  Sed ut perspiciatis unde omnis iste natus error sit voluptatem*/}
+          {/*  accusantium doloremque laudantium, totam rem aperiam, eaque ipsa*/}
+          {/*  quae ab illo inventore veritatis et quasi architecto beatae vitae*/}
+          {/*  dicta sunt explicabo.*/}
+          {/*</Text>*/}
         </View>
-        <View style={{marginTop: 8}}>
-          <Text variant="titleSmall" style={{color: colors.text, fontWeight: 'bold'}}>
-            #something1 #something2 #something3
-          </Text>
-        </View>
-        <View style={{marginTop: 8}}>
-          <Text variant="titleSmall" style={{color: colors.text, fontWeight: 'bold'}}>
-            @somebody@place1.com @somebody@place2.com @somebody@place3.com
-          </Text>
-        </View>
-        <View style={{marginTop: 8}}>
-          <Text variant="titleSmall" style={{color: colors.text, fontWeight: 'bold'}}>
-            Stitch of: [some content link]
-          </Text>
-        </View>
+        {/*<View style={{marginTop: 8}}>*/}
+        {/*  <Text variant="titleSmall" style={{color: colors.text, fontWeight: 'bold'}}>*/}
+        {/*    #something1 #something2 #something3*/}
+        {/*  </Text>*/}
+        {/*</View>*/}
+        {/*<View style={{marginTop: 8}}>*/}
+        {/*  <Text variant="titleSmall" style={{color: colors.text, fontWeight: 'bold'}}>*/}
+        {/*    @somebody@place1.com @somebody@place2.com @somebody@place3.com*/}
+        {/*  </Text>*/}
+        {/*</View>*/}
+        {/*<View style={{marginTop: 8}}>*/}
+        {/*  <Text variant="titleSmall" style={{color: colors.text, fontWeight: 'bold'}}>*/}
+        {/*    Stitch of: [some content link]*/}
+        {/*  </Text>*/}
+        {/*</View>*/}
       </View>
     </View>
   );

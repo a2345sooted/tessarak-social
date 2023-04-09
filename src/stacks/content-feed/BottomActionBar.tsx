@@ -5,6 +5,32 @@ import {Alert, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {ActionSheetRef} from 'react-native-actions-sheet';
 
+interface SideActionProps {
+  label: string;
+  icon: string;
+  iconSize: number;
+  count: number | undefined;
+  onPressFn: () => void;
+}
+
+function SideAction({
+  label,
+  icon,
+  iconSize,
+  count,
+  onPressFn,
+}: SideActionProps) {
+  const {colors} = useContext(AppContext);
+  return (
+    <IconButton
+      icon={icon}
+      iconColor={colors.text}
+      size={iconSize}
+      onPress={() => onPressFn()}
+    />
+  );
+}
+
 const BottomActionBar = () => {
   const {colors} = useContext(AppContext);
   const soundActionSheet = useRef<ActionSheetRef>(null);
@@ -16,7 +42,7 @@ const BottomActionBar = () => {
     <View
       style={{
         position: 'absolute',
-        bottom: 95 + 35,
+        bottom: 95 + 25,
         right: 12,
         width: 50,
         zIndex: 1000,
@@ -28,39 +54,40 @@ const BottomActionBar = () => {
           justifyContent: 'center',
           width: '100%',
         }}>
-        <IconButton
-          icon="music"
-          iconColor={colors.bizarroTessarak}
-          size={35}
-          onPress={() => soundActionSheet.current?.show()}
+        <SideAction
+          label={'Sound'}
+          icon={'music'}
+          iconSize={35}
+          count={undefined}
+          onPressFn={() => soundActionSheet.current?.show()}
         />
-        <IconButton
-          icon="bookmark"
-          iconColor={colors.bizarroTessarak}
-          size={35}
-          onPress={() => {
-            Alert.alert('Like');
-          }}
+        <SideAction
+          label={'Bookmark'}
+          icon={'bookmark'}
+          iconSize={35}
+          count={undefined}
+          onPressFn={() => Alert.alert('Bookmark content')}
         />
-        <IconButton
-          icon="heart"
-          iconColor={colors.bizarroTessarak}
-          size={35}
-          onPress={() => {
-            Alert.alert('Like');
-          }}
+        <SideAction
+          label={'Like'}
+          icon={'heart'}
+          iconSize={35}
+          count={undefined}
+          onPressFn={() => Alert.alert('Like content')}
         />
-        <IconButton
-          icon="comment"
-          iconColor={colors.bizarroTessarak}
-          size={35}
-          onPress={() => commentsActionSheet.current?.show()}
+        <SideAction
+          label={'Comments'}
+          icon={'comment'}
+          iconSize={35}
+          count={undefined}
+          onPressFn={() => commentsActionSheet.current?.show()}
         />
-        <IconButton
-          icon="share-circle"
-          iconColor={colors.bizarroTessarak}
-          size={35}
-          onPress={() => shareActionSheet.current?.show()}
+        <SideAction
+          label={'Share'}
+          icon={'share-circle'}
+          iconSize={35}
+          count={undefined}
+          onPressFn={() => shareActionSheet.current?.show()}
         />
         <View style={{marginHorizontal: 12, marginTop: 12}}>
           <TouchableOpacity
