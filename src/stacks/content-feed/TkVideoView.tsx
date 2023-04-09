@@ -29,8 +29,8 @@ export function TkVideoView({content}: TkVideoViewProps): JSX.Element {
           resizeMode="cover"
           // paused={false}
         source={{
-          // uri: 'https://assets.mixkit.co/videos/preview/mixkit-pov-of-a-basket-of-easter-eggs-48595-large.mp4',
-          uri: 'https://assets.mixkit.co/videos/preview/mixkit-man-under-multicolored-lights-1237-large.mp4',
+          uri: 'https://assets.mixkit.co/videos/preview/mixkit-pov-of-a-basket-of-easter-eggs-48595-large.mp4',
+          // uri: 'https://assets.mixkit.co/videos/preview/mixkit-man-under-multicolored-lights-1237-large.mp4',
         }}
         ref={ref => {
           videoPlayerRef.current = ref;
