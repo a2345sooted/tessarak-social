@@ -1,12 +1,13 @@
-import React, {useContext, useRef} from 'react';
-import {Dimensions, StyleSheet, View} from 'react-native';
+import React, { createRef, useContext, useRef } from 'react';
+import {Alert, Dimensions, StyleSheet, View} from 'react-native';
 import {AppContext} from '@app-ctx';
 import {TkVideo} from '../../services/content';
-import {Text} from 'react-native-paper';
 import BottomActionBar from './BottomActionBar';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Video from 'react-native-video';
-import { DimensionFeedContext } from './DimensionView';
+import {DimensionFeedContext} from './DimensionView';
+import VideoPlayer from 'react-native-media-console';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import VideoResource from 'react-native-video';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
@@ -16,28 +17,30 @@ export interface TkVideoViewProps {
 
 export function TkVideoView({content}: TkVideoViewProps): JSX.Element {
   const {colors} = useContext(AppContext);
-  const videoPlayerRef = useRef<any>();
+  const videoPlayerRef = createRef<VideoResource>();
   const {selectedContentId} = useContext(DimensionFeedContext);
 
   function onBuffer() {}
   function onVideoError() {}
+
   return (
     <View style={[styles.container, {backgroundColor: colors.bg1}]}>
       <BottomActionBar />
-      {/*<Text style={styles.pageText}>Video</Text>*/}
-      {/*<Image source={{uri: content.url}} style={{height: '100%'}} />*/}
-      <Video
+      <VideoPlayer
+        onEnd={() => videoPlayerRef.current?.seek(0)}
+        videoRef={videoPlayerRef}
+        controlTimeoutDelay={1500}
+        disableFullscreen
+        disableVolume
+        disableBack
+        disableSeekButtons
         resizeMode="cover"
-        paused={selectedContentId === content.id}
+        repeat={false}
+        paused={!(selectedContentId === content.id)}
+        style={{height: screenHeight - 95, zIndex: 1000}}
         source={{
           uri: content.videoUrl,
         }}
-        ref={ref => {
-          videoPlayerRef.current = ref;
-        }}
-        onBuffer={onBuffer}
-        onError={onVideoError}
-        style={{height: screenHeight - 95}}
       />
     </View>
   );

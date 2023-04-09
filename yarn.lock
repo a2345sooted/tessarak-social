@@ -6215,6 +6215,11 @@ react-native-mask-input@^1.2.3:
   resolved "https://registry.yarnpkg.com/react-native-mask-input/-/react-native-mask-input-1.2.3.tgz#c588b145bb48098be54ac6b40ebe7363a302428b"
   integrity sha512-RWx+gc1EaBslJWR6dsvGdILJ5XvnvZuyEsgJaH9uAMukB3Z9eOlxra1E7Ovck8NSMVcYWpBB/lzojO4LwqqXgA==
 
+react-native-media-console@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/react-native-media-console/-/react-native-media-console-2.0.6.tgz#3498f28a0997450e354fe1adbf1f8c144895088c"
+  integrity sha512-ZBLWPhRfnnP7lpRXu6QZXa1hGjImHV7zOnhZZozFEOCK8FQCLVfXulTcokDYPoBpK5qT1uOYGW8v6BO5K5MMSA==
+
 react-native-pager-view@^6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/react-native-pager-view/-/react-native-pager-view-6.2.0.tgz#51380d93fbe47f6380dc71d613a787bf27a4ca37"

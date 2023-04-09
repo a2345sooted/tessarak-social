@@ -29,6 +29,7 @@
     "react-native-haptic-feedback": "^2.0.2",
     "react-native-linear-gradient": "^2.6.2",
     "react-native-mask-input": "^1.2.3",
+    "react-native-media-console": "^2.0.6",
     "react-native-pager-view": "^6.2.0",
     "react-native-paper": "^5.5.1",
     "react-native-reanimated": "2.14.4",
