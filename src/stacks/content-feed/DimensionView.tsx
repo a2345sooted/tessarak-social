@@ -1,21 +1,11 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Dimensions, ScrollView, StyleSheet, View} from 'react-native';
-import {AppContext} from '@app-ctx';
-import {
-  DimensionMeta,
-  TkContent,
-  getContent,
-  TkBeam,
-  TkPic,
-  TkVideo,
-} from '../../services/content';
-import {Text} from 'react-native-paper';
-import {TkPicView} from './TkPicView';
-import {TkVideoView} from './TkVideoView';
-import {TkBeamView} from './TkBeamView';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-
-const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
+import React, { useContext, useEffect, useState } from 'react';
+import { ScrollView } from 'react-native';
+import { AppContext } from '@app-ctx';
+import { DimensionMeta, getContent, TkBeam, TkContent, TkPic, TkVideo } from '../../services/content';
+import { TkPicView } from './TkPicView';
+import { TkVideoView } from './TkVideoView';
+import { TkBeamView } from './TkBeamView';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export interface DimensionViewProps {
   meta: DimensionMeta;
@@ -51,7 +41,7 @@ export function DimensionView({meta}: DimensionViewProps): JSX.Element {
         <ScrollView
           pagingEnabled
           showsVerticalScrollIndicator={false}
-          style={styles.verticalScrollView}>
+          style={{flex: 1, backgroundColor: colors.bg1}}>
           {content!.map(c => {
             switch (c.type) {
               case 'pic':
@@ -67,10 +57,3 @@ export function DimensionView({meta}: DimensionViewProps): JSX.Element {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  verticalScrollView: {
-    flex: 1,
-    backgroundColor: '#145ce3',
-  },
-});

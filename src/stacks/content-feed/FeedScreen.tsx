@@ -84,7 +84,7 @@ const FeedScreen = () => {
             horizontal
             pagingEnabled
             showsHorizontalScrollIndicator={false}
-            style={{flex: 1, backgroundColor: '#f10707'}}>
+            style={{flex: 1, backgroundColor: colors.bg1}}>
             {dimensions!.map(dimension => (
               <DimensionView key={dimension.id} meta={dimension} />
             ))}
