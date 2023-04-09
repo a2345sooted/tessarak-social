@@ -1,13 +1,11 @@
-import React, { createRef, useContext, useRef } from 'react';
-import {Alert, Dimensions, StyleSheet, View} from 'react-native';
-import {AppContext} from '@app-ctx';
-import {TkVideo} from '../../services/content';
+import React, { createRef, useContext } from 'react';
+import { Dimensions, StyleSheet, View } from 'react-native';
+import { AppContext } from '@app-ctx';
+import { TkVideo } from '../../services/content';
 import BottomActionBar from './BottomActionBar';
-import Video from 'react-native-video';
-import {DimensionFeedContext} from './DimensionView';
-import VideoPlayer from 'react-native-media-console';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import VideoResource from 'react-native-video';
+import { DimensionFeedContext } from './DimensionView';
+import VideoPlayer from 'react-native-media-console';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
@@ -20,16 +18,14 @@ export function TkVideoView({content}: TkVideoViewProps): JSX.Element {
   const videoPlayerRef = createRef<VideoResource>();
   const {selectedContentId} = useContext(DimensionFeedContext);
 
-  function onBuffer() {}
-  function onVideoError() {}
-
   return (
     <View style={[styles.container, {backgroundColor: colors.bg1}]}>
       <BottomActionBar />
       <VideoPlayer
         onEnd={() => videoPlayerRef.current?.seek(0)}
         videoRef={videoPlayerRef}
-        controlTimeoutDelay={1500}
+        controlTimeoutDelay={3000}
+        tapAnywhereToPause
         disableFullscreen
         disableVolume
         disableBack
