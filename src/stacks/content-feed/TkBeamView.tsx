@@ -1,5 +1,5 @@
 import React, {useContext, useRef} from 'react';
-import { Alert, Dimensions, Image, StyleSheet, View } from 'react-native';
+import {Alert, Dimensions, Image, StyleSheet, View} from 'react-native';
 import {AppContext} from '@app-ctx';
 import {TkBeam} from '../../services/content';
 import {Avatar, IconButton, Text} from 'react-native-paper';
@@ -79,12 +79,18 @@ export function TkBeamView({content}: TkBeamViewProps): JSX.Element {
     );
   }
 
-    return (
-        <View style={{backgroundColor: colors.bg1, height: screenHeight, paddingBottom: 95, width: screenWidth}}>
-            {BottomBar()}
-            <Text style={styles.pageText}>Beam</Text>
-        </View>
-    );
+  return (
+    <View
+      style={{
+        backgroundColor: colors.bg1,
+        height: screenHeight,
+        paddingBottom: 95,
+        width: screenWidth,
+      }}>
+      {BottomBar()}
+      <Text style={styles.pageText}>Beam</Text>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

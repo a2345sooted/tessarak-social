@@ -1,6 +1,18 @@
+import {MOCK_VIDEOS} from './mock-videos';
+
 export interface TkVideo {
+  id: string;
   type: 'video';
-  url: string;
+  title: string;
+  thumbnailUrl: string;
+  duration: string;
+  uploadTime: string;
+  views: string;
+  author: string;
+  videoUrl: string;
+  description: string;
+  subscriber: string;
+  isLive: boolean;
 }
 export interface TkBeam {
   type: 'beam';
@@ -22,15 +34,18 @@ export interface FeedContentResult {
 }
 
 export async function getContent(): Promise<FeedContentResult> {
+  // return {
+  //   items: [
+  //     {type: 'pic', id: '1', url: 'https://fakeimg.pl/400x400/'},
+  //     {type: 'pic', id: '2', url: 'https://fakeimg.pl/500x500/'},
+  //     {type: 'video', id: '3', url: 'https://fakeimg.pl/500x500/'},
+  //     {type: 'video', id: '4', url: 'https://fakeimg.pl/500x500/'},
+  //     {type: 'beam', id: '5', url: 'https://fakeimg.pl/500x500/'},
+  //     {type: 'beam', id: '6', url: 'https://fakeimg.pl/500x500/'},
+  //   ],
+  // };
   return {
-    items: [
-      {type: 'pic', id: '1', url: 'https://fakeimg.pl/400x400/'},
-      {type: 'pic', id: '2', url: 'https://fakeimg.pl/500x500/'},
-      {type: 'video', id: '3', url: 'https://fakeimg.pl/500x500/'},
-      {type: 'video', id: '4', url: 'https://fakeimg.pl/500x500/'},
-      {type: 'beam', id: '5', url: 'https://fakeimg.pl/500x500/'},
-      {type: 'beam', id: '6', url: 'https://fakeimg.pl/500x500/'},
-    ],
+    items: MOCK_VIDEOS,
   };
 }
 
