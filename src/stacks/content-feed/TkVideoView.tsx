@@ -4,6 +4,7 @@ import {AppContext} from '@app-ctx';
 import {TkVideo} from '../../services/content';
 import {Text} from 'react-native-paper';
 import BottomActionBar from './BottomActionBar';
+import VideoPlayer from 'react-native-video-player';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
@@ -16,8 +17,15 @@ export function TkVideoView({content}: TkVideoViewProps): JSX.Element {
   return (
     <View style={[styles.container, {backgroundColor: colors.bg1}]}>
       <BottomActionBar />
-      <Text style={styles.pageText}>Video</Text>
+      {/*<Text style={styles.pageText}>Video</Text>*/}
       {/*<Image source={{uri: content.url}} style={{height: '100%'}} />*/}
+      <VideoPlayer
+        video={{
+          uri: content.videoUrl,
+        }}
+        videoHeight={screenHeight}
+        thumbnail={{uri: content.thumbnailUrl}}
+      />
     </View>
   );
 }
