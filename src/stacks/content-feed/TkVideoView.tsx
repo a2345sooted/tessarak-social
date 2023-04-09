@@ -1,4 +1,4 @@
-import React, {createRef, useContext, useState} from 'react';
+import React, {createRef, useContext, useEffect, useState} from 'react';
 import {Alert, Dimensions, StyleSheet} from 'react-native';
 import {AppContext} from '@app-ctx';
 import {TkVideo} from '../../services/content';
@@ -21,6 +21,10 @@ export function TkVideoView({content}: TkVideoViewProps): JSX.Element {
   const {selectedContentId} = useContext(DimensionFeedContext);
 
   const [manuallyPaused, setManuallyPaused] = useState(false);
+
+  useEffect(() => {
+    setManuallyPaused(false);
+  }, [selectedContentId]);
 
   return (
     <>

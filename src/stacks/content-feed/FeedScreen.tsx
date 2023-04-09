@@ -11,12 +11,10 @@ import React, {useContext, useEffect, useState} from 'react';
 import {DimensionMeta, getDimensions} from '../../services/content';
 import {DimensionView} from './DimensionView';
 import {ContentFeedContext} from './ContentFeedStack';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
 const FeedScreen = () => {
-    const insets = useSafeAreaInsets();
   const {setSelectedDimension} = useContext(ContentFeedContext);
   const {colors} = useContext(AppContext);
 
