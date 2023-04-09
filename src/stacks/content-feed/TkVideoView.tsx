@@ -6,6 +6,7 @@ import {Text} from 'react-native-paper';
 import BottomActionBar from './BottomActionBar';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Video from 'react-native-video';
+import { DimensionFeedContext } from './DimensionView';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
@@ -15,8 +16,8 @@ export interface TkVideoViewProps {
 
 export function TkVideoView({content}: TkVideoViewProps): JSX.Element {
   const {colors} = useContext(AppContext);
-  const insets = useSafeAreaInsets();
   const videoPlayerRef = useRef<any>();
+  const {selectedContentId} = useContext(DimensionFeedContext);
 
   function onBuffer() {}
   function onVideoError() {}
@@ -26,11 +27,10 @@ export function TkVideoView({content}: TkVideoViewProps): JSX.Element {
       {/*<Text style={styles.pageText}>Video</Text>*/}
       {/*<Image source={{uri: content.url}} style={{height: '100%'}} />*/}
       <Video
-          resizeMode="cover"
-          // paused={false}
+        resizeMode="cover"
+        paused={selectedContentId === content.id}
         source={{
-          uri: 'https://assets.mixkit.co/videos/preview/mixkit-pov-of-a-basket-of-easter-eggs-48595-large.mp4',
-          // uri: 'https://assets.mixkit.co/videos/preview/mixkit-man-under-multicolored-lights-1237-large.mp4',
+          uri: content.videoUrl,
         }}
         ref={ref => {
           videoPlayerRef.current = ref;

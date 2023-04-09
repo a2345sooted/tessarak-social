@@ -146,7 +146,7 @@ export const MOCK_PORTRAIT_VIDEOS: TkVideo[] = [
     views: '10',
     author: 'Makeup Artist',
     videoUrl:
-      'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
+      'https://assets.mixkit.co/videos/preview/mixkit-man-under-multicolored-lights-1237-large.mp4',
     description:
       'Watch this amazing transformation as I do my makeup in a selfie video, using only my phone and some makeup products.',
     subscriber: '100 Subscribers',
@@ -162,42 +162,10 @@ export const MOCK_PORTRAIT_VIDEOS: TkVideo[] = [
     views: '50',
     author: 'TikTok Influencer',
     videoUrl:
-      'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
+      'https://assets.mixkit.co/videos/preview/mixkit-pov-of-a-basket-of-easter-eggs-48595-large.mp4',
     description:
       'Laugh along with me as I share some of my favorite funny moments from TikTok, all shot on my phone.',
     subscriber: '1,000 Subscribers',
     isLive: false,
-  },
-  {
-    id: '3',
-    type: 'video',
-    title: 'Instagram Story Time-Lapse',
-    thumbnailUrl: 'https://i.ytimg.com/vi_webp/3Jj3PAMoBb0/maxresdefault.webp',
-    duration: '1:00',
-    uploadTime: 'Apr 6, 2023',
-    views: '500',
-    author: 'Social Media Influencer',
-    videoUrl:
-      'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
-    description:
-      'Watch as I share a day in my life on Instagram, featuring a time-lapse video of my daily routine shot entirely on my phone.',
-    subscriber: '10,000 Subscribers',
-    isLive: false,
-  },
-  {
-    id: '4',
-    type: 'video',
-    title: 'Facebook Live - Q&A with Fans',
-    thumbnailUrl: 'https://i.ytimg.com/vi_webp/m2yEJGgKeIg/maxresdefault.webp',
-    duration: '1:30:20',
-    uploadTime: 'Apr 5, 2023',
-    views: '1,000',
-    author: 'Social Media Celebrity',
-    videoUrl:
-      'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
-    description:
-      'Join me for a live Q&A session on Facebook, where I answer your burning questions about life, love, and everything in between.',
-    subscriber: '50,000 Subscribers',
-    isLive: true,
   },
 ];
