@@ -25,7 +25,6 @@ export function TkVideoView({content}: TkVideoViewProps): JSX.Element {
         onEnd={() => videoPlayerRef.current?.seek(0)}
         videoRef={videoPlayerRef}
         controlTimeoutDelay={3000}
-        tapAnywhereToPause
         disableFullscreen
         disableVolume
         disableBack
