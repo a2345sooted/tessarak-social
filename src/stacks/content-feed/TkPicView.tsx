@@ -79,10 +79,10 @@ export function TkPicView({content}: TkPicViewProps): JSX.Element {
     );
   }
   return (
-    <View style={{backgroundColor: '#c5d916', height: screenHeight, paddingBottom: 95}}>
+    <View style={{backgroundColor: colors.bg1, height: screenHeight, paddingBottom: 95}}>
       {BottomBar()}
         {/*<Text style={styles.pageText}>Horizontal 1, Vertical 2</Text>*/}
-      {/*<Image source={{uri: content.url}} style={{height: '100%'}} />*/}
+      <Image source={{uri: content.url}} style={{height: '100%'}} />
     </View>
   );
 }
