@@ -17,33 +17,52 @@ const BottomActionBar = () => {
       style={{
         position: 'absolute',
         bottom: 95 + 35,
-        left: 0,
-        width: '100%',
+        right: 12,
+        width: 50,
         zIndex: 1000,
       }}>
       <View
         style={{
-          flexDirection: 'row',
+          flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          paddingBottom: 12,
           width: '100%',
         }}>
         <IconButton
           icon="music"
           iconColor={colors.bizarroTessarak}
-          size={25}
+          size={35}
           onPress={() => soundActionSheet.current?.show()}
         />
         <IconButton
-          icon="heart"
+          icon="bookmark"
           iconColor={colors.bizarroTessarak}
-          size={25}
+          size={35}
           onPress={() => {
             Alert.alert('Like');
           }}
         />
-        <View style={{marginHorizontal: 12}}>
+        <IconButton
+          icon="heart"
+          iconColor={colors.bizarroTessarak}
+          size={35}
+          onPress={() => {
+            Alert.alert('Like');
+          }}
+        />
+        <IconButton
+          icon="comment"
+          iconColor={colors.bizarroTessarak}
+          size={35}
+          onPress={() => commentsActionSheet.current?.show()}
+        />
+        <IconButton
+          icon="share-circle"
+          iconColor={colors.bizarroTessarak}
+          size={35}
+          onPress={() => shareActionSheet.current?.show()}
+        />
+        <View style={{marginHorizontal: 12, marginTop: 12}}>
           <TouchableOpacity
             onPress={() => {
               //@ts-ignore
@@ -52,21 +71,65 @@ const BottomActionBar = () => {
             <Avatar.Text size={50} label="XD" />
           </TouchableOpacity>
         </View>
-        <IconButton
-          icon="comment"
-          iconColor={colors.bizarroTessarak}
-          size={25}
-          onPress={() => commentsActionSheet.current?.show()}
-        />
-        <IconButton
-          icon="share"
-          iconColor={colors.bizarroTessarak}
-          size={25}
-          onPress={() => shareActionSheet.current?.show()}
-        />
       </View>
     </View>
   );
+
+  // return (
+  //   <View
+  //     style={{
+  //       position: 'absolute',
+  //       bottom: 95 + 35,
+  //       left: 0,
+  //       width: '100%',
+  //       zIndex: 1000,
+  //     }}>
+  //     <View
+  //       style={{
+  //         flexDirection: 'row',
+  //         alignItems: 'center',
+  //         justifyContent: 'center',
+  //         paddingBottom: 12,
+  //         width: '100%',
+  //       }}>
+  //       <IconButton
+  //         icon="music"
+  //         iconColor={colors.bizarroTessarak}
+  //         size={25}
+  //         onPress={() => soundActionSheet.current?.show()}
+  //       />
+  //       <IconButton
+  //         icon="heart"
+  //         iconColor={colors.bizarroTessarak}
+  //         size={25}
+  //         onPress={() => {
+  //           Alert.alert('Like');
+  //         }}
+  //       />
+  //       <View style={{marginHorizontal: 12}}>
+  //         <TouchableOpacity
+  //           onPress={() => {
+  //             //@ts-ignore
+  //             navigation.navigate('User');
+  //           }}>
+  //           <Avatar.Text size={50} label="XD" />
+  //         </TouchableOpacity>
+  //       </View>
+  //       <IconButton
+  //         icon="comment"
+  //         iconColor={colors.bizarroTessarak}
+  //         size={25}
+  //         onPress={() => commentsActionSheet.current?.show()}
+  //       />
+  //       <IconButton
+  //         icon="share"
+  //         iconColor={colors.bizarroTessarak}
+  //         size={25}
+  //         onPress={() => shareActionSheet.current?.show()}
+  //       />
+  //     </View>
+  //   </View>
+  // );
 };
 
 export default BottomActionBar;

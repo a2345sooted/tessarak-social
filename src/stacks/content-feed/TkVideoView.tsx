@@ -6,6 +6,7 @@ import BottomActionBar from './BottomActionBar';
 import VideoResource from 'react-native-video';
 import { DimensionFeedContext } from './DimensionView';
 import VideoPlayer from 'react-native-media-console';
+import BottomCaptionBar from './BottomCaptionBar';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
@@ -21,6 +22,7 @@ export function TkVideoView({content}: TkVideoViewProps): JSX.Element {
   return (
     <View style={[styles.container, {backgroundColor: colors.bg1}]}>
       <BottomActionBar />
+      <BottomCaptionBar />
       <VideoPlayer
         onEnd={() => videoPlayerRef.current?.seek(0)}
         videoRef={videoPlayerRef}

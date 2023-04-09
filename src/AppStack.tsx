@@ -56,7 +56,7 @@ function AppStack() {
           height: 95,
         },
       }}>
-      {AppStackItem('Tessarak', 'pound', 'tessarak', ContentFeedStack)}
+      {AppStackItem('Tessarak', 'layers', 'tessarak', ContentFeedStack)}
       {AppStackItem('Create', 'plus-box', 'create', CreateStack)}
       {AppStackItem('Portals', 'text-box-multiple', 'portals', MessagesStack)}
       {AppStackItem('Market', 'storefront', 'market', MarketplaceStack)}

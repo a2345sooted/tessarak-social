@@ -1,4 +1,5 @@
 import {MOCK_PORTRAIT_VIDEOS} from './mock-videos';
+import { MOCK_DIMENSIONS } from './mock-dimensions';
 
 export interface TkVideo {
   id: string;
@@ -56,13 +57,5 @@ export interface DimensionMeta {
 }
 
 export async function getDimensions(): Promise<DimensionMeta[]> {
-  return [
-    {id: '1', name: 'Sports', description: 'a feed of sports stuff'},
-    {id: '2', name: 'Cats in Space', description: 'a feed of cats in space.'},
-    {
-      id: '3',
-      name: 'Manatees in Space',
-      description: 'a feed of manatees in space',
-    },
-  ];
+  return MOCK_DIMENSIONS;
 }
