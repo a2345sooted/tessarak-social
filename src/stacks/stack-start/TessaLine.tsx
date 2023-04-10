@@ -18,6 +18,7 @@ export type TessaMessageLine = {
   delayNext?: number;
   fontWeight?: any;
   fadeIn?: boolean;
+  color?: string;
 };
 
 type TessaTextProps = PropsWithChildren<{}>;
@@ -27,7 +28,10 @@ type TessaLineProps = {
   onDoneTyping: () => void;
 };
 
-function TessaLine({line, onDoneTyping}: TessaLineProps): JSX.Element {
+function TessaLine({
+  line,
+  onDoneTyping,
+}: TessaLineProps): JSX.Element {
   const {colors} = useContext(AppContext);
   const sizeCursor = useSharedValue(18);
   const colorCursor = useSharedValue(0);
@@ -49,7 +53,7 @@ function TessaLine({line, onDoneTyping}: TessaLineProps): JSX.Element {
     // const color = line.fadeColor
     //   ? interpolateColor(colorCursor.value, [0, 150], ['#030000', '#5a5b5a'])
     //   : '#030000';
-    const color = colors.text;
+    const color = line.color ?? colors.text;
     return {
       fontSize: sizeCursor.value,
       color,

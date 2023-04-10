@@ -1,13 +1,15 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {Alert, StyleSheet, View} from 'react-native';
-import {IconButton, Text} from 'react-native-paper';
+import {Divider, IconButton, List, Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
 import {SafeScreen} from '@common';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Animated, {
   FadeIn,
   FadeInDown,
-  FadeInLeft, FadeInUp, FadeOutDown,
+  FadeInLeft,
+  FadeInUp,
+  FadeOutDown,
   FadeOutLeft,
   useAnimatedStyle,
   useSharedValue,
@@ -18,6 +20,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {tkDelay} from '@utils';
 import TessaLine, {TessaMessageLine} from './TessaLine';
 import {triggerImpactLight, triggerImpactMedium} from '@haptic';
+import {DarkAppColors} from '@theme';
 
 interface StartFooterProps {}
 
@@ -74,7 +77,7 @@ const SLIDE_1_LINES: TessaMessageLine[] = [
   },
   {
     id: 4,
-    text: 'In the Tessarak, your orb IS your identity and it belongs to you.',
+    text: 'In the Tessarak, your orb is your identity and it belongs to you.',
     delayNext: 400,
     fontWeight: '500',
   },
@@ -83,6 +86,7 @@ const SLIDE_1_LINES: TessaMessageLine[] = [
     text: 'Press and hold your orb to continue...',
     delayNext: 400,
     fontWeight: '500',
+    color: DarkAppColors.tessarak,
   },
 ];
 
@@ -112,6 +116,7 @@ const SLIDE_2_LINES: TessaMessageLine[] = [
     delayNext: 200,
     fadeColor: true,
     fontWeight: '500',
+    color: DarkAppColors.tessarak,
   },
 ];
 
@@ -130,13 +135,13 @@ const SLIDE_3_LINES: TessaMessageLine[] = [
   },
   {
     id: 3,
-    text: "Each rocket has it's own set of rules and moderation by the orb(s) in the rocket.",
+    text: 'Each rocket has its own set of rules and moderation by the orb(s) in the rocket.',
     delayNext: 200,
     fadeColor: true,
   },
   {
     id: 4,
-    text: 'You can change rockets at any time.',
+    text: 'You and your orb can always change rockets.',
     delayNext: 200,
     fadeColor: true,
     fontWeight: '500',
@@ -147,6 +152,16 @@ const SLIDE_3_LINES: TessaMessageLine[] = [
     delayNext: 200,
     fadeColor: true,
     fontWeight: '500',
+    color: DarkAppColors.tessarak,
+  },
+];
+
+const SLIDE_4_LINES: TessaMessageLine[] = [
+  {
+    id: 1,
+    text: 'Choose a rocket...',
+    delayNext: 200,
+    fadeColor: true,
   },
 ];
 
@@ -161,31 +176,40 @@ const SLIDES: Slide[] = [
   {index: 0, lines: SLIDE_1_LINES, lineIndex: 0, inputDisabled: true},
   {index: 1, lines: SLIDE_2_LINES, lineIndex: 0, inputDisabled: true},
   {index: 2, lines: SLIDE_3_LINES, lineIndex: 0, inputDisabled: true},
+  {index: 3, lines: SLIDE_4_LINES, lineIndex: 0, inputDisabled: true},
 ];
 
 const IntroScreenOne = () => {
   const {colors} = useContext(AppContext);
 
-  const [slide, setSlide] = useState(SLIDES[0]);
+  const [slide, setSlide] = useState(SLIDES[3]);
   const [startTyping, setStartTyping] = useState(false);
   const [showRocket, setShowRocket] = useState(false);
+  const [showRocketOptions, setShowRocketOptions] = useState(false);
 
   const orbPaddingBottomCursor = useSharedValue(0);
 
   useEffect(() => {
     delayStartTyping();
-    orbPaddingBottomCursor.value = withSpring(200);
+    handleSlideUpdates();
   }, []);
+
+  useEffect(() => {
+    handleSlideUpdates();
+  }, [slide]);
 
   async function delayStartTyping() {
     await tkDelay(1500);
     setStartTyping(true);
   }
 
-  useEffect(() => {
+  const handleSlideUpdates = useCallback(() => {
     if (slide.inputDisabled && slide.lineIndex >= slide.lines.length - 1) {
-      console.log('enabling input');
       setSlide({...slide, inputDisabled: false});
+    }
+
+    if (slide.index === 0 && slide.lineIndex === 0) {
+      orbPaddingBottomCursor.value = withSpring(200);
     }
 
     if (slide.index === 0 && slide.lineIndex === 3) {
@@ -198,6 +222,11 @@ const IntroScreenOne = () => {
 
     if (slide.index === 2 && slide.lineIndex === 4) {
       setShowRocket(false);
+    }
+
+    if (slide.index === 3 && slide.lineIndex === 0) {
+      orbPaddingBottomCursor.value = withSpring(10);
+      setShowRocketOptions(true);
     }
   }, [slide]);
 
@@ -241,7 +270,7 @@ const IntroScreenOne = () => {
         </View>
         {SLIDES.map((s, slideIndex) => (
           <View key={`slide-${slideIndex}`}>
-            {startTyping && slideIndex === slide.index && (
+            {startTyping && slideIndex === slide.index && slideIndex !== 3 && (
               <Animated.View
                 entering={FadeInLeft.duration(1000)}
                 exiting={FadeOutLeft.duration(600)}
@@ -267,26 +296,58 @@ const IntroScreenOne = () => {
             )}
           </View>
         ))}
-        {/*{startTyping && (*/}
-        {/*  <Animated.View*/}
-        {/*    entering={FadeInLeft.duration(1000)}*/}
-        {/*    exiting={FadeOutLeft.duration(600)}*/}
-        {/*    style={{*/}
-        {/*      marginBottom: 40,*/}
-        {/*      marginTop: 20,*/}
-        {/*      paddingHorizontal: 12,*/}
-        {/*    }}>*/}
-        {/*    {slide.lines.map((line, index) => {*/}
-        {/*      return (*/}
-        {/*        <View key={line.id} style={staticStyles.lineContainer}>*/}
-        {/*          {slide.lineIndex >= index && (*/}
-        {/*            <TessaLine line={line} onDoneTyping={nextLine} />*/}
-        {/*          )}*/}
-        {/*        </View>*/}
-        {/*      );*/}
-        {/*    })}*/}
-        {/*  </Animated.View>*/}
-        {/*)}*/}
+        {showRocketOptions && (
+          <View style={{marginTop: 20}}>
+            <List.Section>
+              <List.Subheader style={{color: colors.text}}>
+                Community Rockets
+              </List.Subheader>
+              <List.Item
+                titleStyle={{color: colors.text, fontWeight: 'bold'}}
+                title="The Nebuchadnezzar"
+                descriptionStyle={{color: colors.text}}
+                description="from: The Tessarak Foundation"
+                left={() => <List.Icon color={'#bb9604'} icon="bell" />}
+                right={() => (
+                  <List.Icon color={colors.text} icon="arrow-right" />
+                )}
+              />
+              <Divider />
+            </List.Section>
+            <List.Section>
+              <List.Subheader style={{color: colors.text}}>
+                Rocket Builders
+              </List.Subheader>
+              <List.Item
+                titleStyle={{color: colors.text, fontWeight: 'bold'}}
+                title="The Tessarak Foundation"
+                descriptionStyle={{color: colors.text}}
+                description="Custom, infra-managed rockets for $9/mo and up."
+                left={() => <List.Icon color={colors.tessarak} icon="cube-outline" />}
+                right={() => (
+                  <List.Icon color={colors.text} icon="arrow-right" />
+                )}
+              />
+              <Divider />
+            </List.Section>
+            <List.Section>
+              <List.Subheader style={{color: colors.text}}>
+                Private Rockets
+              </List.Subheader>
+              <List.Item
+                titleStyle={{color: colors.text, fontWeight: 'bold'}}
+                title="BYOR"
+                descriptionStyle={{color: colors.text}}
+                description="Manually setup your rocket connection... it's easy :)"
+                left={() => <List.Icon color={colors.text} icon="rocket-outline" />}
+                right={() => (
+                  <List.Icon color={colors.text} icon="arrow-right" />
+                )}
+              />
+              <Divider />
+            </List.Section>
+          </View>
+        )}
         <View style={{flex: 1}} />
         <Animated.View
           entering={FadeInDown.duration(1000)}
