@@ -43,7 +43,7 @@ const AccountScreen = () => {
         <Text
           variant="headlineSmall"
           style={{fontWeight: 'bold', color: colors.text, textAlign: 'center'}}>
-          Account/Profile Section.
+          Manage your Tessarak account, your ship, and your data pod here.
         </Text>
       </View>
     </SafeScreen>

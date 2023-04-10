@@ -1,6 +1,6 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {IconButton} from 'react-native-paper';
+import {Divider, IconButton, Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
 import ContentFeedStack from './stacks/content-feed/ContentFeedStack';
 import CreateStack from './stacks/create/CreateStack';
@@ -9,6 +9,8 @@ import MarketplaceStack from './stacks/market/MarketplaceStack';
 import AccountStack from './stacks/account/AccountStack';
 import TessaStack from './stacks/tessa/TessaStack';
 import {triggerImpactMedium} from '@haptic';
+import {View} from 'react-native';
+import Animated, {FadeIn} from 'react-native-reanimated';
 
 const AppNavStack = createBottomTabNavigator();
 
@@ -44,25 +46,75 @@ function AppStackItem(
   );
 }
 
+const FAKE_HINT =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
+
 function AppStack() {
   const {colors} = useContext(AppContext);
+
+  const [tessaHint, setTessaHint] = useState(FAKE_HINT);
+
   return (
-    <AppNavStack.Navigator
-      initialRouteName="market"
-      screenOptions={{
-        tabBarStyle: {
-          backgroundColor: colors.bg1,
-          borderTopWidth: 0,
-          height: 95,
-        },
-      }}>
-      {AppStackItem('Tessarak', 'layers', 'tessarak', ContentFeedStack)}
-      {AppStackItem('Generate', 'shape-plus', 'create', CreateStack)}
-      {AppStackItem('Portals', 'lan', 'portals', MessagesStack)}
-      {AppStackItem('Market', 'store', 'market', MarketplaceStack)}
-      {AppStackItem('Ship', 'rocket', 'account', AccountStack)}
-      {AppStackItem('Tessa', 'robot-excited', 'tessa', TessaStack)}
-    </AppNavStack.Navigator>
+    <>
+      <AppNavStack.Navigator
+        initialRouteName="market"
+        screenOptions={{
+          tabBarStyle: {
+            backgroundColor: colors.bg1,
+            borderTopWidth: 0,
+            height: 95,
+          },
+        }}>
+        {AppStackItem('Tessarak', 'layers', 'tessarak', ContentFeedStack)}
+        {AppStackItem('Market', 'store', 'market', MarketplaceStack)}
+        {AppStackItem('Generate', 'shape-plus', 'create', CreateStack)}
+        {AppStackItem('Portals', 'lan', 'portals', MessagesStack)}
+        {AppStackItem('Control', 'rocket', 'account', AccountStack)}
+        {AppStackItem('Tessa', 'robot-excited', 'tessa', TessaStack)}
+      </AppNavStack.Navigator>
+      {tessaHint && (
+        <Animated.View
+          entering={FadeIn.duration(1000)}
+          style={{
+            position: 'absolute',
+            bottom: 95,
+            left: 0,
+            right: 0,
+            zIndex: 1000000,
+            paddingHorizontal: 12,
+            paddingVertical: 12,
+          }}>
+          <View
+            style={{
+              width: '100%',
+              backgroundColor: 'rgba(2,173,173,0.9)',
+              paddingHorizontal: 8,
+              paddingTop: 4,
+              paddingBottom: 20,
+              borderRadius: 2,
+            }}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text
+                variant="titleLarge"
+                style={{color: '#282828', fontWeight: 'bold', flex: 1}}>
+                Tessa
+              </Text>
+              <IconButton
+                icon={'close'}
+                iconColor={'#282828'}
+                onPress={() => {}}
+              />
+            </View>
+            <Divider style={{marginBottom: 8, backgroundColor: '#282828'}} />
+            <Text
+              variant="labelLarge"
+              style={{color: '#282828', fontWeight: 'bold'}}>
+              {tessaHint}
+            </Text>
+          </View>
+        </Animated.View>
+      )}
+    </>
   );
 }
 

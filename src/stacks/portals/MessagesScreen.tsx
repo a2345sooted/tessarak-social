@@ -13,7 +13,7 @@ const MessagesScreen = () => {
         <Text
           variant="headlineSmall"
           style={{fontWeight: 'bold', color: colors.text, textAlign: 'center'}}>
-          End to end encrypted messaging.
+          End to end encrypted connections to people, groups, businesses, market sellers, and games.
         </Text>
       </View>
     </SafeScreen>
