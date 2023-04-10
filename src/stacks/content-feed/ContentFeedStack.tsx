@@ -105,17 +105,17 @@ function ContentFeedStack() {
         <ContentFeedNavStack.Screen
           name="DimensionPanel"
           component={DimensionsStack}
-          options={{headerShown: false, presentation: 'modal'}}
+          options={{headerShown: false, presentation: 'fullScreenModal'}}
         />
         <ContentFeedNavStack.Screen
           name="SearchPanel"
           component={SearchStack}
-          options={{headerShown: false, presentation: 'modal'}}
+          options={{headerShown: false, presentation: 'fullScreenModal'}}
         />
         <ContentFeedNavStack.Screen
           name="ActivityPanel"
           component={ActivityStack}
-          options={{headerShown: false, presentation: 'modal'}}
+          options={{headerShown: false, presentation: 'fullScreenModal'}}
         />
       </ContentFeedNavStack.Navigator>
     </ContentFeedContext.Provider>

@@ -83,8 +83,10 @@ const VerifyCodeScreen = () => {
         return;
       }
       await verifyCodeForPhone(phone, code);
+      console.log('code verified, checking auth');
       await checkAuth();
       if (staked) {
+        console.log('app is staked, going to app');
         //@ts-ignore
         navigation.getParent()?.navigate('App');
       } else {

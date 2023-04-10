@@ -40,6 +40,8 @@ export async function verifyCodeForPhone(
     await handleAuthSuccess(response.data as AuthSuccessResponse);
   } catch (error: any) {
     // todo what to do with error?
+    console.error(error);
+
     throw error;
   }
 }

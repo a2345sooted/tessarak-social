@@ -3,13 +3,16 @@ import {Divider, IconButton, Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
 import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const ActivityScreen = () => {
   const {colors} = useContext(AppContext);
   const navigation = useNavigation();
+  const insets = useSafeAreaInsets();
 
   return (
-    <View style={{backgroundColor: colors.bg1, flex: 1}}>
+    <View
+      style={{backgroundColor: colors.bg1, flex: 1, paddingTop: insets.top}}>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <IconButton
           icon="close"

@@ -64,9 +64,13 @@ const Tessarak = () => {
   async function checkAuth() {
     const auth = await getActiveAuth();
     if (auth) {
+      console.log('have active auth');
       const u = await getTessarakUser();
+      console.log('got tessrak user');
       setUser(u);
       setSignedIn(true);
+    } else {
+      console.log('no active auth');
     }
   }
 
