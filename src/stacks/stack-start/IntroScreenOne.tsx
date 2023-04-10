@@ -182,7 +182,7 @@ const SLIDES: Slide[] = [
 const IntroScreenOne = () => {
   const {colors} = useContext(AppContext);
 
-  const [slide, setSlide] = useState(SLIDES[3]);
+  const [slide, setSlide] = useState(SLIDES[0]);
   const [startTyping, setStartTyping] = useState(false);
   const [showRocket, setShowRocket] = useState(false);
   const [showRocketOptions, setShowRocketOptions] = useState(false);
@@ -300,7 +300,10 @@ const IntroScreenOne = () => {
           <View style={{marginTop: 12}}>
             <List.Section>
               <List.Subheader style={{color: colors.text}}>
-                Community Rockets
+                Community Rockets{' '}
+                <Text variant="bodySmall" style={{color: colors.text}}>
+                  - FREE
+                </Text>
               </List.Subheader>
               <List.Item
                 titleStyle={{color: colors.text, fontWeight: 'bold'}}
