@@ -17,8 +17,7 @@ export function TkPicView({content}: TkPicViewProps): JSX.Element {
     <View
       style={{
         backgroundColor: colors.bg1,
-        height: screenHeight,
-        paddingBottom: 95,
+        height: screenHeight - 95,
       }}>
       <SideActionBar />
       <Image source={{uri: content.url}} style={{height: '100%'}} />

@@ -22,6 +22,7 @@
     "react-native": "0.70.6",
     "react-native-actions-sheet": "^0.8.29",
     "react-native-bouncy-checkbox": "^3.0.7",
+    "react-native-draggable-flatlist": "^4.0.1",
     "react-native-drawer": "^2.5.1",
     "react-native-format-currency": "^0.0.3",
     "react-native-gesture-handler": "^2.9.0",

@@ -84,7 +84,6 @@ export function TkBeamView({content}: TkBeamViewProps): JSX.Element {
       style={{
         backgroundColor: colors.bg1,
         height: screenHeight,
-        paddingBottom: 95,
         width: screenWidth,
       }}>
       {BottomBar()}
@@ -97,7 +96,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: screenWidth,
-    height: screenHeight,
+    height: screenHeight - 95,
   },
   pageText: {
     fontSize: 24,

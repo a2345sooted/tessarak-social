@@ -10,7 +10,7 @@ import AccountStack from './stacks/account/AccountStack';
 import TessaStack from './stacks/tessa/TessaStack';
 import {triggerImpactMedium} from '@haptic';
 import {View} from 'react-native';
-import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import Animated, {FadeIn, FadeOut} from 'react-native-reanimated';
 
 const AppNavStack = createBottomTabNavigator();
 
@@ -52,12 +52,12 @@ const FAKE_HINT =
 function AppStack() {
   const {colors} = useContext(AppContext);
 
-  const [tessaHint, setTessaHint] = useState(FAKE_HINT);
+  const [tessaHint, setTessaHint] = useState('');
 
   return (
     <>
       <AppNavStack.Navigator
-        initialRouteName="market"
+        initialRouteName="tessarak"
         screenOptions={{
           tabBarStyle: {
             backgroundColor: colors.bg1,
@@ -65,10 +65,10 @@ function AppStack() {
             height: 95,
           },
         }}>
-          {AppStackItem('Control', 'rocket', 'account', AccountStack)}
+        {AppStackItem('Control', 'rocket', 'account', AccountStack)}
         {/*{AppStackItem('Market', 'store', 'market', MarketplaceStack)}*/}
         {AppStackItem('Generate', 'shape-plus', 'create', CreateStack)}
-          {AppStackItem('Tessarak', 'layers', 'tessarak', ContentFeedStack)}
+        {AppStackItem('Tessarak', 'layers', 'tessarak', ContentFeedStack)}
         {AppStackItem('Portals', 'lan', 'portals', MessagesStack)}
         {AppStackItem('Tessa', 'robot-excited', 'tessa', TessaStack)}
       </AppNavStack.Navigator>

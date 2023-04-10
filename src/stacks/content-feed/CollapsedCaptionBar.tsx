@@ -3,7 +3,7 @@ import {Divider, Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
 import {View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import Animated, { FadeInUp, FadeOutUp } from 'react-native-reanimated';
+import Animated, {FadeInUp, FadeOutUp} from 'react-native-reanimated';
 
 export interface CollapsedCaptionBarProps {
   expand: () => void;
@@ -13,8 +13,8 @@ export const CollapsedCaptionBar = ({expand}: CollapsedCaptionBarProps) => {
   const {colors} = useContext(AppContext);
   return (
     <Animated.View
-        entering={FadeInUp.duration(400)}
-        exiting={FadeOutUp.duration(400)}
+      entering={FadeInUp.duration(400)}
+      exiting={FadeOutUp.duration(400)}
       style={{
         position: 'absolute',
         bottom: 25,
