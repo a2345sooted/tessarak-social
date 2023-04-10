@@ -57,10 +57,10 @@ function AppStack() {
         },
       }}>
       {AppStackItem('Tessarak', 'layers', 'tessarak', ContentFeedStack)}
-      {AppStackItem('Generate', 'plus-box', 'create', CreateStack)}
-      {AppStackItem('Portals', 'text-box-multiple', 'portals', MessagesStack)}
-      {AppStackItem('Market', 'storefront', 'market', MarketplaceStack)}
-      {AppStackItem('Ship', 'account-box', 'account', AccountStack)}
+      {AppStackItem('Generate', 'shape-plus', 'create', CreateStack)}
+      {AppStackItem('Portals', 'lan', 'portals', MessagesStack)}
+      {AppStackItem('Market', 'store', 'market', MarketplaceStack)}
+      {AppStackItem('Ship', 'rocket', 'account', AccountStack)}
       {AppStackItem('Tessa', 'robot-excited', 'tessa', TessaStack)}
     </AppNavStack.Navigator>
   );
