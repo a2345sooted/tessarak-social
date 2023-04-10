@@ -7,7 +7,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Animated, {
   FadeIn,
   FadeInDown,
-  FadeInLeft,
+  FadeInLeft, FadeInUp, FadeOutDown,
   FadeOutLeft,
   useAnimatedStyle,
   useSharedValue,
@@ -54,7 +54,7 @@ function StartFooter({}: StartFooterProps) {
   );
 }
 
-const SLIDE_1: TessaMessageLine[] = [
+const SLIDE_1_LINES: TessaMessageLine[] = [
   {
     id: 1,
     text: 'That is your orb.',
@@ -86,57 +86,126 @@ const SLIDE_1: TessaMessageLine[] = [
   },
 ];
 
-const SLIDE_2: TessaMessageLine[] = [
+const SLIDE_2_LINES: TessaMessageLine[] = [
   {
     id: 1,
-    text: 'Your orb is precious because...',
+    text: 'The Tessarak can not be censored by governments or corporations.',
     delayNext: 200,
     fadeColor: true,
   },
+  {
+    id: 2,
+    text: 'In order to achieve this, the pH level in the Tessarak is pretty high and orbs can not survive in it without some kind of protection.',
+    delayNext: 200,
+    fadeColor: true,
+  },
+  {
+    id: 3,
+    text: "That's where rockets come in.",
+    delayNext: 200,
+    fadeColor: true,
+    fontWeight: '500',
+  },
+  {
+    id: 4,
+    text: 'Press and hold the rocket to continue...',
+    delayNext: 200,
+    fadeColor: true,
+    fontWeight: '500',
+  },
+];
+
+const SLIDE_3_LINES: TessaMessageLine[] = [
+  {
+    id: 1,
+    text: 'Rockets allow you and your orb to explore and enjoy the Tessarak.',
+    delayNext: 200,
+    fadeColor: true,
+  },
+  {
+    id: 2,
+    text: 'Rockets also can have more than one orb onboard.',
+    delayNext: 200,
+    fadeColor: true,
+  },
+  {
+    id: 3,
+    text: "Each rocket has it's own set of rules and moderation by the orb(s) in the rocket.",
+    delayNext: 200,
+    fadeColor: true,
+  },
+  {
+    id: 4,
+    text: 'You can change rockets at any time.',
+    delayNext: 200,
+    fadeColor: true,
+    fontWeight: '500',
+  },
+  {
+    id: 5,
+    text: 'Press and hold your orb to choose a rocket...',
+    delayNext: 200,
+    fadeColor: true,
+    fontWeight: '500',
+  },
+];
+
+interface Slide {
+  index: number;
+  lines: TessaMessageLine[];
+  lineIndex: number;
+  inputDisabled: boolean;
+}
+
+const SLIDES: Slide[] = [
+  {index: 0, lines: SLIDE_1_LINES, lineIndex: 0, inputDisabled: true},
+  {index: 1, lines: SLIDE_2_LINES, lineIndex: 0, inputDisabled: true},
+  {index: 2, lines: SLIDE_3_LINES, lineIndex: 0, inputDisabled: true},
 ];
 
 const IntroScreenOne = () => {
   const {colors} = useContext(AppContext);
 
-  const [slideNumber, setSlideNumber] = useState(1);
-
-  const [lineIndex, setLineIndex] = useState(0);
-  const [lines, setLines] = useState(SLIDE_1);
+  const [slide, setSlide] = useState(SLIDES[0]);
   const [startTyping, setStartTyping] = useState(false);
-  const [isDoneTyping, setIsDoneTyping] = useState(false);
   const [showRocket, setShowRocket] = useState(false);
 
   const orbPaddingBottomCursor = useSharedValue(0);
 
   useEffect(() => {
-    tkDelay(2000).then(() => setStartTyping(true));
+    delayStartTyping();
     orbPaddingBottomCursor.value = withSpring(200);
   }, []);
 
+  async function delayStartTyping() {
+    await tkDelay(1500);
+    setStartTyping(true);
+  }
+
   useEffect(() => {
-    if (lineIndex >= lines.length) {
-      setIsDoneTyping(true);
+    if (slide.inputDisabled && slide.lineIndex >= slide.lines.length - 1) {
+      console.log('enabling input');
+      setSlide({...slide, inputDisabled: false});
     }
-    if (lineIndex == 3) {
+
+    if (slide.index === 0 && slide.lineIndex === 3) {
       orbPaddingBottomCursor.value = withSpring(150);
     }
-  }, [lines, lineIndex]);
+
+    if (slide.index === 1 && slide.lineIndex === 2) {
+      setShowRocket(true);
+    }
+
+    if (slide.index === 2 && slide.lineIndex === 4) {
+      setShowRocket(false);
+    }
+  }, [slide]);
 
   const nextLine = useCallback(() => {
-    if (lineIndex < lines.length) {
-      setLineIndex(lineIndex + 1);
+    if (slide.lineIndex < slide.lines.length - 1) {
+      setSlide({...slide, lineIndex: slide.lineIndex + 1});
     }
-    if (lineIndex >= lines.length) {
-      setIsDoneTyping(true);
-    }
-  }, [lines, lineIndex, slideNumber]);
-
-  useEffect(() => {
-    if (isDoneTyping) {
-      // setSlideNumber(slideNumber + 1);
-      // setShowRocket(true);
-    }
-  }, [isDoneTyping]);
+  }, [slide]);
 
   const animatedBottomPadding = useAnimatedStyle(() => {
     return {
@@ -144,14 +213,14 @@ const IntroScreenOne = () => {
     };
   });
 
-  function handleLongPressOne() {
-    setStartTyping(false);
-    setIsDoneTyping(false);
-    setSlideNumber(slideNumber + 1);
-    setLines(SLIDE_2);
-      orbPaddingBottomCursor.value = withSpring(220);
-    tkDelay(600).then(() => setStartTyping(true));
-  }
+  const handleOrbLongPress = useCallback(async () => {
+    if (slide.inputDisabled) {
+      return;
+    }
+    await tkDelay(500);
+    setSlide(SLIDES[slide.index + 1]);
+    delayStartTyping();
+  }, [slide]);
 
   return (
     <SafeScreen>
@@ -170,26 +239,54 @@ const IntroScreenOne = () => {
             Tessarak
           </Text>
         </View>
-        {startTyping && (
-          <Animated.View
-            entering={FadeInLeft.duration(1000)}
-            exiting={FadeOutLeft.duration(600)}
-            style={{
-              marginBottom: 40,
-              marginTop: 20,
-              paddingHorizontal: 12,
-            }}>
-            {lines.map((line, index) => {
-              return (
-                <View key={line.id} style={staticStyles.lineContainer}>
-                  {lineIndex >= index && (
-                    <TessaLine line={line} onDoneTyping={nextLine} />
-                  )}
-                </View>
-              );
-            })}
-          </Animated.View>
-        )}
+        {SLIDES.map((s, slideIndex) => (
+          <View key={`slide-${slideIndex}`}>
+            {startTyping && slideIndex === slide.index && (
+              <Animated.View
+                entering={FadeInLeft.duration(1000)}
+                exiting={FadeOutLeft.duration(600)}
+                style={{
+                  marginBottom: 40,
+                  marginTop: 20,
+                  paddingHorizontal: 12,
+                }}>
+                {slide.lines.map((line, lineIndex) => {
+                  return (
+                    <View key={line.id} style={staticStyles.lineContainer}>
+                      {slide.lineIndex >= lineIndex && (
+                        <TessaLine
+                          // key={`slide::line-${slideIndex}::${lineIndex}`}
+                          line={line}
+                          onDoneTyping={nextLine}
+                        />
+                      )}
+                    </View>
+                  );
+                })}
+              </Animated.View>
+            )}
+          </View>
+        ))}
+        {/*{startTyping && (*/}
+        {/*  <Animated.View*/}
+        {/*    entering={FadeInLeft.duration(1000)}*/}
+        {/*    exiting={FadeOutLeft.duration(600)}*/}
+        {/*    style={{*/}
+        {/*      marginBottom: 40,*/}
+        {/*      marginTop: 20,*/}
+        {/*      paddingHorizontal: 12,*/}
+        {/*    }}>*/}
+        {/*    {slide.lines.map((line, index) => {*/}
+        {/*      return (*/}
+        {/*        <View key={line.id} style={staticStyles.lineContainer}>*/}
+        {/*          {slide.lineIndex >= index && (*/}
+        {/*            <TessaLine line={line} onDoneTyping={nextLine} />*/}
+        {/*          )}*/}
+        {/*        </View>*/}
+        {/*      );*/}
+        {/*    })}*/}
+        {/*  </Animated.View>*/}
+        {/*)}*/}
         <View style={{flex: 1}} />
         <Animated.View
           entering={FadeInDown.duration(1000)}
@@ -203,12 +300,13 @@ const IntroScreenOne = () => {
           ]}>
           <TouchableOpacity
             style={{width: 100, height: 100}}
-            onLongPress={handleLongPressOne}
+            onLongPress={handleOrbLongPress}
             onPress={() => triggerImpactLight()}>
             <PulseIndicator color={colors.bizarroTessarak} size={100} />
             {showRocket && (
               <Animated.View
-                entering={FadeIn.duration(1000)}
+                entering={FadeInUp.duration(1000)}
+                exiting={FadeOutDown.duration(1000)}
                 style={{position: 'absolute', top: -25, left: -39, bottom: 0}}>
                 <IconButton
                   icon="rocket-outline"
