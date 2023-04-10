@@ -1,32 +1,26 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {Alert, StyleSheet, View} from 'react-native';
-import {Text} from 'react-native-paper';
+import {IconButton, Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
 import {SafeScreen} from '@common';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Animated, {
   FadeIn,
+  FadeInDown,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
 import {PulseIndicator} from 'react-native-indicators';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import TypeWriter from 'react-native-typewriter';
 import {tkDelay} from '@utils';
 import TessaLine, {TessaMessageLine} from './TessaLine';
-
-// const LINES = [
-//   'This is your orb.',
-//   'Your orb holds everything you do in the Tessarak.',
-//   'All of your likes, posts, comments, followers, everything!',
-//   'In the Tessarak, your orb IS your identity.',
-// ];
+import {triggerImpactMedium} from '@haptic';
 
 const LINES: TessaMessageLine[] = [
   {
     id: 1,
-    text: 'This is your orb.',
+    text: 'That is your orb.',
     delayNext: 200,
     fadeColor: true,
   },
@@ -55,41 +49,28 @@ const LINES: TessaMessageLine[] = [
   },
 ];
 
-interface InfoLineProps {
-  text: string;
-  doneFn: () => void;
-}
-
-function InfoLine({text, doneFn}: InfoLineProps) {
-  const {colors} = useContext(AppContext);
-  return (
-    <View>
-      <TypeWriter typing={1} onTypingEnd={doneFn}>
-        <Text
-          variant="titleMedium"
-          style={{
-            fontWeight: 'bold',
-            color: colors.text,
-          }}>
-          {text}
-        </Text>
-      </TypeWriter>
-    </View>
-  );
-}
-
 const IntroScreenOne = () => {
   const {colors} = useContext(AppContext);
   const insets = useSafeAreaInsets();
 
   const [lineIndex, setLineIndex] = useState(0);
+  const [startTyping, setStartTyping] = useState(false);
   const [isDoneTyping, setIsDoneTyping] = useState(false);
+  const [showCube, setShowCube] = useState(false);
 
-  const marginCursor = useSharedValue(150);
+  const marginCursor = useSharedValue(0);
+
+  useEffect(() => {
+    tkDelay(2000).then(() => setStartTyping(true));
+    marginCursor.value = withSpring(200);
+  }, []);
 
   useEffect(() => {
     if (lineIndex >= LINES.length) {
       setIsDoneTyping(true);
+    }
+    if (lineIndex == 3) {
+      marginCursor.value = withSpring(150);
     }
   }, [lineIndex]);
 
@@ -104,7 +85,7 @@ const IntroScreenOne = () => {
 
   useEffect(() => {
     if (isDoneTyping) {
-      marginCursor.value = withSpring(0);
+        setShowCube(true);
     }
   }, [isDoneTyping]);
 
@@ -118,7 +99,7 @@ const IntroScreenOne = () => {
     <SafeScreen>
       <Animated.View
         style={{flex: 1, paddingHorizontal: 30}}
-        entering={FadeIn.duration(600)}>
+        entering={FadeIn.duration(300)}>
         <View
           style={{
             paddingTop: 100,
@@ -137,18 +118,20 @@ const IntroScreenOne = () => {
             marginTop: 20,
             paddingHorizontal: 12,
           }}>
-          {LINES.map((line, index) => {
-            return (
-              <View key={line.id} style={staticStyles.lineContainer}>
-                {lineIndex >= index && (
-                  <TessaLine line={line} onDoneTyping={nextLine} />
-                )}
-              </View>
-            );
-          })}
+          {startTyping &&
+            LINES.map((line, index) => {
+              return (
+                <View key={line.id} style={staticStyles.lineContainer}>
+                  {lineIndex >= index && (
+                    <TessaLine line={line} onDoneTyping={nextLine} />
+                  )}
+                </View>
+              );
+            })}
         </View>
         <View style={{flex: 1}} />
         <Animated.View
+          entering={FadeInDown.duration(1000)}
           style={[
             {
               paddingHorizontal: 12,
@@ -162,6 +145,15 @@ const IntroScreenOne = () => {
             onLongPress={() => Alert.alert('long press')}
             onPress={() => Alert.alert('press')}>
             <PulseIndicator color={colors.bizarroTessarak} size={100} />
+              {showCube && (
+                  <Animated.View entering={FadeIn.duration(1000)} style={{position: 'absolute', top: -35, left: -39, bottom: 0}}>
+                      <IconButton
+                          icon="cube-outline"
+                          iconColor={colors.tessarak}
+                          size={150}
+                      />
+                  </Animated.View>
+              )}
           </TouchableOpacity>
         </Animated.View>
         <View style={{paddingBottom: 20 + insets.bottom}}>
