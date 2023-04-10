@@ -4,7 +4,12 @@ import {Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
 import {SafeScreen} from '@common';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import Animated, {FadeIn} from 'react-native-reanimated';
+import Animated, {
+  FadeIn,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
 import {PulseIndicator} from 'react-native-indicators';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import TypeWriter from 'react-native-typewriter';
@@ -80,6 +85,8 @@ const IntroScreenOne = () => {
   const [lineIndex, setLineIndex] = useState(0);
   const [isDoneTyping, setIsDoneTyping] = useState(false);
 
+  const marginCursor = useSharedValue(150);
+
   useEffect(() => {
     if (lineIndex >= LINES.length) {
       setIsDoneTyping(true);
@@ -94,6 +101,18 @@ const IntroScreenOne = () => {
       setIsDoneTyping(true);
     }
   }, [lineIndex]);
+
+  useEffect(() => {
+    if (isDoneTyping) {
+      marginCursor.value = withSpring(0);
+    }
+  }, [isDoneTyping]);
+
+  const animatedBottomMargin = useAnimatedStyle(() => {
+    return {
+      marginBottom: marginCursor.value,
+    };
+  });
 
   return (
     <SafeScreen>
@@ -129,20 +148,22 @@ const IntroScreenOne = () => {
           })}
         </View>
         <View style={{flex: 1}} />
-        <View
-          style={{
-            paddingHorizontal: 12,
-            marginBottom: 150,
-            flexDirection: 'row',
-            justifyContent: 'center',
-          }}>
+        <Animated.View
+          style={[
+            {
+              paddingHorizontal: 12,
+              flexDirection: 'row',
+              justifyContent: 'center',
+            },
+            animatedBottomMargin,
+          ]}>
           <TouchableOpacity
             style={{width: 100, height: 100}}
             onLongPress={() => Alert.alert('long press')}
             onPress={() => Alert.alert('press')}>
             <PulseIndicator color={colors.bizarroTessarak} size={100} />
           </TouchableOpacity>
-        </View>
+        </Animated.View>
         <View style={{paddingBottom: 20 + insets.bottom}}>
           <View
             style={{
