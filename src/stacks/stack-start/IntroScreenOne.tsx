@@ -297,7 +297,7 @@ const IntroScreenOne = () => {
           </View>
         ))}
         {showRocketOptions && (
-          <View style={{marginTop: 20}}>
+          <View style={{marginTop: 12}}>
             <List.Section>
               <List.Subheader style={{color: colors.text}}>
                 Community Rockets
@@ -312,39 +312,55 @@ const IntroScreenOne = () => {
                   <List.Icon color={colors.text} icon="arrow-right" />
                 )}
               />
-              <Divider />
+              {/*<Divider />*/}
+              {/*<Text variant="bodySmall" style={{color: colors.text, marginTop: 12}}>*/}
+              {/*  [... more community options to come]*/}
+              {/*</Text>*/}
             </List.Section>
             <List.Section>
               <List.Subheader style={{color: colors.text}}>
-                Rocket Builders
+                Rocket Builders{' '}
+                <Text variant="bodySmall" style={{color: colors.text}}>
+                  (not yet available)
+                </Text>
               </List.Subheader>
               <List.Item
                 titleStyle={{color: colors.text, fontWeight: 'bold'}}
                 title="The Tessarak Foundation"
                 descriptionStyle={{color: colors.text}}
-                description="Custom, infra-managed rockets for $9/mo and up."
-                left={() => <List.Icon color={colors.tessarak} icon="cube-outline" />}
+                description="Custom, infra-managed rockets for $X/mo and up."
+                left={() => (
+                  <List.Icon color={colors.tessarak} icon="cube-outline" />
+                )}
                 right={() => (
                   <List.Icon color={colors.text} icon="arrow-right" />
                 )}
               />
-              <Divider />
+              {/*<Divider />*/}
+              {/*<Text variant="bodySmall" style={{color: colors.text, marginTop: 12}}>*/}
+              {/*  [... more builder options to come]*/}
+              {/*</Text>*/}
             </List.Section>
             <List.Section>
               <List.Subheader style={{color: colors.text}}>
-                Private Rockets
+                Private Rockets{' '}
+                <Text variant="bodySmall" style={{color: colors.text}}>
+                  (not yet available)
+                </Text>
               </List.Subheader>
               <List.Item
                 titleStyle={{color: colors.text, fontWeight: 'bold'}}
                 title="BYOR"
                 descriptionStyle={{color: colors.text}}
                 description="Manually setup your rocket connection... it's easy :)"
-                left={() => <List.Icon color={colors.text} icon="rocket-outline" />}
+                left={() => (
+                  <List.Icon color={colors.text} icon="rocket-outline" />
+                )}
                 right={() => (
                   <List.Icon color={colors.text} icon="arrow-right" />
                 )}
               />
-              <Divider />
+              {/*<Divider />*/}
             </List.Section>
           </View>
         )}
