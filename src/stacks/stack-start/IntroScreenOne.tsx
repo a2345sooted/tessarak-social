@@ -38,7 +38,7 @@ const LINES: TessaMessageLine[] = [
   },
   {
     id: 4,
-    text: 'In the Tessarak, your orb IS your identity.',
+    text: 'In the Tessarak, your orb IS your identity and it belongs to you.',
     delayNext: 400,
     fontWeight: '500',
   },
