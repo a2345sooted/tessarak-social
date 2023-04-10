@@ -7,6 +7,8 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Animated, {
   FadeIn,
   FadeInDown,
+  FadeInLeft,
+  FadeOutLeft,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -15,9 +17,44 @@ import {PulseIndicator} from 'react-native-indicators';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {tkDelay} from '@utils';
 import TessaLine, {TessaMessageLine} from './TessaLine';
-import {triggerImpactMedium} from '@haptic';
+import {triggerImpactLight, triggerImpactMedium} from '@haptic';
 
-const LINES: TessaMessageLine[] = [
+interface StartFooterProps {}
+
+function StartFooter({}: StartFooterProps) {
+  const {colors} = useContext(AppContext);
+  const insets = useSafeAreaInsets();
+  return (
+    <View style={{paddingBottom: 20 + insets.bottom}}>
+      <View
+        style={{
+          marginTop: 5,
+          flexDirection: 'row',
+          justifyContent: 'center',
+        }}>
+        <Text
+          variant="titleSmall"
+          style={{
+            fontWeight: 'bold',
+            color: colors.text,
+          }}>
+          The Tessarak Foundation, 2023
+        </Text>
+      </View>
+      <Text
+        variant="bodySmall"
+        style={{
+          color: '#c66ef1',
+          fontWeight: 'bold',
+          textAlign: 'center',
+        }}>
+        Version 1.0.4
+      </Text>
+    </View>
+  );
+}
+
+const SLIDE_1: TessaMessageLine[] = [
   {
     id: 1,
     text: 'That is your orb.',
@@ -49,51 +86,72 @@ const LINES: TessaMessageLine[] = [
   },
 ];
 
+const SLIDE_2: TessaMessageLine[] = [
+  {
+    id: 1,
+    text: 'Your orb is precious because...',
+    delayNext: 200,
+    fadeColor: true,
+  },
+];
+
 const IntroScreenOne = () => {
   const {colors} = useContext(AppContext);
-  const insets = useSafeAreaInsets();
+
+  const [slideNumber, setSlideNumber] = useState(1);
 
   const [lineIndex, setLineIndex] = useState(0);
+  const [lines, setLines] = useState(SLIDE_1);
   const [startTyping, setStartTyping] = useState(false);
   const [isDoneTyping, setIsDoneTyping] = useState(false);
-  const [showCube, setShowCube] = useState(false);
+  const [showRocket, setShowRocket] = useState(false);
 
-  const marginCursor = useSharedValue(0);
+  const orbPaddingBottomCursor = useSharedValue(0);
 
   useEffect(() => {
     tkDelay(2000).then(() => setStartTyping(true));
-    marginCursor.value = withSpring(200);
+    orbPaddingBottomCursor.value = withSpring(200);
   }, []);
 
   useEffect(() => {
-    if (lineIndex >= LINES.length) {
+    if (lineIndex >= lines.length) {
       setIsDoneTyping(true);
     }
     if (lineIndex == 3) {
-      marginCursor.value = withSpring(150);
+      orbPaddingBottomCursor.value = withSpring(150);
     }
-  }, [lineIndex]);
+  }, [lines, lineIndex]);
 
   const nextLine = useCallback(() => {
-    if (lineIndex < LINES.length) {
+    if (lineIndex < lines.length) {
       setLineIndex(lineIndex + 1);
     }
-    if (lineIndex >= LINES.length) {
+    if (lineIndex >= lines.length) {
       setIsDoneTyping(true);
     }
-  }, [lineIndex]);
+  }, [lines, lineIndex, slideNumber]);
 
   useEffect(() => {
     if (isDoneTyping) {
-        setShowCube(true);
+      // setSlideNumber(slideNumber + 1);
+      // setShowRocket(true);
     }
   }, [isDoneTyping]);
 
-  const animatedBottomMargin = useAnimatedStyle(() => {
+  const animatedBottomPadding = useAnimatedStyle(() => {
     return {
-      marginBottom: marginCursor.value,
+      paddingBottom: orbPaddingBottomCursor.value,
     };
   });
+
+  function handleLongPressOne() {
+    setStartTyping(false);
+    setIsDoneTyping(false);
+    setSlideNumber(slideNumber + 1);
+    setLines(SLIDE_2);
+      orbPaddingBottomCursor.value = withSpring(220);
+    tkDelay(600).then(() => setStartTyping(true));
+  }
 
   return (
     <SafeScreen>
@@ -112,14 +170,16 @@ const IntroScreenOne = () => {
             Tessarak
           </Text>
         </View>
-        <View
-          style={{
-            marginBottom: 40,
-            marginTop: 20,
-            paddingHorizontal: 12,
-          }}>
-          {startTyping &&
-            LINES.map((line, index) => {
+        {startTyping && (
+          <Animated.View
+            entering={FadeInLeft.duration(1000)}
+            exiting={FadeOutLeft.duration(600)}
+            style={{
+              marginBottom: 40,
+              marginTop: 20,
+              paddingHorizontal: 12,
+            }}>
+            {lines.map((line, index) => {
               return (
                 <View key={line.id} style={staticStyles.lineContainer}>
                   {lineIndex >= index && (
@@ -128,7 +188,8 @@ const IntroScreenOne = () => {
                 </View>
               );
             })}
-        </View>
+          </Animated.View>
+        )}
         <View style={{flex: 1}} />
         <Animated.View
           entering={FadeInDown.duration(1000)}
@@ -138,50 +199,27 @@ const IntroScreenOne = () => {
               flexDirection: 'row',
               justifyContent: 'center',
             },
-            animatedBottomMargin,
+            animatedBottomPadding,
           ]}>
           <TouchableOpacity
             style={{width: 100, height: 100}}
-            onLongPress={() => Alert.alert('long press')}
-            onPress={() => Alert.alert('press')}>
+            onLongPress={handleLongPressOne}
+            onPress={() => triggerImpactLight()}>
             <PulseIndicator color={colors.bizarroTessarak} size={100} />
-              {showCube && (
-                  <Animated.View entering={FadeIn.duration(1000)} style={{position: 'absolute', top: -35, left: -39, bottom: 0}}>
-                      <IconButton
-                          icon="cube-outline"
-                          iconColor={colors.tessarak}
-                          size={150}
-                      />
-                  </Animated.View>
-              )}
+            {showRocket && (
+              <Animated.View
+                entering={FadeIn.duration(1000)}
+                style={{position: 'absolute', top: -25, left: -39, bottom: 0}}>
+                <IconButton
+                  icon="rocket-outline"
+                  iconColor={colors.tessarak}
+                  size={150}
+                />
+              </Animated.View>
+            )}
           </TouchableOpacity>
         </Animated.View>
-        <View style={{paddingBottom: 20 + insets.bottom}}>
-          <View
-            style={{
-              marginTop: 5,
-              flexDirection: 'row',
-              justifyContent: 'center',
-            }}>
-            <Text
-              variant="titleSmall"
-              style={{
-                fontWeight: 'bold',
-                color: colors.text,
-              }}>
-              The Tessarak Foundation, 2023
-            </Text>
-          </View>
-          <Text
-            variant="bodySmall"
-            style={{
-              color: '#c66ef1',
-              fontWeight: 'bold',
-              textAlign: 'center',
-            }}>
-            Version 1.0.4
-          </Text>
-        </View>
+        <StartFooter />
       </Animated.View>
     </SafeScreen>
   );
