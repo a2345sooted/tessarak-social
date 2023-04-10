@@ -10,7 +10,7 @@ import AccountStack from './stacks/account/AccountStack';
 import TessaStack from './stacks/tessa/TessaStack';
 import {triggerImpactMedium} from '@haptic';
 import {View} from 'react-native';
-import Animated, {FadeIn} from 'react-native-reanimated';
+import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
 const AppNavStack = createBottomTabNavigator();
 
@@ -74,7 +74,8 @@ function AppStack() {
       </AppNavStack.Navigator>
       {tessaHint && (
         <Animated.View
-          entering={FadeIn.duration(1000)}
+          entering={FadeIn.duration(600)}
+          exiting={FadeOut.duration(600)}
           style={{
             position: 'absolute',
             bottom: 95,
@@ -102,7 +103,7 @@ function AppStack() {
               <IconButton
                 icon={'close'}
                 iconColor={'#282828'}
-                onPress={() => {}}
+                onPress={() => setTessaHint('')}
               />
             </View>
             <Divider style={{marginBottom: 8, backgroundColor: '#282828'}} />
