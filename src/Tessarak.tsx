@@ -18,6 +18,7 @@ import SystemNavigationBar from 'react-native-system-navigation-bar';
 import {appIsStaked, getActiveAuth} from '@auth';
 import {checkConnection, getTessarakUser, TessarakUser} from '@api';
 import EnterStack from './stacks/enter/EnterStack';
+import StartStack from './stacks/stack-start/StartStack';
 
 function getAppColors(mode: string): AppColors {
   return mode === 'light' ? LightAppColors : DarkAppColors;
@@ -142,20 +143,26 @@ const Tessarak = () => {
             />
           )}
           {!isCheckingAuth && !errorConnecting && (
-            <RootStack.Navigator initialRouteName={signedIn ? 'App' : 'Enter'}>
+            // <RootStack.Navigator initialRouteName={signedIn ? 'App' : 'Enter'}>
+            <RootStack.Navigator initialRouteName="Start">
               <RootStack.Screen
-                name="Enter"
-                component={EnterStack}
+                name="Start"
+                component={StartStack}
                 options={{headerShown: false, animation: 'none'}}
               />
-              <RootStack.Screen
-                name="App"
-                component={AppStack}
-                options={{
-                  headerShown: false,
-                  presentation: 'fullScreenModal',
-                }}
-              />
+              {/*<RootStack.Screen*/}
+              {/*  name="Enter"*/}
+              {/*  component={EnterStack}*/}
+              {/*  options={{headerShown: false, animation: 'none'}}*/}
+              {/*/>*/}
+              {/*<RootStack.Screen*/}
+              {/*  name="App"*/}
+              {/*  component={AppStack}*/}
+              {/*  options={{*/}
+              {/*    headerShown: false,*/}
+              {/*    presentation: 'fullScreenModal',*/}
+              {/*  }}*/}
+              {/*/>*/}
             </RootStack.Navigator>
           )}
         </NavigationContainer>
