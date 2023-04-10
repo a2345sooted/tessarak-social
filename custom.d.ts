@@ -6,4 +6,3 @@ declare module '@env' {
 
 declare module 'react-native-dynamic-tab-view';
 declare module 'react-native-vector-icons/MaterialCommunityIcons';
-declare module 'react-native-webgl';

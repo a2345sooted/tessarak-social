@@ -1,18 +1,99 @@
-import React, {useContext} from 'react';
-import {View} from 'react-native';
-import {Button, Text} from 'react-native-paper';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
+import {Alert, StyleSheet, View} from 'react-native';
+import {Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
-import {useNavigation} from '@react-navigation/native';
 import {SafeScreen} from '@common';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Animated, {FadeIn} from 'react-native-reanimated';
-import {triggerImpactMedium} from '@haptic';
-// import Orb from './Orb';
+import {PulseIndicator} from 'react-native-indicators';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import TypeWriter from 'react-native-typewriter';
+import {tkDelay} from '@utils';
+import TessaLine, {TessaMessageLine} from './TessaLine';
+
+// const LINES = [
+//   'This is your orb.',
+//   'Your orb holds everything you do in the Tessarak.',
+//   'All of your likes, posts, comments, followers, everything!',
+//   'In the Tessarak, your orb IS your identity.',
+// ];
+
+const LINES: TessaMessageLine[] = [
+  {
+    id: 1,
+    text: 'This is your orb.',
+    delayNext: 200,
+    fadeColor: true,
+  },
+  {
+    id: 2,
+    text: 'Your orb holds everything you do in the Tessarak.',
+    delayNext: 200,
+    fadeColor: true,
+  },
+  {
+    id: 3,
+    text: 'All of your likes, posts, comments, followers, everything!',
+    delayNext: 700,
+  },
+  {
+    id: 4,
+    text: 'In the Tessarak, your orb IS your identity.',
+    delayNext: 400,
+    fontWeight: '500',
+  },
+  {
+    id: 5,
+    text: 'Press and hold your orb to continue...',
+    delayNext: 400,
+    fontWeight: '500',
+  },
+];
+
+interface InfoLineProps {
+  text: string;
+  doneFn: () => void;
+}
+
+function InfoLine({text, doneFn}: InfoLineProps) {
+  const {colors} = useContext(AppContext);
+  return (
+    <View>
+      <TypeWriter typing={1} onTypingEnd={doneFn}>
+        <Text
+          variant="titleMedium"
+          style={{
+            fontWeight: 'bold',
+            color: colors.text,
+          }}>
+          {text}
+        </Text>
+      </TypeWriter>
+    </View>
+  );
+}
 
 const IntroScreenOne = () => {
-  const {colors, staked} = useContext(AppContext);
-  const navigation = useNavigation();
+  const {colors} = useContext(AppContext);
   const insets = useSafeAreaInsets();
+
+  const [lineIndex, setLineIndex] = useState(0);
+  const [isDoneTyping, setIsDoneTyping] = useState(false);
+
+  useEffect(() => {
+    if (lineIndex >= LINES.length) {
+      setIsDoneTyping(true);
+    }
+  }, [lineIndex]);
+
+  const nextLine = useCallback(() => {
+    if (lineIndex < LINES.length) {
+      setLineIndex(lineIndex + 1);
+    }
+    if (lineIndex >= LINES.length) {
+      setIsDoneTyping(true);
+    }
+  }, [lineIndex]);
 
   return (
     <SafeScreen>
@@ -33,21 +114,34 @@ const IntroScreenOne = () => {
         </View>
         <View
           style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
             marginBottom: 40,
+            marginTop: 20,
+            paddingHorizontal: 12,
           }}>
-          <Text
-            variant="titleLarge"
-            style={{
-              fontWeight: 'bold',
-              color: colors.text,
-            }}>
-            This is your orb
-          </Text>
+          {LINES.map((line, index) => {
+            return (
+              <View key={line.id} style={staticStyles.lineContainer}>
+                {lineIndex >= index && (
+                  <TessaLine line={line} onDoneTyping={nextLine} />
+                )}
+              </View>
+            );
+          })}
         </View>
         <View style={{flex: 1}} />
-        <View style={{paddingHorizontal: 12, marginTop: 50}}>
+        <View
+          style={{
+            paddingHorizontal: 12,
+            marginBottom: 150,
+            flexDirection: 'row',
+            justifyContent: 'center',
+          }}>
+          <TouchableOpacity
+            style={{width: 100, height: 100}}
+            onLongPress={() => Alert.alert('long press')}
+            onPress={() => Alert.alert('press')}>
+            <PulseIndicator color={colors.bizarroTessarak} size={100} />
+          </TouchableOpacity>
         </View>
         <View style={{paddingBottom: 20 + insets.bottom}}>
           <View
@@ -79,5 +173,19 @@ const IntroScreenOne = () => {
     </SafeScreen>
   );
 };
+
+const staticStyles = StyleSheet.create({
+  tessaText: {
+    fontWeight: '500',
+    fontSize: 20,
+  },
+  buttonContainer: {
+    marginTop: 24,
+    paddingHorizontal: '10%',
+  },
+  lineContainer: {
+    paddingHorizontal: 10,
+  },
+});
 
 export default IntroScreenOne;
