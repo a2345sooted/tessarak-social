@@ -65,11 +65,11 @@ function AppStack() {
             height: 95,
           },
         }}>
-        {AppStackItem('Tessarak', 'layers', 'tessarak', ContentFeedStack)}
-        {AppStackItem('Market', 'store', 'market', MarketplaceStack)}
+          {AppStackItem('Control', 'rocket', 'account', AccountStack)}
+        {/*{AppStackItem('Market', 'store', 'market', MarketplaceStack)}*/}
         {AppStackItem('Generate', 'shape-plus', 'create', CreateStack)}
+          {AppStackItem('Tessarak', 'layers', 'tessarak', ContentFeedStack)}
         {AppStackItem('Portals', 'lan', 'portals', MessagesStack)}
-        {AppStackItem('Control', 'rocket', 'account', AccountStack)}
         {AppStackItem('Tessa', 'robot-excited', 'tessa', TessaStack)}
       </AppNavStack.Navigator>
       {tessaHint && (
