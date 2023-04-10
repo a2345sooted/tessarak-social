@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {Dimensions, Image, View} from 'react-native';
 import {AppContext} from '@app-ctx';
 import {TkPic} from '../../services/content';
-import BottomActionBar from './BottomActionBar';
+import SideActionBar from './SideActionBar';
 
 const {height: screenHeight} = Dimensions.get('window');
 
@@ -20,7 +20,7 @@ export function TkPicView({content}: TkPicViewProps): JSX.Element {
         height: screenHeight,
         paddingBottom: 95,
       }}>
-      <BottomActionBar />
+      <SideActionBar />
       <Image source={{uri: content.url}} style={{height: '100%'}} />
     </View>
   );

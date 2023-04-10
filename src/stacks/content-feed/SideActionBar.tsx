@@ -1,26 +1,20 @@
-import React, {useContext, useRef} from 'react';
-import {Avatar, IconButton, Text} from 'react-native-paper';
-import {AppContext} from '@app-ctx';
-import {Alert, View} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {ActionSheetRef} from 'react-native-actions-sheet';
+import React, { useContext, useRef } from 'react';
+import { Avatar, IconButton, Text } from 'react-native-paper';
+import { AppContext } from '@app-ctx';
+import { View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ActionSheetRef } from 'react-native-actions-sheet';
 
 interface SideActionProps {
   icon: string;
   count: number | undefined;
-  onPressFn: () => void;
 }
 
-function SideAction({icon, count, onPressFn}: SideActionProps) {
+function SideAction({icon, count}: SideActionProps) {
   const {colors} = useContext(AppContext);
   return (
-    <View style={{}}>
-      <IconButton
-        icon={icon}
-        iconColor={colors.text}
-        size={35}
-        onPress={() => onPressFn()}
-      />
+    <TouchableOpacity onPress={() => {}}>
+      <IconButton icon={icon} iconColor={colors.text} size={35} />
       {count && (
         <Text
           variant="labelSmall"
@@ -33,11 +27,11 @@ function SideAction({icon, count, onPressFn}: SideActionProps) {
           {count}
         </Text>
       )}
-    </View>
+    </TouchableOpacity>
   );
 }
 
-const BottomActionBar = () => {
+const SideActionBar = () => {
   const soundActionSheet = useRef<ActionSheetRef>(null);
   const commentsActionSheet = useRef<ActionSheetRef>(null);
   const shareActionSheet = useRef<ActionSheetRef>(null);
@@ -46,7 +40,7 @@ const BottomActionBar = () => {
     <View
       style={{
         position: 'absolute',
-        bottom: 95 + 25,
+        bottom: 25,
         right: 15,
         width: 50,
         zIndex: 1000,
@@ -58,31 +52,11 @@ const BottomActionBar = () => {
           justifyContent: 'center',
           width: '100%',
         }}>
-        <SideAction
-          icon={'music'}
-          count={undefined}
-          onPressFn={() => soundActionSheet.current?.show()}
-        />
-        <SideAction
-          icon={'bookmark'}
-          count={1577}
-          onPressFn={() => Alert.alert('Bookmark content')}
-        />
-        <SideAction
-          icon={'heart'}
-          count={10455}
-          onPressFn={() => Alert.alert('Like content')}
-        />
-        <SideAction
-          icon={'message-text'}
-          count={492}
-          onPressFn={() => commentsActionSheet.current?.show()}
-        />
-        <SideAction
-          icon={'share-circle'}
-          count={177}
-          onPressFn={() => shareActionSheet.current?.show()}
-        />
+        <SideAction icon={'music'} count={undefined} />
+        <SideAction icon={'bookmark'} count={1577} />
+        <SideAction icon={'heart'} count={10455} />
+        <SideAction icon={'message-text'} count={492} />
+        <SideAction icon={'share-circle'} count={177} />
         <View style={{marginHorizontal: 12, marginTop: 12}}>
           <TouchableOpacity
             onPress={() => {
@@ -153,7 +127,7 @@ const BottomActionBar = () => {
   // );
 };
 
-export default BottomActionBar;
+export default SideActionBar;
 
 //
 //

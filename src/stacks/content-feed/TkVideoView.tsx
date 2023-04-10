@@ -1,13 +1,14 @@
 import React, {createRef, useContext, useEffect, useState} from 'react';
-import {Alert, Dimensions, StyleSheet} from 'react-native';
+import {Alert, Dimensions, StyleSheet, View} from 'react-native';
 import {AppContext} from '@app-ctx';
 import {TkVideo} from '../../services/content';
-import BottomActionBar from './BottomActionBar';
+import SideActionBar from './SideActionBar';
 import VideoResource from 'react-native-video';
 import {DimensionFeedContext} from './DimensionView';
 import VideoPlayer from 'react-native-media-console';
-import BottomCaptionBar from './BottomCaptionBar';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
+import {CollapsedCaptionBar} from './CollapsedCaptionBar';
+import {ExpandedCaptionBar} from './ExpandedCaptionBar';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
@@ -21,19 +22,18 @@ export function TkVideoView({content}: TkVideoViewProps): JSX.Element {
   const {selectedContentId} = useContext(DimensionFeedContext);
 
   const [manuallyPaused, setManuallyPaused] = useState(false);
+  const [isCaptionExpanded, setIsCaptionExpanded] = useState(false);
 
   useEffect(() => {
     setManuallyPaused(false);
   }, [selectedContentId]);
 
   return (
-    <>
+    <View>
       <TouchableWithoutFeedback
-        style={[styles.container, {backgroundColor: colors.bg1}]}
+        style={[styles.container, {backgroundColor: colors.bg1, zIndex: 100}]}
         onLongPress={() => Alert.alert('long press')}
         onPress={() => setManuallyPaused(!manuallyPaused)}>
-        <BottomActionBar />
-        <BottomCaptionBar />
         <VideoPlayer
           onEnd={() => videoPlayerRef.current?.seek(0)}
           videoRef={videoPlayerRef}
@@ -51,15 +51,19 @@ export function TkVideoView({content}: TkVideoViewProps): JSX.Element {
             uri: content.videoUrl,
           }}
         />
+        <SideActionBar />
+        {isCaptionExpanded && <ExpandedCaptionBar />}
+        {!isCaptionExpanded && (
+          <CollapsedCaptionBar expand={() => setIsCaptionExpanded(true)} />
+        )}
       </TouchableWithoutFeedback>
-    </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    height: screenHeight,
-    paddingBottom: 95,
+    height: screenHeight - 95,
     width: screenWidth,
   },
   pageText: {

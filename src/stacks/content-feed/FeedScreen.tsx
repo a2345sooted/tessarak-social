@@ -76,7 +76,7 @@ const FeedScreen = () => {
     <>
       {isLoadingDimensions && loadingScreen()}
       {!isLoadingDimensions && !errorLoadingDimensions && (
-        <View style={{height: screenHeight, backgroundColor: colors.bg1}}>
+        <View style={{height: screenHeight - 95, backgroundColor: colors.bg1}}>
           <ScrollView
             onMomentumScrollEnd={handleScrollEnd}
             horizontal
