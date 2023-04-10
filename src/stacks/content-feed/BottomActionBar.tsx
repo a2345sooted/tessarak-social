@@ -6,36 +6,40 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {ActionSheetRef} from 'react-native-actions-sheet';
 
 interface SideActionProps {
-  label: string;
   icon: string;
-  iconSize: number;
   count: number | undefined;
   onPressFn: () => void;
 }
 
-function SideAction({
-  label,
-  icon,
-  iconSize,
-  count,
-  onPressFn,
-}: SideActionProps) {
+function SideAction({icon, count, onPressFn}: SideActionProps) {
   const {colors} = useContext(AppContext);
   return (
-    <IconButton
-      icon={icon}
-      iconColor={colors.text}
-      size={iconSize}
-      onPress={() => onPressFn()}
-    />
+    <View style={{}}>
+      <IconButton
+        icon={icon}
+        iconColor={colors.text}
+        size={35}
+        onPress={() => onPressFn()}
+      />
+      {count && (
+        <Text
+          variant="labelSmall"
+          style={{
+            color: colors.text,
+            fontWeight: 'bold',
+            marginTop: -12,
+            textAlign: 'center',
+          }}>
+          {count}
+        </Text>
+      )}
+    </View>
   );
 }
 
 const BottomActionBar = () => {
-  const {colors} = useContext(AppContext);
   const soundActionSheet = useRef<ActionSheetRef>(null);
   const commentsActionSheet = useRef<ActionSheetRef>(null);
-  // const longPressActionSheet = useRef<ActionSheetRef>(null);
   const shareActionSheet = useRef<ActionSheetRef>(null);
 
   return (
@@ -43,7 +47,7 @@ const BottomActionBar = () => {
       style={{
         position: 'absolute',
         bottom: 95 + 25,
-        right: 12,
+        right: 15,
         width: 50,
         zIndex: 1000,
       }}>
@@ -55,38 +59,28 @@ const BottomActionBar = () => {
           width: '100%',
         }}>
         <SideAction
-          label={'Sound'}
           icon={'music'}
-          iconSize={35}
           count={undefined}
           onPressFn={() => soundActionSheet.current?.show()}
         />
         <SideAction
-          label={'Bookmark'}
           icon={'bookmark'}
-          iconSize={35}
-          count={undefined}
+          count={1577}
           onPressFn={() => Alert.alert('Bookmark content')}
         />
         <SideAction
-          label={'Like'}
           icon={'heart'}
-          iconSize={35}
-          count={undefined}
+          count={10455}
           onPressFn={() => Alert.alert('Like content')}
         />
         <SideAction
-          label={'Comments'}
-          icon={'comment'}
-          iconSize={35}
-          count={undefined}
+          icon={'message-text'}
+          count={492}
           onPressFn={() => commentsActionSheet.current?.show()}
         />
         <SideAction
-          label={'Share'}
           icon={'share-circle'}
-          iconSize={35}
-          count={undefined}
+          count={177}
           onPressFn={() => shareActionSheet.current?.show()}
         />
         <View style={{marginHorizontal: 12, marginTop: 12}}>

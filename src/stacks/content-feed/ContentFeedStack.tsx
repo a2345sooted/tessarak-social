@@ -49,7 +49,7 @@ function ContentFeedHeader() {
         }}>
         <IconButton
           icon="layers"
-          iconColor={colors.bizarroTessarak}
+          iconColor={colors.text}
           size={30}
           onPress={gotoDimensionsPanel}
         />
@@ -61,13 +61,13 @@ function ContentFeedHeader() {
         <IconButton
           icon="magnify"
           style={{marginRight: -10}}
-          iconColor={colors.bizarroTessarak}
+          iconColor={colors.text}
           size={25}
           onPress={gotoSearchPanel}
         />
         <IconButton
           icon="bell-outline"
-          iconColor={colors.bizarroTessarak}
+          iconColor={colors.text}
           size={25}
           onPress={gotoActivityPanel}
         />
