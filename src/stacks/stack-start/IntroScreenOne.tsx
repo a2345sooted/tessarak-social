@@ -7,8 +7,9 @@ import {SafeScreen} from '@common';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Animated, {FadeIn} from 'react-native-reanimated';
 import {triggerImpactMedium} from '@haptic';
+// import Orb from './Orb';
 
-const LandingScreen = () => {
+const IntroScreenOne = () => {
   const {colors, staked} = useContext(AppContext);
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
@@ -25,8 +26,8 @@ const LandingScreen = () => {
             justifyContent: 'center',
           }}>
           <Text
-            variant="displayLarge"
-            style={{fontWeight: 'bold', color: colors.text}}>
+            variant="titleLarge"
+            style={{fontWeight: 'bold', color: '#c66ef1'}}>
             Tessarak
           </Text>
         </View>
@@ -35,56 +36,18 @@ const LandingScreen = () => {
             flexDirection: 'row',
             justifyContent: 'center',
             marginBottom: 40,
-            marginTop: -10,
           }}>
           <Text
-            variant="titleMedium"
+            variant="titleLarge"
             style={{
               fontWeight: 'bold',
               color: colors.text,
             }}>
-            choose your dimensions
+            This is your orb
           </Text>
-        </View>
-        <View style={{marginTop: 50, paddingHorizontal: 10}}>
-          <Button
-            uppercase
-            icon="arrow-right"
-            labelStyle={{color: colors.text, fontWeight: '800'}}
-            buttonColor={colors.tessarak}
-            theme={{roundness: 1}}
-            onPress={() => {
-              //@ts-ignore
-              navigation.navigate('IntroScreenOne');
-              triggerImpactMedium();
-            }}>
-            Enter
-          </Button>
         </View>
         <View style={{flex: 1}} />
-        <View style={{marginBottom: 50, paddingHorizontal: 10}}>
-          <Text
-            variant="titleMedium"
-            style={{
-              fontWeight: 'bold',
-              color: colors.text,
-              marginBottom: 8,
-              textAlign: 'center',
-            }}>
-            Already setup?
-          </Text>
-          <Button
-            mode="text"
-            uppercase
-            labelStyle={{fontWeight: '900'}}
-            theme={{roundness: 1}}
-            onPress={() => {
-              //@ts-ignore
-              navigation.navigate(staked ? 'GetPhoneNumber' : 'ReadTerms');
-              triggerImpactMedium();
-            }}>
-            Tap here to authenticate
-          </Button>
+        <View style={{paddingHorizontal: 12, marginTop: 50}}>
         </View>
         <View style={{paddingBottom: 20 + insets.bottom}}>
           <View
@@ -117,4 +80,4 @@ const LandingScreen = () => {
   );
 };
 
-export default LandingScreen;
+export default IntroScreenOne;

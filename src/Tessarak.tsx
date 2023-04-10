@@ -33,14 +33,14 @@ const Tessarak = () => {
     getAppColors(appBrightMode as string),
   );
 
-  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(false);
   const [errorConnecting, setErrorConnecting] = useState<any>(null);
   const [staked, setStaked] = useState(false);
   const [user, setUser] = useState<TessarakUser | null>(null);
   const [signedIn, setSignedIn] = useState(false);
 
   useEffect(() => {
-    startApp();
+    // startApp();
   }, []);
 
   async function startApp() {
