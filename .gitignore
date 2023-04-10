@@ -1,0 +1,15 @@
+# node_modules
+node_modules
+
+# .idea
+.idea
+
+# ios
+ios/Pods
+ios/build
+
+# ruby-version
+.ruby-version
+
+# Gemfile.lock
+Gemfile.lock
