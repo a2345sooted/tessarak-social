@@ -309,7 +309,7 @@ const IntroScreenOne = () => {
                 titleStyle={{color: colors.text, fontWeight: 'bold'}}
                 title="The Nebuchadnezzar"
                 descriptionStyle={{color: colors.text}}
-                description="from: The Tessarak Foundation"
+                description="Owner: The Tessarak Foundation"
                 left={() => <List.Icon color={'#bb9604'} icon="bell" />}
                 right={() => (
                   <List.Icon color={colors.text} icon="arrow-right" />
