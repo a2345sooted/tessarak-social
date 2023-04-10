@@ -52,7 +52,9 @@ export function TkVideoView({content}: TkVideoViewProps): JSX.Element {
           }}
         />
         <SideActionBar />
-        {isCaptionExpanded && <ExpandedCaptionBar />}
+        {isCaptionExpanded && (
+          <ExpandedCaptionBar collapse={() => setIsCaptionExpanded(false)} />
+        )}
         {!isCaptionExpanded && (
           <CollapsedCaptionBar expand={() => setIsCaptionExpanded(true)} />
         )}
