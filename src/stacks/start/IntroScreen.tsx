@@ -445,7 +445,7 @@ const IntroScreen = () => {
               <TouchableOpacity onPress={() => Alert.alert('In progress.')}>
                 <List.Item
                   titleStyle={{color: colors.text, fontWeight: 'bold'}}
-                  title="BYOR"
+                  title="BYOS"
                   descriptionStyle={{color: colors.text}}
                   description="Board a non-community ship."
                   left={() => (
