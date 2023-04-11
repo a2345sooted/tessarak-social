@@ -68,7 +68,7 @@ const LandingScreen = () => {
             style={{
               fontWeight: 'bold',
               color: colors.text,
-              marginBottom: 8,
+              // marginBottom: 8,
               textAlign: 'center',
             }}>
             Already setup?
@@ -76,7 +76,7 @@ const LandingScreen = () => {
           <Button
             mode="text"
             uppercase
-            labelStyle={{fontWeight: '900'}}
+            labelStyle={{fontWeight: '900', color: colors.bizarroTessarak}}
             theme={{roundness: 1}}
             onPress={() => {
               //@ts-ignore

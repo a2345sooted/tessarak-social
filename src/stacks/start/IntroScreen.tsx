@@ -70,13 +70,13 @@ const SLIDE_1_LINES: TessaMessageLine[] = [
   },
   {
     id: 2,
-    text: 'Your orb holds everything you do in the Tessarak.',
+    text: 'Your orb contains everything you do in the Tessarak.',
     delayNext: 200,
     fadeColor: true,
   },
   {
     id: 3,
-    text: 'All of your likes, posts, comments, followers, everything!',
+    text: 'All of your posts, likes, comments, followers, everything!',
     delayNext: 700,
   },
   {
@@ -186,6 +186,7 @@ const SLIDES: Slide[] = [
 const IntroScreen = () => {
   const {colors} = useContext(AppContext);
   const navigation = useNavigation();
+  const insets = useSafeAreaInsets();
 
   const [slide, setSlide] = useState(SLIDES[0]);
   const [startTyping, setStartTyping] = useState(false);
@@ -214,19 +215,20 @@ const IntroScreen = () => {
     }
 
     if (slide.index === 0 && slide.lineIndex === 0) {
-      orbPaddingBottomCursor.value = withSpring(200);
+      orbPaddingBottomCursor.value = withSpring(insets.bottom + 200);
     }
 
-    if (slide.index === 0 && slide.lineIndex === 3) {
-      orbPaddingBottomCursor.value = withSpring(150);
-    }
+    // if (slide.index === 0 && slide.lineIndex === 4) {
+    //   orbPaddingBottomCursor.value = withSpring(insets.bottom + 150);
+    // }
 
-    if (slide.index === 1 && slide.lineIndex === 3) {
+    if (slide.index === 1 && slide.lineIndex === 2) {
       setShowRocket(true);
+      orbPaddingBottomCursor.value = withSpring(insets.bottom + 200);
     }
 
     if (slide.index === 2 && slide.lineIndex === 3) {
-      orbPaddingBottomCursor.value = withSpring(100);
+      orbPaddingBottomCursor.value = withSpring(insets.bottom + 200);
     }
 
     if (slide.index === 2 && slide.lineIndex === 4) {
@@ -234,8 +236,8 @@ const IntroScreen = () => {
     }
 
     if (slide.index === 3 && slide.lineIndex === 0) {
-      orbPaddingBottomCursor.value = withSpring(10);
-      setShowRocketOptions(true);
+      orbPaddingBottomCursor.value = withSpring(insets.bottom + 10);
+      tkDelay(1000).then(() => setShowRocketOptions(true));
     }
   }, [slide]);
 
@@ -329,8 +331,8 @@ const IntroScreen = () => {
         {showRocketOptions && (
           <Animated.View
             style={{marginTop: 8}}
-            entering={FadeInRight.duration(600)}
-            exiting={FadeOutRight.duration(600)}>
+            entering={FadeInDown.duration(600)}
+            exiting={FadeOutDown.duration(600)}>
             <List.Section
               style={{
                 borderRadius: 4,
@@ -487,7 +489,17 @@ const IntroScreen = () => {
             )}
           </TouchableOpacity>
         </Animated.View>
-        <StartFooter />
+        <View style={{position: 'absolute', bottom: 0, left: 0, right: 0}}>
+          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+            <IconButton
+              icon="close"
+              iconColor={colors.text}
+              size={30}
+              onPress={() => navigation.goBack()}
+            />
+          </View>
+          <StartFooter />
+        </View>
       </Animated.View>
     </SafeScreen>
   );
