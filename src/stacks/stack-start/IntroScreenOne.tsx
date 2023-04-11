@@ -10,6 +10,7 @@ import Animated, {
   FadeInLeft,
   FadeInRight,
   FadeInUp,
+  FadeOut,
   FadeOutDown,
   FadeOutLeft,
   FadeOutRight,
@@ -108,14 +109,14 @@ const SLIDE_2_LINES: TessaMessageLine[] = [
   },
   {
     id: 3,
-    text: "That's where rockets come in.",
+    text: "That's where ships come in.",
     delayNext: 200,
     fadeColor: true,
     fontWeight: '500',
   },
   {
     id: 4,
-    text: 'Press and hold the rocket to continue...',
+    text: 'Press and hold the ship to continue...',
     delayNext: 200,
     fadeColor: true,
     fontWeight: '500',
@@ -126,32 +127,32 @@ const SLIDE_2_LINES: TessaMessageLine[] = [
 const SLIDE_3_LINES: TessaMessageLine[] = [
   {
     id: 1,
-    text: 'Rockets allow you and your orb to explore and enjoy the Tessarak.',
+    text: 'Ships allow you and your orb to explore and enjoy the Tessarak.',
     delayNext: 200,
     fadeColor: true,
   },
   {
     id: 2,
-    text: 'Rockets also can have more than one orb onboard.',
+    text: 'Ships also can have more than one orb onboard.',
     delayNext: 200,
     fadeColor: true,
   },
   {
     id: 3,
-    text: 'Each rocket has its own set of rules and moderation by the orb(s) in the rocket.',
+    text: 'Each ship has its own set of rules and is moderated by the orbs onboard.',
     delayNext: 200,
     fadeColor: true,
   },
   {
     id: 4,
-    text: 'You and your orb can always change rockets.',
+    text: 'You and your orb can always change ships.',
     delayNext: 200,
     fadeColor: true,
     fontWeight: '500',
   },
   {
     id: 5,
-    text: 'Press and hold your orb to choose a rocket...',
+    text: 'Press and hold your orb to choose a ship...',
     delayNext: 200,
     fadeColor: true,
     fontWeight: '500',
@@ -162,7 +163,7 @@ const SLIDE_3_LINES: TessaMessageLine[] = [
 const SLIDE_4_LINES: TessaMessageLine[] = [
   {
     id: 1,
-    text: 'Choose a rocket...',
+    text: 'Choose a ship...',
     delayNext: 200,
     fadeColor: true,
   },
@@ -280,15 +281,21 @@ const IntroScreenOne = () => {
               }}>
               Tessarak
             </Text>
-            <Text
-              variant="titleMedium"
-              style={{
-                fontWeight: 'bold',
-                color: colors.text,
-                textAlign: 'center',
-              }}>
-              choose a ship
-            </Text>
+            {slide.index === 3 && (
+              <Animated.View
+                entering={FadeIn.duration(600)}
+                exiting={FadeOut.duration(600)}>
+                <Text
+                  variant="titleMedium"
+                  style={{
+                    fontWeight: 'bold',
+                    color: colors.text,
+                    textAlign: 'center',
+                  }}>
+                  choose a ship
+                </Text>
+              </Animated.View>
+            )}
           </View>
         </View>
         {SLIDES.map((s, slideIndex) => (
@@ -324,9 +331,15 @@ const IntroScreenOne = () => {
             style={{marginTop: 8}}
             entering={FadeInRight.duration(600)}
             exiting={FadeOutRight.duration(600)}>
-            <List.Section style={{borderRadius: 4, backgroundColor: '#3d3d3d', paddingHorizontal: 12, paddingVertical: 2}}>
+            <List.Section
+              style={{
+                borderRadius: 4,
+                backgroundColor: '#3d3d3d',
+                paddingHorizontal: 12,
+                paddingVertical: 2,
+              }}>
               <List.Subheader style={{color: colors.text}}>
-                Community Rockets{' '}
+                Community Ships{' '}
                 <Text
                   variant="bodySmall"
                   style={{color: colors.text, fontWeight: 'bold'}}>
@@ -349,7 +362,7 @@ const IntroScreenOne = () => {
                   )}
                 />
               </TouchableOpacity>
-              <Divider style={{marginTop: 16}}/>
+              <Divider style={{marginTop: 16}} />
               <TouchableOpacity
                 onPress={() => {
                   //@ts-ignore
@@ -367,9 +380,16 @@ const IntroScreenOne = () => {
                 />
               </TouchableOpacity>
             </List.Section>
-            <List.Section style={{borderRadius: 4, backgroundColor: '#3d3d3d', paddingHorizontal: 12, paddingVertical: 2, marginTop: -2}}>
+            <List.Section
+              style={{
+                borderRadius: 4,
+                backgroundColor: '#3d3d3d',
+                paddingHorizontal: 12,
+                paddingVertical: 2,
+                marginTop: -2,
+              }}>
               <List.Subheader style={{color: colors.text}}>
-                Rocket Builders{' '}
+                Ship Builders{' '}
                 <Text variant="bodySmall" style={{color: colors.text}}>
                   (not yet available)
                 </Text>
@@ -379,7 +399,7 @@ const IntroScreenOne = () => {
                   titleStyle={{color: colors.text, fontWeight: 'bold'}}
                   title="The Tessarak Foundation"
                   descriptionStyle={{color: colors.text}}
-                  description="Custom, infra-managed rockets for $X/mo and up."
+                  description="Custom, infra-managed ships for $X/mo and up."
                   left={() => (
                     <List.Icon color={colors.tessarak} icon="cube-outline" />
                   )}
@@ -388,7 +408,7 @@ const IntroScreenOne = () => {
                   )}
                 />
               </TouchableOpacity>
-              <Divider style={{marginTop: 16}}/>
+              <Divider style={{marginTop: 16}} />
               <TouchableOpacity
                 onPress={() => {
                   //@ts-ignore
@@ -406,9 +426,16 @@ const IntroScreenOne = () => {
                 />
               </TouchableOpacity>
             </List.Section>
-            <List.Section style={{borderRadius: 4, backgroundColor: '#3d3d3d', paddingHorizontal: 12, paddingVertical: 2, marginTop: -2}}>
+            <List.Section
+              style={{
+                borderRadius: 4,
+                backgroundColor: '#3d3d3d',
+                paddingHorizontal: 12,
+                paddingVertical: 2,
+                marginTop: -2,
+              }}>
               <List.Subheader style={{color: colors.text}}>
-                Private Rockets{' '}
+                Private Ships{' '}
                 <Text variant="bodySmall" style={{color: colors.text}}>
                   (not yet available)
                 </Text>
@@ -418,7 +445,7 @@ const IntroScreenOne = () => {
                   titleStyle={{color: colors.text, fontWeight: 'bold'}}
                   title="BYOR"
                   descriptionStyle={{color: colors.text}}
-                  description="Manually setup your rocket connection... it's easy :)"
+                  description="Board a non-community ship."
                   left={() => (
                     <List.Icon color={colors.text} icon="rocket-outline" />
                   )}
