@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import LandingScreen from './LandingScreen';
 import IntroScreenOne from './IntroScreenOne';
 import NbzLandingScreen from './NbzLandingScreen';
+import CommunityRocketRulesScreen from './CommunityRocketRulesScreen';
 
 const StartNavStack = createNativeStackNavigator();
 
@@ -23,6 +24,11 @@ function StartStack() {
         name="NbzLandingScreen"
         component={NbzLandingScreen}
         options={{headerShown: false}}
+      />
+      <StartNavStack.Screen
+        name="CommunityRocketRulesScreen"
+        component={CommunityRocketRulesScreen}
+        options={{headerShown: false, presentation: 'modal'}}
       />
     </StartNavStack.Navigator>
   );

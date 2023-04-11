@@ -25,9 +25,9 @@ import {triggerImpactLight} from '@haptic';
 import {DarkAppColors} from '@theme';
 import {useNavigation} from '@react-navigation/native';
 
-interface StartFooterProps {}
+export interface StartFooterProps {}
 
-function StartFooter({}: StartFooterProps) {
+export function StartFooter({}: StartFooterProps) {
   const {colors} = useContext(AppContext);
   const insets = useSafeAreaInsets();
   return (
