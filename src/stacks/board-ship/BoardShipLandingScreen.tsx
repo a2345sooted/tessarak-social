@@ -4,15 +4,13 @@ import {AppContext} from '@app-ctx';
 import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {StartFooter} from './IntroScreenOne';
 import Animated, {
   FadeInDown,
-  FadeInUp,
   FadeOutDown,
-  FadeOutUp,
 } from 'react-native-reanimated';
+import { StartFooter } from '../start/IntroScreen';
 
-const NbzLandingScreen = () => {
+const BoardShipLandingScreen = () => {
   const {colors} = useContext(AppContext);
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
@@ -21,7 +19,7 @@ const NbzLandingScreen = () => {
 
   function handleReadRulesPress() {
     //@ts-ignore
-    navigation.navigate('CommunityRocketRulesScreen');
+    navigation.navigate('ShipRulesScreen');
   }
 
   function handleBoardShipPress() {}
@@ -36,15 +34,6 @@ const NbzLandingScreen = () => {
           size={30}
           onPress={() => navigation.goBack()}
         />
-        {/*<Text*/}
-        {/*  variant="headlineSmall"*/}
-        {/*  style={{*/}
-        {/*    fontWeight: 'bold',*/}
-        {/*    color: colors.text,*/}
-        {/*    textAlign: 'center',*/}
-        {/*  }}>*/}
-        {/*  Activity*/}
-        {/*</Text>*/}
       </View>
       <View
         style={{
@@ -73,12 +62,7 @@ const NbzLandingScreen = () => {
           paddingHorizontal: 20,
         }}>
         <Text variant="titleSmall" style={{color: colors.text}}>
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-          accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
-          ab illo inventore veritatis et quasi architecto beatae vitae dicta
-          sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-          aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
-          qui ratione voluptatem sequi nesciunt.
+          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
         </Text>
       </View>
       <View
@@ -160,4 +144,4 @@ const NbzLandingScreen = () => {
   );
 };
 
-export default NbzLandingScreen;
+export default BoardShipLandingScreen;

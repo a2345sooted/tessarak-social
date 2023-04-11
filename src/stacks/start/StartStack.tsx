@@ -1,34 +1,28 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import LandingScreen from './LandingScreen';
-import IntroScreenOne from './IntroScreenOne';
-import NbzLandingScreen from './NbzLandingScreen';
-import CommunityRocketRulesScreen from './CommunityRocketRulesScreen';
+import IntroScreen from './IntroScreen';
+import BoardShipStack from '../board-ship/BoardShipStack';
 
 const StartNavStack = createNativeStackNavigator();
 
 function StartStack() {
   return (
-    <StartNavStack.Navigator initialRouteName="StartLanding">
+    <StartNavStack.Navigator initialRouteName="BoardShip">
       <StartNavStack.Screen
         name="StartLanding"
         component={LandingScreen}
         options={{headerShown: false}}
       />
       <StartNavStack.Screen
-        name="IntroScreenOne"
-        component={IntroScreenOne}
+        name="IntroScreen"
+        component={IntroScreen}
         options={{headerShown: false}}
       />
       <StartNavStack.Screen
-        name="NbzLandingScreen"
-        component={NbzLandingScreen}
+        name="BoardShip"
+        component={BoardShipStack}
         options={{headerShown: false}}
-      />
-      <StartNavStack.Screen
-        name="CommunityRocketRulesScreen"
-        component={CommunityRocketRulesScreen}
-        options={{headerShown: false, presentation: 'modal'}}
       />
     </StartNavStack.Navigator>
   );

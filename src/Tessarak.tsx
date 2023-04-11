@@ -18,7 +18,7 @@ import SystemNavigationBar from 'react-native-system-navigation-bar';
 import {appIsStaked, getActiveAuth} from '@auth';
 import {checkConnection, getTessarakUser, TessarakUser} from '@api';
 import EnterStack from './stacks/enter/EnterStack';
-import StartStack from './stacks/stack-start/StartStack';
+import StartStack from './stacks/start/StartStack';
 
 function getAppColors(mode: string): AppColors {
   return mode === 'light' ? LightAppColors : DarkAppColors;

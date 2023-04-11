@@ -183,7 +183,7 @@ const SLIDES: Slide[] = [
   {index: 3, lines: SLIDE_4_LINES, lineIndex: 0, inputDisabled: true},
 ];
 
-const IntroScreenOne = () => {
+const IntroScreen = () => {
   const {colors} = useContext(AppContext);
   const navigation = useNavigation();
 
@@ -349,7 +349,7 @@ const IntroScreenOne = () => {
               <TouchableOpacity
                 onPress={() => {
                   //@ts-ignore
-                  navigation.navigate('NbzLandingScreen');
+                  navigation.navigate('BoardShipLandingScreen');
                 }}>
                 <List.Item
                   titleStyle={{color: colors.text, fontWeight: 'bold'}}
@@ -507,4 +507,4 @@ const staticStyles = StyleSheet.create({
   },
 });
 
-export default IntroScreenOne;
+export default IntroScreen;

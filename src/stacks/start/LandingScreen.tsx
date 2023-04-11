@@ -55,7 +55,7 @@ const LandingScreen = () => {
             theme={{roundness: 1}}
             onPress={() => {
               //@ts-ignore
-              navigation.navigate('IntroScreenOne');
+              navigation.navigate('IntroScreen');
               triggerImpactMedium();
             }}>
             Enter
