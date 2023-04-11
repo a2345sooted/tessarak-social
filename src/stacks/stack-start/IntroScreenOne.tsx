@@ -220,8 +220,12 @@ const IntroScreenOne = () => {
       orbPaddingBottomCursor.value = withSpring(150);
     }
 
-    if (slide.index === 1 && slide.lineIndex === 2) {
+    if (slide.index === 1 && slide.lineIndex === 3) {
       setShowRocket(true);
+    }
+
+    if (slide.index === 2 && slide.lineIndex === 3) {
+      orbPaddingBottomCursor.value = withSpring(100);
     }
 
     if (slide.index === 2 && slide.lineIndex === 4) {
