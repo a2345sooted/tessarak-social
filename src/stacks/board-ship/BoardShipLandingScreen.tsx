@@ -20,8 +20,8 @@ const BoardShipLandingScreen = () => {
   }
 
   function handleBoardShipPress() {
-      //@ts-ignore
-      navigation.navigate('CreateHandleScreen');
+    //@ts-ignore
+    navigation.navigate('SetupShipAuthScreen');
   }
 
   return (
@@ -35,41 +35,46 @@ const BoardShipLandingScreen = () => {
       {/*    onPress={() => navigation.goBack()}*/}
       {/*  />*/}
       {/*</View>*/}
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <IconButton
-                icon="arrow-left"
-                iconColor={colors.text}
-                size={30}
-                onPress={() => navigation.goBack()}
-                style={{flex: 1}}
-            />
-            <IconButton icon="bell" iconColor={'#bb9604'} size={60} style={{flex: 2}}/>
-            <View style={{flex: 1}}/>
-        </View>
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <IconButton
+          icon="arrow-left"
+          iconColor={colors.text}
+          size={30}
+          onPress={() => navigation.goBack()}
+          style={{flex: 1}}
+        />
+        <IconButton
+          icon="bell"
+          iconColor={'#bb9604'}
+          size={60}
+          style={{flex: 2}}
+        />
+        <View style={{flex: 1}} />
+      </View>
 
-        <View
-            style={{
-                paddingHorizontal: 20,
-                // flexDirection: 'row',
-                //   justifyContent: 'center',
-                // alignItems: 'center',
-            }}>
-            {/*<View>*/}
-            {/*<View style={{flexDirection: 'row', justifyContent: 'center'}}>*/}
-            {/*  <IconButton icon="bell" iconColor={'#bb9604'} size={30} />*/}
-            {/*</View>*/}
-            <Text
-                variant="headlineSmall"
-                style={{fontWeight: 'bold', color: colors.text, textAlign: 'center'}}>
-                {ship?.name}
-            </Text>
-            <Text
-                variant="titleSmall"
-                style={{color: colors.text, textAlign: 'center'}}>
-                {ship?.motto}
-            </Text>
-            {/*</View>*/}
-        </View>
+      <View
+        style={{
+          paddingHorizontal: 20,
+          // flexDirection: 'row',
+          //   justifyContent: 'center',
+          // alignItems: 'center',
+        }}>
+        {/*<View>*/}
+        {/*<View style={{flexDirection: 'row', justifyContent: 'center'}}>*/}
+        {/*  <IconButton icon="bell" iconColor={'#bb9604'} size={30} />*/}
+        {/*</View>*/}
+        <Text
+          variant="headlineSmall"
+          style={{fontWeight: 'bold', color: colors.text, textAlign: 'center'}}>
+          {ship?.name}
+        </Text>
+        <Text
+          variant="titleSmall"
+          style={{color: colors.bizarroTessarak, textAlign: 'center'}}>
+          {ship?.domain}
+        </Text>
+        {/*</View>*/}
+      </View>
       {/*<View*/}
       {/*  style={{*/}
       {/*    marginTop: 12,*/}

@@ -3,7 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ShipRulesScreen from './ShipRulesScreen';
 import BoardShipLandingScreen from './BoardShipLandingScreen';
 import {NBZ, ShipBoardingDetails} from './mock-data';
-import CreateHandleScreen from './CreateHandleScreen';
+import SetupShipAuthScreen from './SetupShipAuthScreen';
 
 export type BoardShipContextContainer = {
   ship: ShipBoardingDetails | null;
@@ -21,7 +21,7 @@ const BoardShipNavStack = createNativeStackNavigator();
 
 function BoardShipStack() {
   const [ship, setShip] = useState<ShipBoardingDetails | null>(NBZ);
-  const [agreedToRules, setAgreedToRules] = useState(false);
+  const [agreedToRules, setAgreedToRules] = useState(true);
 
   function toggleAgreedToRules(agreed: boolean): void {
     setAgreedToRules(agreed);
@@ -41,9 +41,9 @@ function BoardShipStack() {
           options={{headerShown: false, presentation: 'modal'}}
         />
         <BoardShipNavStack.Screen
-          name="CreateHandleScreen"
-          component={CreateHandleScreen}
-          options={{headerShown: false}}
+          name="SetupShipAuthScreen"
+          component={SetupShipAuthScreen}
+          options={{headerShown: false, presentation: 'fullScreenModal'}}
         />
       </BoardShipNavStack.Navigator>
     </BoardShipContext.Provider>

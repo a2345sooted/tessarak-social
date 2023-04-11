@@ -1,62 +1,23 @@
 import React, {useContext, useRef, useState} from 'react';
-import {Button, Divider, IconButton, Text, TextInput} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
+import Animated, { FadeInDown, FadeInRight, FadeOutDown, FadeOutLeft, FadeOutRight } from 'react-native-reanimated';
 import {View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import Animated, {FadeInDown, FadeOutDown} from 'react-native-reanimated';
-import {StartFooter} from '../start/IntroScreen';
-import {BoardShipContext} from './BoardShipStack';
+import {Button, IconButton, Text, TextInput} from 'react-native-paper';
 
-const CreateHandleScreen = () => {
+export interface CreateUsernameSectionProps {
+  nextFn: () => void;
+}
+
+const CreateUsernameSection = ({nextFn}: CreateUsernameSectionProps) => {
   const {colors} = useContext(AppContext);
-  const {ship, agreedToRules} = useContext(BoardShipContext);
-  const navigation = useNavigation();
-  const insets = useSafeAreaInsets();
   const usernameInputRef = useRef<any>();
-
   const [isChecking, setIsChecking] = useState(false);
   const [username, setUsername] = useState('');
 
-  function handleSubmit() {}
-
   return (
-    <View
-      style={{backgroundColor: colors.bg1, flex: 1, paddingTop: insets.top}}>
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <IconButton
-          icon="arrow-left"
-          iconColor={colors.text}
-          size={30}
-          onPress={() => navigation.goBack()}
-          style={{flex: 1}}
-        />
-          <IconButton icon="bell" iconColor={'#bb9604'} size={60} style={{flex: 2}}/>
-          <View style={{flex: 1}}/>
-      </View>
-      <View
-        style={{
-          paddingHorizontal: 20,
-          // flexDirection: 'row',
-          //   justifyContent: 'center',
-          // alignItems: 'center',
-        }}>
-        {/*<View>*/}
-        {/*<View style={{flexDirection: 'row', justifyContent: 'center'}}>*/}
-        {/*  <IconButton icon="bell" iconColor={'#bb9604'} size={30} />*/}
-        {/*</View>*/}
-        <Text
-          variant="headlineSmall"
-          style={{fontWeight: 'bold', color: colors.text, textAlign: 'center'}}>
-          {ship?.name}
-        </Text>
-        <Text
-          variant="titleSmall"
-          style={{color: colors.text, textAlign: 'center'}}>
-          {ship?.motto}
-        </Text>
-        {/*</View>*/}
-      </View>
+    <Animated.View
+      entering={FadeInRight.duration(600)}
+      exiting={FadeOutRight.duration(600)}>
       <View
         style={{
           marginTop: 12,
@@ -75,7 +36,7 @@ const CreateHandleScreen = () => {
       <View
         style={{
           marginTop: 12,
-          paddingHorizontal: 20,
+          paddingHorizontal: 50,
         }}>
         <TextInput
           disabled={isChecking}
@@ -124,21 +85,24 @@ const CreateHandleScreen = () => {
       {username.length > 2 && true && (
         <Animated.View
           style={{
-              marginTop: 8,
+            marginTop: 8,
             paddingHorizontal: 30,
             flexDirection: 'row',
             justifyContent: 'center',
           }}
           entering={FadeInDown.duration(600)}
           exiting={FadeOutDown.duration(600)}>
-          <IconButton icon="arrow-right" iconColor={colors.text} size={30} mode="outlined"/>
+          <IconButton
+            onPress={nextFn}
+            icon="arrow-right"
+            iconColor={colors.text}
+            size={30}
+            mode="outlined"
+          />
         </Animated.View>
       )}
-      <View style={{position: 'absolute', bottom: 0, left: 0, right: 0}}>
-        <StartFooter />
-      </View>
-    </View>
+    </Animated.View>
   );
 };
 
-export default CreateHandleScreen;
+export default CreateUsernameSection;
