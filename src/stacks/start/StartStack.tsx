@@ -8,7 +8,7 @@ const StartNavStack = createNativeStackNavigator();
 
 function StartStack() {
   return (
-    <StartNavStack.Navigator initialRouteName="BoardShip">
+    <StartNavStack.Navigator initialRouteName="StartLanding">
       <StartNavStack.Screen
         name="StartLanding"
         component={LandingScreen}

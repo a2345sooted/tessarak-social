@@ -349,7 +349,7 @@ const IntroScreen = () => {
               <TouchableOpacity
                 onPress={() => {
                   //@ts-ignore
-                  navigation.navigate('BoardShipLandingScreen');
+                  navigation.navigate('BoardShip');
                 }}>
                 <List.Item
                   titleStyle={{color: colors.text, fontWeight: 'bold'}}

@@ -19,7 +19,10 @@ const BoardShipLandingScreen = () => {
     navigation.navigate('ShipRulesScreen');
   }
 
-  function handleBoardShipPress() {}
+  function handleBoardShipPress() {
+      //@ts-ignore
+      navigation.navigate('CreateHandleScreen');
+  }
 
   return (
     <View

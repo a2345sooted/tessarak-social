@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ShipRulesScreen from './ShipRulesScreen';
 import BoardShipLandingScreen from './BoardShipLandingScreen';
 import {NBZ, ShipBoardingDetails} from './mock-data';
+import CreateHandleScreen from './CreateHandleScreen';
 
 export type BoardShipContextContainer = {
   ship: ShipBoardingDetails | null;
@@ -38,6 +39,11 @@ function BoardShipStack() {
           name="ShipRulesScreen"
           component={ShipRulesScreen}
           options={{headerShown: false, presentation: 'modal'}}
+        />
+        <BoardShipNavStack.Screen
+          name="CreateHandleScreen"
+          component={CreateHandleScreen}
+          options={{headerShown: false}}
         />
       </BoardShipNavStack.Navigator>
     </BoardShipContext.Provider>
