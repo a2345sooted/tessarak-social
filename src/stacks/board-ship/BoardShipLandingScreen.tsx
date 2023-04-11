@@ -1,21 +1,18 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import {Button, Divider, IconButton, Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
 import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import Animated, {
-  FadeInDown,
-  FadeOutDown,
-} from 'react-native-reanimated';
-import { StartFooter } from '../start/IntroScreen';
+import Animated, {FadeInDown, FadeOutDown} from 'react-native-reanimated';
+import {StartFooter} from '../start/IntroScreen';
+import {BoardShipContext} from './BoardShipStack';
 
 const BoardShipLandingScreen = () => {
   const {colors} = useContext(AppContext);
+  const {ship, agreedToRules} = useContext(BoardShipContext);
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
-
-  const [rulesAgreed, setRulesAgreed] = useState(false);
 
   function handleReadRulesPress() {
     //@ts-ignore
@@ -47,12 +44,12 @@ const BoardShipLandingScreen = () => {
           <Text
             variant="titleLarge"
             style={{fontWeight: 'bold', color: colors.text}}>
-            The Nebuchadnezzar
+            {ship?.name}
           </Text>
           <Text
             variant="titleMedium"
             style={{fontWeight: 'bold', color: colors.text}}>
-            Some tagline
+            {ship?.motto}
           </Text>
         </View>
       </View>
@@ -62,7 +59,7 @@ const BoardShipLandingScreen = () => {
           paddingHorizontal: 20,
         }}>
         <Text variant="titleSmall" style={{color: colors.text}}>
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+          {ship?.description}
         </Text>
       </View>
       <View
@@ -79,7 +76,7 @@ const BoardShipLandingScreen = () => {
         <Text
           variant="titleMedium"
           style={{fontWeight: 'bold', color: colors.text}}>
-          The Tessarak Foundation
+          {ship?.owner.name}
         </Text>
       </View>
       <View
@@ -95,7 +92,7 @@ const BoardShipLandingScreen = () => {
         <Text
           variant="headlineMedium"
           style={{fontWeight: '800', color: colors.text}}>
-          1,767
+          {ship?.numOrbs}
         </Text>
       </View>
       <View
@@ -118,7 +115,7 @@ const BoardShipLandingScreen = () => {
           Read the Rules
         </Button>
       </View>
-      {rulesAgreed && (
+      {agreedToRules && (
         <Animated.View
           entering={FadeInDown.duration(600)}
           exiting={FadeOutDown.duration(600)}
