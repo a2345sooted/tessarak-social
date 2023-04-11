@@ -103,7 +103,7 @@ const NbzLandingScreen = () => {
         <Text
           variant="titleSmall"
           style={{fontWeight: 'bold', color: colors.tessarak}}>
-          Number of orbs onboard:
+          # Orbs:
         </Text>
         <Text
           variant="headlineMedium"
