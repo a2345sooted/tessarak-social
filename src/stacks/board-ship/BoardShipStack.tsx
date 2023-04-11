@@ -21,7 +21,7 @@ const BoardShipNavStack = createNativeStackNavigator();
 
 function BoardShipStack() {
   const [ship, setShip] = useState<ShipBoardingDetails | null>(NBZ);
-  const [agreedToRules, setAgreedToRules] = useState(true);
+  const [agreedToRules, setAgreedToRules] = useState(false);
 
   function toggleAgreedToRules(agreed: boolean): void {
     setAgreedToRules(agreed);

@@ -1,10 +1,20 @@
 import React, {useContext, useRef, useState} from 'react';
 import {AppContext} from '@app-ctx';
-import Animated, { FadeInDown, FadeInRight, FadeOutDown, FadeOutRight } from 'react-native-reanimated';
+import Animated, {
+  FadeInDown,
+  FadeInRight,
+  FadeOutDown,
+  FadeOutRight,
+} from 'react-native-reanimated';
 import {View} from 'react-native';
 import {Button, IconButton, Text, TextInput} from 'react-native-paper';
 
-const VerifyCodeSection = () => {
+interface VerifyCodeSectionProps {
+  nextFn: () => void;
+  prevFn: () => void;
+}
+
+const VerifyCodeSection = ({nextFn, prevFn}: VerifyCodeSectionProps) => {
   const {colors} = useContext(AppContext);
   const codeInputRef = useRef<any>();
   const [isVerifying, setIsVerifying] = useState(false);
@@ -88,6 +98,7 @@ const VerifyCodeSection = () => {
           entering={FadeInDown.duration(600)}
           exiting={FadeOutDown.duration(600)}>
           <IconButton
+            onPress={prevFn}
             icon="arrow-right"
             iconColor={colors.text}
             size={30}

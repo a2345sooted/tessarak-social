@@ -237,7 +237,7 @@ const IntroScreen = () => {
 
     if (slide.index === 3 && slide.lineIndex === 0) {
       orbPaddingBottomCursor.value = withSpring(insets.bottom + 10);
-      tkDelay(1000).then(() => setShowRocketOptions(true));
+      tkDelay(100).then(() => setShowRocketOptions(true));
     }
   }, [slide]);
 
@@ -331,8 +331,8 @@ const IntroScreen = () => {
         {showRocketOptions && (
           <Animated.View
             style={{marginTop: 8}}
-            entering={FadeInDown.duration(600)}
-            exiting={FadeOutDown.duration(600)}>
+            entering={FadeInRight.duration(600)}
+            exiting={FadeOutRight.duration(600)}>
             <List.Section
               style={{
                 borderRadius: 4,

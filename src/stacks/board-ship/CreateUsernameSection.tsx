@@ -39,6 +39,7 @@ const CreateUsernameSection = ({nextFn}: CreateUsernameSectionProps) => {
           paddingHorizontal: 50,
         }}>
         <TextInput
+            autoFocus
           disabled={isChecking}
           placeholder="username"
           maxLength={20}

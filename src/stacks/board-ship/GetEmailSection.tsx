@@ -1,10 +1,20 @@
 import React, {useContext, useRef, useState} from 'react';
 import {AppContext} from '@app-ctx';
-import Animated, { FadeInDown, FadeInRight, FadeOutDown, FadeOutRight } from 'react-native-reanimated';
+import Animated, {
+  FadeInDown,
+  FadeInRight,
+  FadeOutDown,
+  FadeOutRight,
+} from 'react-native-reanimated';
 import {View} from 'react-native';
 import {Button, IconButton, Text, TextInput} from 'react-native-paper';
 
-const GetEmailSection = () => {
+export interface GetEmailSectionProps {
+  nextFn: () => void;
+  prevFn: () => void;
+}
+
+const GetEmailSection = ({nextFn, prevFn}: GetEmailSectionProps) => {
   const {colors} = useContext(AppContext);
   const emailInputRef = useRef<any>();
   const [isSendingCode, setIsSendingCode] = useState(false);
@@ -35,6 +45,7 @@ const GetEmailSection = () => {
           paddingHorizontal: 50,
         }}>
         <TextInput
+            autoFocus
           disabled={isSendingCode}
           placeholder="email"
           maxLength={20}
@@ -65,37 +76,36 @@ const GetEmailSection = () => {
           @tessarak.org
         </Text>
       </View>
-        {email.length > 2 && (
-            <Animated.View
-                style={{marginTop: 20, paddingHorizontal: 30}}
-                entering={FadeInDown.duration(600)}
-                exiting={FadeOutDown.duration(600)}>
-                <Button
-                    mode="outlined"
-                    uppercase
-                    labelStyle={{fontWeight: '900', color: '#48d203'}}>
-                    Send Code
-                </Button>
-            </Animated.View>
-        )}
-      {email.length > 2 && true && (
+      {email.length > 2 && (
         <Animated.View
-          style={{
-            marginTop: 8,
-            paddingHorizontal: 30,
-            flexDirection: 'row',
-            justifyContent: 'center',
-          }}
+          style={{marginTop: 20, paddingHorizontal: 30}}
           entering={FadeInDown.duration(600)}
           exiting={FadeOutDown.duration(600)}>
-          <IconButton
-            icon="arrow-left"
-            iconColor={colors.text}
-            size={30}
+          <Button
             mode="outlined"
-          />
+            uppercase
+            labelStyle={{fontWeight: '900', color: '#48d203'}}>
+            Send Code
+          </Button>
         </Animated.View>
       )}
+      <Animated.View
+        style={{
+          marginTop: 8,
+          paddingHorizontal: 30,
+          flexDirection: 'row',
+          justifyContent: 'center',
+        }}
+        entering={FadeInDown.duration(600)}
+        exiting={FadeOutDown.duration(600)}>
+        <IconButton
+          onPress={prevFn}
+          icon="arrow-left"
+          iconColor={colors.text}
+          size={30}
+          mode="outlined"
+        />
+      </Animated.View>
     </Animated.View>
   );
 };

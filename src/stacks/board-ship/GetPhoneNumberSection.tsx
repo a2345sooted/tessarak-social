@@ -1,10 +1,23 @@
 import React, {useContext, useRef, useState} from 'react';
 import {AppContext} from '@app-ctx';
-import Animated, { FadeInDown, FadeInRight, FadeOutDown, FadeOutRight } from 'react-native-reanimated';
+import Animated, {
+  FadeInDown,
+  FadeInRight,
+  FadeOutDown,
+  FadeOutRight,
+} from 'react-native-reanimated';
 import {View} from 'react-native';
 import {Button, IconButton, Text, TextInput} from 'react-native-paper';
 
-const GetPhoneNumberSection = () => {
+export interface GetPhoneNumberSectionProps {
+  nextFn: () => void;
+  prevFn: () => void;
+}
+
+const GetPhoneNumberSection = ({
+  nextFn,
+  prevFn,
+}: GetPhoneNumberSectionProps) => {
   const {colors} = useContext(AppContext);
   const phoneInputRef = useRef<any>();
   const [isSendingCode, setIsSendingCode] = useState(false);
@@ -35,6 +48,7 @@ const GetPhoneNumberSection = () => {
           paddingHorizontal: 50,
         }}>
         <TextInput
+            autoFocus
           disabled={isSendingCode}
           placeholder="Phone Number"
           maxLength={20}
@@ -77,24 +91,23 @@ const GetPhoneNumberSection = () => {
           </Button>
         </Animated.View>
       )}
-      {phoneNumber.length > 2 && true && (
-        <Animated.View
-          style={{
-            marginTop: 8,
-            paddingHorizontal: 30,
-            flexDirection: 'row',
-            justifyContent: 'center',
-          }}
-          entering={FadeInDown.duration(600)}
-          exiting={FadeOutDown.duration(600)}>
-          <IconButton
-            icon="arrow-left"
-            iconColor={colors.text}
-            size={30}
-            mode="outlined"
-          />
-        </Animated.View>
-      )}
+      <Animated.View
+        style={{
+          marginTop: 8,
+          paddingHorizontal: 30,
+          flexDirection: 'row',
+          justifyContent: 'center',
+        }}
+        entering={FadeInDown.duration(600)}
+        exiting={FadeOutDown.duration(600)}>
+        <IconButton
+          onPress={prevFn}
+          icon="arrow-left"
+          iconColor={colors.text}
+          size={30}
+          mode="outlined"
+        />
+      </Animated.View>
     </Animated.View>
   );
 };

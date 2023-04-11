@@ -63,6 +63,10 @@ const SetupShipAuthScreen = () => {
     }
   }
 
+  function handleBackFromVerifyCode() {
+    gotoGetEmailSection();
+  }
+
   return (
     <View
       style={{backgroundColor: colors.bg1, flex: 1, paddingTop: insets.top}}>
@@ -76,9 +80,9 @@ const SetupShipAuthScreen = () => {
           prevFn={gotoCreateUsernameSection}
         />
       )}
-      {section === AuthSetupSection.GET_PHONE && <GetPhoneNumberSection />}
-      {section === AuthSetupSection.GET_EMAIL && <GetEmailSection />}
-      {section === AuthSetupSection.VERIFY_CODE && <VerifyCodeSection />}
+      {section === AuthSetupSection.GET_PHONE && <GetPhoneNumberSection nextFn={gotoVerifyCodeSection} prevFn={gotoChooseAuthMethodSection} />}
+      {section === AuthSetupSection.GET_EMAIL && <GetEmailSection nextFn={gotoVerifyCodeSection} prevFn={gotoChooseAuthMethodSection} />}
+      {section === AuthSetupSection.VERIFY_CODE && <VerifyCodeSection nextFn={() => {}} prevFn={handleBackFromVerifyCode} />}
       <View style={{position: 'absolute', bottom: 0, left: 0, right: 0}}>
         <StartFooter />
       </View>
