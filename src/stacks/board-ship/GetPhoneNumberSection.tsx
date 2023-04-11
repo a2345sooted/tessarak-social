@@ -1,6 +1,6 @@
 import React, {useContext, useRef, useState} from 'react';
 import {AppContext} from '@app-ctx';
-import Animated, {FadeInDown, FadeOutDown} from 'react-native-reanimated';
+import Animated, { FadeInDown, FadeInRight, FadeOutDown, FadeOutRight } from 'react-native-reanimated';
 import {View} from 'react-native';
 import {Button, IconButton, Text, TextInput} from 'react-native-paper';
 
@@ -12,8 +12,8 @@ const GetPhoneNumberSection = () => {
 
   return (
     <Animated.View
-      entering={FadeInDown.duration(600)}
-      exiting={FadeOutDown.duration(600)}>
+      entering={FadeInRight.duration(600)}
+      exiting={FadeOutRight.duration(600)}>
       <View
         style={{
           marginTop: 12,
@@ -73,7 +73,7 @@ const GetPhoneNumberSection = () => {
             mode="outlined"
             uppercase
             labelStyle={{fontWeight: '900', color: '#48d203'}}>
-            Check Availability
+            Send Code
           </Button>
         </Animated.View>
       )}
@@ -88,7 +88,7 @@ const GetPhoneNumberSection = () => {
           entering={FadeInDown.duration(600)}
           exiting={FadeOutDown.duration(600)}>
           <IconButton
-            icon="arrow-right"
+            icon="arrow-left"
             iconColor={colors.text}
             size={30}
             mode="outlined"

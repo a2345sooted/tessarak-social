@@ -1,6 +1,6 @@
 import React, {useContext, useRef, useState} from 'react';
 import {AppContext} from '@app-ctx';
-import Animated, {FadeInDown, FadeOutDown} from 'react-native-reanimated';
+import Animated, { FadeInDown, FadeInRight, FadeOutDown, FadeOutRight } from 'react-native-reanimated';
 import {View} from 'react-native';
 import {Button, IconButton, Text, TextInput} from 'react-native-paper';
 
@@ -12,8 +12,8 @@ const GetEmailSection = () => {
 
   return (
     <Animated.View
-      entering={FadeInDown.duration(600)}
-      exiting={FadeOutDown.duration(600)}>
+      entering={FadeInRight.duration(600)}
+      exiting={FadeOutRight.duration(600)}>
       <View
         style={{
           marginTop: 12,
@@ -26,7 +26,7 @@ const GetEmailSection = () => {
             textAlign: 'center',
             fontWeight: '900',
           }}>
-          Choose a username:
+          What is your email?
         </Text>
       </View>
       <View
@@ -65,19 +65,19 @@ const GetEmailSection = () => {
           @tessarak.org
         </Text>
       </View>
-      {email.length > 2 && (
-        <Animated.View
-          style={{marginTop: 20, paddingHorizontal: 30}}
-          entering={FadeInDown.duration(600)}
-          exiting={FadeOutDown.duration(600)}>
-          <Button
-            mode="outlined"
-            uppercase
-            labelStyle={{fontWeight: '900', color: '#48d203'}}>
-            Check Availability
-          </Button>
-        </Animated.View>
-      )}
+        {email.length > 2 && (
+            <Animated.View
+                style={{marginTop: 20, paddingHorizontal: 30}}
+                entering={FadeInDown.duration(600)}
+                exiting={FadeOutDown.duration(600)}>
+                <Button
+                    mode="outlined"
+                    uppercase
+                    labelStyle={{fontWeight: '900', color: '#48d203'}}>
+                    Send Code
+                </Button>
+            </Animated.View>
+        )}
       {email.length > 2 && true && (
         <Animated.View
           style={{
@@ -89,7 +89,7 @@ const GetEmailSection = () => {
           entering={FadeInDown.duration(600)}
           exiting={FadeOutDown.duration(600)}>
           <IconButton
-            icon="arrow-right"
+            icon="arrow-left"
             iconColor={colors.text}
             size={30}
             mode="outlined"

@@ -1,6 +1,6 @@
 import React, {useContext, useRef, useState} from 'react';
 import {AppContext} from '@app-ctx';
-import Animated, {FadeInDown, FadeOutDown} from 'react-native-reanimated';
+import Animated, { FadeInDown, FadeInRight, FadeOutDown, FadeOutRight } from 'react-native-reanimated';
 import {View} from 'react-native';
 import {Button, IconButton, Text, TextInput} from 'react-native-paper';
 
@@ -12,8 +12,8 @@ const VerifyCodeSection = () => {
 
   return (
     <Animated.View
-      entering={FadeInDown.duration(600)}
-      exiting={FadeOutDown.duration(600)}>
+      entering={FadeInRight.duration(600)}
+      exiting={FadeOutRight.duration(600)}>
       <View
         style={{
           marginTop: 12,
