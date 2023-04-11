@@ -47,7 +47,7 @@ const GetEmailSection = ({nextFn, prevFn}: GetEmailSectionProps) => {
         <TextInput
             autoFocus
           disabled={isSendingCode}
-          placeholder="email"
+          placeholder=" "
           maxLength={20}
           keyboardType="email-address"
           autoCapitalize="none"
@@ -70,11 +70,6 @@ const GetEmailSection = ({nextFn, prevFn}: GetEmailSectionProps) => {
             setEmail(text);
           }}
         />
-        <Text
-          variant="titleSmall"
-          style={{color: colors.text, textAlign: 'center'}}>
-          @tessarak.org
-        </Text>
       </View>
       {email.length > 2 && (
         <Animated.View

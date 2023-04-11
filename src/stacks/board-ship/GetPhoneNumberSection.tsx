@@ -50,7 +50,7 @@ const GetPhoneNumberSection = ({
         <TextInput
             autoFocus
           disabled={isSendingCode}
-          placeholder="Phone Number"
+          placeholder=" "
           maxLength={20}
           keyboardType="number-pad"
           returnKeyType="done"
@@ -72,11 +72,6 @@ const GetPhoneNumberSection = ({
             setPhoneNumber(text);
           }}
         />
-        <Text
-          variant="titleSmall"
-          style={{color: colors.text, textAlign: 'center'}}>
-          @tessarak.org
-        </Text>
       </View>
       {phoneNumber.length > 2 && (
         <Animated.View
