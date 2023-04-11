@@ -2,6 +2,7 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import LandingScreen from './LandingScreen';
 import IntroScreenOne from './IntroScreenOne';
+import NbzLandingScreen from './NbzLandingScreen';
 
 const StartNavStack = createNativeStackNavigator();
 
@@ -16,6 +17,11 @@ function StartStack() {
       <StartNavStack.Screen
         name="IntroScreenOne"
         component={IntroScreenOne}
+        options={{headerShown: false}}
+      />
+      <StartNavStack.Screen
+        name="NbzLandingScreen"
+        component={NbzLandingScreen}
         options={{headerShown: false}}
       />
     </StartNavStack.Navigator>

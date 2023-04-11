@@ -1,6 +1,6 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {Alert, StyleSheet, View} from 'react-native';
-import {Divider, IconButton, List, Text} from 'react-native-paper';
+import {IconButton, List, Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
 import {SafeScreen} from '@common';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -8,9 +8,11 @@ import Animated, {
   FadeIn,
   FadeInDown,
   FadeInLeft,
+  FadeInRight,
   FadeInUp,
   FadeOutDown,
   FadeOutLeft,
+  FadeOutRight,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -19,8 +21,9 @@ import {PulseIndicator} from 'react-native-indicators';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {tkDelay} from '@utils';
 import TessaLine, {TessaMessageLine} from './TessaLine';
-import {triggerImpactLight, triggerImpactMedium} from '@haptic';
+import {triggerImpactLight} from '@haptic';
 import {DarkAppColors} from '@theme';
+import {useNavigation} from '@react-navigation/native';
 
 interface StartFooterProps {}
 
@@ -181,6 +184,7 @@ const SLIDES: Slide[] = [
 
 const IntroScreenOne = () => {
   const {colors} = useContext(AppContext);
+  const navigation = useNavigation();
 
   const [slide, setSlide] = useState(SLIDES[0]);
   const [startTyping, setStartTyping] = useState(false);
@@ -297,28 +301,33 @@ const IntroScreenOne = () => {
           </View>
         ))}
         {showRocketOptions && (
-          <View style={{marginTop: 12}}>
+          <Animated.View
+            style={{marginTop: 12}}
+            entering={FadeInRight.duration(600)}
+            exiting={FadeOutRight.duration(600)}>
             <List.Section>
               <List.Subheader style={{color: colors.text}}>
                 Community Rockets{' '}
-                <Text variant="bodySmall" style={{color: colors.text}}>
-                  - FREE
+                <Text variant="bodySmall" style={{color: colors.text, fontWeight: 'bold'}}>
+                  - FREE TO BOARD
                 </Text>
               </List.Subheader>
-              <List.Item
-                titleStyle={{color: colors.text, fontWeight: 'bold'}}
-                title="The Nebuchadnezzar"
-                descriptionStyle={{color: colors.text}}
-                description="Owner: The Tessarak Foundation"
-                left={() => <List.Icon color={'#bb9604'} icon="bell" />}
-                right={() => (
-                  <List.Icon color={colors.text} icon="arrow-right" />
-                )}
-              />
-              {/*<Divider />*/}
-              {/*<Text variant="bodySmall" style={{color: colors.text, marginTop: 12}}>*/}
-              {/*  [... more community options to come]*/}
-              {/*</Text>*/}
+              <TouchableOpacity
+                onPress={() => {
+                  //@ts-ignore
+                  navigation.navigate('NbzLandingScreen');
+                }}>
+                <List.Item
+                  titleStyle={{color: colors.text, fontWeight: 'bold'}}
+                  title="The Nebuchadnezzar"
+                  descriptionStyle={{color: colors.text}}
+                  description="Owner: The Tessarak Foundation"
+                  left={() => <List.Icon color={'#bb9604'} icon="bell" />}
+                  right={() => (
+                    <List.Icon color={colors.text} icon="arrow-right" />
+                  )}
+                />
+              </TouchableOpacity>
             </List.Section>
             <List.Section>
               <List.Subheader style={{color: colors.text}}>
@@ -327,22 +336,20 @@ const IntroScreenOne = () => {
                   (not yet available)
                 </Text>
               </List.Subheader>
-              <List.Item
-                titleStyle={{color: colors.text, fontWeight: 'bold'}}
-                title="The Tessarak Foundation"
-                descriptionStyle={{color: colors.text}}
-                description="Custom, infra-managed rockets for $X/mo and up."
-                left={() => (
-                  <List.Icon color={colors.tessarak} icon="cube-outline" />
-                )}
-                right={() => (
-                  <List.Icon color={colors.text} icon="arrow-right" />
-                )}
-              />
-              {/*<Divider />*/}
-              {/*<Text variant="bodySmall" style={{color: colors.text, marginTop: 12}}>*/}
-              {/*  [... more builder options to come]*/}
-              {/*</Text>*/}
+              <TouchableOpacity onPress={() => Alert.alert('In progress.')}>
+                <List.Item
+                  titleStyle={{color: colors.text, fontWeight: 'bold'}}
+                  title="The Tessarak Foundation"
+                  descriptionStyle={{color: colors.text}}
+                  description="Custom, infra-managed rockets for $X/mo and up."
+                  left={() => (
+                    <List.Icon color={colors.tessarak} icon="cube-outline" />
+                  )}
+                  right={() => (
+                    <List.Icon color={colors.text} icon="arrow-right" />
+                  )}
+                />
+              </TouchableOpacity>
             </List.Section>
             <List.Section>
               <List.Subheader style={{color: colors.text}}>
@@ -351,21 +358,22 @@ const IntroScreenOne = () => {
                   (not yet available)
                 </Text>
               </List.Subheader>
-              <List.Item
-                titleStyle={{color: colors.text, fontWeight: 'bold'}}
-                title="BYOR"
-                descriptionStyle={{color: colors.text}}
-                description="Manually setup your rocket connection... it's easy :)"
-                left={() => (
-                  <List.Icon color={colors.text} icon="rocket-outline" />
-                )}
-                right={() => (
-                  <List.Icon color={colors.text} icon="arrow-right" />
-                )}
-              />
-              {/*<Divider />*/}
+              <TouchableOpacity onPress={() => Alert.alert('In progress.')}>
+                <List.Item
+                  titleStyle={{color: colors.text, fontWeight: 'bold'}}
+                  title="BYOR"
+                  descriptionStyle={{color: colors.text}}
+                  description="Manually setup your rocket connection... it's easy :)"
+                  left={() => (
+                    <List.Icon color={colors.text} icon="rocket-outline" />
+                  )}
+                  right={() => (
+                    <List.Icon color={colors.text} icon="arrow-right" />
+                  )}
+                />
+              </TouchableOpacity>
             </List.Section>
-          </View>
+          </Animated.View>
         )}
         <View style={{flex: 1}} />
         <Animated.View
