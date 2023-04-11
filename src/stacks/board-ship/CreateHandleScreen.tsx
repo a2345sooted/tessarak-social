@@ -29,36 +29,47 @@ const CreateHandleScreen = () => {
           iconColor={colors.text}
           size={30}
           onPress={() => navigation.goBack()}
+          style={{flex: 1}}
         />
+          <IconButton icon="bell" iconColor={'#bb9604'} size={60} style={{flex: 2}}/>
+          <View style={{flex: 1}}/>
+      </View>
+      <View
+        style={{
+          paddingHorizontal: 20,
+          // flexDirection: 'row',
+          //   justifyContent: 'center',
+          // alignItems: 'center',
+        }}>
+        {/*<View>*/}
+        {/*<View style={{flexDirection: 'row', justifyContent: 'center'}}>*/}
+        {/*  <IconButton icon="bell" iconColor={'#bb9604'} size={30} />*/}
+        {/*</View>*/}
+        <Text
+          variant="headlineSmall"
+          style={{fontWeight: 'bold', color: colors.text, textAlign: 'center'}}>
+          {ship?.name}
+        </Text>
+        <Text
+          variant="titleSmall"
+          style={{color: colors.text, textAlign: 'center'}}>
+          {ship?.motto}
+        </Text>
+        {/*</View>*/}
       </View>
       <View
         style={{
           marginTop: 12,
           paddingHorizontal: 20,
-          flexDirection: 'row',
-          alignItems: 'center',
         }}>
-        <IconButton icon="bell" iconColor={'#bb9604'} size={30} />
-        <View>
-          <Text
-            variant="titleLarge"
-            style={{fontWeight: 'bold', color: colors.text}}>
-            {ship?.name}
-          </Text>
-          <Text
-            variant="titleMedium"
-            style={{fontWeight: 'bold', color: colors.text}}>
-            {ship?.motto}
-          </Text>
-        </View>
-      </View>
-      <View
-        style={{
-          marginTop: 12,
-          paddingHorizontal: 20,
-        }}>
-        <Text variant="titleSmall" style={{color: colors.text}}>
-          In order to board, you must choose a username:
+        <Text
+          variant="titleMedium"
+          style={{
+            color: colors.bizarroTessarak,
+            textAlign: 'center',
+            fontWeight: '900',
+          }}>
+          Choose a username:
         </Text>
       </View>
       <View
@@ -75,7 +86,7 @@ const CreateHandleScreen = () => {
           returnKeyType="done"
           // onSubmitEditing={handleSubmit}
           ref={(input: any) => (usernameInputRef.current = input)}
-          style={{fontSize: 26, textAlign: 'left', paddingHorizontal: 8}}
+          style={{fontSize: 26, textAlign: 'center', paddingHorizontal: 8}}
           textColor={colors.text}
           underlineColor={colors.tessarak}
           activeUnderlineColor={colors.tessarak}
@@ -91,10 +102,38 @@ const CreateHandleScreen = () => {
             setUsername(text);
           }}
         />
-        <Text variant="titleSmall" style={{color: colors.text}}>
+        <Text
+          variant="titleSmall"
+          style={{color: colors.text, textAlign: 'center'}}>
           @tessarak.org
         </Text>
       </View>
+      {username.length > 2 && (
+        <Animated.View
+          style={{marginTop: 20, paddingHorizontal: 30}}
+          entering={FadeInDown.duration(600)}
+          exiting={FadeOutDown.duration(600)}>
+          <Button
+            mode="outlined"
+            uppercase
+            labelStyle={{fontWeight: '900', color: '#48d203'}}>
+            Check Availability
+          </Button>
+        </Animated.View>
+      )}
+      {username.length > 2 && true && (
+        <Animated.View
+          style={{
+              marginTop: 8,
+            paddingHorizontal: 30,
+            flexDirection: 'row',
+            justifyContent: 'center',
+          }}
+          entering={FadeInDown.duration(600)}
+          exiting={FadeOutDown.duration(600)}>
+          <IconButton icon="arrow-right" iconColor={colors.text} size={30} mode="outlined"/>
+        </Animated.View>
+      )}
       <View style={{position: 'absolute', bottom: 0, left: 0, right: 0}}>
         <StartFooter />
       </View>
