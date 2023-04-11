@@ -48,7 +48,7 @@ const GetPhoneNumberSection = ({
           paddingHorizontal: 50,
         }}>
         <TextInput
-            autoFocus
+          autoFocus
           disabled={isSendingCode}
           placeholder=" "
           maxLength={20}

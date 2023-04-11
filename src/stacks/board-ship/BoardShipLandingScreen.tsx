@@ -173,7 +173,7 @@ const BoardShipLandingScreen = () => {
             mode="contained"
             labelStyle={{fontWeight: '800'}}
             buttonColor={colors.tessarak}>
-            Board the Ship
+            Begin Boarding
           </Button>
         </Animated.View>
       )}

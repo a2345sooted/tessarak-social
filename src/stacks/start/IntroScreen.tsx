@@ -95,15 +95,15 @@ const SLIDE_1_LINES: TessaMessageLine[] = [
 ];
 
 const SLIDE_2_LINES: TessaMessageLine[] = [
-  {
-    id: 1,
-    text: 'The Tessarak can not be censored by governments or corporations.',
-    delayNext: 200,
-    fadeColor: true,
-  },
+  // {
+  //   id: 1,
+  //   text: 'The Tessarak can not be censored by governments or corporations.',
+  //   delayNext: 200,
+  //   fadeColor: true,
+  // },
   {
     id: 2,
-    text: 'In order to achieve this, the pH level in the Tessarak is pretty high and orbs can not survive in it without some kind of protection.',
+    text: 'The pH level in the Tessarak is pretty high and there are a lot of sharp edges. Orbs can not survive in it without some kind of protection.',
     delayNext: 200,
     fadeColor: true,
   },
