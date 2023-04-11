@@ -1,6 +1,6 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {Alert, StyleSheet, View} from 'react-native';
-import {IconButton, List, Text} from 'react-native-paper';
+import {Divider, IconButton, List, Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
 import {SafeScreen} from '@common';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -262,19 +262,34 @@ const IntroScreenOne = () => {
   return (
     <SafeScreen>
       <Animated.View
-        style={{flex: 1, paddingHorizontal: 30}}
+        style={{flex: 1, paddingHorizontal: 12}}
         entering={FadeIn.duration(300)}>
         <View
           style={{
-            paddingTop: 100,
+            paddingTop: 20,
             flexDirection: 'row',
             justifyContent: 'center',
           }}>
-          <Text
-            variant="titleLarge"
-            style={{fontWeight: 'bold', color: '#c66ef1'}}>
-            Tessarak
-          </Text>
+          <View>
+            <Text
+              variant="titleLarge"
+              style={{
+                fontWeight: 'bold',
+                color: '#c66ef1',
+                textAlign: 'center',
+              }}>
+              Tessarak
+            </Text>
+            <Text
+              variant="titleMedium"
+              style={{
+                fontWeight: 'bold',
+                color: colors.text,
+                textAlign: 'center',
+              }}>
+              choose a ship
+            </Text>
+          </View>
         </View>
         {SLIDES.map((s, slideIndex) => (
           <View key={`slide-${slideIndex}`}>
@@ -306,13 +321,15 @@ const IntroScreenOne = () => {
         ))}
         {showRocketOptions && (
           <Animated.View
-            style={{marginTop: 12}}
+            style={{marginTop: 8}}
             entering={FadeInRight.duration(600)}
             exiting={FadeOutRight.duration(600)}>
-            <List.Section>
+            <List.Section style={{borderRadius: 4, backgroundColor: '#3d3d3d', paddingHorizontal: 12, paddingVertical: 2}}>
               <List.Subheader style={{color: colors.text}}>
                 Community Rockets{' '}
-                <Text variant="bodySmall" style={{color: colors.text, fontWeight: 'bold'}}>
+                <Text
+                  variant="bodySmall"
+                  style={{color: colors.text, fontWeight: 'bold'}}>
                   - FREE TO BOARD
                 </Text>
               </List.Subheader>
@@ -332,8 +349,25 @@ const IntroScreenOne = () => {
                   )}
                 />
               </TouchableOpacity>
+              <Divider style={{marginTop: 16}}/>
+              <TouchableOpacity
+                onPress={() => {
+                  //@ts-ignore
+                  navigation.navigate('NbzLandingScreen');
+                }}>
+                <List.Item
+                  titleStyle={{color: colors.text}}
+                  title="More Options"
+                  // left={() => (
+                  //   <List.Icon color={colors.text} icon="dots-vertical" />
+                  // )}
+                  right={() => (
+                    <List.Icon color={colors.text} icon="arrow-right" />
+                  )}
+                />
+              </TouchableOpacity>
             </List.Section>
-            <List.Section>
+            <List.Section style={{borderRadius: 4, backgroundColor: '#3d3d3d', paddingHorizontal: 12, paddingVertical: 2, marginTop: -2}}>
               <List.Subheader style={{color: colors.text}}>
                 Rocket Builders{' '}
                 <Text variant="bodySmall" style={{color: colors.text}}>
@@ -354,8 +388,25 @@ const IntroScreenOne = () => {
                   )}
                 />
               </TouchableOpacity>
+              <Divider style={{marginTop: 16}}/>
+              <TouchableOpacity
+                onPress={() => {
+                  //@ts-ignore
+                  navigation.navigate('NbzLandingScreen');
+                }}>
+                <List.Item
+                  titleStyle={{color: colors.text}}
+                  title="More Options"
+                  // left={() => (
+                  //   <List.Icon color={colors.text} icon="dots-vertical" />
+                  // )}
+                  right={() => (
+                    <List.Icon color={colors.text} icon="arrow-right" />
+                  )}
+                />
+              </TouchableOpacity>
             </List.Section>
-            <List.Section>
+            <List.Section style={{borderRadius: 4, backgroundColor: '#3d3d3d', paddingHorizontal: 12, paddingVertical: 2, marginTop: -2}}>
               <List.Subheader style={{color: colors.text}}>
                 Private Rockets{' '}
                 <Text variant="bodySmall" style={{color: colors.text}}>

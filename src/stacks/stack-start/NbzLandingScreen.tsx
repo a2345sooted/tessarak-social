@@ -17,7 +17,7 @@ const NbzLandingScreen = () => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
 
-  const [rulesAgreed, setRulesAgreed] = useState(true);
+  const [rulesAgreed, setRulesAgreed] = useState(false);
 
   function handleReadRulesPress() {
     //@ts-ignore
@@ -143,7 +143,7 @@ const NbzLandingScreen = () => {
             paddingHorizontal: 20,
           }}>
           <Button
-            icon={'rocket'}
+            icon={'arrow-right'}
             onPress={handleBoardShipPress}
             uppercase
             mode="contained"
