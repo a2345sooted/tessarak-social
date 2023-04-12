@@ -53,7 +53,7 @@ const LandingScreen = () => {
             choose your dimensions
           </Text>
         </View>
-        <View style={{marginTop: 30, paddingHorizontal: 10}}>
+        <View style={{marginTop: 15, paddingHorizontal: 10}}>
           <Animated.View
             entering={FadeIn.duration(1000)}
             exiting={FadeOut.duration(600)}>
@@ -64,7 +64,16 @@ const LandingScreen = () => {
                 color: colors.text,
                 marginBottom: 12,
               }}>
-              You must agree to the Tessarak terms of service to enter:
+              You must agree to the Tessarak terms of service to enter.
+            </Text>
+            <Text
+              variant="titleSmall"
+              style={{
+                fontWeight: 'bold',
+                color: colors.text,
+                marginBottom: 12,
+              }}>
+              Don't worry, they're short and easy to understand.
             </Text>
             <Button
               icon={agreed ? 'check-circle-outline' : 'circle-outline'}
