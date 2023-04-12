@@ -23,13 +23,19 @@ const AccountScreen = () => {
           flexDirection: 'row',
           alignItems: 'center',
         }}>
+
+          <TouchableOpacity
+              style={{width: 35, height: 35, marginLeft: 12}}
+              onPress={() => {}}>
+              <PulseIndicator color={colors.bizarroTessarak} size={35} />
+          </TouchableOpacity>
         <Text
           variant="headlineSmall"
           style={{
             fontWeight: 'bold',
             color: colors.text,
             flex: 1,
-            marginLeft: 20,
+            marginLeft: 8,
           }}>
           {/*{maskPhoneNumber(user!.phone.substring(2))}*/}
           Command Center
@@ -44,7 +50,7 @@ const AccountScreen = () => {
           }}
         />
         <IconButton
-          style={{marginLeft: -8}}
+          style={{marginLeft: -12}}
           icon="rocket"
           iconColor={colors.tessarak}
           size={25}
@@ -53,11 +59,6 @@ const AccountScreen = () => {
             navigation.navigate('Settings');
           }}
         />
-        <TouchableOpacity
-          style={{width: 35, height: 35, marginRight: 10, marginLeft: -4}}
-          onPress={() => {}}>
-          <PulseIndicator color={colors.bizarroTessarak} size={35} />
-        </TouchableOpacity>
       </View>
       <Divider />
       <View
