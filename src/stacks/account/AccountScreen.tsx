@@ -23,12 +23,11 @@ const AccountScreen = () => {
           flexDirection: 'row',
           alignItems: 'center',
         }}>
-
-          <TouchableOpacity
-              style={{width: 35, height: 35, marginLeft: 12}}
-              onPress={() => {}}>
-              <PulseIndicator color={colors.bizarroTessarak} size={35} />
-          </TouchableOpacity>
+        <TouchableOpacity
+          style={{width: 35, height: 35, marginLeft: 12}}
+          onPress={() => {}}>
+          <PulseIndicator color={colors.bizarroTessarak} size={35} />
+        </TouchableOpacity>
         <Text
           variant="headlineSmall"
           style={{
