@@ -1,17 +1,24 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {View} from 'react-native';
 import {Button, Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
 import {useNavigation} from '@react-navigation/native';
 import {SafeScreen} from '@common';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import Animated, {FadeIn} from 'react-native-reanimated';
+import Animated, {
+    FadeIn,
+    FadeInDown, FadeInRight,
+    FadeOut,
+    FadeOutDown, FadeOutRight,
+} from 'react-native-reanimated';
 import {triggerImpactMedium} from '@haptic';
 
 const LandingScreen = () => {
   const {colors, staked} = useContext(AppContext);
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
+
+  const [agreed, setAgreed] = useState(false);
 
   return (
     <SafeScreen>
@@ -46,20 +53,54 @@ const LandingScreen = () => {
             choose your dimensions
           </Text>
         </View>
-        <View style={{marginTop: 50, paddingHorizontal: 10}}>
-          <Button
-            uppercase
-            icon="arrow-right"
-            labelStyle={{color: colors.text, fontWeight: '800'}}
-            buttonColor={colors.tessarak}
-            theme={{roundness: 1}}
-            onPress={() => {
-              //@ts-ignore
-              navigation.navigate('IntroScreen');
-              triggerImpactMedium();
-            }}>
-            Enter
-          </Button>
+        <View style={{marginTop: 30, paddingHorizontal: 10}}>
+          <Animated.View
+            entering={FadeIn.duration(1000)}
+            exiting={FadeOut.duration(600)}>
+            <Text
+              variant="titleSmall"
+              style={{
+                fontWeight: 'bold',
+                color: colors.text,
+                marginBottom: 12,
+              }}>
+              You must agree to the Tessarak terms of service to enter:
+            </Text>
+            <Button
+              icon={agreed ? 'check-circle-outline' : 'circle-outline'}
+              uppercase
+              labelStyle={{color: colors.text, fontWeight: '800'}}
+              buttonColor={colors.tessarak}
+              theme={{roundness: 1}}
+              onPress={() => {
+                // //@ts-ignore
+                // navigation.navigate('IntroScreen');
+                // triggerImpactMedium();
+                setAgreed(!agreed);
+              }}>
+              Terms of Service
+            </Button>
+          </Animated.View>
+          {agreed && (
+            <Animated.View
+                style={{marginTop: 20}}
+              entering={FadeInRight.duration(600)}
+              exiting={FadeOutRight.duration(600)}>
+              <Button
+                uppercase
+                icon="arrow-right"
+                labelStyle={{color: colors.text, fontWeight: '800'}}
+                buttonColor={colors.bizarroTessarak}
+                theme={{roundness: 1}}
+                onPress={() => {
+                  //@ts-ignore
+                  navigation.navigate('IntroScreen');
+                  triggerImpactMedium();
+                }}>
+                Enter
+              </Button>
+            </Animated.View>
+          )}
         </View>
         <View style={{flex: 1}} />
         <View style={{marginBottom: 50, paddingHorizontal: 10}}>

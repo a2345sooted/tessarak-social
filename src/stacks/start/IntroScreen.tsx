@@ -236,7 +236,7 @@ const IntroScreen = () => {
     }
 
     if (slide.index === 3 && slide.lineIndex === 0) {
-      orbPaddingBottomCursor.value = withSpring(insets.bottom + 10);
+      orbPaddingBottomCursor.value = withSpring(insets.bottom);
       tkDelay(100).then(() => setShowRocketOptions(true));
     }
   }, [slide]);
