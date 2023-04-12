@@ -67,7 +67,7 @@ const AccountScreen = () => {
           flexDirection: 'row',
           justifyContent: 'center',
         }}>
-        <Avatar.Icon size={60} icon="folder" />
+        <Avatar.Icon size={60} icon="space-invaders" />
       </View>
       <View
         style={{
