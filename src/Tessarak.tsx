@@ -144,25 +144,25 @@ const Tessarak = () => {
           )}
           {!isCheckingAuth && !errorConnecting && (
             // <RootStack.Navigator initialRouteName={signedIn ? 'App' : 'Enter'}>
-            <RootStack.Navigator initialRouteName="Start">
+            <RootStack.Navigator initialRouteName="App">
               <RootStack.Screen
                 name="Start"
                 component={StartStack}
                 options={{headerShown: false, animation: 'none'}}
               />
-              {/*<RootStack.Screen*/}
-              {/*  name="Enter"*/}
-              {/*  component={EnterStack}*/}
-              {/*  options={{headerShown: false, animation: 'none'}}*/}
-              {/*/>*/}
-              {/*<RootStack.Screen*/}
-              {/*  name="App"*/}
-              {/*  component={AppStack}*/}
-              {/*  options={{*/}
-              {/*    headerShown: false,*/}
-              {/*    presentation: 'fullScreenModal',*/}
-              {/*  }}*/}
-              {/*/>*/}
+              <RootStack.Screen
+                name="Enter"
+                component={EnterStack}
+                options={{headerShown: false, animation: 'none'}}
+              />
+              <RootStack.Screen
+                name="App"
+                component={AppStack}
+                options={{
+                  headerShown: false,
+                  presentation: 'fullScreenModal',
+                }}
+              />
             </RootStack.Navigator>
           )}
         </NavigationContainer>

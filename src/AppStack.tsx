@@ -65,12 +65,12 @@ function AppStack() {
             height: 95,
           },
         }}>
-        {AppStackItem('Control', 'rocket', 'account', AccountStack)}
+        {AppStackItem('Command', 'apple-keyboard-command', 'account', AccountStack)}
         {/*{AppStackItem('Market', 'store', 'market', MarketplaceStack)}*/}
         {AppStackItem('Generate', 'shape-plus', 'create', CreateStack)}
         {AppStackItem('Tessarak', 'layers', 'tessarak', ContentFeedStack)}
+          {AppStackItem('Tessa', 'robot-excited', 'tessa', TessaStack)}
         {AppStackItem('Portals', 'lan', 'portals', MessagesStack)}
-        {AppStackItem('Tessa', 'robot-excited', 'tessa', TessaStack)}
       </AppNavStack.Navigator>
       {tessaHint && (
         <Animated.View
