@@ -4,7 +4,7 @@ import {
   Dimensions,
   NativeScrollEvent,
   NativeSyntheticEvent,
-  ScrollView,
+  ScrollView, View,
 } from 'react-native';
 import {AppContext} from '@app-ctx';
 import {
@@ -18,6 +18,8 @@ import {
 import {TkPicView} from './TkPicView';
 import {TkVideoView} from './TkVideoView';
 import {TkBeamView} from './TkBeamView';
+import { Text } from 'react-native-paper';
+import { TkNoteView } from './TkNoteView';
 
 const {height: screenHeight} = Dimensions.get('window');
 
@@ -86,6 +88,8 @@ export function DimensionView({meta}: DimensionViewProps): JSX.Element {
                 return <TkVideoView key={c.id} content={c as TkVideo} />;
               case 'beam':
                 return <TkBeamView key={c.id} content={c as TkBeam} />;
+              case 'note':
+                return <TkNoteView key={c.id} content={c as any} />;
             }
           })}
         </ScrollView>
