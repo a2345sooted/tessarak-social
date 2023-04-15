@@ -69,8 +69,8 @@ function AppStack() {
         {/*{AppStackItem('Market', 'store', 'market', MarketplaceStack)}*/}
         {AppStackItem('Generate', 'shape-plus', 'create', CreateStack)}
         {AppStackItem('Tessarak', 'layers', 'tessarak', ContentFeedStack)}
+          {AppStackItem('Portals', 'lan', 'portals', MessagesStack)}
           {AppStackItem('Tessa', 'robot-excited', 'tessa', TessaStack)}
-        {AppStackItem('Portals', 'lan', 'portals', MessagesStack)}
       </AppNavStack.Navigator>
       {tessaHint && (
         <Animated.View

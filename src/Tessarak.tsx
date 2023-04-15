@@ -144,7 +144,7 @@ const Tessarak = () => {
           )}
           {!isCheckingAuth && !errorConnecting && (
             // <RootStack.Navigator initialRouteName={signedIn ? 'App' : 'Enter'}>
-            <RootStack.Navigator initialRouteName="Start">
+            <RootStack.Navigator initialRouteName="App">
               <RootStack.Screen
                 name="Start"
                 component={StartStack}
