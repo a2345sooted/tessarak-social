@@ -8,12 +8,13 @@ import {ActionSheetRef} from 'react-native-actions-sheet';
 interface SideActionProps {
   icon: string;
   count: number | undefined;
+  clickFn: () => void;
 }
 
-function SideAction({icon, count, source}: SideActionProps) {
+function SideAction({icon, count, clickFn}: SideActionProps) {
   const {colors} = useContext(AppContext);
   return (
-    <TouchableOpacity onPress={() => {}}>
+    <TouchableOpacity onPress={clickFn}>
       <IconButton icon={icon} iconColor={colors.text} size={35} />
       {count && (
         <Text
@@ -39,6 +40,7 @@ const SideActionBar = ({source}: SideActionBarProps) => {
   const soundActionSheet = useRef<ActionSheetRef>(null);
   const commentsActionSheet = useRef<ActionSheetRef>(null);
   const shareActionSheet = useRef<ActionSheetRef>(null);
+  const {colors} = useContext(AppContext);
 
   return (
     <View
@@ -56,11 +58,11 @@ const SideActionBar = ({source}: SideActionBarProps) => {
           justifyContent: 'center',
           width: '100%',
         }}>
-        {/*<SideAction icon={'music'} count={undefined} />*/}
-        {/*<SideAction icon={'bookmark'} count={1577} />*/}
-        {/*<SideAction icon={'heart'} count={10455} />*/}
-        {/*<SideAction icon={'message-text'} count={492} />*/}
-        {/*<SideAction icon={'share-circle'} count={177} />*/}
+        <SideAction icon={'music'} count={undefined} clickFn={() => Alert.alert('Sound -- Not yet implemented.')} />
+        <SideAction icon={'bookmark'} count={1577} clickFn={() => Alert.alert('Bookmark -- Not yet implemented.')} />
+        <SideAction icon={'heart'} count={10455} clickFn={() => Alert.alert('Like -- Not yet implemented.')} />
+        <SideAction icon={'message-text'} count={492} clickFn={() => Alert.alert('Comments -- Not yet implemented.')} />
+        <SideAction icon={'share-circle'} count={177} clickFn={() => Alert.alert('Share -- Not yet implemented.')} />
         <View style={{marginHorizontal: 12, marginTop: 12}}>
           <TouchableOpacity
             onPress={() => {
@@ -68,7 +70,7 @@ const SideActionBar = ({source}: SideActionBarProps) => {
               // navigation.navigate('User');
                 Alert.alert("View the creator's profile -- Not yet implemented.");
             }}>
-            {source && <Avatar.Image size={50} source={{uri: source}} />}
+            {source && <Avatar.Image size={50} source={{uri: source}}/>}
             {!source && <Avatar.Text size={50} label="XD" />}
           </TouchableOpacity>
         </View>
