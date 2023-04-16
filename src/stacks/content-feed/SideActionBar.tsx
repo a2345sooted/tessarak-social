@@ -14,7 +14,7 @@ interface SideActionProps {
 function SideAction({icon, count, clickFn}: SideActionProps) {
   const {colors} = useContext(AppContext);
   return (
-    <TouchableOpacity onPress={clickFn}>
+    <TouchableOpacity onPress={clickFn} style={{backgroundColor: 'rgba(0, 0, 0, 0.4)', borderRadius: 10, paddingBottom: 12, marginVertical: 2}}>
       <IconButton icon={icon} iconColor={colors.text} size={35} />
       {count && (
         <Text
@@ -47,7 +47,7 @@ const SideActionBar = ({source}: SideActionBarProps) => {
       style={{
         position: 'absolute',
         bottom: 25,
-        right: 15,
+        right: 20,
         width: 50,
         zIndex: 1000,
       }}>
@@ -83,7 +83,7 @@ const SideActionBar = ({source}: SideActionBarProps) => {
           count={177}
           clickFn={() => Alert.alert('Share -- Not yet implemented.')}
         />
-        <View style={{marginHorizontal: 12, marginTop: 12}}>
+        <View style={{marginHorizontal: 12, marginTop: 12, backgroundColor: 'rgba(0, 0, 0, 0.4)', borderRadius: 10, padding: 12}}>
           <TouchableOpacity
             onPress={() => {
               // //@ts-ignore

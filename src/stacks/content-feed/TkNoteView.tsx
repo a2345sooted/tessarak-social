@@ -8,6 +8,9 @@ import RenderHTML from 'react-native-render-html';
 import {getAspectRatio} from '@utils';
 
 import {Linking} from 'react-native';
+import Animated, {FadeInUp, FadeOutUp} from 'react-native-reanimated';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import { DateTime } from 'luxon';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
@@ -106,6 +109,34 @@ export function TkNoteView({content}: TkNoteViewProps): JSX.Element {
             />
           </View>
         )}
+      <Animated.View
+        entering={FadeInUp.duration(400)}
+        exiting={FadeOutUp.duration(400)}
+        style={{
+          position: 'absolute',
+          bottom: 25,
+          left: 15,
+          width: '70%',
+          zIndex: 1000,
+          backgroundColor: 'rgba(0, 0, 0, 0.4)',
+          borderRadius: 2,
+        }}>
+        <View style={{width: '100%', padding: 8}}>
+          <View>
+            <Text
+              variant="labelLarge"
+              style={{fontWeight: 'bold', color: colors.text}}>
+              @{content.account.acct}
+            </Text>
+          </View>
+          <Divider style={{marginVertical: 8}} />
+          <View>
+            <Text variant="labelMedium" style={{color: colors.text}}>
+                {DateTime.fromISO(content.created_at).toFormat('f')}
+            </Text>
+          </View>
+        </View>
+      </Animated.View>
     </View>
   );
 }
