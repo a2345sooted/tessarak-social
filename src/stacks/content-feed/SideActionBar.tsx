@@ -1,7 +1,7 @@
 import React, {useContext, useRef} from 'react';
 import {Avatar, IconButton, Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
-import {View} from 'react-native';
+import { Alert, View } from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {ActionSheetRef} from 'react-native-actions-sheet';
 
@@ -64,8 +64,9 @@ const SideActionBar = ({source}: SideActionBarProps) => {
         <View style={{marginHorizontal: 12, marginTop: 12}}>
           <TouchableOpacity
             onPress={() => {
-              //@ts-ignore
-              navigation.navigate('User');
+              // //@ts-ignore
+              // navigation.navigate('User');
+                Alert.alert("View the creator's profile -- Not yet implemented.");
             }}>
             {source && <Avatar.Image size={50} source={{uri: source}} />}
             {!source && <Avatar.Text size={50} label="XD" />}

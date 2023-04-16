@@ -1,11 +1,13 @@
 import React, {useContext} from 'react';
-import {Dimensions, Image, View} from 'react-native';
+import {Alert, Dimensions, Image, View} from 'react-native';
 import {AppContext} from '@app-ctx';
 import SideActionBar from './SideActionBar';
 import {Divider, Text} from 'react-native-paper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import RenderHtml from 'react-native-render-html';
+import RenderHTML from 'react-native-render-html';
 import {getAspectRatio} from '@utils';
+
+import {Linking} from 'react-native';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
@@ -35,6 +37,21 @@ export function TkNoteView({content}: TkNoteViewProps): JSX.Element {
   const {colors} = useContext(AppContext);
   const insets = useSafeAreaInsets();
 
+  const handleLinkPress = (
+    event: any,
+    url: string,
+    htmlAttribs: any,
+    target: any,
+  ) => {
+    Alert.alert('Go to link -- Not yet implemented.');
+  };
+
+  const rendererProps = {
+    a: {
+      onPress: handleLinkPress,
+    },
+  };
+
   return (
     <View
       style={{
@@ -45,27 +62,45 @@ export function TkNoteView({content}: TkNoteViewProps): JSX.Element {
       <SideActionBar source={content.account.avatar} />
       <View
         style={{
-          marginTop: insets.top + 75,
+          marginTop: insets.top + 50,
           paddingHorizontal: 16,
           flexDirection: 'row',
           alignItems: 'center',
           // backgroundColor: '#696868',
           paddingVertical: 4,
         }}>
-        <RenderHtml
+        <RenderHTML
           source={{html: content.content}}
           contentWidth={screenWidth}
           baseStyle={{color: colors.text, fontWeight: '600', fontSize: 16}}
+          tagsStyles={{
+            a: {color: colors.bizarroTessarak, textDecorationLine: 'none'},
+          }}
+          renderersProps={rendererProps}
         />
       </View>
       {content.media_attachments.length > 0 &&
         content.media_attachments[0].type.startsWith('image') && (
-          <View style={{paddingHorizontal: 16}}>
+          <View
+            style={{
+              paddingHorizontal: 8,
+              paddingBottom: 40,
+              paddingTop: 12,
+              flexDirection: 'row',
+              justifyContent: 'center',
+            }}>
             <Image
               source={{uri: content.media_attachments[0].url}}
               style={{
-                width: '100%',
-                height: undefined,
+                borderRadius: 2,
+                width:
+                  content.media_attachments[0].meta.original.aspect >= 1
+                    ? '100%'
+                    : undefined,
+                height:
+                  content.media_attachments[0].meta.original.aspect < 1
+                    ? '70%'
+                    : undefined,
                 aspectRatio: content.media_attachments[0].meta.original.aspect,
               }}
             />
