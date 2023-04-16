@@ -9,7 +9,6 @@ import DimensionsStack from '../dimensions/DimensionsStack';
 import {useNavigation} from '@react-navigation/native';
 import ActivityStack from '../activity/ActivityStack';
 import SearchStack from '../search/SearchStack';
-import {DimensionMeta} from '../../services/content';
 
 function ContentFeedHeader() {
   const {selectedDimension} = useContext(ContentFeedContext);
@@ -56,7 +55,7 @@ function ContentFeedHeader() {
         <Text
           variant="headlineSmall"
           style={{color: colors.text, fontWeight: 'bold', flex: 1}}>
-          {selectedDimension?.name}
+          {selectedDimension}
         </Text>
         <IconButton
           icon="magnify"
@@ -77,8 +76,8 @@ function ContentFeedHeader() {
 }
 
 export type ContentFeedContextContainer = {
-  selectedDimension: DimensionMeta | null;
-  setSelectedDimension: (dimension: DimensionMeta) => void;
+  selectedDimension: string | null;
+  setSelectedDimension: (dimension: string) => void;
 };
 
 export const ContentFeedContext = createContext<ContentFeedContextContainer>({
@@ -89,8 +88,9 @@ export const ContentFeedContext = createContext<ContentFeedContextContainer>({
 const ContentFeedNavStack = createNativeStackNavigator();
 
 function ContentFeedStack() {
-  const [selectedDimension, setSelectedDimension] =
-    useState<DimensionMeta | null>(null);
+  const [selectedDimension, setSelectedDimension] = useState<string | null>(
+    null,
+  );
 
   return (
     <ContentFeedContext.Provider

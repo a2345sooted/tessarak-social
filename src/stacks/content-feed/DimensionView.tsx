@@ -1,26 +1,11 @@
-import React, {createContext, useContext, useEffect, useState} from 'react';
-import {
-  Alert,
-  Dimensions,
-  NativeScrollEvent,
-  NativeSyntheticEvent,
-  ScrollView, View,
-} from 'react-native';
-import {AppContext} from '@app-ctx';
-import {
-  DimensionMeta,
-  getContent,
-  TkBeam,
-  TkContent,
-  TkPic,
-  TkVideo,
-} from '../../services/content';
-import {TkPicView} from './TkPicView';
-import {TkVideoView} from './TkVideoView';
-import {TkBeamView} from './TkBeamView';
-import { Text } from 'react-native-paper';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { Dimensions, NativeScrollEvent, NativeSyntheticEvent, ScrollView } from 'react-native';
+import { AppContext } from '@app-ctx';
+import { getContent2, TkBeam, TkContent, TkPic, TkVideo } from '../../services/content';
+import { TkPicView } from './TkPicView';
+import { TkVideoView } from './TkVideoView';
+import { TkBeamView } from './TkBeamView';
 import { TkNoteView } from './TkNoteView';
-import { getTestApContent } from '@api';
 
 const {height: screenHeight} = Dimensions.get('window');
 
@@ -34,10 +19,11 @@ export const DimensionFeedContext =
   });
 
 export interface DimensionViewProps {
-  meta: DimensionMeta;
+  // meta: DimensionMeta;
+  name: string;
 }
 
-export function DimensionView({meta}: DimensionViewProps): JSX.Element {
+export function DimensionView({name}: DimensionViewProps): JSX.Element {
   const {colors} = useContext(AppContext);
   const [content, setContent] = useState<TkContent[] | null>(null);
   const [isLoadingContent, setIsLoadingContent] = useState(true);
@@ -55,7 +41,7 @@ export function DimensionView({meta}: DimensionViewProps): JSX.Element {
     setIsLoadingContent(true);
     setErrorLoadingContent(null);
     try {
-      const result = await getContent();
+      const result = await getContent2(name);
       // const result = await getTestApContent();
       setContent(result.items);
       setSelectedContentId(result.items[0].id);

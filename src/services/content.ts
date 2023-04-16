@@ -1,5 +1,9 @@
 import { MOCK_DIMENSIONS } from './mock-dimensions';
 import { MOCK_AP_NOTE_1, MOCK_AP_NOTE_2 } from './mock-ap';
+import { API_ORIGIN, HTTP_PROTOCOL } from '@env';
+import axios from 'axios';
+
+const API = `${HTTP_PROTOCOL}://${API_ORIGIN}`;
 
 export interface TkVideo {
   id: string;
@@ -58,4 +62,15 @@ export interface DimensionMeta {
 
 export async function getDimensions(): Promise<DimensionMeta[]> {
   return MOCK_DIMENSIONS;
+}
+
+export async function getContent2(name: string): Promise<FeedContentResult> {
+  return {
+    items: [MOCK_AP_NOTE_1, MOCK_AP_NOTE_2],
+  };
+}
+
+export async function getDimensions2(): Promise<string[]> {
+  const response = await axios.get(`${API}/dimensions`);
+  return response.data as string[];
 }

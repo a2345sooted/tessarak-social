@@ -1,16 +1,10 @@
-import {ProgressBar, Text} from 'react-native-paper';
-import {AppContext} from '@app-ctx';
-import {
-  Dimensions,
-  NativeScrollEvent,
-  NativeSyntheticEvent,
-  ScrollView,
-  View,
-} from 'react-native';
-import React, {useContext, useEffect, useState} from 'react';
-import {DimensionMeta, getDimensions} from '../../services/content';
-import {DimensionView} from './DimensionView';
-import {ContentFeedContext} from './ContentFeedStack';
+import { ProgressBar, Text } from 'react-native-paper';
+import { AppContext } from '@app-ctx';
+import { Dimensions, NativeScrollEvent, NativeSyntheticEvent, ScrollView, View } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import { getDimensions2 } from '../../services/content';
+import { DimensionView } from './DimensionView';
+import { ContentFeedContext } from './ContentFeedStack';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
@@ -18,7 +12,7 @@ const FeedScreen = () => {
   const {setSelectedDimension} = useContext(ContentFeedContext);
   const {colors} = useContext(AppContext);
 
-  const [dimensions, setDimensions] = useState<DimensionMeta[] | null>(null);
+  const [dimensions, setDimensions] = useState<string[] | null>(null);
   const [isLoadingDimensions, setIsLoadingDimensions] = useState(true);
   const [errorLoadingDimensions, setErrorLoadingDimensions] =
     useState<any>(null);
@@ -31,7 +25,7 @@ const FeedScreen = () => {
     setIsLoadingDimensions(true);
     setErrorLoadingDimensions(null);
     try {
-      const result = await getDimensions();
+      const result = await getDimensions2();
       setDimensions(result);
       setSelectedDimension(result[0]);
     } catch (error: any) {
@@ -84,7 +78,7 @@ const FeedScreen = () => {
             showsHorizontalScrollIndicator={false}
             style={{flex: 1, backgroundColor: colors.bg1}}>
             {dimensions!.map(dimension => (
-              <DimensionView key={dimension.id} meta={dimension} />
+              <DimensionView key={dimension} name={dimension} />
             ))}
           </ScrollView>
         </View>

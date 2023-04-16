@@ -1,15 +1,45 @@
-import React, {useContext} from 'react';
-import {Divider, IconButton, Text} from 'react-native-paper';
+import React, {useContext, useEffect, useState} from 'react';
+import {Divider, IconButton, ProgressBar, Text} from 'react-native-paper';
 import {AppContext} from '@app-ctx';
-import {Alert, View} from 'react-native';
+import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
+import {getDimensions2} from '../../services/content';
+import Animated, {
+  FadeInRight,
+  FadeOutRight,
+} from 'react-native-reanimated';
 
 const DimensionsScreen = () => {
   const {colors} = useContext(AppContext);
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
+
+  const [loading, setLoading] = useState(true);
+  const [errorLoading, setErrorLoading] = useState<any>(null);
+  const [dimensions, setDimensions] = useState<string[] | null>(null);
+
+  useEffect(() => {
+    load();
+  }, []);
+
+  async function load() {
+    setLoading(true);
+    setErrorLoading(null);
+    try {
+      const result = await getDimensions2();
+      setDimensions(result);
+    } catch (error: any) {
+      setErrorLoading(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function chooseDimension(dimension: string) {
+
+  }
 
   return (
     <View
@@ -30,114 +60,44 @@ const DimensionsScreen = () => {
           }}>
           Dimensions
         </Text>
-        {/*<IconButton*/}
-        {/*  icon="magnify"*/}
-        {/*  iconColor={colors.bizarroTessarak}*/}
-        {/*  size={30}*/}
-        {/*  onPress={() => Alert.alert('Search dimension meta only, not content')}*/}
-        {/*/>*/}
       </View>
       <Divider />
-      <TouchableOpacity
-        onPress={() => {
-          //@ts-ignore
-          navigation.navigate('ArrangeDimensionsScreen');
-        }}
-        style={{
-          width: '100%',
-          paddingVertical: 8,
-          paddingHorizontal: 12,
-          marginTop: 20,
-        }}>
-        {/*<Divider />*/}
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginVertical: 12,
-          }}>
-          <View style={{flex: 1}}>
-            <Text
-              variant="titleLarge"
-              style={{color: colors.text, fontWeight: '900'}}>
-              Discover
-            </Text>
-            <Text
-              variant="titleSmall"
-              style={{color: colors.text, fontWeight: '900'}}>
-              Find new dimensions to explore.
-            </Text>
-          </View>
-          <IconButton icon="arrow-right" iconColor={colors.text} size={30} />
-        </View>
-        <Divider />
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
-          //@ts-ignore
-          navigation.navigate('ArrangeDimensionsScreen');
-        }}
-        style={{
-          width: '100%',
-          paddingVertical: 8,
-          paddingHorizontal: 12,
-        }}>
-        {/*<Divider />*/}
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginVertical: 12,
-          }}>
-          <View style={{flex: 1}}>
-            <Text
-              variant="titleLarge"
-              style={{color: colors.text, fontWeight: '900'}}>
-                Arrange
-            </Text>
-            <Text
-              variant="titleSmall"
-              style={{color: colors.text, fontWeight: '900'}}>
-                Customize the order of the horizontal dimensions.
-            </Text>
-          </View>
-          <IconButton icon="arrow-right" iconColor={colors.text} size={30} />
-        </View>
-        <Divider />
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
-          //@ts-ignore
-          navigation.navigate('ArrangeDimensionsScreen');
-        }}
-        style={{
-          width: '100%',
-          paddingVertical: 8,
-          paddingHorizontal: 12,
-        }}>
-        {/*<Divider />*/}
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginVertical: 12,
-          }}>
-          <View style={{flex: 1}}>
-            <Text
-              variant="titleLarge"
-              style={{color: colors.text, fontWeight: '900'}}>
-              Markets
-            </Text>
-            <Text
-              variant="titleSmall"
-              style={{color: colors.text, fontWeight: '900'}}>
-              Discover new market based dimensions.
-            </Text>
-          </View>
-          <IconButton icon="arrow-right" iconColor={colors.text} size={30} />
-        </View>
-        <Divider />
-      </TouchableOpacity>
+      {loading && (
+        <Animated.View
+          exiting={FadeOutRight.duration(600)}
+          entering={FadeInRight.duration(600)}>
+          <ProgressBar indeterminate color={colors.bizarroTessarak} />
+        </Animated.View>
+      )}
+      {dimensions && (
+        <ScrollView style={{paddingVertical: 20}}>
+          {dimensions.map((dimension, index) => (
+            <TouchableOpacity
+              key={dimension}
+              onPress={() => chooseDimension(dimension)}
+              style={{
+                width: '100%',
+                paddingHorizontal: 12,
+              }}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  marginVertical: 12,
+                }}>
+                <View style={{flex: 1}}>
+                  <Text
+                    variant="titleLarge"
+                    style={{color: colors.text, fontWeight: '600'}}>
+                    ~{dimension}
+                  </Text>
+                </View>
+              </View>
+              {index < dimensions?.length - 1 && <Divider />}
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+      )}
     </View>
   );
 };
