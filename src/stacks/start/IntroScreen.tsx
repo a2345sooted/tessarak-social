@@ -236,7 +236,7 @@ const IntroScreen = () => {
     }
 
     if (slide.index === 3 && slide.lineIndex === 0) {
-      orbPaddingBottomCursor.value = withSpring(insets.bottom);
+      // orbPaddingBottomCursor.value = withSpring(insets.bottom);
       tkDelay(100).then(() => setShowRocketOptions(true));
     }
   }, [slide]);
@@ -330,7 +330,7 @@ const IntroScreen = () => {
         ))}
         {showRocketOptions && (
           <Animated.View
-            style={{marginTop: 8}}
+            style={{marginTop: 50}}
             entering={FadeInRight.duration(600)}
             exiting={FadeOutRight.duration(600)}>
             <List.Section
@@ -364,99 +364,127 @@ const IntroScreen = () => {
                   )}
                 />
               </TouchableOpacity>
-              <Divider style={{marginTop: 16}} />
-              <TouchableOpacity
-                onPress={() => {
-                  //@ts-ignore
-                  navigation.navigate('NbzLandingScreen');
-                }}>
-                <List.Item
-                  titleStyle={{color: colors.text}}
-                  title="More Options"
-                  // left={() => (
-                  //   <List.Icon color={colors.text} icon="dots-vertical" />
-                  // )}
-                  right={() => (
-                    <List.Icon color={colors.text} icon="arrow-right" />
-                  )}
-                />
-              </TouchableOpacity>
+              {/*<Divider style={{marginTop: 16}} />*/}
+              {/*<TouchableOpacity*/}
+              {/*  onPress={() => {*/}
+              {/*    //@ts-ignore*/}
+              {/*    navigation.navigate('NbzLandingScreen');*/}
+              {/*  }}>*/}
+              {/*  <List.Item*/}
+              {/*    titleStyle={{color: colors.text}}*/}
+              {/*    title="More Options"*/}
+              {/*    // left={() => (*/}
+              {/*    //   <List.Icon color={colors.text} icon="dots-vertical" />*/}
+              {/*    // )}*/}
+              {/*    right={() => (*/}
+              {/*      <List.Icon color={colors.text} icon="arrow-right" />*/}
+              {/*    )}*/}
+              {/*  />*/}
+              {/*</TouchableOpacity>*/}
             </List.Section>
-            <List.Section
-              style={{
-                borderRadius: 4,
-                backgroundColor: '#3d3d3d',
-                paddingHorizontal: 12,
-                paddingVertical: 2,
-                marginTop: -2,
-              }}>
-              <List.Subheader style={{color: colors.text}}>
-                Ship Builders{' '}
-                <Text variant="bodySmall" style={{color: colors.text}}>
-                  (not yet available)
-                </Text>
-              </List.Subheader>
-              <TouchableOpacity onPress={() => Alert.alert('In progress.')}>
-                <List.Item
-                  titleStyle={{color: colors.text, fontWeight: 'bold'}}
-                  title="The Tessarak Foundation"
-                  descriptionStyle={{color: colors.text}}
-                  description="Custom, infra-managed ships for $X/mo and up."
-                  left={() => (
-                    <List.Icon color={colors.tessarak} icon="cube-outline" />
-                  )}
-                  right={() => (
-                    <List.Icon color={colors.text} icon="arrow-right" />
-                  )}
-                />
-              </TouchableOpacity>
-              <Divider style={{marginTop: 16}} />
-              <TouchableOpacity
-                onPress={() => {
-                  //@ts-ignore
-                  navigation.navigate('NbzLandingScreen');
-                }}>
-                <List.Item
-                  titleStyle={{color: colors.text}}
-                  title="More Options"
-                  // left={() => (
-                  //   <List.Icon color={colors.text} icon="dots-vertical" />
-                  // )}
-                  right={() => (
-                    <List.Icon color={colors.text} icon="arrow-right" />
-                  )}
-                />
-              </TouchableOpacity>
-            </List.Section>
-            <List.Section
-              style={{
-                borderRadius: 4,
-                backgroundColor: '#3d3d3d',
-                paddingHorizontal: 12,
-                paddingVertical: 2,
-                marginTop: -2,
-              }}>
-              <List.Subheader style={{color: colors.text}}>
-                Private Ships{' '}
-                <Text variant="bodySmall" style={{color: colors.text}}>
-                  (not yet available)
-                </Text>
-              </List.Subheader>
-              <TouchableOpacity onPress={() => Alert.alert('In progress.')}>
-                <List.Item
-                  titleStyle={{color: colors.text, fontWeight: 'bold'}}
-                  title="BYOS"
-                  descriptionStyle={{color: colors.text}}
-                  description="Board a non-community ship."
-                  left={() => (
-                    <List.Icon color={colors.text} icon="rocket-outline" />
-                  )}
-                  right={() => (
-                    <List.Icon color={colors.text} icon="arrow-right" />
-                  )}
-                />
-              </TouchableOpacity>
-            </List.Section>
+            <View style={{marginTop: 4, paddingLeft: 20}}>
+              <Text
+                variant="bodyMedium"
+                style={{color: '#c2c1c1', fontWeight: 'bold'}}>
+                More options are in progress:
+              </Text>
+            </View>
+            <View style={{marginTop: 4, paddingLeft: 24}}>
+              <Text
+                variant="bodyMedium"
+                style={{color: '#c2c1c1', fontWeight: 'bold'}}>
+                - Custom ship building services
+              </Text>
+            </View>
+            <View style={{marginTop: 4, paddingLeft: 24}}>
+              <Text
+                variant="bodyMedium"
+                style={{color: '#c2c1c1', fontWeight: 'bold'}}>
+                - Bring your own ship
+              </Text>
+            </View>
+            <View style={{marginTop: 4, paddingLeft: 24}}>
+              <Text
+                variant="bodyMedium"
+                style={{color: '#c2c1c1', fontWeight: 'bold'}}>
+                - More community ships
+              </Text>
+            </View>
+            {/*<List.Section*/}
+            {/*  style={{*/}
+            {/*    borderRadius: 4,*/}
+            {/*    backgroundColor: '#3d3d3d',*/}
+            {/*    paddingHorizontal: 12,*/}
+            {/*    paddingVertical: 2,*/}
+            {/*    marginTop: -2,*/}
+            {/*  }}>*/}
+            {/*  <List.Subheader style={{color: colors.text}}>*/}
+            {/*    Ship Builders{' '}*/}
+            {/*    <Text variant="bodySmall" style={{color: colors.text}}>*/}
+            {/*      (not yet available)*/}
+            {/*    </Text>*/}
+            {/*  </List.Subheader>*/}
+            {/*  <TouchableOpacity onPress={() => Alert.alert('In progress.')}>*/}
+            {/*    <List.Item*/}
+            {/*      titleStyle={{color: colors.text, fontWeight: 'bold'}}*/}
+            {/*      title="The Tessarak Foundation"*/}
+            {/*      descriptionStyle={{color: colors.text}}*/}
+            {/*      description="Custom, infra-managed ships for $X/mo and up."*/}
+            {/*      left={() => (*/}
+            {/*        <List.Icon color={colors.tessarak} icon="cube-outline" />*/}
+            {/*      )}*/}
+            {/*      right={() => (*/}
+            {/*        <List.Icon color={colors.text} icon="arrow-right" />*/}
+            {/*      )}*/}
+            {/*    />*/}
+            {/*  </TouchableOpacity>*/}
+            {/*  <Divider style={{marginTop: 16}} />*/}
+            {/*  <TouchableOpacity*/}
+            {/*    onPress={() => {*/}
+            {/*      //@ts-ignore*/}
+            {/*      navigation.navigate('NbzLandingScreen');*/}
+            {/*    }}>*/}
+            {/*    <List.Item*/}
+            {/*      titleStyle={{color: colors.text}}*/}
+            {/*      title="More Options"*/}
+            {/*      // left={() => (*/}
+            {/*      //   <List.Icon color={colors.text} icon="dots-vertical" />*/}
+            {/*      // )}*/}
+            {/*      right={() => (*/}
+            {/*        <List.Icon color={colors.text} icon="arrow-right" />*/}
+            {/*      )}*/}
+            {/*    />*/}
+            {/*  </TouchableOpacity>*/}
+            {/*</List.Section>*/}
+            {/*<List.Section*/}
+            {/*  style={{*/}
+            {/*    borderRadius: 4,*/}
+            {/*    backgroundColor: '#3d3d3d',*/}
+            {/*    paddingHorizontal: 12,*/}
+            {/*    paddingVertical: 2,*/}
+            {/*    marginTop: -2,*/}
+            {/*  }}>*/}
+            {/*  <List.Subheader style={{color: colors.text}}>*/}
+            {/*    Private Ships{' '}*/}
+            {/*    <Text variant="bodySmall" style={{color: colors.text}}>*/}
+            {/*      (not yet available)*/}
+            {/*    </Text>*/}
+            {/*  </List.Subheader>*/}
+            {/*  <TouchableOpacity onPress={() => Alert.alert('In progress.')}>*/}
+            {/*    <List.Item*/}
+            {/*      titleStyle={{color: colors.text, fontWeight: 'bold'}}*/}
+            {/*      title="BYOS"*/}
+            {/*      descriptionStyle={{color: colors.text}}*/}
+            {/*      description="Board a non-community ship."*/}
+            {/*      left={() => (*/}
+            {/*        <List.Icon color={colors.text} icon="rocket-outline" />*/}
+            {/*      )}*/}
+            {/*      right={() => (*/}
+            {/*        <List.Icon color={colors.text} icon="arrow-right" />*/}
+            {/*      )}*/}
+            {/*    />*/}
+            {/*  </TouchableOpacity>*/}
+            {/*</List.Section>*/}
           </Animated.View>
         )}
         <View style={{flex: 1}} />

@@ -22,7 +22,7 @@ export interface ShipBoardingDetails {
   numOrbs: number;
 }
 
-const MOCK_RULES: ShipRuleSection[] = [
+export const MOCK_RULES: ShipRuleSection[] = [
   {
     title: 'Architecto Beatae',
     paragraphs: [

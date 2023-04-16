@@ -6,19 +6,20 @@ import {useNavigation} from '@react-navigation/native';
 import {SafeScreen} from '@common';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Animated, {
-    FadeIn,
-    FadeInDown, FadeInRight,
-    FadeOut,
-    FadeOutDown, FadeOutRight,
+  FadeIn,
+  FadeInRight,
+  FadeOut,
+  FadeOutRight,
 } from 'react-native-reanimated';
 import {triggerImpactMedium} from '@haptic';
+import { StartContext } from './StartStack';
 
 const LandingScreen = () => {
   const {colors, staked} = useContext(AppContext);
+  const {agreedToTerms} = useContext(StartContext);
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
 
-  const [agreed, setAgreed] = useState(false);
 
   return (
     <SafeScreen>
@@ -76,23 +77,23 @@ const LandingScreen = () => {
               Don't worry, they're short and easy to understand.
             </Text>
             <Button
-              icon={agreed ? 'check-circle-outline' : 'circle-outline'}
+              icon={agreedToTerms ? 'check-circle-outline' : 'circle-outline'}
               uppercase
               labelStyle={{color: colors.text, fontWeight: '800'}}
               buttonColor={colors.tessarak}
               theme={{roundness: 1}}
               onPress={() => {
-                // //@ts-ignore
-                // navigation.navigate('IntroScreen');
+                //@ts-ignore
+                navigation.navigate('TermsScreen');
                 // triggerImpactMedium();
-                setAgreed(!agreed);
+                // setAgreed(!agreed);
               }}>
               Terms of Service
             </Button>
           </Animated.View>
-          {agreed && (
+          {agreedToTerms && (
             <Animated.View
-                style={{marginTop: 20}}
+              style={{marginTop: 20}}
               entering={FadeInRight.duration(600)}
               exiting={FadeOutRight.duration(600)}>
               <Button
