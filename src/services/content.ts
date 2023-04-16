@@ -1,4 +1,3 @@
-import {MOCK_PORTRAIT_VIDEOS} from './mock-videos';
 import { MOCK_DIMENSIONS } from './mock-dimensions';
 import { MOCK_AP_NOTE_1, MOCK_AP_NOTE_2 } from './mock-ap';
 
@@ -46,9 +45,9 @@ export async function getContent(): Promise<FeedContentResult> {
   //     {type: 'beam', id: '6', url: 'https://fakeimg.pl/500x500/'},
   //   ],
   // };
-  // return {
-  //   items: [MOCK_AP_NOTE_1, MOCK_AP_NOTE_2],
-  // };
+  return {
+    items: [MOCK_AP_NOTE_1, MOCK_AP_NOTE_2],
+  };
 }
 
 export interface DimensionMeta {
