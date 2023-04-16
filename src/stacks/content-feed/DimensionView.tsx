@@ -42,7 +42,6 @@ export function DimensionView({name}: DimensionViewProps): JSX.Element {
     setErrorLoadingContent(null);
     try {
       const result = await getContent2(name);
-      // const result = await getTestApContent();
       setContent(result.items);
       setSelectedContentId(result.items[0].id);
     } catch (error: any) {

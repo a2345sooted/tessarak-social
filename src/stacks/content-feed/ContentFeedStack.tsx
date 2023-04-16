@@ -55,7 +55,7 @@ function ContentFeedHeader() {
         <Text
           variant="headlineSmall"
           style={{color: colors.text, fontWeight: 'bold', flex: 1}}>
-          {selectedDimension}
+          ~{selectedDimension}
         </Text>
         <IconButton
           icon="magnify"
