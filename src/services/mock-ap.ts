@@ -3,6 +3,7 @@ export const MOCK_AP_NOTE = {
   type: 'note',
   name: 'William Woodgate',
   actor: 'https://mastodon.social/users/willwood',
+  avatar: 'https://files.mastodon.social/accounts/avatars/000/224/910/original/764088efefbb3c91.jpg',
   published: '2018-09-13T09:04:05Z',
   to: ['https://www.w3.org/ns/activitystreams#Public'],
   cc: ['https://mastodon.social/users/willwood/followers'],

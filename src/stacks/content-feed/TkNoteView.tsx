@@ -1,9 +1,10 @@
 import React, {useContext} from 'react';
-import {Dimensions, View} from 'react-native';
+import {Dimensions, Image, View} from 'react-native';
 import {AppContext} from '@app-ctx';
 import SideActionBar from './SideActionBar';
 import {Text} from 'react-native-paper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import RenderHtml from 'react-native-render-html';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
@@ -41,10 +42,39 @@ export function TkNoteView({content}: TkNoteViewProps): JSX.Element {
         width: screenWidth,
       }}>
       <SideActionBar />
-      <View style={{marginTop: insets.top + 75, paddingHorizontal: 16}}>
-        <Text style={{color: colors.text}}>{content.name}</Text>
-        <Text style={{color: colors.text}}>{generateUsername(content.id)}</Text>
-        {/*<Text style={{color: colors.text}}>{JSON.stringify(content, null, 2)}</Text>*/}
+      <View
+        style={{
+          marginTop: insets.top + 75,
+          paddingHorizontal: 16,
+          flexDirection: 'row',
+          alignItems: 'center',
+          // backgroundColor: '#696868',
+          paddingVertical: 4,
+        }}>
+        <Image
+          source={{uri: content.avatar}}
+          // style={{height: 40, width: 40, borderRadius: 20, borderWidth: 1, borderColor: colors.text}}
+          style={{height: 40, width: 40, borderRadius: 20}}
+        />
+        <View style={{marginLeft: 12}}>
+          <Text style={{color: colors.text, fontWeight: 'bold'}}>
+            {content.name}
+          </Text>
+          <Text style={{color: colors.text}}>
+            {generateUsername(content.actor)}
+          </Text>
+        </View>
+      </View>
+      <View
+        style={{
+          marginTop: 8,
+          paddingHorizontal: 16,
+        }}>
+        <RenderHtml
+          source={{html: content.object.content}}
+          contentWidth={screenWidth}
+          baseStyle={{color: colors.text, fontWeight: '600', fontSize: 18}}
+        />
       </View>
     </View>
   );
