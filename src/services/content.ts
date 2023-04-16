@@ -1,6 +1,6 @@
 import {MOCK_PORTRAIT_VIDEOS} from './mock-videos';
 import { MOCK_DIMENSIONS } from './mock-dimensions';
-import { MOCK_AP_NOTE } from './mock-ap';
+import { MOCK_AP_NOTE_1, MOCK_AP_NOTE_2 } from './mock-ap';
 
 export interface TkVideo {
   id: string;
@@ -47,7 +47,7 @@ export async function getContent(): Promise<FeedContentResult> {
   //   ],
   // };
   return {
-    items: [MOCK_AP_NOTE],
+    items: [MOCK_AP_NOTE_1, MOCK_AP_NOTE_2],
   };
 }
 
