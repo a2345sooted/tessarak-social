@@ -10,7 +10,7 @@ import {getAspectRatio} from '@utils';
 import {Linking} from 'react-native';
 import Animated, {FadeInUp, FadeOutUp} from 'react-native-reanimated';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import { DateTime } from 'luxon';
+import {DateTime} from 'luxon';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
@@ -121,7 +121,7 @@ export function TkNoteView({content}: TkNoteViewProps): JSX.Element {
           backgroundColor: 'rgba(0, 0, 0, 0.4)',
           borderRadius: 2,
         }}>
-        <View style={{width: '100%', padding: 8}}>
+        <TouchableOpacity style={{width: '100%', padding: 8}} onPress={() => Alert.alert('Expand info -- Not yet implemented.')}>
           <View>
             <Text
               variant="labelLarge"
@@ -132,10 +132,10 @@ export function TkNoteView({content}: TkNoteViewProps): JSX.Element {
           <Divider style={{marginVertical: 8}} />
           <View>
             <Text variant="labelMedium" style={{color: colors.text}}>
-                {DateTime.fromISO(content.created_at).toFormat('f')}
+              {DateTime.fromISO(content.created_at).toFormat('f')}
             </Text>
           </View>
-        </View>
+        </TouchableOpacity>
       </Animated.View>
     </View>
   );
