@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {Dimensions, Image, View} from 'react-native';
 import {AppContext} from '@app-ctx';
 import SideActionBar from './SideActionBar';
-import {Text} from 'react-native-paper';
+import { Divider, Text } from 'react-native-paper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import RenderHtml from 'react-native-render-html';
 
@@ -57,7 +57,7 @@ export function TkNoteView({content}: TkNoteViewProps): JSX.Element {
           style={{height: 40, width: 40, borderRadius: 20}}
         />
         <View style={{marginLeft: 12}}>
-          <Text style={{color: colors.text, fontWeight: 'bold'}}>
+          <Text variant="titleMedium" style={{color: colors.text, fontWeight: 'bold'}}>
             {content.name}
           </Text>
           <Text style={{color: colors.text}}>
@@ -70,6 +70,7 @@ export function TkNoteView({content}: TkNoteViewProps): JSX.Element {
           marginTop: 8,
           paddingHorizontal: 16,
         }}>
+          <Divider style={{marginTop: 12, marginBottom: 4}}/>
         <RenderHtml
           source={{html: content.object.content}}
           contentWidth={screenWidth}
