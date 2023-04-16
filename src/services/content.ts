@@ -64,10 +64,9 @@ export async function getDimensions(): Promise<DimensionMeta[]> {
   return MOCK_DIMENSIONS;
 }
 
-export async function getContent2(name: string): Promise<FeedContentResult> {
-  return {
-    items: [MOCK_AP_NOTE_1, MOCK_AP_NOTE_2],
-  };
+export async function getContent2(name: string): Promise<any> {
+  const response = await axios.get(`${API}/dimension/${name}`);
+  return response.data;
 }
 
 export async function getDimensions2(): Promise<string[]> {

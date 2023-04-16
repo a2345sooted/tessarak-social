@@ -1,11 +1,12 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { Dimensions, NativeScrollEvent, NativeSyntheticEvent, ScrollView } from 'react-native';
+import { Alert, Dimensions, NativeScrollEvent, NativeSyntheticEvent, ScrollView } from 'react-native';
 import { AppContext } from '@app-ctx';
 import { getContent2, TkBeam, TkContent, TkPic, TkVideo } from '../../services/content';
 import { TkPicView } from './TkPicView';
 import { TkVideoView } from './TkVideoView';
 import { TkBeamView } from './TkBeamView';
 import { TkNoteView } from './TkNoteView';
+import { ContentFeedContext } from './ContentFeedStack';
 
 const {height: screenHeight} = Dimensions.get('window');
 
@@ -24,8 +25,9 @@ export interface DimensionViewProps {
 }
 
 export function DimensionView({name}: DimensionViewProps): JSX.Element {
+  const {selectedDimension} = useContext(ContentFeedContext);
   const {colors} = useContext(AppContext);
-  const [content, setContent] = useState<TkContent[] | null>(null);
+  const [content, setContent] = useState<any[] | null>(null);
   const [isLoadingContent, setIsLoadingContent] = useState(true);
   const [errorLoadingContent, setErrorLoadingContent] = useState<any>(null);
 
@@ -34,18 +36,22 @@ export function DimensionView({name}: DimensionViewProps): JSX.Element {
   );
 
   useEffect(() => {
-    loadContent();
-  }, []);
+    if (selectedDimension === name) {
+      loadContent();
+    }
+  }, [selectedDimension]);
 
   async function loadContent() {
     setIsLoadingContent(true);
     setErrorLoadingContent(null);
     try {
       const result = await getContent2(name);
-      setContent(result.items);
-      setSelectedContentId(result.items[0].id);
+      setContent(result);
+      setSelectedContentId(result[0].id);
+      // Alert.alert('set content');
     } catch (error: any) {
       setErrorLoadingContent(error);
+      // Alert.alert('error content');
     } finally {
       setIsLoadingContent(false);
     }
@@ -68,16 +74,17 @@ export function DimensionView({name}: DimensionViewProps): JSX.Element {
           showsVerticalScrollIndicator={false}
           style={{flex: 1, backgroundColor: colors.bg1}}>
           {content!.map(c => {
-            switch (c.object.type.toLowerCase()) {
-              case 'pic':
-                return <TkPicView key={c.id} content={c as TkPic} />;
-              case 'video':
-                return <TkVideoView key={c.id} content={c as TkVideo} />;
-              case 'beam':
-                return <TkBeamView key={c.id} content={c as TkBeam} />;
-              case 'note':
-                return <TkNoteView key={c.id} content={c as any} />;
-            }
+            return <TkNoteView key={c.id} content={c} />;
+            // switch (c.object.type.toLowerCase()) {
+            //   case 'pic':
+            //     return <TkPicView key={c.id} content={c as TkPic} />;
+            //   case 'video':
+            //     return <TkVideoView key={c.id} content={c as TkVideo} />;
+            //   case 'beam':
+            //     return <TkBeamView key={c.id} content={c as TkBeam} />;
+            //   default:
+            //     return <TkNoteView key={c.id} content={c} />;
+            // }
           })}
         </ScrollView>
       )}

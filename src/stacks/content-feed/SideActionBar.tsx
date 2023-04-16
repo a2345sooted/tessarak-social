@@ -1,16 +1,16 @@
-import React, { useContext, useRef } from 'react';
-import { Avatar, IconButton, Text } from 'react-native-paper';
-import { AppContext } from '@app-ctx';
-import { View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { ActionSheetRef } from 'react-native-actions-sheet';
+import React, {useContext, useRef} from 'react';
+import {Avatar, IconButton, Text} from 'react-native-paper';
+import {AppContext} from '@app-ctx';
+import {View} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {ActionSheetRef} from 'react-native-actions-sheet';
 
 interface SideActionProps {
   icon: string;
   count: number | undefined;
 }
 
-function SideAction({icon, count}: SideActionProps) {
+function SideAction({icon, count, source}: SideActionProps) {
   const {colors} = useContext(AppContext);
   return (
     <TouchableOpacity onPress={() => {}}>
@@ -31,7 +31,11 @@ function SideAction({icon, count}: SideActionProps) {
   );
 }
 
-const SideActionBar = () => {
+export interface SideActionBarProps {
+  source?: string;
+}
+
+const SideActionBar = ({source}: SideActionBarProps) => {
   const soundActionSheet = useRef<ActionSheetRef>(null);
   const commentsActionSheet = useRef<ActionSheetRef>(null);
   const shareActionSheet = useRef<ActionSheetRef>(null);
@@ -52,18 +56,19 @@ const SideActionBar = () => {
           justifyContent: 'center',
           width: '100%',
         }}>
-        <SideAction icon={'music'} count={undefined} />
-        <SideAction icon={'bookmark'} count={1577} />
-        <SideAction icon={'heart'} count={10455} />
-        <SideAction icon={'message-text'} count={492} />
-        <SideAction icon={'share-circle'} count={177} />
+        {/*<SideAction icon={'music'} count={undefined} />*/}
+        {/*<SideAction icon={'bookmark'} count={1577} />*/}
+        {/*<SideAction icon={'heart'} count={10455} />*/}
+        {/*<SideAction icon={'message-text'} count={492} />*/}
+        {/*<SideAction icon={'share-circle'} count={177} />*/}
         <View style={{marginHorizontal: 12, marginTop: 12}}>
           <TouchableOpacity
             onPress={() => {
               //@ts-ignore
               navigation.navigate('User');
             }}>
-            <Avatar.Text size={50} label="XD" />
+            {source && <Avatar.Image size={50} source={{uri: source}} />}
+            {!source && <Avatar.Text size={50} label="XD" />}
           </TouchableOpacity>
         </View>
       </View>
