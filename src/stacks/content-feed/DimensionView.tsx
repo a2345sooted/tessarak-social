@@ -68,7 +68,7 @@ export function DimensionView({name}: DimensionViewProps): JSX.Element {
 
   return (
     <DimensionFeedContext.Provider value={{selectedContentId}}>
-      {!isLoadingContent && !errorLoadingContent && (
+      {!isLoadingContent && !errorLoadingContent && selectedDimension === name && (
         <ScrollView
           onMomentumScrollEnd={handleScrollEnd}
           pagingEnabled

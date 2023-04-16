@@ -70,7 +70,6 @@ const FeedScreen = () => {
   ): void {
     const offset = event.nativeEvent.contentOffset;
     const pageIndex = Math.floor(offset.x / screenWidth);
-    console.log('page index = ' + pageIndex);
     setSelectedDimension(dimensions![pageIndex]);
   }
   return (
