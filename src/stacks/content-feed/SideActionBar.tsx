@@ -4,6 +4,11 @@ import {AppContext} from '@app-ctx';
 import {Alert, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {ActionSheetRef} from 'react-native-actions-sheet';
+import Animated, {
+  FadeInDown,
+  FadeInUp,
+  FadeOutUp,
+} from 'react-native-reanimated';
 
 interface SideActionProps {
   icon: string;
@@ -14,7 +19,14 @@ interface SideActionProps {
 function SideAction({icon, count, clickFn}: SideActionProps) {
   const {colors} = useContext(AppContext);
   return (
-    <TouchableOpacity onPress={clickFn} style={{backgroundColor: 'rgba(0, 0, 0, 0.4)', borderRadius: 10, paddingBottom: 12, marginVertical: 2}}>
+    <TouchableOpacity
+      onPress={clickFn}
+      style={{
+        backgroundColor: 'rgba(0, 0, 0, 0.4)',
+        borderRadius: 10,
+        paddingBottom: 12,
+        marginVertical: 2,
+      }}>
       <IconButton icon={icon} iconColor={colors.text} size={35} />
       {count && (
         <Text
@@ -40,10 +52,11 @@ const SideActionBar = ({source}: SideActionBarProps) => {
   const soundActionSheet = useRef<ActionSheetRef>(null);
   const commentsActionSheet = useRef<ActionSheetRef>(null);
   const shareActionSheet = useRef<ActionSheetRef>(null);
-  const {colors} = useContext(AppContext);
 
   return (
-    <View
+    <Animated.View
+      entering={FadeInDown.duration(200)}
+      exiting={FadeOutUp.duration(200)}
       style={{
         position: 'absolute',
         bottom: 25,
@@ -83,7 +96,14 @@ const SideActionBar = ({source}: SideActionBarProps) => {
           count={177}
           clickFn={() => Alert.alert('Share -- Not yet implemented.')}
         />
-        <View style={{marginHorizontal: 12, marginTop: 12, backgroundColor: 'rgba(0, 0, 0, 0.4)', borderRadius: 10, padding: 12}}>
+        <View
+          style={{
+            marginHorizontal: 12,
+            marginTop: 12,
+            backgroundColor: 'rgba(0, 0, 0, 0.4)',
+            borderRadius: 10,
+            padding: 12,
+          }}>
           <TouchableOpacity
             onPress={() => {
               // //@ts-ignore
@@ -95,7 +115,7 @@ const SideActionBar = ({source}: SideActionBarProps) => {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </Animated.View>
   );
 
   // return (
