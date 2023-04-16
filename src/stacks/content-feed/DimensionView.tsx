@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { Alert, Dimensions, NativeScrollEvent, NativeSyntheticEvent, ScrollView } from 'react-native';
+import { Alert, Dimensions, NativeScrollEvent, NativeSyntheticEvent, ScrollView, View } from 'react-native';
 import { AppContext } from '@app-ctx';
 import { getContent2, TkBeam, TkContent, TkPic, TkVideo } from '../../services/content';
 import { TkPicView } from './TkPicView';
@@ -8,7 +8,7 @@ import { TkBeamView } from './TkBeamView';
 import { TkNoteView } from './TkNoteView';
 import { ContentFeedContext } from './ContentFeedStack';
 
-const {height: screenHeight} = Dimensions.get('window');
+const {height: screenHeight, width: screenWidth} = Dimensions.get('window');
 
 export type DimensionFeedContextContainer = {
   selectedContentId: string | null;
@@ -36,12 +36,13 @@ export function DimensionView({name}: DimensionViewProps): JSX.Element {
   );
 
   useEffect(() => {
-    if (selectedDimension === name) {
+    if (selectedDimension === name && !content) {
       loadContent();
     }
   }, [selectedDimension]);
 
   async function loadContent() {
+    // Alert.alert('load content for dimension view = ' + name);
     setIsLoadingContent(true);
     setErrorLoadingContent(null);
     try {

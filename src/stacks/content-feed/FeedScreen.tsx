@@ -1,10 +1,17 @@
-import { ProgressBar, Text } from 'react-native-paper';
-import { AppContext } from '@app-ctx';
-import { Dimensions, NativeScrollEvent, NativeSyntheticEvent, ScrollView, View } from 'react-native';
-import React, { useContext, useEffect, useState } from 'react';
-import { getDimensions2 } from '../../services/content';
-import { DimensionView } from './DimensionView';
-import { ContentFeedContext } from './ContentFeedStack';
+import {ProgressBar, Text} from 'react-native-paper';
+import {AppContext} from '@app-ctx';
+import {
+  Alert,
+  Dimensions,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  ScrollView,
+  View,
+} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
+import {getDimensions2} from '../../services/content';
+import {DimensionView} from './DimensionView';
+import {ContentFeedContext} from './ContentFeedStack';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
@@ -63,9 +70,9 @@ const FeedScreen = () => {
   ): void {
     const offset = event.nativeEvent.contentOffset;
     const pageIndex = Math.floor(offset.x / screenWidth);
+    console.log('page index = ' + pageIndex);
     setSelectedDimension(dimensions![pageIndex]);
   }
-
   return (
     <>
       {isLoadingDimensions && loadingScreen()}
@@ -78,7 +85,11 @@ const FeedScreen = () => {
             showsHorizontalScrollIndicator={false}
             style={{flex: 1, backgroundColor: colors.bg1}}>
             {dimensions!.map(dimension => (
-              <DimensionView key={dimension} name={dimension} />
+              <View
+                key={dimension}
+                style={{height: screenHeight - 95, width: screenWidth}}>
+                <DimensionView name={dimension} />
+              </View>
             ))}
           </ScrollView>
         </View>

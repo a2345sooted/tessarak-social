@@ -10,9 +10,11 @@ import Animated, {
   FadeInRight,
   FadeOutRight,
 } from 'react-native-reanimated';
+import { ContentFeedContext } from '../content-feed/ContentFeedStack';
 
 const DimensionsScreen = () => {
   const {colors} = useContext(AppContext);
+  const {setSelectedDimension} = useContext(ContentFeedContext);
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
 
@@ -38,7 +40,8 @@ const DimensionsScreen = () => {
   }
 
   function chooseDimension(dimension: string) {
-
+    setSelectedDimension(dimension);
+    navigation.goBack();
   }
 
   return (

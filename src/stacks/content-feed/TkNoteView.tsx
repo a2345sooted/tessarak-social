@@ -61,7 +61,8 @@ export function TkNoteView({content}: TkNoteViewProps): JSX.Element {
         backgroundColor: colors.bg1,
         height: screenHeight - 95,
         width: screenWidth,
-      }}>
+      }}
+    >
       <SideActionBar source={content.account.avatar} />
       <View
         style={{
