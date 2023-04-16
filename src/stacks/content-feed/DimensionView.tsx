@@ -20,6 +20,7 @@ import {TkVideoView} from './TkVideoView';
 import {TkBeamView} from './TkBeamView';
 import { Text } from 'react-native-paper';
 import { TkNoteView } from './TkNoteView';
+import { getTestApContent } from '@api';
 
 const {height: screenHeight} = Dimensions.get('window');
 
@@ -54,7 +55,8 @@ export function DimensionView({meta}: DimensionViewProps): JSX.Element {
     setIsLoadingContent(true);
     setErrorLoadingContent(null);
     try {
-      const result = await getContent();
+      // const result = await getContent();
+      const result = await getTestApContent();
       setContent(result.items);
       setSelectedContentId(result.items[0].id);
     } catch (error: any) {
@@ -81,7 +83,7 @@ export function DimensionView({meta}: DimensionViewProps): JSX.Element {
           showsVerticalScrollIndicator={false}
           style={{flex: 1, backgroundColor: colors.bg1}}>
           {content!.map(c => {
-            switch (c.type) {
+            switch (c.object.type.toLowerCase()) {
               case 'pic':
                 return <TkPicView key={c.id} content={c as TkPic} />;
               case 'video':

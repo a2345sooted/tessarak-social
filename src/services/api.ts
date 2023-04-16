@@ -103,3 +103,9 @@ export async function createSocket(
   websocket.onmessage = handlers.onmessage;
   return websocket;
 }
+
+
+export async function getTestApContent(): Promise<any> {
+  const response = await axios.get(`${API}/content`);
+  return response.data;
+}

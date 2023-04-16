@@ -1,6 +1,6 @@
 export const MOCK_AP_NOTE_1 = {
   id: 'https://mastodon.social/users/willwood/statuses/100717654536153603/activity',
-  type: 'note',
+  type: 'Create',
   name: 'William Woodgate',
   actor: 'https://mastodon.social/users/willwood',
   avatar:
@@ -63,7 +63,7 @@ export const MOCK_AP_NOTE_1 = {
 
 export const MOCK_AP_NOTE_2 = {
   id: 'https://mastodon.social/users/willwood/statuses/100709106309566588/activity',
-  type: 'note',
+  type: 'Create',
   name: 'William Woodgate',
   actor: 'https://mastodon.social/users/willwood',
   avatar:

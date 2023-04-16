@@ -46,9 +46,9 @@ export async function getContent(): Promise<FeedContentResult> {
   //     {type: 'beam', id: '6', url: 'https://fakeimg.pl/500x500/'},
   //   ],
   // };
-  return {
-    items: [MOCK_AP_NOTE_1, MOCK_AP_NOTE_2],
-  };
+  // return {
+  //   items: [MOCK_AP_NOTE_1, MOCK_AP_NOTE_2],
+  // };
 }
 
 export interface DimensionMeta {
