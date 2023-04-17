@@ -116,7 +116,7 @@ export function TkNoteView({content}: TkNoteViewProps): JSX.Element {
         {content.media_attachments.length > 0 &&
           content.media_attachments[0].type.startsWith('image') && (
             <TouchableWithoutFeedback
-                onPress={() => Alert.alert('full screen image')}
+                onPress={() => Alert.alert('full screen image -- not yet implemented')}
               onLongPress={openLongPressActionSheet}
               style={{
                 paddingHorizontal: 8,
