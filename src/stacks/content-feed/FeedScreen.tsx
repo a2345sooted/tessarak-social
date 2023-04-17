@@ -58,7 +58,7 @@ const FeedScreen = () => {
             color: colors.text,
             textAlign: 'center',
           }}>
-          Teleporting...
+          Teleporting Dimensions...
         </Text>
         <ProgressBar indeterminate color={colors.bizarroTessarak} />
       </View>

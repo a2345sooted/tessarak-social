@@ -1,12 +1,16 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { Alert, Dimensions, NativeScrollEvent, NativeSyntheticEvent, ScrollView, View } from 'react-native';
-import { AppContext } from '@app-ctx';
-import { getContent2, TkBeam, TkContent, TkPic, TkVideo } from '../../services/content';
-import { TkPicView } from './TkPicView';
-import { TkVideoView } from './TkVideoView';
-import { TkBeamView } from './TkBeamView';
-import { TkNoteView } from './TkNoteView';
-import { ContentFeedContext } from './ContentFeedStack';
+import React, {createContext, useContext, useEffect, useState} from 'react';
+import {
+  Dimensions,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  ScrollView,
+  View,
+} from 'react-native';
+import {AppContext} from '@app-ctx';
+import {TkNoteView} from './TkNoteView';
+import {ContentFeedContext} from './ContentFeedStack';
+import {ProgressBar, Text} from 'react-native-paper';
+import {getDimContent} from '../../services/dimensions';
 
 const {height: screenHeight, width: screenWidth} = Dimensions.get('window');
 
@@ -20,13 +24,13 @@ export const DimensionFeedContext =
   });
 
 export interface DimensionViewProps {
-  // meta: DimensionMeta;
   name: string;
 }
 
 export function DimensionView({name}: DimensionViewProps): JSX.Element {
   const {selectedDimension} = useContext(ContentFeedContext);
   const {colors} = useContext(AppContext);
+  const [views, setViews] = useState<JSX.Element[] | null>(null);
   const [content, setContent] = useState<any[] | null>(null);
   const [isLoadingContent, setIsLoadingContent] = useState(true);
   const [errorLoadingContent, setErrorLoadingContent] = useState<any>(null);
@@ -36,23 +40,21 @@ export function DimensionView({name}: DimensionViewProps): JSX.Element {
   );
 
   useEffect(() => {
-    if (selectedDimension === name && !content) {
+    // if (selectedDimension === name && !content) {
       loadContent();
-    }
-  }, [selectedDimension]);
+    // }
+  }, []);
 
   async function loadContent() {
-    // Alert.alert('load content for dimension view = ' + name);
     setIsLoadingContent(true);
     setErrorLoadingContent(null);
     try {
-      const result = await getContent2(name);
+      const result = await getDimContent(name);
       setContent(result);
+      setViews(result.map(c => <TkNoteView key={c.id} content={c} />));
       setSelectedContentId(result[0].id);
-      // Alert.alert('set content');
     } catch (error: any) {
       setErrorLoadingContent(error);
-      // Alert.alert('error content');
     } finally {
       setIsLoadingContent(false);
     }
@@ -66,29 +68,50 @@ export function DimensionView({name}: DimensionViewProps): JSX.Element {
     setSelectedContentId(content![pageIndex].id);
   }
 
+  function loadingScreen(): JSX.Element {
+    return (
+      <View
+        style={{
+          backgroundColor: colors.bg1,
+          flex: 1,
+          justifyContent: 'center',
+          paddingHorizontal: 30,
+        }}>
+        <Text
+          variant="headlineSmall"
+          style={{
+            fontWeight: 'bold',
+            color: colors.text,
+            textAlign: 'center',
+          }}>
+          Teleporting Content...
+        </Text>
+        <ProgressBar indeterminate color={colors.bizarroTessarak} />
+      </View>
+    );
+  }
+
   return (
     <DimensionFeedContext.Provider value={{selectedContentId}}>
-      {!isLoadingContent && !errorLoadingContent && selectedDimension === name && (
-        <ScrollView
-          onMomentumScrollEnd={handleScrollEnd}
-          pagingEnabled
-          showsVerticalScrollIndicator={false}
-          style={{flex: 1, backgroundColor: colors.bg1}}>
-          {content!.map(c => {
-            return <TkNoteView key={c.id} content={c} />;
-            // switch (c.object.type.toLowerCase()) {
-            //   case 'pic':
-            //     return <TkPicView key={c.id} content={c as TkPic} />;
-            //   case 'video':
-            //     return <TkVideoView key={c.id} content={c as TkVideo} />;
-            //   case 'beam':
-            //     return <TkBeamView key={c.id} content={c as TkBeam} />;
-            //   default:
-            //     return <TkNoteView key={c.id} content={c} />;
-            // }
-          })}
-        </ScrollView>
-      )}
+      {!isLoadingContent &&
+        !errorLoadingContent &&
+        selectedDimension === name && (
+          <ScrollView
+            onMomentumScrollEnd={handleScrollEnd}
+            pagingEnabled
+            showsVerticalScrollIndicator={false}
+            style={{flex: 1, backgroundColor: colors.bg1}}>
+            {isLoadingContent && loadingScreen()}
+            {/*{!isLoadingContent &&*/}
+            {/*  content &&*/}
+            {/*  content!.map(c => {*/}
+            {/*    return <TkNoteView key={c.id} content={c} />;*/}
+            {/*  })}*/}
+            {!isLoadingContent && views && (
+              <React.Fragment>{views}</React.Fragment>
+            )}
+          </ScrollView>
+        )}
     </DimensionFeedContext.Provider>
   );
 }

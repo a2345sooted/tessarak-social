@@ -1,18 +1,15 @@
-import React, {useContext, useRef, useState} from 'react';
-import {Alert, Dimensions, Image, View} from 'react-native';
-import {AppContext} from '@app-ctx';
+import React, { useContext, useRef, useState } from 'react';
+import { Alert, Dimensions, Image, View } from 'react-native';
+import { AppContext } from '@app-ctx';
 import SideActionBar from './SideActionBar';
-import {Divider, IconButton, Text} from 'react-native-paper';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import { Divider, IconButton, Text } from 'react-native-paper';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import RenderHTML from 'react-native-render-html';
-import Animated, {FadeInUp, FadeOutUp} from 'react-native-reanimated';
-import {
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-} from 'react-native-gesture-handler';
-import {DateTime} from 'luxon';
-import ActionSheet, {ActionSheetRef} from 'react-native-actions-sheet';
-import {tkDelay} from '@utils';
+import Animated, { FadeInUp, FadeOutUp } from 'react-native-reanimated';
+import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { DateTime } from 'luxon';
+import ActionSheet, { ActionSheetRef } from 'react-native-actions-sheet';
+import { tkDelay } from '@utils';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
@@ -116,7 +113,8 @@ export function TkNoteView({content}: TkNoteViewProps): JSX.Element {
         {content.media_attachments.length > 0 &&
           content.media_attachments[0].type.startsWith('image') && (
             <TouchableWithoutFeedback
-                onPress={() => Alert.alert('full screen image -- not yet implemented')}
+                // onPress={() => Alert.alert('full screen image -- not yet implemented')}
+                onPress={() => Alert.alert(JSON.stringify(content, null, 2))}
               onLongPress={openLongPressActionSheet}
               style={{
                 paddingHorizontal: 8,
