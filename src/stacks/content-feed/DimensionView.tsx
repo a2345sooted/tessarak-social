@@ -1,6 +1,7 @@
 import React, {createContext, useContext, useEffect, useState} from 'react';
 import {
   Dimensions,
+  FlatList,
   NativeScrollEvent,
   NativeSyntheticEvent,
   ScrollView,
@@ -41,7 +42,7 @@ export function DimensionView({name}: DimensionViewProps): JSX.Element {
 
   useEffect(() => {
     // if (selectedDimension === name && !content) {
-      loadContent();
+    loadContent();
     // }
   }, []);
 
@@ -96,21 +97,15 @@ export function DimensionView({name}: DimensionViewProps): JSX.Element {
       {!isLoadingContent &&
         !errorLoadingContent &&
         selectedDimension === name && (
-          <ScrollView
+          <FlatList
+            keyExtractor={item => item.id}
             onMomentumScrollEnd={handleScrollEnd}
+            style={{flex: 1, backgroundColor: colors.bg1}}
+            data={content}
+            renderItem={({item}) => <TkNoteView content={item} />}
             pagingEnabled
             showsVerticalScrollIndicator={false}
-            style={{flex: 1, backgroundColor: colors.bg1}}>
-            {isLoadingContent && loadingScreen()}
-            {/*{!isLoadingContent &&*/}
-            {/*  content &&*/}
-            {/*  content!.map(c => {*/}
-            {/*    return <TkNoteView key={c.id} content={c} />;*/}
-            {/*  })}*/}
-            {!isLoadingContent && views && (
-              <React.Fragment>{views}</React.Fragment>
-            )}
-          </ScrollView>
+          />
         )}
     </DimensionFeedContext.Provider>
   );

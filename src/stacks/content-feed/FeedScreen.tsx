@@ -3,6 +3,7 @@ import {AppContext} from '@app-ctx';
 import {
   Alert,
   Dimensions,
+  FlatList,
   NativeScrollEvent,
   NativeSyntheticEvent,
   ScrollView,
@@ -12,6 +13,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {getDimensions2} from '../../services/content';
 import {DimensionView} from './DimensionView';
 import {ContentFeedContext} from './ContentFeedStack';
+import {TkNoteView} from './TkNoteView';
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
@@ -77,20 +79,20 @@ const FeedScreen = () => {
       {isLoadingDimensions && loadingScreen()}
       {!isLoadingDimensions && !errorLoadingDimensions && (
         <View style={{height: screenHeight - 95, backgroundColor: colors.bg1}}>
-          <ScrollView
-            onMomentumScrollEnd={handleScrollEnd}
+          <FlatList
             horizontal
-            pagingEnabled
-            showsHorizontalScrollIndicator={false}
-            style={{flex: 1, backgroundColor: colors.bg1}}>
-            {dimensions!.map(dimension => (
-              <View
-                key={dimension}
-                style={{height: screenHeight - 95, width: screenWidth}}>
-                <DimensionView name={dimension} />
+            keyExtractor={item => item}
+            onMomentumScrollEnd={handleScrollEnd}
+            style={{flex: 1, backgroundColor: colors.bg1}}
+            data={dimensions}
+            renderItem={({item}) => (
+              <View style={{height: screenHeight - 95, width: screenWidth}}>
+                <DimensionView name={item} />
               </View>
-            ))}
-          </ScrollView>
+            )}
+            pagingEnabled
+            showsVerticalScrollIndicator={false}
+          />
         </View>
       )}
     </>
